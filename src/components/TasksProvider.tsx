@@ -7,6 +7,6 @@ interface Props {
   children: React.ReactNode;
 }
 
-export default function ClientWrapper({ tasks, children }: Props) {
+export default function TasksProvider({ tasks, children }: Props) {
   return <TaskContext.Provider value={tasks}>{children}</TaskContext.Provider>;
 }

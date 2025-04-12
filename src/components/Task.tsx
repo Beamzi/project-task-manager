@@ -1,26 +1,23 @@
-"use client";
+import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
 
-import { TaskContext } from "@/context/TaskContext";
-import React, { useContext } from "react";
-import { format } from "date-fns";
+interface Props {
+  author: string | null | undefined;
+  title: string;
+  date: string;
+  content: string | null;
+  id: string;
+}
 
-export default function Task({}) {
-  const tasks = useContext(TaskContext);
-  if (!tasks) return null;
+export default function Task({ author, title, date, content, id }: Props) {
   return (
     <>
-      {tasks.map((item) => (
-        <div key={item.id}>
-          <h3>{item.author?.name}</h3>
-          <h1>{item.title}</h1>
-          <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
-          <p>{item.content}</p>
-        </div>
-      ))}
+      <div className="border-2 my-5 p-5">
+        <h3>{author}</h3>
+        <h1>{title}</h1>
+        <p>{date}</p>
+        <p>{content}</p>
+        <RemoveTaskBtn id={id}></RemoveTaskBtn>
+      </div>
     </>
   );
 }
-
-//toLocaleDateString();
-
-//{item.date.toLocaleString()}
