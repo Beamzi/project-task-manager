@@ -3,19 +3,27 @@ import SignInBtn from "@/components/buttons/SignInBtn";
 import TasksProvider from "@/components/TasksProvider";
 import { prisma } from "@/lib/prisma";
 import React from "react";
-import { auth } from "@/auth";
+import { auth } from "../../auth";
 import { SignOutBtn } from "@/components/buttons/SignOutBtn";
 
 async function getTasks() {
-  const tasks = await prisma.task.findMany({
-    where: { published: true },
-    include: {
-      author: {
-        select: { name: true },
+  const session = await auth();
+  let empty: [] = [];
+  if (session) {
+    const tasks = await prisma.task.findMany({
+      where: {
+        author: { id: session?.user?.id },
       },
-    },
-  });
-  return tasks;
+      include: {
+        author: {
+          select: { name: true },
+        },
+      },
+    });
+    return tasks;
+  } else {
+    return empty;
+  }
 }
 
 export default async function AllTasksView() {

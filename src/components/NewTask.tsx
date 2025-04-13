@@ -8,7 +8,6 @@ import { useState } from "react";
 export default function NewTask() {
   const router = useRouter();
   const [date, setDate] = useState("");
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 

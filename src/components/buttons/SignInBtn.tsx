@@ -1,4 +1,4 @@
-import { signIn } from "@/auth";
+import { signIn } from "../../../auth";
 
 export default function SignInBtn() {
   return (
@@ -12,3 +12,5 @@ export default function SignInBtn() {
     </form>
   );
 }
+
+//{ redirectTo: "/dashboard" }

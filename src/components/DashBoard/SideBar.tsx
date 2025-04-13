@@ -1,6 +1,8 @@
 import React from "react";
 import NewTask from "../NewTask";
 import NewTaskBtn from "../buttons/NewTaskBtn";
+import NewProjectBtn from "../buttons/NewProjectBtn";
+import ProjectList from "../Lists/ProjectList";
 
 export default function SideBar() {
   return (
@@ -9,6 +11,8 @@ export default function SideBar() {
       <button>All Tasks</button>
       <button>Prioties</button>
       <button>Projects</button>
+      <NewProjectBtn></NewProjectBtn>
+      <ProjectList></ProjectList>
     </aside>
   );
 }

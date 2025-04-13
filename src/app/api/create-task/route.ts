@@ -1,10 +1,11 @@
 
 import { prisma } from "@/lib/prisma"
 import { NextResponse } from "next/server"
-import { format } from "date-fns"
+import { auth } from "../../../../auth"
 
 export async function POST(request: Request) {
     const res = await request.json()
+    const session = await auth()
 
     console.log({res}, 'its alive!!!!!!!!!!!!!!!!!!!!! OMFG!!!!')
 
@@ -18,6 +19,9 @@ export async function POST(request: Request) {
             title: title,
             date: new Date(date),
             content: content,
+            author: {
+                connect: {id: session?.user?.id}
+            }
         }
     })
     
