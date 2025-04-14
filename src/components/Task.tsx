@@ -1,3 +1,4 @@
+import ProjectAssignBtn from "./buttons/ProjectAssignBtn";
 import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
 
 interface Props {
@@ -11,12 +12,13 @@ interface Props {
 export default function Task({ author, title, date, content, id }: Props) {
   return (
     <>
-      <div className="border-2 my-5 p-5">
+      <div className="border-2 my-5 p-5 flex flex-col">
         <h3>{author}</h3>
         <h1>{title}</h1>
         <p>{date}</p>
         <p>{content}</p>
         <RemoveTaskBtn id={id}></RemoveTaskBtn>
+        <ProjectAssignBtn id={id}></ProjectAssignBtn>
       </div>
     </>
   );
