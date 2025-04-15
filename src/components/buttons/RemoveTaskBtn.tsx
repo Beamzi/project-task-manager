@@ -1,3 +1,5 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 
 function RemoveTaskBtn({ id }: { id: string }) {

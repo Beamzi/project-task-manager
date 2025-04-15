@@ -2,24 +2,14 @@
 
 import { TaskContext } from "@/context/TaskContext";
 import React, { useContext } from "react";
-import { format } from "date-fns";
-import Task from "./Task";
+import ListOfTasks from "./Lists/ListOfTasks";
 
-export default function AllTasks({}) {
+export default function AllTasks() {
   const tasks = useContext(TaskContext);
-  if (!tasks) return null;
+
   return (
     <>
-      {tasks.map((item) => (
-        <Task
-          key={item.id}
-          author={item.author?.name}
-          title={item.title}
-          date={format(new Date(item.date), "dd/MM/yyyy")}
-          content={item.content}
-          id={item.id}
-        ></Task>
-      ))}
+      <ListOfTasks currentTasks={tasks}></ListOfTasks>
     </>
   );
 }

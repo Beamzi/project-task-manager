@@ -1,9 +1,9 @@
 "use client";
-import { Task, TaskContext } from "@/context/TaskContext";
+import { TaskType, TaskContext } from "@/context/TaskContext";
 import React from "react";
 
 interface Props {
-  tasks: Task[];
+  tasks: TaskType[];
   children: React.ReactNode;
 }
 

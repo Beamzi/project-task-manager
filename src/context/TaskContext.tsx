@@ -3,14 +3,14 @@
 import { create } from "domain";
 import { createContext } from "react";
 
-export type Task = {
+export type TaskType = {
   author: {
     name: string | null;
   } | null;
   title: string;
-  date: Date | string;
+  date: Date;
   content: string | null;
   id: string;
 };
 
-export const TaskContext = createContext<Task[]>([]);
+export const TaskContext = createContext<TaskType[]>([]);
