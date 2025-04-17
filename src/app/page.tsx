@@ -11,6 +11,9 @@ async function getTasks() {
   let empty: [] = [];
   if (session) {
     const tasks = await prisma.task.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
       where: {
         author: { id: session?.user?.id },
       },
@@ -27,18 +30,26 @@ async function getTasks() {
 }
 
 export default async function AllTasksView() {
+  const result = await prisma.$queryRaw`
+  SELECT 
+    table_name,
+    pg_size_pretty(pg_total_relation_size(quote_ident(table_name))) as size
+  FROM information_schema.tables
+  WHERE table_schema = 'public'
+  ORDER BY pg_total_relation_size(quote_ident(table_name)) DESC;
+`;
+
+  //console.log(result);
   const session = await auth();
-  console.log({ session });
+  //console.log({ session });
   const tasks = await getTasks();
-  console.log(tasks);
+  //console.log(tasks);
   return (
     <TasksProvider tasks={tasks}>
-      <main className="border-2 p-5 ml-5 w-[80%]">
-        <div>THIS IS TASK VIEW PAGE</div>
-        <SignInBtn></SignInBtn>
-        <SignOutBtn></SignOutBtn>
-        <AllTasks></AllTasks>
-      </main>
+      <div>THIS IS TASK VIEW PAGE</div>
+      <SignInBtn></SignInBtn>
+      <SignOutBtn></SignOutBtn>
+      <AllTasks></AllTasks>
     </TasksProvider>
   );
 }

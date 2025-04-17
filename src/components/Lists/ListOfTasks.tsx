@@ -9,6 +9,27 @@ interface NewProps {
   currentTasks: TaskType[] | undefined;
 }
 
+export default function ListOfTasks({ currentTasks }: NewProps) {
+  return (
+    <div>
+      {currentTasks?.map((item) => (
+        <Task
+          key={item.id}
+          author={item.author?.name}
+          title={item.title}
+          date={format(new Date(item.date), "yyyy-MM-dd'T'HH:mm")}
+          content={item.content}
+          id={item.id}
+          priority={item.priority}
+        ></Task>
+      ))}
+    </div>
+  );
+}
+
+/*format(new Date(item.date), "dd/MM/yyyy")
+
+
 interface Props {
   currentTasks:
     | ({
@@ -22,21 +43,4 @@ interface Props {
         content: string | null;
       })[]
     | undefined;
-}
-
-export default function ListOfTasks({ currentTasks }: NewProps) {
-  return (
-    <div>
-      {currentTasks?.map((item) => (
-        <Task
-          key={item.id}
-          author={item.author?.name}
-          title={item.title}
-          date={format(new Date(item.date), "dd/MM/yyyy")}
-          content={item.content}
-          id={item.id}
-        ></Task>
-      ))}
-    </div>
-  );
-}
+}*/

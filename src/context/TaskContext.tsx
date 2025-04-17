@@ -11,6 +11,7 @@ export type TaskType = {
   date: Date;
   content: string | null;
   id: string;
+  priority: boolean;
 };
 
 export const TaskContext = createContext<TaskType[]>([]);

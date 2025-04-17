@@ -26,14 +26,10 @@ export default async function CurrentProject({ params }: Props) {
         },
       },
     });
-
     return project;
   }
-
   const project = await getProject();
-
   const tasks = project?.tasks;
-  console.log({ project, tasks });
   return (
     <div>
       <ProjectView project={project}></ProjectView>

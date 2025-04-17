@@ -5,17 +5,18 @@ export async function POST(request: Request) {
     const res = await request.json()
     console.log({res})
 
-    const { title, id } = res
+    const { title, content, id, date } = res
 
     const result = await prisma.task.update({
         where: {id: id},
         data: {
-            title: title
+            title: title,
+            content: content,
+            date: new Date(date)
         }
     })
 
     return NextResponse.json({result})
-
 
 
 }
