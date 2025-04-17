@@ -47,8 +47,6 @@ export default async function AllTasksView() {
   return (
     <TasksProvider tasks={tasks}>
       <div>THIS IS TASK VIEW PAGE</div>
-      <SignInBtn></SignInBtn>
-      <SignOutBtn></SignOutBtn>
       <AllTasks></AllTasks>
     </TasksProvider>
   );

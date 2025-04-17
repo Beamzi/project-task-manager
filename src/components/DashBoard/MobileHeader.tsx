@@ -3,7 +3,7 @@ import { DashBoardContext } from "@/context/DashBoardContext";
 import { Bars3Icon } from "@heroicons/react/16/solid";
 import { useContext, useState } from "react";
 
-export default function Header({ className }: { className: string }) {
+export default function MobileHeader({ className }: { className: string }) {
   const [localSideMenu, setLocalSideMenu] = useState(false);
   const context = useContext(DashBoardContext);
   if (!context) {
