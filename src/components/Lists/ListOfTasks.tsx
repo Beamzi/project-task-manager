@@ -11,7 +11,7 @@ interface NewProps {
 
 export default function ListOfTasks({ currentTasks }: NewProps) {
   return (
-    <div>
+    <>
       {currentTasks?.map((item) => (
         <Task
           key={item.id}
@@ -23,7 +23,7 @@ export default function ListOfTasks({ currentTasks }: NewProps) {
           priority={item.priority}
         ></Task>
       ))}
-    </div>
+    </>
   );
 }
 

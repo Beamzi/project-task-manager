@@ -12,8 +12,8 @@ export default function ProjectAssignBtn({ id }: { id: string }) {
   const [list, setList] = useState(false);
 
   return (
-    <div className="flex flex-col">
-      <button className="bg-white" onClick={() => setList(true)}>
+    <div className="flex flex-col w-full">
+      <button className="text-start" onClick={() => setList(true)}>
         ProjectAssignBtn
       </button>
       {list && (

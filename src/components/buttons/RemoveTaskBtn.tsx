@@ -19,8 +19,8 @@ function RemoveTaskBtn({ id }: { id: string }) {
     }
   }
   return (
-    <button onClick={deleteTask} className="bg-red-900">
-      Remove
+    <button onClick={deleteTask} className="bg-red-900 w-[10%]">
+      X
     </button>
   );
 }

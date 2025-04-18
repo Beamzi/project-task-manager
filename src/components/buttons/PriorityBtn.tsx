@@ -29,9 +29,9 @@ export default function PriorityBtn({
   }
 
   return (
-    <div className="flex">
+    <div className="flex w-2/4">
       <button
-        className="bg-orange-900"
+        className=" w-full"
         onClick={() => {
           makePriority(true);
           setLocalPriorityState(true);
@@ -44,12 +44,13 @@ export default function PriorityBtn({
           onClick={() => {
             setUnpriority(true);
           }}
-          className="bg-gray-800 mx-5 px-5"
+          className="bg-red-900 ml-1 p-2 text-center my-1"
         >
           X
           {unpriority && (
-            <li>
+            <li className="">
               <button
+                className=""
                 onClick={() => {
                   setTimeout(() => {
                     setUnpriority(false);

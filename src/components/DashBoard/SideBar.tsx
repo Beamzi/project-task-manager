@@ -6,6 +6,12 @@ import NewProjectBtn from "../buttons/NewProjectBtn";
 import ProjectList from "../Lists/ProjectList";
 import { DashBoardContext } from "@/context/DashBoardContext";
 
+import {
+  StarIcon,
+  CheckCircleIcon,
+  ListBulletIcon,
+} from "@heroicons/react/24/outline";
+
 export default function SideBar({ className }: { className: string }) {
   const context = useContext(DashBoardContext);
   if (!context) {
@@ -16,12 +22,21 @@ export default function SideBar({ className }: { className: string }) {
   return (
     <>
       <aside className={`${className} ${sideMenu}`}>
-        <NewTaskBtn></NewTaskBtn>
-        <button>All Tasks</button>
-        <button>Prioties</button>
-        <button>Projects</button>
-        <NewProjectBtn></NewProjectBtn>
-        <ProjectList></ProjectList>
+        <NewTaskBtn />
+        <button>
+          <CheckCircleIcon />
+          All Tasks
+        </button>
+        <button>
+          <StarIcon />
+          Prioties
+        </button>
+        <button>
+          <ListBulletIcon />
+          Projects
+        </button>
+        <NewProjectBtn />
+        <ProjectList />
       </aside>
     </>
   );

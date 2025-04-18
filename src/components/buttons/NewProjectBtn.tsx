@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 export default function NewProjectBtn() {
   const [projectTitleInput, setProjectTitleInput] = useState(false);
@@ -22,7 +23,11 @@ export default function NewProjectBtn() {
   }
   return (
     <>
-      <button onClick={() => setProjectTitleInput(true)}>NewProjectBtn</button>
+      <button onClick={() => setProjectTitleInput(true)}>
+        {" "}
+        <PlusIcon />
+        New Project
+      </button>
       {projectTitleInput && (
         <form onSubmit={createProject}>
           <input

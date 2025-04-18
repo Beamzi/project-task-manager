@@ -46,8 +46,10 @@ export default async function AllTasksView() {
   //console.log(tasks);
   return (
     <TasksProvider tasks={tasks}>
-      <div>THIS IS TASK VIEW PAGE</div>
-      <AllTasks></AllTasks>
+      <div className="bg-transparent py-5 pb-10">All Tasks.</div>
+      <div className="noise-overlay sm:flex sm:flex-wrap sm:justify-between">
+        <AllTasks></AllTasks>
+      </div>
     </TasksProvider>
   );
 }

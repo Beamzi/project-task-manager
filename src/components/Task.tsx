@@ -66,45 +66,52 @@ export default function Task({
 
   return (
     <>
-      <div className="border-2 my-5 p-5 flex flex-col">
-        <h3>{author}</h3>
-        <form onSubmit={updateTask}>
-          <input
-            value={select ? state.newTitle : title}
-            onChange={(e) =>
-              dispatch({ type: "change-values", propTitle: e.target.value })
-            }
-            onClick={() => setSelect(true)}
-            type="text"
-          ></input>
+      <div className="task-shadows md:m-[4px] md:w-[calc(50%-8px)] lg:w-[calc(33%-10px)] lg:m-[3.3px] w-[80dvw] border-1 my-5 p-5 flex flex-col bg-neutral-800">
+        <h3 className="bg-transparent my-1 text-end">{author}</h3>
 
-          <input
-            value={select ? state.newContent : content}
-            onChange={(e) =>
-              dispatch({ type: "change-values", propContent: e.target.value })
-            }
-            onClick={() => setSelect(true)}
-            type="text"
-          ></input>
-          <p>{date}</p>
+        <div className="flex border-1 mb-1">
+          <ProjectAssignBtn id={id}></ProjectAssignBtn>
 
-          <input
-            type="datetime-local"
-            max="9999-12-31T23:59"
-            value={select ? state.newDate : date}
-            onChange={(e) =>
-              dispatch({ type: "change-values", propDate: e.target.value })
-            }
-            onClick={() => setSelect(true)}
-          ></input>
+          <RemoveTaskBtn id={id}></RemoveTaskBtn>
+        </div>
+        <input
+          value={select ? state.newTitle : title}
+          onChange={(e) =>
+            dispatch({ type: "change-values", propTitle: e.target.value })
+          }
+          onClick={() => setSelect(true)}
+          type="text"
+        ></input>
+        <textarea
+          className="min-h-35 border-1"
+          value={select ? state.newContent : content}
+          onChange={(e) =>
+            dispatch({ type: "change-values", propContent: e.target.value })
+          }
+          onClick={() => setSelect(true)}
+        ></textarea>
+        <input
+          className=""
+          type="datetime-local"
+          max="9999-12-31T23:59"
+          value={select ? state.newDate : date}
+          onChange={(e) =>
+            dispatch({ type: "change-values", propDate: e.target.value })
+          }
+          onClick={() => setSelect(true)}
+        ></input>
 
-          <button type="submit" className="bg-green-900">
+        <div className="flex mt-1">
+          <button
+            onClick={updateTask}
+            type="submit"
+            className="bg-green-900 w-2/4"
+          >
             SAVE
           </button>
-        </form>
-        <PriorityBtn id={id} priorityState={priority}></PriorityBtn>
-        <RemoveTaskBtn id={id}></RemoveTaskBtn>
-        <ProjectAssignBtn id={id}></ProjectAssignBtn>
+
+          <PriorityBtn id={id} priorityState={priority}></PriorityBtn>
+        </div>
       </div>
     </>
   );

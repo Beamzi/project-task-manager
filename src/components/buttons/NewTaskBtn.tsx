@@ -3,6 +3,7 @@
 import { useContext } from "react";
 import NewTask from "../NewTask";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 function NewTaskBtn() {
   const modalState = useContext(DashBoardContext);
@@ -10,7 +11,12 @@ function NewTaskBtn() {
     throw new Error("must be used within a dashboardprovider");
   }
   const { modal, setModal } = modalState;
-  return <button onClick={() => setModal(true)}>Create New Task</button>;
+  return (
+    <button onClick={() => setModal(true)}>
+      <PlusIcon />
+      Create New Task
+    </button>
+  );
 }
 
 export default NewTaskBtn;
