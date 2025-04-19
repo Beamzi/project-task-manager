@@ -47,7 +47,7 @@ export default async function AllTasksView() {
   return (
     <TasksProvider tasks={tasks}>
       <div className="bg-transparent py-5 pb-10">All Tasks.</div>
-      <div className="noise-overlay sm:flex sm:flex-wrap sm:justify-between">
+      <div className="noise-overlay sm:flex sm:flex-wrap sm:justify-between sm:w-[100%] w-[70dvw]">
         <AllTasks></AllTasks>
       </div>
     </TasksProvider>

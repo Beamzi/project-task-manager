@@ -5,6 +5,7 @@ import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
 import { useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
+import { CheckIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   author: string | null | undefined;
@@ -66,12 +67,10 @@ export default function Task({
 
   return (
     <>
-      <div className="task-shadows md:m-[4px] md:w-[calc(50%-8px)] lg:w-[calc(33%-10px)] lg:m-[3.3px] w-[80dvw] border-1 my-5 p-5 flex flex-col bg-neutral-800">
+      <div className="task-shadows lg:m-[4px] lg:w-[calc(50%-8px)] xl:w-[calc(33%-10px)] xl:m-[3.3px] w-[100%] border-1 my-5 p-5 flex flex-col bg-neutral-800">
         <h3 className="bg-transparent my-1 text-end">{author}</h3>
-
         <div className="flex border-1 mb-1">
           <ProjectAssignBtn id={id}></ProjectAssignBtn>
-
           <RemoveTaskBtn id={id}></RemoveTaskBtn>
         </div>
         <input
@@ -107,6 +106,7 @@ export default function Task({
             type="submit"
             className="bg-green-900 w-2/4"
           >
+            <CheckIcon></CheckIcon>
             SAVE
           </button>
 

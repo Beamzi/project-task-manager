@@ -1,6 +1,9 @@
 "use client";
 
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
+import { StarIcon as StarIconOutline } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { useRouter } from "next/navigation";
 import { useContext, useState, useEffect } from "react";
 
@@ -12,8 +15,8 @@ export default function PriorityBtn({
   priorityState: boolean;
 }) {
   const [localPriorityState, setLocalPriorityState] = useState(priorityState);
+  const [toggleItem, setToggleItem] = useState("");
   const [unpriority, setUnpriority] = useState(false);
-  const router = useRouter();
   async function makePriority(value: boolean) {
     try {
       await fetch("/api/priority-task", {
@@ -31,26 +34,36 @@ export default function PriorityBtn({
   return (
     <div className="flex w-2/4">
       <button
-        className=" w-full"
+        className=" w-full flex justify-center ml-2"
         onClick={() => {
           makePriority(true);
           setLocalPriorityState(true);
         }}
       >
-        {localPriorityState ? "prioritised" : "priority"}
+        {localPriorityState ? (
+          <>
+            <StarIconSolid className="ml-2" />
+          </>
+        ) : (
+          <StarIconOutline className="ml-2" />
+        )}
+        {/* {localPriorityState ? "prioritised"  : "priority"} */}
       </button>
       {localPriorityState && (
         <ul
           onClick={() => {
             setUnpriority(true);
+            toggleItem === "visible"
+              ? setToggleItem("invisible")
+              : setToggleItem("visible");
           }}
-          className="bg-red-900 ml-1 p-2 text-center my-1"
+          className="bg-red-900 relative ml-1 p-2 text-center my-1 flex flex-col items-center justify-center"
         >
-          X
+          <ChevronDownIcon className="ml-2" />
           {unpriority && (
-            <li className="">
+            <li className={`${toggleItem} absolute top-0, -left-12 -bottom-13`}>
               <button
-                className=""
+                className={`${toggleItem}`}
                 onClick={() => {
                   setTimeout(() => {
                     setUnpriority(false);
@@ -59,7 +72,7 @@ export default function PriorityBtn({
                   setLocalPriorityState(false);
                 }}
               >
-                unprioritise
+                unprioritise?
               </button>
             </li>
           )}
