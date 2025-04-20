@@ -8,18 +8,21 @@ import LinkTaskToProjectBtn from "./LinkTaskToProjectBtn";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { motion } from "motion/react";
 
-export default function ProjectAssignBtn({ id }: { id: string }) {
-  const taskId = id;
+export default function ProjectAssignBtn({
+  taskId,
+  projectIdOfTask,
+}: {
+  taskId: string;
+  projectIdOfTask: string;
+}) {
   const projects = useContext(projectContext);
 
   if (!projects) {
     throw new Error("projects not loaded");
   }
 
-  const { title } = projects[0];
-  console.log(title, "projectsaaaaaaaaaaaaaaaa");
-
   const [list, setList] = useState(false);
+  const [titleCheck, setTitleCheck] = useState(false);
 
   return (
     <div className="flex flex-col w-full py-2 px-2 relative">
@@ -32,13 +35,16 @@ export default function ProjectAssignBtn({ id }: { id: string }) {
         <motion.div
           animate={list ? { rotate: 180 } : { rotate: 0 }}
           transition={{ duration: 0.2 }}
-          className="mr-2 w-5 "
+          className="mr-2 w-5"
         >
           <ChevronDownIcon
             className={`text-white w-full h-full ${list && "fill-white "}`}
           />
         </motion.div>
-        Projects {title && `${title}`}
+        Projects
+        {projects?.map((item) => (
+          <p key={item.id}>{item.id === projectIdOfTask ? item.title : null}</p>
+        ))}
       </button>
       {list && (
         <motion.ul
@@ -55,6 +61,8 @@ export default function ProjectAssignBtn({ id }: { id: string }) {
             >
               <LinkTaskToProjectBtn
                 setList={setList}
+                setTitleCheck={setTitleCheck}
+                titleCheck={titleCheck}
                 title={item.title}
                 projectId={item.id}
                 taskId={taskId}

@@ -15,6 +15,7 @@ interface Props {
   content: string | null;
   id: string;
   priority: boolean;
+  projectId: string;
 }
 
 function reducer(state, action) {
@@ -37,6 +38,7 @@ export default function Task({
   content,
   id,
   priority,
+  projectId,
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
@@ -71,7 +73,10 @@ export default function Task({
       <div className="task-selector task-shadows lg:m-[4px] lg:w-[calc(50%-8px)] xl:w-[calc(33%-10px)] xl:m-[3.3px] w-[100%] border-1 my-5 p-5 flex flex-col bg-neutral-800">
         <h3 className="bg-transparent my-1 text-end">{author}</h3>
         <div className="flex mb-1 py-1">
-          <ProjectAssignBtn id={id}></ProjectAssignBtn>
+          <ProjectAssignBtn
+            taskId={id}
+            projectIdOfTask={projectId}
+          ></ProjectAssignBtn>
           <div className="flex justify-end relative ">
             <MinimiseTaskBtn id={id}></MinimiseTaskBtn>
             <RemoveTaskBtn id={id}></RemoveTaskBtn>

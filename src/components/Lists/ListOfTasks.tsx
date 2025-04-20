@@ -21,6 +21,7 @@ export default function ListOfTasks({ currentTasks }: NewProps) {
           content={item.content}
           id={item.id}
           priority={item.priority}
+          projectId={item.projectId}
         ></Task>
       ))}
     </>
