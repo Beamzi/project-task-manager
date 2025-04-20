@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { XMarkIcon } from "@heroicons/react/24/solid";
 
 function RemoveTaskBtn({ id }: { id: string }) {
   const router = useRouter();
@@ -19,8 +20,11 @@ function RemoveTaskBtn({ id }: { id: string }) {
     }
   }
   return (
-    <button onClick={deleteTask} className="bg-red-900 w-[10%]">
-      X
+    <button
+      onClick={deleteTask}
+      className="w-10 bg-neutral-800 border-1 relative px-2 flex  justify-center mx-1 hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-150 hover:[&>*]:fill-rose-600"
+    >
+      <XMarkIcon className="absolute top-2  mt-[0.5px] transition-all duration-100" />
     </button>
   );
 }

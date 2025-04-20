@@ -25,7 +25,11 @@ export default function LinkTaskToProjectBtn({
     }
   }
   return (
-    <button onClick={linkTask} key={projectId}>
+    <button
+      className="hover:text-rose-600 w-full text-left p-1"
+      onClick={linkTask}
+      key={projectId}
+    >
       {title}
     </button>
   );

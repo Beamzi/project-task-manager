@@ -5,7 +5,8 @@ import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
 import { useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
-import { CheckIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
+import MinimiseTaskBtn from "./buttons/MinimiseTaskBtn";
 
 interface Props {
   author: string | null | undefined;
@@ -67,11 +68,14 @@ export default function Task({
 
   return (
     <>
-      <div className="task-shadows lg:m-[4px] lg:w-[calc(50%-8px)] xl:w-[calc(33%-10px)] xl:m-[3.3px] w-[100%] border-1 my-5 p-5 flex flex-col bg-neutral-800">
+      <div className="task-selector task-shadows lg:m-[4px] lg:w-[calc(50%-8px)] xl:w-[calc(33%-10px)] xl:m-[3.3px] w-[100%] border-1 my-5 p-5 flex flex-col bg-neutral-800">
         <h3 className="bg-transparent my-1 text-end">{author}</h3>
-        <div className="flex border-1 mb-1">
+        <div className="flex mb-1 py-1">
           <ProjectAssignBtn id={id}></ProjectAssignBtn>
-          <RemoveTaskBtn id={id}></RemoveTaskBtn>
+          <div className="flex justify-end relative ">
+            <MinimiseTaskBtn id={id}></MinimiseTaskBtn>
+            <RemoveTaskBtn id={id}></RemoveTaskBtn>
+          </div>
         </div>
         <input
           value={select ? state.newTitle : title}
@@ -100,16 +104,17 @@ export default function Task({
           onClick={() => setSelect(true)}
         ></input>
 
-        <div className="flex mt-1">
-          <button
-            onClick={updateTask}
-            type="submit"
-            className="bg-green-900 w-2/4"
-          >
-            <CheckIcon></CheckIcon>
-            SAVE
-          </button>
-
+        <div className="flex mt-1 py-1">
+          <div className="w-2/4">
+            <button
+              onClick={updateTask}
+              type="submit"
+              className=" flex py-2 px-5 "
+            >
+              Saved
+              <CheckCircleIcon className="ml-2 stroke-green-400" />
+            </button>
+          </div>
           <PriorityBtn id={id} priorityState={priority}></PriorityBtn>
         </div>
       </div>

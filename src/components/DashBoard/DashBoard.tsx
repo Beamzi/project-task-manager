@@ -34,7 +34,7 @@ export default async function DashBoard({
 
           <TopBar className="z-2 invisible relative md:h-20 h-0 md:border-y-1 w-full md:visible"></TopBar>
 
-          <div className="z-2 flex justify-center relative overflow-auto bg-transparent h-[85dvh]">
+          <div className="z-2 flex justify-center relative  bg-transparent h-[85dvh]">
             <SideBar className="noise-overlay w-[40%] md:w-[30%] max-w-55 md:visible invisible flex flex-col p-5 mr-5 border-x-1 border-b-1  md:relative fixed h-full left-0 md:top-0" />
             <div className="sm:w-[100%] w-vw h-[85dvh]">
               <main className="flex flex-col noise-overlay overflow-y-scroll border-x-1 border-b-1 p-5 h-[100%]">

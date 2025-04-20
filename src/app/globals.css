@@ -42,16 +42,42 @@ body > * {
   );
 }
 
+.unselected {
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(94, 94, 94) 0px,    /* Start color at 0px */
+    rgb(90, 90, 90) 0px,    /* Same color up to 1px */
+    #272727 1px,            /* IMMEDIATE switch to black at 1px */
+    #272727 5px            /* Black continues to 20px */
+  );
+}
 
 
 
 @layer components {
-  button {
-    @apply p-2 my-1 bg-transparent  flex text-center items-center 
+  button, ul, li, div {
+    @apply select-none 
   }
-  button:hover {
-    @apply shadow-neutral-950 shadow-md scale-110
+  button, ul {
+    @apply cursor-pointer
   }
+
+  aside {
+    button {
+      @apply p-2 my-1 bg-transparent  flex text-center items-center 
+    }
+    button:hover {
+      @apply shadow-neutral-950 shadow-md scale-110
+    }
+    svg {
+      @apply mr-3 w-5
+    }
+  }
+
+  .task-selector {
+
+  }
+
   body > * {
     @apply dark:bg-black
   }
@@ -62,8 +88,10 @@ body > * {
     @apply text-neutral-500 p-2 border-1 my-1
   }
   svg {
-    @apply mr-3 bg-transparent w-5 stroke-white
+    @apply bg-transparent w-5
   }
+
+
 }
 
 .task-shadows {
