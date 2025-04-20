@@ -11,31 +11,50 @@ import { motion } from "motion/react";
 export default function ProjectAssignBtn({ id }: { id: string }) {
   const taskId = id;
   const projects = useContext(projectContext);
+
+  if (!projects) {
+    throw new Error("projects not loaded");
+  }
+
+  const { title } = projects[0];
+  console.log(title, "projectsaaaaaaaaaaaaaaaa");
+
   const [list, setList] = useState(false);
 
   return (
     <div className="flex flex-col w-full py-2 px-2 relative">
       <button
-        className="text-start flex"
+        className={`hover:text-rose-600  text-start flex  transition-all duration-300 hover:[&>*]:scale-120 ${
+          list && "text-rose-600"
+        }`}
         onClick={() => (list ? setList(false) : setList(true))}
       >
-        <ChevronDownIcon className="mr-2" />
-        Projects
+        <motion.div
+          animate={list ? { rotate: 180 } : { rotate: 0 }}
+          transition={{ duration: 0.2 }}
+          className="mr-2 w-5 "
+        >
+          <ChevronDownIcon
+            className={`text-white w-full h-full ${list && "fill-white "}`}
+          />
+        </motion.div>
+        Projects {title && `${title}`}
       </button>
       {list && (
         <motion.ul
           initial={{ scaleY: 0 }}
           animate={{ scaleY: 1, transition: { duration: 0.1 } }}
-          className="absolute top-13 left-0 border-t-1 origin-top bg-black"
+          className="absolute top-15 left-0 border-t-1 origin-top bg-black  shadow-2xl shadow-black border-r-3"
         >
           {projects?.map((item) => (
             <motion.li
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 1, transition: { duration: 0.1 } }}
-              className="border-x-1 border-b-1 pointer-none origin-top hover:ml-2 hover:-mr-2  hover:border-transparent hover:py-1 hover:outline-1 outline-neutral-400 transition-all duration-100"
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.1 } }}
+              className="border-x-1 border-b-1 pointer-none origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100"
               key={item.id}
             >
               <LinkTaskToProjectBtn
+                setList={setList}
                 title={item.title}
                 projectId={item.id}
                 taskId={taskId}
