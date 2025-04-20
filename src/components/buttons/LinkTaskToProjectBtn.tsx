@@ -5,8 +5,10 @@ interface Props {
   projectId: string;
   taskId: string;
   setList: (value: boolean) => void;
-  setTitleCheck: (value: boolean) => void;
-  titleCheck: boolean;
+  setTitleCheck: (value: string) => void;
+  setAssignCheck: (value: boolean) => void;
+
+  titleCheck: string;
 }
 
 export default function LinkTaskToProjectBtn({
@@ -15,7 +17,7 @@ export default function LinkTaskToProjectBtn({
   taskId,
   setList,
   setTitleCheck,
-  titleCheck,
+  setAssignCheck,
 }: Props) {
   const router = useRouter();
   async function linkTask() {
@@ -43,7 +45,8 @@ export default function LinkTaskToProjectBtn({
         linkTask();
         setList(false);
         router.refresh();
-        setTitleCheck(true);
+        setTitleCheck(title);
+        setAssignCheck(true);
       }}
       key={projectId}
     >

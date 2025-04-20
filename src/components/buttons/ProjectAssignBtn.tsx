@@ -22,12 +22,13 @@ export default function ProjectAssignBtn({
   }
 
   const [list, setList] = useState(false);
-  const [titleCheck, setTitleCheck] = useState(false);
+  const [titleCheck, setTitleCheck] = useState("");
+  const [assignCheck, setAssignCheck] = useState(false);
 
   return (
     <div className="flex flex-col w-full py-2 px-2 relative">
       <button
-        className={`hover:text-rose-600  text-start flex  transition-all duration-300 hover:[&>*]:scale-120 ${
+        className={`hover:text-rose-600  text-start flex transition-all duration-300 hover:[&>*]:scale-120 ${
           list && "text-rose-600"
         }`}
         onClick={() => (list ? setList(false) : setList(true))}
@@ -41,10 +42,19 @@ export default function ProjectAssignBtn({
             className={`text-white w-full h-full ${list && "fill-white "}`}
           />
         </motion.div>
-        Projects
-        {projects?.map((item) => (
-          <p key={item.id}>{item.id === projectIdOfTask ? item.title : null}</p>
-        ))}
+
+        {!projectIdOfTask && !assignCheck && "projects"}
+        {assignCheck ? (
+          <p>{`assigned to ${titleCheck}`}</p>
+        ) : (
+          projects?.map((item) => (
+            <div key={item.id}>
+              {item.id === projectIdOfTask ? (
+                <p>{`assigned to ${item.title}`}</p>
+              ) : null}
+            </div>
+          ))
+        )}
       </button>
       {list && (
         <motion.ul
@@ -62,7 +72,7 @@ export default function ProjectAssignBtn({
               <LinkTaskToProjectBtn
                 setList={setList}
                 setTitleCheck={setTitleCheck}
-                titleCheck={titleCheck}
+                setAssignCheck={setAssignCheck}
                 title={item.title}
                 projectId={item.id}
                 taskId={taskId}
