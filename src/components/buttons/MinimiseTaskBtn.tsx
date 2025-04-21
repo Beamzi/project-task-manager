@@ -4,11 +4,27 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 
 interface Props {
   id: string;
+  setMinimise: (value: boolean) => void;
+  minimise: boolean;
+  setStatus: (value: string) => void;
+  status: string;
 }
 
-export default function MinimiseTaskBtn({ id }: Props) {
+export default function MinimiseTaskBtn({
+  id,
+  setMinimise,
+  minimise,
+  setStatus,
+  status,
+}: Props) {
   return (
-    <button className="w-10 bg-neutral-800 border-1 relative px-2 flex  justify-center hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-150 hover:[&>*]:fill-rose-600">
+    <button
+      onClick={() => {
+        minimise ? setMinimise(false) : setMinimise(true);
+        status === "closed" ? setStatus("open") : setStatus("closed");
+      }}
+      className="w-10 bg-neutral-800 border-1 relative px-2 flex  justify-center hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-150 hover:[&>*]:fill-rose-600"
+    >
       <MinusIcon className="absolute top-2 mt-[0.5px]  transition-all duration-100"></MinusIcon>
     </button>
   );

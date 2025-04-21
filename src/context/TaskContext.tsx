@@ -12,7 +12,7 @@ export type TaskType = {
   content: string | null;
   id: string;
   priority: boolean;
-  projectId: string;
+  projectId: string | null;
 };
 
 export const TaskContext = createContext<TaskType[]>([]);

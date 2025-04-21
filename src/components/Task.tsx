@@ -2,11 +2,13 @@
 
 import ProjectAssignBtn from "./buttons/ProjectAssignBtn";
 import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
 import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
 import MinimiseTaskBtn from "./buttons/MinimiseTaskBtn";
+import { motion } from "motion/react";
+import { DashBoardContext } from "@/context/DashBoardContext";
 
 interface Props {
   author: string | null | undefined;
@@ -42,11 +44,22 @@ export default function Task({
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
+  const [minimise, setMinimise] = useState(false);
+  const [status, setStatus] = useState("initial");
   const [state, dispatch] = useReducer(reducer, {
     newTitle: `${title}`,
     newContent: `${content}`,
     newDate: `${date}`,
   });
+
+  const context = useContext(DashBoardContext);
+
+  const { taskRef } = context;
+
+  const motionProps = {
+    initial: status === "initial" ? { opacity: 1 } : { opacity: 0 },
+    animate: { opacity: 1 },
+  };
 
   async function updateTask() {
     try {
@@ -70,7 +83,16 @@ export default function Task({
 
   return (
     <>
-      <div className="task-selector task-shadows lg:m-[4px] lg:w-[calc(50%-8px)] xl:w-[calc(33%-10px)] xl:m-[3.3px] w-[100%] border-1 my-5 p-5 flex flex-col bg-neutral-800">
+      <motion.div
+        ref={taskRef}
+        id={id}
+        initial={{ height: 500 }}
+        transition={{ duration: 0.3 }}
+        animate={minimise ? { height: 200 } : { height: 500 }}
+        className={`origin-top ${
+          minimise && "origin-top hello"
+        }task-selector task-shadows w-130 border-1  p-5  mx-2  flex flex-col bg-neutral-800`}
+      >
         <h3 className="bg-transparent my-1 text-end">{author}</h3>
         <div className="flex mb-1 py-1">
           <ProjectAssignBtn
@@ -78,7 +100,13 @@ export default function Task({
             projectIdOfTask={projectId}
           ></ProjectAssignBtn>
           <div className="flex justify-end relative ">
-            <MinimiseTaskBtn id={id}></MinimiseTaskBtn>
+            <MinimiseTaskBtn
+              id={id}
+              setMinimise={setMinimise}
+              minimise={minimise}
+              status={status}
+              setStatus={setStatus}
+            ></MinimiseTaskBtn>
             <RemoveTaskBtn id={id}></RemoveTaskBtn>
           </div>
         </div>
@@ -90,39 +118,46 @@ export default function Task({
           onClick={() => setSelect(true)}
           type="text"
         ></input>
-        <textarea
-          className="min-h-35 border-1"
-          value={select ? state.newContent : content}
-          onChange={(e) =>
-            dispatch({ type: "change-values", propContent: e.target.value })
-          }
-          onClick={() => setSelect(true)}
-        ></textarea>
-        <input
-          className=""
-          type="datetime-local"
-          max="9999-12-31T23:59"
-          value={select ? state.newDate : date}
-          onChange={(e) =>
-            dispatch({ type: "change-values", propDate: e.target.value })
-          }
-          onClick={() => setSelect(true)}
-        ></input>
-
-        <div className="flex mt-1 py-1">
-          <div className="w-2/4">
-            <button
-              onClick={updateTask}
-              type="submit"
-              className=" flex py-2 px-5 "
-            >
-              Saved
-              <CheckCircleIcon className="ml-2 stroke-green-400" />
-            </button>
-          </div>
-          <PriorityBtn id={id} priorityState={priority}></PriorityBtn>
-        </div>
-      </div>
+        {!minimise && (
+          <>
+            <motion.textarea
+              {...motionProps}
+              className="origin-bottom min-h-35 border-1"
+              value={select ? state.newContent : content}
+              onChange={(e) =>
+                dispatch({
+                  type: "change-values",
+                  propContent: e.target.value,
+                })
+              }
+              onClick={() => setSelect(true)}
+            ></motion.textarea>
+            <motion.input
+              {...motionProps}
+              type="datetime-local"
+              max="9999-12-31T23:59"
+              value={select ? state.newDate : date}
+              onChange={(e) =>
+                dispatch({ type: "change-values", propDate: e.target.value })
+              }
+              onClick={() => setSelect(true)}
+            ></motion.input>
+            <motion.div {...motionProps} className="flex mt-1 py-1">
+              <div className="w-2/4">
+                <button
+                  onClick={updateTask}
+                  type="submit"
+                  className=" flex py-2 px-5 "
+                >
+                  Saved
+                  <CheckCircleIcon className="ml-2 stroke-green-400" />
+                </button>
+              </div>
+              <PriorityBtn id={id} priorityState={priority}></PriorityBtn>
+            </motion.div>
+          </>
+        )}
+      </motion.div>
     </>
   );
 }

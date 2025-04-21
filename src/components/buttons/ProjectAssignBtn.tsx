@@ -28,7 +28,7 @@ export default function ProjectAssignBtn({
   return (
     <div className="flex flex-col w-full py-2 px-2 relative">
       <button
-        className={`hover:text-rose-600  text-start flex transition-all duration-300 hover:[&>*]:scale-120 ${
+        className={`hover:text-rose-600  text-start flex transition-all duration-300 hover:[&>*]: ${
           list && "text-rose-600"
         }`}
         onClick={() => (list ? setList(false) : setList(true))}
@@ -43,14 +43,14 @@ export default function ProjectAssignBtn({
           />
         </motion.div>
 
-        {!projectIdOfTask && !assignCheck && "projects"}
+        {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
-          <p>{`assigned to ${titleCheck}`}</p>
+          <p>{`Assigned to ${titleCheck}`}</p>
         ) : (
           projects?.map((item) => (
             <div key={item.id}>
               {item.id === projectIdOfTask ? (
-                <p>{`assigned to ${item.title}`}</p>
+                <p>{`Assigned to ${item.title}`}</p>
               ) : null}
             </div>
           ))

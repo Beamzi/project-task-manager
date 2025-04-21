@@ -6,7 +6,6 @@ import ListOfTasks from "./Lists/ListOfTasks";
 
 export default function AllTasks() {
   const tasks = useContext(TaskContext);
-  console.log({ tasks }, "omg tasks!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
   return (
     <>
