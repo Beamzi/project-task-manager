@@ -1,6 +1,5 @@
-"use client";
-
 import React from "react";
+import ScheduleMenuItems from "./ScheduleMenuItems";
 
 interface Props {
   scheduleTasks:
@@ -19,5 +18,20 @@ interface Props {
 }
 
 export default function ScheduleMenu({ scheduleTasks }: Props) {
-  return <div></div>;
+  return (
+    <div>
+      <div className="flex justify-center py-1 ">
+        {scheduleTasks?.map((item) => (
+          <ScheduleMenuItems
+            key={item.id}
+            date={item.date}
+            title={item.title}
+            taskId={item.id}
+            content={item.content}
+          ></ScheduleMenuItems>
+        ))}
+      </div>
+      <hr></hr>
+    </div>
+  );
 }
