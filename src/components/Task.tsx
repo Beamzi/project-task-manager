@@ -18,7 +18,10 @@ interface Props {
   id: string;
   priority: boolean;
   projectId: string;
+  taskParentClasses: string;
 }
+
+interface viewSpecificProps {}
 
 function reducer(state, action) {
   switch (action.type) {
@@ -41,6 +44,7 @@ export default function Task({
   id,
   priority,
   projectId,
+  taskParentClasses,
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
@@ -53,8 +57,6 @@ export default function Task({
   });
 
   const context = useContext(DashBoardContext);
-
-  const { taskRef } = context;
 
   const motionProps = {
     initial: status === "initial" ? { opacity: 1 } : { opacity: 0 },
@@ -81,17 +83,18 @@ export default function Task({
     }
   }
 
+  // task-selector task-shadows  xl:w-[100%] lg:w-[100%] md:w-130 border-1 mb-4 mt-4 p-5 mx-4 flex flex-col bg-neutral-800
+
   return (
     <>
       <motion.div
-        ref={taskRef}
         id={id}
         initial={{ height: 500 }}
         transition={{ duration: 0.3 }}
         animate={minimise ? { height: 200 } : { height: 500 }}
         className={`origin-top ${
           minimise && "origin-top hello"
-        }task-selector task-shadows w-130 border-1  p-5  mx-2  flex flex-col bg-neutral-800`}
+        } ${taskParentClasses} task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-1 p-5 flex flex-col bg-neutral-800`}
       >
         <h3 className="bg-transparent my-1 text-end">{author}</h3>
         <div className="flex mb-1 py-1">
@@ -99,7 +102,7 @@ export default function Task({
             taskId={id}
             projectIdOfTask={projectId}
           ></ProjectAssignBtn>
-          <div className="flex justify-end relative ">
+          <div className="flex justify-end relative dark:bg-neutral-900">
             <MinimiseTaskBtn
               id={id}
               setMinimise={setMinimise}
@@ -143,7 +146,7 @@ export default function Task({
               onClick={() => setSelect(true)}
             ></motion.input>
             <motion.div {...motionProps} className="flex mt-1 py-1">
-              <div className="w-2/4">
+              <div className="w-2/4 dark:bg-neutral-900">
                 <button
                   onClick={updateTask}
                   type="submit"

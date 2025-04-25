@@ -31,9 +31,15 @@ export default async function CurrentProject({ params }: Props) {
   const project = await getProject();
   const tasks = project?.tasks;
   return (
-    <div>
+    <div className=" flex flex-col lg:flex-row align-middle py-4 w-[100%] lg:pl-4">
       <ProjectView project={project}></ProjectView>
-      <ListOfTasks currentTasks={tasks}></ListOfTasks>
+
+      <div className="w-[100%] lg:px-4 overflow-scroll h-155">
+        <ListOfTasks
+          currentTasks={tasks}
+          taskParentClasses={"gofkurself"}
+        ></ListOfTasks>
+      </div>
     </div>
   );
 }

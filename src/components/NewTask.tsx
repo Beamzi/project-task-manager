@@ -27,6 +27,14 @@ export default function NewTask() {
     }
   }
 
+  const getYear = () => new Date().getFullYear();
+
+  const currentDate = format(new Date(), "yyyy-MM-dd'T'HH:mm");
+
+  console.log(currentDate, "current date");
+
+  console.log(getYear, "current year bla");
+
   return (
     <form
       onSubmit={createTask}
@@ -48,7 +56,8 @@ export default function NewTask() {
           value={date}
           className="border-2 w-full"
           type="datetime-local"
-          max="9999-12-31T23:59"
+          min={`${currentDate}`}
+          max={`${getYear()}-12-31T23:59`}
         ></input>
       </label>
       <label>
@@ -66,3 +75,5 @@ export default function NewTask() {
     </form>
   );
 }
+
+//9999-12-31T23:59

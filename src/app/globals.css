@@ -81,8 +81,11 @@ body > * {
   body > * {
     @apply dark:bg-black
   }
+  textarea, input {
+    @apply dark:bg-neutral-900
+  }
   * {
-    @apply  dark:border-neutral-600 dark:bg-neutral-900; 
+    @apply  dark:border-neutral-600 ; 
   }
   input, textarea {
     @apply text-neutral-500 p-2 border-1 my-1
@@ -90,7 +93,6 @@ body > * {
   svg {
     @apply bg-transparent w-5
   }
-
 
 }
 

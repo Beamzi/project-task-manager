@@ -7,9 +7,13 @@ import type { TaskType } from "@/context/TaskContext";
 
 interface NewProps {
   currentTasks: TaskType[] | undefined;
+  taskParentClasses: string;
 }
 
-export default function ListOfTasks({ currentTasks }: NewProps) {
+export default function ListOfTasks({
+  currentTasks,
+  taskParentClasses,
+}: NewProps) {
   return (
     <>
       {currentTasks?.map((item) => (
@@ -22,6 +26,7 @@ export default function ListOfTasks({ currentTasks }: NewProps) {
           id={item.id}
           priority={item.priority}
           projectId={item.projectId}
+          taskParentClasses={taskParentClasses}
         ></Task>
       ))}
     </>

@@ -2,9 +2,9 @@
 
 import { createContext } from "react";
 
-interface keys {
+export interface project {
   title: string;
   id: string;
 }
 
-export const projectContext = createContext<keys[] | null>(null);
+export const projectContext = createContext<project[] | null>(null);

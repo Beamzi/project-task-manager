@@ -26,7 +26,7 @@ export default function ProjectAssignBtn({
   const [assignCheck, setAssignCheck] = useState(false);
 
   return (
-    <div className="flex flex-col w-full py-2 px-2 relative">
+    <div className="flex flex-col w-full py-2 px-2 relative dark:bg-neutral-900">
       <button
         className={`hover:text-rose-600  text-start flex transition-all duration-300 hover:[&>*]: ${
           list && "text-rose-600"

@@ -39,7 +39,7 @@ export default function PriorityBtn({
   }
 
   return (
-    <div className="z-10 flex w-2/4 justify-end relative">
+    <div className="z-5 flex w-2/4 justify-end relative dark:bg-neutral-900">
       <motion.button
         //keep an eye on this
         key={restart ? "restart" : "normal"}

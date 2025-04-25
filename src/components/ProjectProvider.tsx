@@ -2,13 +2,13 @@
 import { projectContext } from "@/context/ProjectContext";
 import React from "react";
 
-interface keys {
+interface project {
   title: string;
   id: string;
 }
 
 interface Props {
-  value: keys[];
+  value: project[];
   children: React.ReactNode;
 }
 

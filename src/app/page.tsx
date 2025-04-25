@@ -5,7 +5,9 @@ import { prisma } from "@/lib/prisma";
 import React from "react";
 import { auth } from "../../auth";
 import { SignOutBtn } from "@/components/buttons/SignOutBtn";
-import TaskEasySelect from "@/components/Lists/TaskEasySelect";
+import EasySelect from "@/components/Lists/EasySelect";
+import EasySelectAdapter from "@/components/EasySelectAdapter";
+import { format } from "date-fns";
 
 async function getTasks() {
   const session = await auth();
@@ -45,15 +47,25 @@ export default async function AllTasksView() {
   //console.log({ session });
   const tasks = await getTasks();
   //console.log(tasks);
+
   return (
     <TasksProvider tasks={tasks}>
-      <div className="bg-transparent py-2 pb-5">All Tasks.</div>
-      <div className="flex py-2">
-        <div className="flex w-130 flex-wrap overflow-y-scroll h-[70dvh]">
+      {/* <div className="bg-transparent py-2 pb-5 border-2"></div> */}
+      <div className=" py-5 px-3 flex flex-col justify-start w-full  bg-transparent ">
+        <h3 className="text-start w-full">Quickview</h3>
+        <hr className="w-full mt-2 opacity-40"></hr>
+      </div>
+
+      <div className="flex  relative bg-transparent  justify-center ">
+        <div
+          id="task-scroll-container"
+          className=" border-1 flex justify-center xl:max-w-200 md:max-w-130 lg:max-w-150 px-4 py-4  bg-linear-0 from-rose-900 to-neutral-900 relative flex-wrap overflow-y-scroll h-[70dvh]"
+        >
+          <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
           <AllTasks></AllTasks>
         </div>
-        <div className="ml-5">
-          <TaskEasySelect tasks={tasks} />
+        <div className="flex">
+          <EasySelect modelList={tasks} />
         </div>
       </div>
     </TasksProvider>

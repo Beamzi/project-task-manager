@@ -7,5 +7,8 @@ interface Props {
   sideMenu: string;
   setSideMenu: (value: string) => void;
   taskRef: any;
+  globalMinimised: boolean;
+  setGlobalMinimised: (value: boolean) => void;
+  taskParentClasses: string;
 }
 export const DashBoardContext = createContext<Props | null>(null);
