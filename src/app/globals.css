@@ -110,7 +110,11 @@ body > * {
 }
 
 
+.scroll-x-containers {
+  scrollbar-width: auto; /* For Firefox */
+  -webkit-overflow-scrolling: touch; /* For iOS */
 
+}
 
 
 div::-webkit-scrollbar-track {

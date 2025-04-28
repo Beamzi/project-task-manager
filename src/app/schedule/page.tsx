@@ -24,9 +24,11 @@ export default async function Schedule() {
 
   return (
     <div>
-      <ScheduleMenu scheduleTasks={result} />
+      <div className="overflow-x-scroll">
+        <ScheduleMenu scheduleTasks={result} />
+      </div>
 
-      <div className="overflow-y-scroll  h-[80dvh] w-[80wvh] ">
+      <div className="overflow-y-scroll border-2 h-[70dvh] w-[70wvh] ">
         <ListOfScheduleTasks scheduleTasks={result} />
       </div>
     </div>
