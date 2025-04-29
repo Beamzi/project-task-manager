@@ -5,7 +5,7 @@ import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
 export interface Props {
-  taskId: string;
+  dateId: string;
   title: string;
   date: Date;
   content: string | null;
@@ -13,7 +13,7 @@ export interface Props {
 }
 
 export default function ScheduleTask({
-  taskId,
+  dateId,
   title,
   date,
   content,
@@ -29,13 +29,13 @@ export default function ScheduleTask({
     return date;
   };
 
-  console.log(dateForDisplay, "datefordispaly");
-
   return (
-    <div id={taskId} className="w-[60dvw] overflow-hidden">
+    <div className="w-[60dvw] overflow-hidden">
       {!overDue ? (
         <>
-          <h1 className="font-bold py-2 px-5">{getDate()}</h1>
+          <h1 id={dateId} className="font-bold py-2 px-5">
+            {getDate()}
+          </h1>
           <hr></hr>
         </>
       ) : (

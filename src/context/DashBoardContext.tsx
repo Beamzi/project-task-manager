@@ -6,7 +6,7 @@ interface Props {
   setModal: (value: boolean) => void;
   sideMenu: string;
   setSideMenu: (value: string) => void;
-  taskRef: any;
+  scrollDivRef: RefObject<HTMLDivElement | null>; // ✅ Correct type
   globalMinimised: boolean;
   setGlobalMinimised: (value: boolean) => void;
   taskParentClasses: string;

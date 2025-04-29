@@ -4,7 +4,8 @@ import React, { useEffect } from "react";
 import ScheduleTask from "../ScheduleTask";
 import { format, eachDayOfInterval, parseISO } from "date-fns";
 import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { useState, useRef, useContext } from "react";
+import { DashBoardContext } from "@/context/DashBoardContext";
 
 interface Props {
   scheduleTasks:
@@ -26,6 +27,13 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
   const [overDue, isOverDue] = useState(true);
   const latestTask = scheduleTasks?.[scheduleTasks.length - 1];
 
+  const context = useContext(DashBoardContext);
+  if (!context) {
+    throw new Error("scrollDivRef not loaded");
+  }
+
+  const { scrollDivRef } = context;
+
   const getDateRange = eachDayOfInterval({
     start: new Date(),
     end: new Date(latestTask.date),
@@ -44,7 +52,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
 
   return (
     <>
-      <div className=" overflow-hidden border-2">
+      <div ref={scrollDivRef} className="scrolling-container overflow-hidden">
         <div>
           {scheduleTasks?.map(
             (item) =>
@@ -68,7 +76,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
                 date === format(new Date(item.date), "yyyy-MM-dd") ? (
                   <ScheduleTask
                     key={item.id}
-                    taskId={date}
+                    dateId={date}
                     title={item.title}
                     date={item.date}
                     content={item.content}
@@ -77,8 +85,10 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
               )}
             </div>
           ) : (
-            <div className="w-100" key={date} id={date}>
-              <h1 className="font-bold py-2 px-5">{reformat(date)}</h1>
+            <div className="w-100" key={date}>
+              <h1 id={date} className="font-bold py-2 px-5">
+                {reformat(date)}
+              </h1>
               <hr></hr>
               <div className="flex align-center h-full">
                 <div className="py-5  px-5 h-full   wrap-normal text-neutral-500">

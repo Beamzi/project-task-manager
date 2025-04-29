@@ -17,10 +17,12 @@ export default function ScheduleMenuItems({
   const day = date.toString().slice(0, 3);
   const dayNum = date.toString().slice(7, 10);
 
+  const formDate = format(new Date(date), "yyyy-MM-dd");
+
   return (
     <button
       onClick={() => {
-        const element = document.getElementById(taskId);
+        const element = document.getElementById(formDate);
         element?.scrollIntoView({
           behavior: "smooth",
         });
