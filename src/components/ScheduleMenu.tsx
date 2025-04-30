@@ -82,11 +82,6 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
 
   const overflow = () => "overflow-x-hidden";
 
-  const translate = [
-    "-translate-x-100",
-    "-translate-x-200",
-    "-translate-x-300",
-  ];
   return (
     <div>
       <div className="scroll-x-containers w-[70dvw] flex h-20">
@@ -96,9 +91,6 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
           const windowEnd = windowStart + windowSize;
 
           if (i >= windowStart && i < windowEnd)
-            // let min = !(sequence % 7);
-            // let max = min + 8;
-            // if (sequence > min && sequence < max && i > min && i < max)
             return (
               <button
                 className={`border-2 min-w-20 flex ${
