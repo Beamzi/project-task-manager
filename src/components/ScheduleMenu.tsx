@@ -10,6 +10,8 @@ import {
 } from "date-fns";
 import { useEffect, useState, useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { count } from "console";
+import { form } from "motion/react-client";
 
 interface Props {
   scheduleTasks:
@@ -32,6 +34,8 @@ interface Props {
 export default function ScheduleMenu({ scheduleTasks }: Props) {
   const latestTask = scheduleTasks?.[scheduleTasks.length - 1];
   const [inView, setInView] = useState("");
+  const [sequence, setSequence] = useState(0);
+  const [nextColumn, setNextColumn] = useState(0);
 
   const context = useContext(DashBoardContext);
 
@@ -49,18 +53,20 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
 
   useEffect(() => {
     const scrollingDiv = document.querySelector(".scrolling-container");
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setInView(entry.target.id);
+            setSequence(formattedDates.indexOf(entry.target.id));
           }
         });
       },
       {
-        threshold: 0.8,
-        root: scrollingDiv?.current,
-        rootMargin: "0% 0px -70% 0px",
+        threshold: 0.1,
+        root: scrollingDiv,
+        rootMargin: "0% 0px -90% 0px",
       }
     );
 
@@ -74,48 +80,41 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
     return () => observer.disconnect();
   }, []);
 
+  const overflow = () => "overflow-x-hidden";
+
+  const translate = [
+    "-translate-x-100",
+    "-translate-x-200",
+    "-translate-x-300",
+  ];
   return (
-    <div className="">
-      <div
-        className="scroll-x-containers w-[70dvw] flex overflow-x-scroll  h-20 overflow-y-hidden overflow-auto "
-        // onWheel={(e) => {
-        //   // here im handling the horizontal scroll inline, without the use of hooks
-        //   const strength = Math.abs(e.deltaY);
-        //   if (e.deltaY === 0) return;
-        //   const el = e.currentTarget;
-        //   if (
-        //     !(el.scrollLeft === 0 && e.deltaY < 0) &&
-        //     !(
-        //       el.scrollWidth - el.clientWidth - Math.round(el.scrollLeft) ===
-        //         0 && e.deltaY > 0
-        //     )
-        //   ) {
-        //     e.preventDefault();
-        //   }
-        //   el.scrollTo({
-        //     left: el.scrollLeft + e.deltaY,
-        //     // large scrolls with smooth animation behavior will lag, so switch to auto
-        //     behavior: strength > 70 ? "auto" : "smooth",
-        //   });
-        // }}
-      >
-        {formattedDates.map((date) => {
-          return (
-            <button
-              className={`border-2 min-w-30 flex ${
-                inView === date && "text-rose-600"
-              }`}
-              id={`${date}-horizontal`}
-              onClick={(e) => {
-                setInView(date);
-                const el = document.getElementById(date);
-                el.scrollIntoView({
-                  behavior: "smooth",
-                });
-              }}
-              key={date}
-            >{`${date}`}</button>
-          );
+    <div>
+      <div className="scroll-x-containers w-[70dvw] flex h-20">
+        {formattedDates.map((date, i) => {
+          const windowSize = 8;
+          const windowStart = Math.floor(sequence / windowSize) * windowSize;
+          const windowEnd = windowStart + windowSize;
+
+          if (i >= windowStart && i < windowEnd)
+            // let min = !(sequence % 7);
+            // let max = min + 8;
+            // if (sequence > min && sequence < max && i > min && i < max)
+            return (
+              <button
+                className={`border-2 min-w-20 flex ${
+                  inView === date && "text-rose-600"
+                }`}
+                id={`${date}-horizontal`}
+                onClick={(e) => {
+                  setInView(date);
+                  const el = document.getElementById(date);
+                  el.scrollIntoView({
+                    // behavior: "smooth",
+                  });
+                }}
+                key={date}
+              >{`${date}`}</button>
+            );
         })}
       </div>
 
@@ -136,3 +135,26 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
     </div>
   );
 }
+
+//className="scroll-x-containers w-[70dvw] flex overflow-x-scroll  h-20 overflow-y-hidden overflow-auto "
+
+// onWheel={(e) => {
+//   // here im handling the horizontal scroll inline, without the use of hooks
+//   const strength = Math.abs(e.deltaY);
+//   if (e.deltaY === 0) return;
+//   const el = e.currentTarget;
+//   if (
+//     !(el.scrollLeft === 0 && e.deltaY < 0) &&
+//     !(
+//       el.scrollWidth - el.clientWidth - Math.round(el.scrollLeft) ===
+//         0 && e.deltaY > 0
+//     )
+//   ) {
+//     e.preventDefault();
+//   }
+//   el.scrollTo({
+//     left: el.scrollLeft + e.deltaY,
+//     // large scrolls with smooth animation behavior will lag, so switch to auto
+//     behavior: strength > 70 ? "auto" : "smooth",
+//   });
+// }}

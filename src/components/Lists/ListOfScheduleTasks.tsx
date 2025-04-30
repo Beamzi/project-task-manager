@@ -52,7 +52,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
 
   return (
     <>
-      <div ref={scrollDivRef} className="scrolling-container overflow-hidden">
+      <div ref={scrollDivRef} className="overflow-hidden">
         <div>
           {scheduleTasks?.map(
             (item) =>
