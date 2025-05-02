@@ -21,7 +21,7 @@ export default function ListOfTasks({
           key={item.id}
           author={item.author?.name}
           title={item.title}
-          date={format(new Date(item.date), "yyyy-MM-dd'T'HH:mm")}
+          date={item.date}
           content={item.content}
           id={item.id}
           priority={item.priority}

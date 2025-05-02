@@ -42,7 +42,7 @@ export default function EasySelect({ modelList }: NewProps) {
   }, []);
 
   return (
-    <div className="py-2 mx-4 px-5 h-[100%] easy-select-gradient  ">
+    <div className="py-2  px-5 h-[100%] bg-neutral-900  ">
       <div className="py-3 bg-transparent">
         <h3 className="py-1 bg-transparent">Tasks</h3>
         <hr></hr>

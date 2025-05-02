@@ -9,15 +9,17 @@ import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
 import MinimiseTaskBtn from "./buttons/MinimiseTaskBtn";
 import { motion } from "motion/react";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { format } from "date-fns";
+import TimeOptions from "./TimeOptions";
 
 interface Props {
   author: string | null | undefined;
   title: string;
-  date: string;
+  date: Date;
   content: string | null;
   id: string;
   priority: boolean;
-  projectId: string;
+  projectId: string | null;
   taskParentClasses: string;
 }
 
@@ -48,20 +50,35 @@ export default function Task({
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
-  const [minimise, setMinimise] = useState(false);
+  const [minimise, setMinimise] = useState(true);
   const [status, setStatus] = useState("initial");
+  const [onHover, setOnHover] = useState(
+    minimise && `opacity-0 hover:opacity-100`
+  );
+  const [showTimeOptions, setShowTimeOptions] = useState(false);
+  const formattedTrueDate = format(new Date(date), "yyyy-MM-dd'T'HH:mm");
+
   const [state, dispatch] = useReducer(reducer, {
     newTitle: `${title}`,
     newContent: `${content}`,
-    newDate: `${date}`,
+    newDate: `${formattedTrueDate}`,
   });
 
+  const [quickDate, setQuickDate] = useState<Date>();
   const context = useContext(DashBoardContext);
+
+  if (!context) {
+    throw new Error("dashboard props not loaded");
+  }
+  const { globalMinimised, setGlobalMinimised } = context;
 
   const motionProps = {
     initial: status === "initial" ? { opacity: 1 } : { opacity: 0 },
     animate: { opacity: 1 },
   };
+
+  const getYear = () => new Date().getFullYear();
+  const currentDate = format(new Date(), "yyyy-MM-dd'T'HH:mm");
 
   async function updateTask() {
     try {
@@ -73,7 +90,7 @@ export default function Task({
         body: JSON.stringify({
           title: state.newTitle,
           content: state.newContent,
-          date: state.newDate,
+          date: quickDate && quickDate,
           id: id,
         }),
       });
@@ -88,21 +105,31 @@ export default function Task({
   return (
     <>
       <motion.div
+        onHoverStart={() => setOnHover("")}
+        onHoverEnd={() => setOnHover("opacity-0 hover:opacity-100")}
         id={id}
-        initial={{ height: 500 }}
+        initial={!minimise && { height: 500 }}
         transition={{ duration: 0.3 }}
-        animate={minimise ? { height: 200 } : { height: 500 }}
-        className={`origin-top ${
-          minimise && "origin-top hello"
-        } ${taskParentClasses} task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-1 p-5 flex flex-col bg-neutral-800`}
+        animate={minimise ? { height: 130 } : { height: 330 }}
+        className={` origin-top ${
+          minimise && "origin-top hello relative"
+        } ${taskParentClasses} task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full  border-b-1 py-3 px-4 flex flex-col bg-neutral-800`}
       >
-        <h3 className="bg-transparent my-1 text-end">{author}</h3>
-        <div className="flex mb-1 py-1">
+        {/* <h3 className="bg-transparent my-1 text-end">{author}</h3> */}
+
+        <div className="flex py-1">
           <ProjectAssignBtn
             taskId={id}
             projectIdOfTask={projectId}
+            minimise={minimise}
           ></ProjectAssignBtn>
-          <div className="flex justify-end relative dark:bg-neutral-900">
+
+          <div
+            className={`
+            flex justify-end py-1 pl-1 relative dark:bg-neutral-900 ${
+              minimise && onHover
+            }`}
+          >
             <MinimiseTaskBtn
               id={id}
               setMinimise={setMinimise}
@@ -120,12 +147,21 @@ export default function Task({
           }
           onClick={() => setSelect(true)}
           type="text"
+          className={`py-1 px-2 text-md font-medium ${
+            minimise && "bg-transparent text-neutral-400"
+          }`}
         ></input>
+        {minimise && (
+          <p className="py-1 px-2 text-sm  text-rose-300">
+            {minimise && format(new Date(date), "EEE MMM d")}
+          </p>
+        )}
+
         {!minimise && (
           <>
             <motion.textarea
               {...motionProps}
-              className="origin-bottom min-h-35 border-1"
+              className=" text-sm font-light origin-bottom  px-2 py-1 min-h-35 border-y-1"
               value={select ? state.newContent : content}
               onChange={(e) =>
                 dispatch({
@@ -136,21 +172,44 @@ export default function Task({
               onClick={() => setSelect(true)}
             ></motion.textarea>
             <motion.input
-              {...motionProps}
               type="datetime-local"
-              max="9999-12-31T23:59"
-              value={select ? state.newDate : date}
-              onChange={(e) =>
-                dispatch({ type: "change-values", propDate: e.target.value })
+              min={`${currentDate}`}
+              max={`${getYear()}-12-31T23:59`}
+              value={
+                select
+                  ? state.newDate
+                  : format(new Date(date), "yyyy-MM-dd'T'HH:mm")
               }
-              onClick={() => setSelect(true)}
+              onChange={(e) => {
+                dispatch({ type: "change-values", propDate: e.target.value });
+              }}
+              onClick={() => {
+                setSelect(true);
+              }}
+              className="py-1 px-2 relative"
             ></motion.input>
-            <motion.div {...motionProps} className="flex mt-1 py-1">
+
+            <div
+              {...motionProps}
+              className="relative"
+              onClick={() => setShowTimeOptions(showTimeOptions ? false : true)}
+            >
+              {format(new Date(date), "EEE MMM d")}
+            </div>
+            {showTimeOptions && (
+              <TimeOptions
+                setQuickDate={setQuickDate}
+                trueDate={date}
+                setShowTimeOptions={setShowTimeOptions}
+              ></TimeOptions>
+            )}
+
+            <motion.div {...motionProps} className="flex py-1 ">
               <div className="w-2/4 dark:bg-neutral-900">
                 <button
                   onClick={updateTask}
                   type="submit"
-                  className=" flex py-2 px-5 "
+                  className="flex py-1 px-2"
                 >
                   Saved
                   <CheckCircleIcon className="ml-2 stroke-green-400" />
@@ -164,3 +223,20 @@ export default function Task({
     </>
   );
 }
+
+// <motion.input
+//   {...motionProps}
+//   type="datetime-local"
+//   min={`${currentDate}`}
+//   max={`${getYear()}-12-31T23:59`}
+//   value={
+//     select ? state.newDate : date
+//   }
+//   onChange={(e) =>
+//     dispatch({ type: "change-values", propDate: e.target.value })
+//   }
+//   onClick={() => {
+//     setSelect(true);
+//   }}
+//   className="py-1 px-2"
+// ></motion.input>

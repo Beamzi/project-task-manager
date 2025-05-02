@@ -42,6 +42,16 @@ body > * {
   );
 }
 
+.inner-background {
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(34, 34, 34) 0px,    /* Start color at 0px */
+    rgb(34, 34, 34) 1px,    /* Same color up to 1px */
+    #000000 1px,            /* IMMEDIATE switch to black at 1px */
+    #000000 10px            /* Black continues to 20px */
+  );
+}
+
 .unselected {
   background: repeating-linear-gradient(
     45deg,
@@ -88,7 +98,7 @@ body > * {
     @apply  dark:border-neutral-600 ; 
   }
   input, textarea {
-    @apply text-neutral-500 p-2 border-1 my-1
+    @apply text-neutral-500
   }
   svg {
     @apply bg-transparent w-5
@@ -105,6 +115,7 @@ body > * {
   background: #833ab44f;
   background: linear-gradient(90deg,rgba(131, 58, 180, 0.2) 0%, rgba(253, 29, 29, 0.7) 50%, rgb(0, 0, 0) 100%);
 }
+
 .noise-overlay {
   background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.1"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="3"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>')
 }

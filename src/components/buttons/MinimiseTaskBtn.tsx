@@ -34,9 +34,9 @@ export default function MinimiseTaskBtn({
         globalMinimised ? setGlobalMinimised(false) : setGlobalMinimised(true);
         status === "closed" ? setStatus("open") : setStatus("closed");
       }}
-      className="w-10 bg-neutral-800 border-1 relative px-2 flex  justify-center hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-150 hover:[&>*]:fill-rose-600"
+      className="w-10  bg-neutral-800 border-1 relative px-2 flex  justify-center hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-150 hover:[&>*]:fill-rose-600"
     >
-      <MinusIcon className="absolute top-2 mt-[0.5px]  transition-all duration-100"></MinusIcon>
+      <MinusIcon className="absolute top mt-[0.5px]  transition-all duration-100"></MinusIcon>
     </button>
   );
 }

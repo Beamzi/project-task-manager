@@ -39,7 +39,7 @@ export default function PriorityBtn({
   }
 
   return (
-    <div className="z-5 flex w-2/4 justify-end relative dark:bg-neutral-900">
+    <div className="z-5  py-1 flex w-2/4 justify-end relative dark:bg-neutral-900">
       <motion.button
         //keep an eye on this
         key={restart ? "restart" : "normal"}
@@ -52,7 +52,7 @@ export default function PriorityBtn({
                 scale: 0.8,
               }
         }
-        className={`w-20 flex justify-center ml-2 bg-neutral-800 border-y-1  ${
+        className={`w-20 flex justify-center ml-2 bg-neutral-800 border-1  ${
           (localPriorityState && "asd") ||
           "hover:[&>*]:fill-rose-600 hover:[&>*]:stroke-rose-600 transition-all duration-100 hover:border-x-5 hover:[&>*]:scale-120"
         }`}

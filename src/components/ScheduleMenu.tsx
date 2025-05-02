@@ -80,11 +80,9 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
     return () => observer.disconnect();
   }, []);
 
-  const overflow = () => "overflow-x-hidden";
-
   return (
-    <div>
-      <div className="scroll-x-containers w-[70dvw] flex h-20">
+    <div className="flex flex-col w-[100%]">
+      <div className=" py-1 scroll-x-containers w-full flex justify-center">
         {formattedDates.map((date, i) => {
           const windowSize = 8;
           const windowStart = Math.floor(sequence / windowSize) * windowSize;
@@ -93,7 +91,7 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
           if (i >= windowStart && i < windowEnd)
             return (
               <button
-                className={`border-2 min-w-20 flex ${
+                className={`2 min-w-20 max-h-10 flex align-middle text-center justify-center content-center ${
                   inView === date && "text-rose-600"
                 }`}
                 id={`${date}-horizontal`}
@@ -105,12 +103,12 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
                   });
                 }}
                 key={date}
-              >{`${date}`}</button>
+              >{`${format(new Date(date), "EEE d")}`}</button>
             );
         })}
       </div>
 
-      <div className="flex justify-center py-1  ">
+      <div className="flex border-t-1 justify-center py-1">
         {scheduleTasks?.map((item) => {
           return (
             <ScheduleMenuItems

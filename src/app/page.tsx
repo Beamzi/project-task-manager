@@ -56,15 +56,18 @@ export default async function AllTasksView() {
         <hr className="w-full mt-2 opacity-40"></hr>
       </div>
 
-      <div className="flex  relative bg-transparent  justify-center ">
-        <div
-          id="task-scroll-container"
-          className=" border-1 flex justify-center xl:max-w-200 md:max-w-130 lg:max-w-150 px-4 py-4  bg-linear-0 from-rose-900 to-neutral-900 relative flex-wrap overflow-y-scroll h-[70dvh]"
-        >
-          <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
-          <AllTasks></AllTasks>
+      <div className="inner-background flex border-1 py-4 px-4 relative bg-transparent  justify-center ">
+        <div className="border-1 bg-neutral-900">
+          <p className="px-2 py-2">Recently Created </p>
+          <div
+            id="task-scroll-container"
+            className="border-r-1 border-y-1 bg-neutral-900 flex justify-center xl:max-w-200 md:max-w-130 lg:max-w-150 relative flex-wrap overflow-y-scroll h-[70dvh]"
+          >
+            <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
+            <AllTasks></AllTasks>
+          </div>
         </div>
-        <div className="flex">
+        <div className="flex border-1 ml-4">
           <EasySelect modelList={tasks} />
         </div>
       </div>
@@ -72,6 +75,7 @@ export default async function AllTasksView() {
   );
 }
 
+// bg-linear-0 from-rose-900 to-neutral-900
 /*    <ClientWrapper tasks={tasks}>i
       <div>THIS IS TASK VIEW PAGE</dv>
     </ClientWrapper>*/

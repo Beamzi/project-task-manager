@@ -11,9 +11,11 @@ import { motion } from "motion/react";
 export default function ProjectAssignBtn({
   taskId,
   projectIdOfTask,
+  minimise,
 }: {
   taskId: string;
   projectIdOfTask: string;
+  minimise: boolean;
 }) {
   const projects = useContext(projectContext);
 
@@ -26,9 +28,13 @@ export default function ProjectAssignBtn({
   const [assignCheck, setAssignCheck] = useState(false);
 
   return (
-    <div className="flex flex-col w-full py-2 px-2 relative dark:bg-neutral-900">
+    <div
+      className={`${
+        minimise && "dark:bg-linear-to-r/srgb from-neutral-900 to-neutral-800"
+      } flex flex-col w-full py-1 px-2 relative dark:bg-neutral-900`}
+    >
       <button
-        className={`hover:text-rose-600  text-start flex transition-all duration-300 hover:[&>*]: ${
+        className={`hover:text-rose-600 text-md font-light  text-start flex transition-all duration-300 hover:[&>*]: ${
           list && "text-rose-600"
         }`}
         onClick={() => (list ? setList(false) : setList(true))}
@@ -45,7 +51,7 @@ export default function ProjectAssignBtn({
 
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
-          <p>{`Assigned to ${titleCheck}`}</p>
+          <p className="">{`Assigned to ${titleCheck}`}</p>
         ) : (
           projects?.map((item) => (
             <div key={item.id}>
