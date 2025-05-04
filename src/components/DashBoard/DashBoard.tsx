@@ -3,6 +3,8 @@ import { DashBoardProvider } from "../DashBoardProvider";
 import DashBoardOverlay from "./DashBoardOverlay";
 import { ProjectProvider } from "../ProjectProvider";
 import { prisma } from "@/lib/prisma";
+import { auth } from "../../../auth";
+import { TaskDueDateProvider } from "../TaskDueDateProvider";
 
 import MobileHeader from "./MobileHeader";
 import TopBar from "./TopBar";
@@ -18,31 +20,53 @@ async function getProjects() {
   return projects;
 }
 
+async function getTasksByDueDate() {
+  const session = await auth();
+  if (session) {
+    const result = await prisma.task.findMany({
+      where: { author: { id: session?.user?.id } },
+      orderBy: {
+        date: "asc",
+      },
+      select: {
+        title: true,
+        id: true,
+        date: true,
+        content: true,
+      },
+    });
+    return result;
+  } else return [];
+}
+
 export default async function DashBoard({
   children,
 }: {
   children: React.ReactNode;
 }) {
   const projects = await getProjects();
+  const tasksByDueDate = await getTasksByDueDate();
+
   return (
     <DashBoardProvider>
-      <ProjectProvider value={projects}>
-        <DashBoardOverlay />
-        <div className="relative w-vw md:p-5 overflow-hidden ">
-          <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
+      <TaskDueDateProvider value={tasksByDueDate}>
+        <ProjectProvider value={projects}>
+          <DashBoardOverlay />
+          <div className="relative w-vw md:p-5 overflow-hidden ">
+            <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
+            <TopBar className="z-2 dark:bg-neutral-800 invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
 
-          <TopBar className="z-2 dark:bg-neutral-900 invisible relative md:h-20 h-0 md:border-y-1 w-full md:visible"></TopBar>
-
-          <div className="z-2 flex justify-center dark:bg-neutral-900 relative  bg-transparent h-[85dvh]">
-            <SideBar className="noise-overlay w-[40%] md:w-[30%] max-w-55 md:visible invisible flex flex-col p-5 mr-5 border-x-1 border-b-1  md:relative fixed h-full left-0 md:top-0" />
-            <div className="sm:w-[100%] w-[100%]  h-[85dvh]">
-              <main className="noise-overlay border-x-1 border-b-1 w-[100%] xl:px-10 h-[100%]">
-                {children}
-              </main>
+            <div className="z-2 flex justify-center  relative  bg-transparent h-[90dvh]">
+              <SideBar className="dark:bg-neutral-800  w-[40%] md:w-[30%] max-w-55 md:visible invisible flex flex-col px-1 py-2  border-l-1 border-b-1  md:relative fixed h-full left-0 md:top-0" />
+              <div className=" h-full">
+                <main className="noise-overlay border-x-1 border-b-1 dark:bg-neutral-950 h-full">
+                  {children}
+                </main>
+              </div>
             </div>
           </div>
-        </div>
-      </ProjectProvider>
+        </ProjectProvider>
+      </TaskDueDateProvider>
     </DashBoardProvider>
   );
 }

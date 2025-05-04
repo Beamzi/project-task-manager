@@ -29,6 +29,15 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/inter/Inter-Light.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

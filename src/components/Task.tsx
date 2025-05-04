@@ -64,7 +64,7 @@ export default function Task({
     newDate: `${formattedTrueDate}`,
   });
 
-  const [quickDate, setQuickDate] = useState<Date>();
+  const [quickDate, setQuickDate] = useState<Date>(date);
   const context = useContext(DashBoardContext);
 
   if (!context) {
@@ -76,11 +76,8 @@ export default function Task({
     initial: status === "initial" ? { opacity: 1 } : { opacity: 0 },
     animate: { opacity: 1 },
   };
-
-  const getYear = () => new Date().getFullYear();
-  const currentDate = format(new Date(), "yyyy-MM-dd'T'HH:mm");
-
-  async function updateTask() {
+  //Type '(scopedDate: Date) => Promise<void>'
+  async function updateTask(scopedDate: Date) {
     try {
       await fetch("/api/update-task", {
         method: "POST",
@@ -90,7 +87,7 @@ export default function Task({
         body: JSON.stringify({
           title: state.newTitle,
           content: state.newContent,
-          date: quickDate && quickDate,
+          date: scopedDate && scopedDate,
           id: id,
         }),
       });
@@ -171,23 +168,6 @@ export default function Task({
               }
               onClick={() => setSelect(true)}
             ></motion.textarea>
-            <motion.input
-              type="datetime-local"
-              min={`${currentDate}`}
-              max={`${getYear()}-12-31T23:59`}
-              value={
-                select
-                  ? state.newDate
-                  : format(new Date(date), "yyyy-MM-dd'T'HH:mm")
-              }
-              onChange={(e) => {
-                dispatch({ type: "change-values", propDate: e.target.value });
-              }}
-              onClick={() => {
-                setSelect(true);
-              }}
-              className="py-1 px-2 relative"
-            ></motion.input>
 
             <div
               {...motionProps}
@@ -196,18 +176,23 @@ export default function Task({
             >
               {format(new Date(date), "EEE MMM d")}
             </div>
-            {showTimeOptions && (
-              <TimeOptions
-                setQuickDate={setQuickDate}
-                trueDate={date}
-                setShowTimeOptions={setShowTimeOptions}
-              ></TimeOptions>
-            )}
+            <div>
+              {showTimeOptions && (
+                <TimeOptions
+                  setQuickDate={setQuickDate}
+                  trueDate={date}
+                  setShowTimeOptions={setShowTimeOptions}
+                  callApi={updateTask}
+                ></TimeOptions>
+              )}
+            </div>
 
             <motion.div {...motionProps} className="flex py-1 ">
               <div className="w-2/4 dark:bg-neutral-900">
                 <button
-                  onClick={updateTask}
+                  onClick={() => {
+                    updateTask(quickDate);
+                  }}
                   type="submit"
                   className="flex py-1 px-2"
                 >
@@ -225,18 +210,19 @@ export default function Task({
 }
 
 // <motion.input
-//   {...motionProps}
 //   type="datetime-local"
 //   min={`${currentDate}`}
 //   max={`${getYear()}-12-31T23:59`}
 //   value={
-//     select ? state.newDate : date
+//     select
+//       ? state.newDate
+//       : format(new Date(date), "yyyy-MM-dd'T'HH:mm")
 //   }
-//   onChange={(e) =>
-//     dispatch({ type: "change-values", propDate: e.target.value })
-//   }
+//   onChange={(e) => {
+//     dispatch({ type: "change-values", propDate: e.target.value });
+//   }}
 //   onClick={() => {
 //     setSelect(true);
 //   }}
-//   className="py-1 px-2"
+//   className="py-1 px-2 relative"
 // ></motion.input>

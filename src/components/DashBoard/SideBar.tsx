@@ -31,11 +31,12 @@ export default function SideBar({ className }: { className: string }) {
           <StarIcon />
           Prioties
         </button>
+
+        <NewProjectBtn />
         <button>
           <ListBulletIcon />
           Projects
         </button>
-        <NewProjectBtn />
         <ProjectList />
       </aside>
     </>

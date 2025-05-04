@@ -10,26 +10,43 @@ import {
 import { useState, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import {
+  ClockIcon,
+  CalendarDaysIcon,
+  CalendarDateRangeIcon,
+  SunIcon,
+  MoonIcon,
+} from "@heroicons/react/24/solid";
 
 interface Props {
   setQuickDate: (value: Date) => void;
   trueDate: Date;
   setShowTimeOptions: (value: boolean) => void;
+  callApi: (scopedDate: Date) => Promise<void>;
 }
 export default function TimeOptions({
   setQuickDate,
   trueDate,
   setShowTimeOptions,
+  callApi,
 }: Props) {
   const [showCalendar] = useState(true);
   const [time, setTime] = useState("");
+  const [isoInput, setIsoInput] = useState("");
+  const [timeOption, setTimeOption] = useState(false);
+  const [isoOption, setIsoOption] = useState(false);
+
   const currentDate = new Date();
+  const getYear = () => new Date().getFullYear();
 
   const lastDayOfYear = new Date(new Date().getFullYear(), 11, 31);
 
   const handleDateChange = (date: Date | null) => {
-    if (date) setQuickDate(date);
-    setShowTimeOptions(false);
+    if (date) {
+      callApi(date);
+      setQuickDate(date);
+      setShowTimeOptions(false);
+    }
   };
 
   const getEndOfDay = () => {
@@ -53,84 +70,133 @@ export default function TimeOptions({
   });
 
   return (
-    <div>
-      <div className="absolute z-10">
-        <ul className="bg-neutral-900 w-80 ">
+    <div className="absolute z-10 px-1 border-1 dark:bg-neutral-900 flex flex-col">
+      <div className="">
+        <ul className="bg-neutral-900  ">
           <li className="w-full ">
             <button
               onClick={() => {
-                setShowTimeOptions(false);
+                callApi(getEndOfDay());
                 setQuickDate(getEndOfDay());
+                setShowTimeOptions(false);
               }}
-              className="bg-black px-2 w-1/2 text-left"
+              className=" date-options "
             >
+              <SunIcon />
               today
             </button>
           </li>
           <li>
             <button
               onClick={() => {
-                setShowTimeOptions(false);
+                callApi(getTomorrow());
                 setQuickDate(getTomorrow());
+                setShowTimeOptions(false);
               }}
-              className="bg-black px-2 w-1/2 text-left"
+              className="date-options "
             >
+              <MoonIcon />
               tomorrow
             </button>
           </li>
           <li>
             <button
               onClick={() => {
+                callApi(getNextWeek());
                 setShowTimeOptions(false);
                 setQuickDate(getNextWeek());
               }}
-              className="bg-black px-2 w-1/2 text-left"
+              className="date-options "
             >
+              <CalendarDaysIcon />
               next Week
             </button>
           </li>
         </ul>
         {showCalendar && (
           <DatePicker
-            selected={new Date()}
+            selected={trueDate}
             onChange={handleDateChange}
             inline
             minDate={new Date()}
             maxDate={lastDayOfYear}
           />
         )}
-
-        <input
-          className="bg-black p-2"
-          onChange={(e) => setTime(e.target.value)}
-          type="time"
-        ></input>
-        <button
-          className="bg-black p-2"
-          onClick={() => {
-            const trueDateFormat = format(
-              new Date(trueDate),
-              `yyyy-MM-dd'T'${time}`
-            );
-            if (
-              trueDate > new Date() &&
-              format(new Date(trueDate), "yyyy-MM-dd") ===
-                format(new Date(), "yyyy-MM-dd")
-            ) {
-              alert("please select a valid time of day");
-            } else setQuickDate(parseISO(trueDateFormat));
-            setShowTimeOptions(false);
-          }}
-          type="submit"
-        >
-          submit
-        </button>
       </div>
+      <button
+        className="py-2 px-2 "
+        onClick={() => setTimeOption(timeOption ? false : true)}
+      >
+        set a time
+      </button>
+      {timeOption && (
+        <div>
+          <input
+            className="date-options"
+            onChange={(e) => setTime(e.target.value)}
+            type="time"
+          ></input>
+          <button
+            className="bg-black p-2"
+            onClick={() => {
+              const trueDateFormat = format(
+                new Date(trueDate),
+                `yyyy-MM-dd'T'${time}`
+              );
+              const parseIso = parseISO(trueDateFormat);
+              if (
+                trueDate > new Date() &&
+                format(new Date(trueDate), "yyyy-MM-dd") ===
+                  format(new Date(), "yyyy-MM-dd")
+              ) {
+                alert("please select a valid time of day");
+              } else {
+                setQuickDate(parseIso);
+                callApi(parseIso);
+                setShowTimeOptions(false);
+              }
+            }}
+            type="submit"
+          >
+            submit
+          </button>
+        </div>
+      )}
+
+      <button
+        className="py-2 px-2"
+        onClick={() => setIsoOption(isoOption ? false : true)}
+      >
+        manual
+      </button>
+
+      {isoOption && (
+        <div>
+          <input
+            onChange={(event) => setIsoInput(event.target.value)}
+            value={
+              isoInput
+                ? isoInput
+                : format(new Date(trueDate), "yyyy-MM-dd'T'HH:mm")
+            }
+            className="border-2 w-full"
+            type="datetime-local"
+            min={`${format(new Date(), "yyyy-MM-dd'T'HH:mm")}`}
+            max={`${getYear()}-12-31T23:59`}
+          ></input>
+          <button
+            className="bg-black"
+            onClick={() => {
+              const parseIso = parseISO(isoInput);
+              callApi(parseIso);
+              setQuickDate(parseIso);
+              setShowTimeOptions(false);
+            }}
+          >
+            submit
+          </button>
+        </div>
+      )}
     </div>
   );
 }
-
-// if (
-//   format(new Date(trueDate), "yyyy-MM-dd'T'HH:mm") ===
-//   format(new Date(), "yyyy-MM-dd'T'HH:mm")
-// )
