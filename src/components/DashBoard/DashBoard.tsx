@@ -52,7 +52,7 @@ export default async function DashBoard({
       <TaskDueDateProvider value={tasksByDueDate}>
         <ProjectProvider value={projects}>
           <DashBoardOverlay />
-          <div className="relative w-vw md:p-5 overflow-hidden ">
+          <div className="relative w-vw md:p-5 overflow-hidden">
             <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
             <TopBar className="z-2 dark:bg-neutral-800 invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
 

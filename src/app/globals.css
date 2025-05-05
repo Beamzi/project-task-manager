@@ -71,6 +71,26 @@ body > * {
 
 
 @layer components {
+  /* variable classes first  */
+  .text-hover {
+    @apply hover:text-rose-600 transition-all duration-300;
+  }
+  .date-options {
+    @apply px-2 py-1 w-full text-left flex
+  }
+  .li-hover {
+    @apply border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 
+
+
+
+  }
+
+
+  /* hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 */
+
+  /* border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 */
+
+
   button, ul, li, div {
     @apply select-none 
   }
@@ -90,9 +110,7 @@ body > * {
     }
   }
 
-  .date-options {
-    @apply px-2 py-1 w-full text-left flex
-  }
+
   .date-options:hover {
     @apply dark:bg-neutral-400 text-rose-600
   }

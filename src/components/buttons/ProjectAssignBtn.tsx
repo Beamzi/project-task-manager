@@ -7,6 +7,8 @@ import React from "react";
 import LinkTaskToProjectBtn from "./LinkTaskToProjectBtn";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { motion } from "motion/react";
+import ChevronDown from "../icons/ChevronDown";
+import DropDown from "../icons/DropDown";
 
 export default function ProjectAssignBtn({
   taskId,
@@ -39,15 +41,7 @@ export default function ProjectAssignBtn({
         }`}
         onClick={() => (list ? setList(false) : setList(true))}
       >
-        <motion.div
-          animate={list ? { rotate: 180 } : { rotate: 0 }}
-          transition={{ duration: 0.2 }}
-          className="mr-2 w-5"
-        >
-          <ChevronDownIcon
-            className={`text-white w-full h-full ${list && "fill-white "}`}
-          />
-        </motion.div>
+        <ChevronDown isRendered={list} />
 
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
@@ -62,33 +56,28 @@ export default function ProjectAssignBtn({
           ))
         )}
       </button>
-      {list && (
-        <motion.ul
-          initial={{ scaleY: 0 }}
-          animate={{ scaleY: 1, transition: { duration: 0.1 } }}
-          className="absolute top-15 left-0 border-t-1 origin-top bg-black  shadow-2xl shadow-black border-r-3"
-        >
-          {projects?.map((item) => (
-            <motion.li
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.1 } }}
-              className="border-x-1 border-b-1 pointer-none origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100"
-              key={item.id}
+
+      <DropDown isRendered={list}>
+        {projects?.map((item) => (
+          <motion.li
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.1 } }}
+            className="pointer-none li-hover"
+            key={item.id}
+          >
+            <LinkTaskToProjectBtn
+              setList={setList}
+              setTitleCheck={setTitleCheck}
+              setAssignCheck={setAssignCheck}
+              title={item.title}
+              projectId={item.id}
+              taskId={taskId}
             >
-              <LinkTaskToProjectBtn
-                setList={setList}
-                setTitleCheck={setTitleCheck}
-                setAssignCheck={setAssignCheck}
-                title={item.title}
-                projectId={item.id}
-                taskId={taskId}
-              >
-                {item.title}
-              </LinkTaskToProjectBtn>
-            </motion.li>
-          ))}
-        </motion.ul>
-      )}
+              {item.title}
+            </LinkTaskToProjectBtn>
+          </motion.li>
+        ))}
+      </DropDown>
     </div>
   );
 }

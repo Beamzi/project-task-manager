@@ -15,13 +15,11 @@ export default function ProjectList() {
   return (
     <div className="flex flex-col">
       {projects?.map((item) => (
-        <>
-          <ProjectListBtn
-            key={item.id}
-            title={item.title}
-            id={item.id}
-          ></ProjectListBtn>
-        </>
+        <ProjectListBtn
+          key={item.id}
+          title={item.title}
+          id={item.id}
+        ></ProjectListBtn>
       ))}
     </div>
   );

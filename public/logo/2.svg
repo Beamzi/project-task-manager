@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-504928f6-1b6c-471f-9457-f513f96d1c41" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 436.72 264.11">
+  <defs>
+    <linearGradient id="uuid-14c95fd2-a49a-4dc0-8c60-311be1199df0" x1="0" y1="131.76" x2="326.95" y2="131.76" gradientTransform="translate(141.05 -77) rotate(45)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#e11d48"/>
+    </linearGradient>
+    <linearGradient id="uuid-3706dfa3-f6c1-46eb-9d4d-18672f2d792e" x1="281.37" y1="186.44" x2="436.72" y2="186.44" gradientTransform="translate(252.85 -205.84) rotate(45)" xlink:href="#uuid-14c95fd2-a49a-4dc0-8c60-311be1199df0"/>
+    <linearGradient id="uuid-dd19edb1-91d7-47cc-aeb5-613f3f4ac876" x1="141.47" y1="150.62" x2="397.66" y2="150.62" gradientTransform="translate(196.67 -141.85) rotate(45)" xlink:href="#uuid-14c95fd2-a49a-4dc0-8c60-311be1199df0"/>
+  </defs>
+  <path d="M-29.44,93.49h309.27c42.25,0,76.55,34.3,76.55,76.55H47.11c-42.25,0-76.55-34.3-76.55-76.55h0Z" transform="translate(-45.29 154.19) rotate(-45)" style="fill: url(#uuid-14c95fd2-a49a-4dc0-8c60-311be1199df0); stroke-width: 0px;"/>
+  <path d="M280.91,164.02h187.99c0,42.25-34.3,76.55-76.55,76.55h-34.88c-42.25,0-76.55-34.3-76.55-76.55h0Z" transform="translate(-33.24 324.34) rotate(-45)" style="fill: url(#uuid-3706dfa3-f6c1-46eb-9d4d-18672f2d792e); stroke-width: 0px;"/>
+  <path d="M126.68,128.2h285.77v76.55h-209.21c-42.25,0-76.55-34.3-76.55-76.55h0Z" transform="translate(-38.76 239.37) rotate(-45)" style="fill: url(#uuid-dd19edb1-91d7-47cc-aeb5-613f3f4ac876); stroke-width: 0px;"/>
+</svg>

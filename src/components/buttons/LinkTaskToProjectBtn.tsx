@@ -40,7 +40,7 @@ export default function LinkTaskToProjectBtn({
   }
   return (
     <button
-      className="hover:text-rose-600 w-full text-left p-1 hover:bg-neutral-800 hover:border-r-3"
+      className=" w-full text-left p-1"
       onClick={() => {
         linkTask();
         setList(false);
