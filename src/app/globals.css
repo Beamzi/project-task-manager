@@ -25,8 +25,24 @@
 }
 
 @font-face {
-  font-family: 'Inter';
+  font-family: 'inter-light';
   src: url('/fonts/inter/Inter-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'inter-semi-bold';
+  src: url('/fonts/inter/InterDisplay-SemiBold.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'inter-bold';
+  src: url('/fonts/inter/InterDisplay-Bold.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -35,7 +51,15 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Inter', sans-serif;
+  font-family: 'inter-light', sans-serif;
+}
+
+h1 {
+  font-family: 'inter-bold', sans-serif;
+}
+
+h3 {
+  font-family: 'inter-semi-bold'
 }
 
 body > * {
@@ -81,15 +105,7 @@ body > * {
   .li-hover {
     @apply border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 
 
-
-
   }
-
-
-  /* hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 */
-
-  /* border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 */
-
 
   button, ul, li, div {
     @apply select-none 
@@ -97,27 +113,26 @@ body > * {
   button, ul {
     @apply cursor-pointer
   }
+  button, p, textarea, span, input, h3 {
+    @apply text-sm
+  }
 
   aside {
     button {
-      @apply p-2 my-1 bg-transparent  flex text-center items-center 
+      @apply p-2  bg-transparent  flex text-center items-center text-neutral-100 
     }
     button:hover {
-      @apply shadow-neutral-950 shadow-md scale-110
+      @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 rounded-sm  [&>*]:stroke-black
     }
     svg {
-      @apply mr-3 w-5
+      @apply mr-2 w-5 stroke-neutral-400
     }
   }
-
 
   .date-options:hover {
     @apply dark:bg-neutral-400 text-rose-600
   }
 
-  .task-selector {
-
-  }
 
   body > * {
     @apply dark:bg-black

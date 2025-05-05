@@ -26,7 +26,7 @@ export default function ScheduleTask({
 
   const getDate = () => {
     const date =
-      dueDate === currentDate ? `today ${dateForDisplay}` : `${dateForDisplay}`;
+      dueDate === currentDate ? `Today ${dateForDisplay}` : `${dateForDisplay}`;
     return date;
   };
 
@@ -34,35 +34,35 @@ export default function ScheduleTask({
     <div className="overflow-hidden bg-neutral-800">
       {!overDue ? (
         <>
-          <h1 id={dateId} className="font-bold py-2 px-5">
+          <h3 id={dateId} className="font-bold pb-3 pt-3 px-5">
             {getDate()}
-          </h1>
+          </h3>
           <hr></hr>
         </>
       ) : (
         <>
-          <h1 className="font-bold py-2 px-5">Overdue</h1>
+          <h3 className=" pb-3 pt-3 px-5">Overdue</h3>
           <hr></hr>
         </>
       )}
 
       <div className="flex align-center h-full">
-        <div className="py-5  px-5 h-full   wrap-normal text-neutral-500">
-          <h3 className="flex wrap-normal [&>*]:mr-2 ">
+        <div className="pt-3 px-3 h-full wrap-normal text-neutral-500">
+          <span className="flex wrap-normal [&>*]:mr-2 ">
             <CheckCircleIcon className="stroke-neutral-300 min-w-5 " />
             {title}
-          </h3>
+          </span>
           <p className="wrap-normal pl-7 pb-2">{content}</p>
           {!overDue ? (
             <>
               <hr className="pt-2"></hr>
               <button className="flex  [&>*]:mr-2">
-                <PlusIcon className="fill-neutral-100 w-5" />
+                <PlusIcon className="fill-neutral-100 w-5 pb-3" />
                 new task
               </button>
             </>
           ) : (
-            <h3 className="text-red-700">{getDate()}</h3>
+            <span className="text-red-700 ">{getDate()}</span>
           )}
 
           {/* {overDue && <h3 className="text-red-700">{getDate()}</h3>} */}

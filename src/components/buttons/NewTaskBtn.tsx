@@ -14,7 +14,7 @@ function NewTaskBtn() {
   return (
     <button onClick={() => setModal(true)}>
       <PlusIcon />
-      Create New Task
+      Create Task
     </button>
   );
 }

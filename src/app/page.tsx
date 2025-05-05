@@ -48,20 +48,16 @@ export default async function AllTasksView() {
   const userName = session?.user?.name;
   const firstNameOfUser = userName?.substring(0, userName?.indexOf(" "));
 
-  console.log(session?.user?.name);
-
   return (
     <TasksProvider tasks={tasks}>
       <div className="px-5 py-6 flex justify-start bg-transparent ">
-        <h3 className="text-start text-lg min-w-50">
+        <h2 className="text-start min-w-45">
           {tasks[0]
             ? `Welcome Back, ${firstNameOfUser}`
             : `Welcome, ${firstNameOfUser}`}
-        </h3>
+        </h2>
         <div className="border-b-1 border-dotted relative bottom-1.5 outline-white w-full"></div>
-        <p className="min-w-60 text-lg text-right">
-          You have 12 active projects
-        </p>
+        <h2 className="min-w-53 text-right">You have 12 active projects</h2>
       </div>
       <div className="flex px-6 relative bg-transparent  justify-center">
         <div className="border-1 border-dotted w-1/2 bg-neutral-900">

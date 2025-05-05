@@ -29,7 +29,7 @@ export default function SideBar({ className }: { className: string }) {
         </button>
         <button>
           <StarIcon />
-          Prioties
+          Priorities
         </button>
 
         <NewProjectBtn />

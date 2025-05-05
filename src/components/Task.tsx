@@ -107,10 +107,11 @@ export default function Task({
         id={id}
         initial={!minimise && { height: 500 }}
         transition={{ duration: 0.3 }}
-        animate={minimise ? { height: 130 } : { height: 330 }}
+        animate={minimise ? { height: 104 } : { height: 330 }}
         className={` origin-top ${
-          minimise && "origin-top hello relative"
-        } ${taskParentClasses} task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full  border-b-1 py-3 px-4 flex flex-col bg-neutral-800`}
+          minimise &&
+          "origin-top hello relative hover:ml-5 transition-all duration-300"
+        } ${taskParentClasses} hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 py-2 px-3 flex flex-col bg-neutral-800 `}
       >
         {/* <h3 className="bg-transparent my-1 text-end">{author}</h3> */}
 
@@ -149,7 +150,7 @@ export default function Task({
           }`}
         ></input>
         {minimise && (
-          <p className="py-1 px-2 text-sm  text-rose-300">
+          <p className=" px-2 text-sm  text-rose-300">
             {minimise && format(new Date(date), "EEE MMM d")}
           </p>
         )}

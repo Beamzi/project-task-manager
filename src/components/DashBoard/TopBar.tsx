@@ -17,7 +17,7 @@ export default async function TopBar({ className }: { className: string }) {
       <div className="pointer-events-none md:h-full md:w-full md:scale-x-103 md:border-y-1 md:scale-y-102 md:bg-transparent md:z-1 md:absolute md:bottom-0 md:top-0 md:left-0 md:right-0"></div>
 
       <div className="flex justify-center align-middle items-center h-12 text-center">
-        <div className="w-full h-full px-5  py-3 ">
+        <div className="w-full h-full pl-5 pr-3 py-3 ">
           <Image
             className="h-full w-full"
             src="/logo/2.svg"
@@ -29,7 +29,7 @@ export default async function TopBar({ className }: { className: string }) {
           />
         </div>
         <div>
-          <h1 className="h-full text-lg">promana</h1>
+          <h1 className="h-full text-lg">manaboard</h1>
         </div>
       </div>
       <div className="flex align-middle justify-center content-center px-2">
@@ -38,5 +38,7 @@ export default async function TopBar({ className }: { className: string }) {
     </div>
   );
 }
+
+//promana
 
 // width={500} height={500}
