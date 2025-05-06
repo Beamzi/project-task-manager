@@ -44,6 +44,7 @@ export default function ProfileTopBar({ session }: Props) {
         height={30}
         style={{ objectFit: "contain" }}
         alt="user profile picture"
+        priority
       ></Image>
     </div>
   );

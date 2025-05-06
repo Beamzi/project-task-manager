@@ -10,12 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Comments {
+  id        String  @id @default(cuid())
+  content   String
+  project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  String?
+  createdAt DateTime @default(now()) 
+}
+
 model Project {
   id          String     @default(cuid()) @id
   title       String
   description String
   published   Boolean  @default(false)
   tasks       Task[]
+  comments    Comments[]
 }
 
 
@@ -43,6 +54,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   tasks         Task[]
+  comments      Comments[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
   
