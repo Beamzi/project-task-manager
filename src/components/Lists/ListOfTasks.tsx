@@ -7,13 +7,9 @@ import type { TaskType } from "@/context/TaskContext";
 
 interface NewProps {
   currentTasks: TaskType[] | undefined;
-  taskParentClasses: string;
 }
 
-export default function ListOfTasks({
-  currentTasks,
-  taskParentClasses,
-}: NewProps) {
+export default function ListOfTasks({ currentTasks }: NewProps) {
   return (
     <>
       {currentTasks?.map((item) => (
@@ -26,27 +22,8 @@ export default function ListOfTasks({
           id={item.id}
           priority={item.priority}
           projectId={item.projectId}
-          taskParentClasses={taskParentClasses}
         ></Task>
       ))}
     </>
   );
 }
-
-/*format(new Date(item.date), "dd/MM/yyyy")
-
-
-interface Props {
-  currentTasks:
-    | ({
-        author: {
-          name: string | null;
-        } | null;
-      } & {
-        id: string;
-        title: string;
-        date: Date;
-        content: string | null;
-      })[]
-    | undefined;
-}*/

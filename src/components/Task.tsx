@@ -46,7 +46,6 @@ export default function Task({
   id,
   priority,
   projectId,
-  taskParentClasses,
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
@@ -97,8 +96,6 @@ export default function Task({
     }
   }
 
-  // task-selector task-shadows  xl:w-[100%] lg:w-[100%] md:w-130 border-1 mb-4 mt-4 p-5 mx-4 flex flex-col bg-neutral-800
-
   return (
     <>
       <motion.div
@@ -111,7 +108,7 @@ export default function Task({
         className={` origin-top ${
           minimise &&
           "origin-top hello relative hover:ml-5 transition-all duration-300"
-        } ${taskParentClasses} hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 py-2 px-3 flex flex-col bg-neutral-800 `}
+        }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 py-2 px-3 flex flex-col bg-neutral-800 `}
       >
         {/* <h3 className="bg-transparent my-1 text-end">{author}</h3> */}
 

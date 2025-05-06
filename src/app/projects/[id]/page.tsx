@@ -31,15 +31,24 @@ export default async function CurrentProject({ params }: Props) {
   const project = await getProject();
   const tasks = project?.tasks;
   return (
-    <div className=" flex flex-col lg:flex-row align-middle py-4 w-[100%] lg:pl-4">
-      <ProjectView project={project}></ProjectView>
+    <>
+      <div className="flex px-6 relative bg-transparent  justify-center">
+        <div className="w-1/2  flex flex-col border-1 border-dotted  dark:bg-neutral-900">
+          <p className="border-b-1 border-dotted px-2 py-2 ">Project </p>
+          <ProjectView project={project}></ProjectView>
+        </div>
+        <div className="border-1 ml-6 border-dotted w-1/2 bg-neutral-900 ">
+          <p className="px-2 py-2">Project Tasks </p>
+          <div
+            id="task-scroll-container"
+            className="border-t-1 border-dotted bg-neutral-900 flex  content-start w-full relative flex-wrap overflow-y-scroll h-[40dvh]"
+          >
+            <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
 
-      <div className="w-[100%] lg:px-4 overflow-scroll h-155">
-        <ListOfTasks
-          currentTasks={tasks}
-          taskParentClasses={"gofkurself"}
-        ></ListOfTasks>
+            <ListOfTasks currentTasks={tasks} />
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

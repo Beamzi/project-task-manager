@@ -9,6 +9,7 @@ import EasySelect from "@/components/Lists/EasySelect";
 import EasySelectAdapter from "@/components/EasySelectAdapter";
 import { format } from "date-fns";
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
+import ListOfTasks from "@/components/Lists/ListOfTasks";
 
 async function getTasks() {
   const session = await auth();
@@ -49,7 +50,7 @@ export default async function AllTasksView() {
   const firstNameOfUser = userName?.substring(0, userName?.indexOf(" "));
 
   return (
-    <TasksProvider tasks={tasks}>
+    <>
       <div className="px-5 py-6 flex justify-start bg-transparent ">
         <h2 className="text-start min-w-45">
           {tasks[0]
@@ -67,7 +68,7 @@ export default async function AllTasksView() {
             className=" border-t-1 border-dotted bg-neutral-900 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[40dvh]"
           >
             <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
-            <AllTasks></AllTasks>
+            <ListOfTasks currentTasks={tasks} />
           </div>
         </div>
         <div className="w-1/2 flex flex-col border-1 border-dotted ml-6 dark:bg-neutral-900">
@@ -84,11 +85,11 @@ export default async function AllTasksView() {
             className=" border-t-1 border-dotted bg-neutral-900 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[27dvh]"
           >
             <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
-            <AllTasks></AllTasks>
+            <ListOfTasks currentTasks={tasks} />
           </div>
         </div>
       </div>
-    </TasksProvider>
+    </>
   );
 }
 
