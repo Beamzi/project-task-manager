@@ -5,11 +5,15 @@ import NewTaskBtn from "../buttons/NewTaskBtn";
 import NewProjectBtn from "../buttons/NewProjectBtn";
 import ProjectList from "../Lists/ProjectList";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import Link from "next/link";
 
 import {
   StarIcon,
   CheckCircleIcon,
   ListBulletIcon,
+  InboxIcon,
+  HomeIcon,
+  CalendarDaysIcon,
 } from "@heroicons/react/24/outline";
 
 export default function SideBar({ className }: { className: string }) {
@@ -23,10 +27,20 @@ export default function SideBar({ className }: { className: string }) {
     <>
       <aside className={`${className} ${sideMenu}`}>
         <NewTaskBtn />
+        <Link className="flex" href={"/"}>
+          <HomeIcon />
+          Overview
+        </Link>
+
         <button>
-          <CheckCircleIcon />
-          All Tasks
+          <InboxIcon />
+          Inbox
         </button>
+        <button>
+          <CalendarDaysIcon />
+          Schedule
+        </button>
+
         <button>
           <StarIcon />
           Priorities
@@ -35,7 +49,7 @@ export default function SideBar({ className }: { className: string }) {
         <NewProjectBtn />
         <button>
           <ListBulletIcon />
-          Projects
+          All Projects
         </button>
         <ProjectList />
       </aside>

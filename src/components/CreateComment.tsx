@@ -41,7 +41,7 @@ export default function CreateComment({ projectId, profileImg }: Props) {
           height={30}
           style={{ objectFit: "contain" }}
           alt="user profile picture"
-          priority
+          loading="lazy"
         ></Image>
         <textarea
           onChange={(e) => setContent(e.target.value)}

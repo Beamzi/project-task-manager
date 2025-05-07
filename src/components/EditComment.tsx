@@ -63,7 +63,7 @@ export default function EditComment({
         height={30}
         style={{ objectFit: "contain" }}
         alt="user profile picture"
-        priority
+        loading="lazy"
       ></Image>
 
       <div key={id} className="w-full">

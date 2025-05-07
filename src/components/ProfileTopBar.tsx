@@ -43,8 +43,10 @@ export default function ProfileTopBar({ session }: Props) {
         width={30}
         height={30}
         style={{ objectFit: "contain" }}
+        //  loading="lazy"
+        loading={undefined} // Explicitly set to undefined
+        priority={true}
         alt="user profile picture"
-        priority
       ></Image>
     </div>
   );

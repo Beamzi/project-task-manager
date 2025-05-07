@@ -6,6 +6,14 @@ import ClientWrapper from "@/components/TasksProvider";
 import { auth } from "../../auth";
 import SignInPrompt from "@/components/SignInPrompt";
 
+import { Inter } from "next/font/google";
+
+// If loading a variable font, you don't need to specify the font weight
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,31 +37,9 @@ export default async function RootLayout({
   const session = await auth();
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="preload"
-          href="/fonts/inter/Inter-Light.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/inter/InterDisplay-SemiBold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/fonts/inter/InterDisplay-Bold.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
+      <head></head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
         {session ? (
           <DashBoard>{children}</DashBoard>

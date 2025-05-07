@@ -1,13 +1,6 @@
-import AllTasks from "@/components/AllTasks";
-import SignInBtn from "@/components/buttons/SignInBtn";
-import TasksProvider from "@/components/TasksProvider";
 import { prisma } from "@/lib/prisma";
 import React from "react";
 import { auth } from "../../auth";
-import { SignOutBtn } from "@/components/buttons/SignOutBtn";
-import EasySelect from "@/components/Lists/EasySelect";
-import EasySelectAdapter from "@/components/EasySelectAdapter";
-import { format } from "date-fns";
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 

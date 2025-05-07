@@ -2,9 +2,7 @@
 
 *, *::before, *::after {
   box-sizing: border-box;
-
 }
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -24,43 +22,25 @@
   }
 }
 
-@font-face {
-  font-family: 'inter-light';
-  src: url('/fonts/inter/Inter-Light.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'inter-semi-bold';
-  src: url('/fonts/inter/InterDisplay-SemiBold.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'inter-bold';
-  src: url('/fonts/inter/InterDisplay-Bold.woff2') format('woff2');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'inter-light', sans-serif;
+  font-family: var(--font-inter), 'sans-serif';
+  font-weight: 200;
+}
+
+input, p, span, textarea, a, button {
+  font-weight: 300;
 }
 
 h1 {
-  font-family: 'inter-bold', sans-serif;
+  font-weight: 700
+}
+h3 {
+  font-weight: 600
 }
 
-h3 {
-  font-family: 'inter-semi-bold'
-}
+
 
 body > * {
   background: repeating-linear-gradient(
@@ -113,15 +93,15 @@ body > * {
   button, ul {
     @apply cursor-pointer
   }
-  button, p, textarea, span, input, h3 {
+  button, p, textarea, span, input, h3, a {
     @apply text-sm
   }
 
   aside {
-    button {
+    button, a {
       @apply p-2  bg-transparent  flex text-center items-center text-neutral-100 
     }
-    button:hover {
+    button:hover, a:hover {
       @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 rounded-sm  [&>*]:stroke-black
     }
     svg {
