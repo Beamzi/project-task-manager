@@ -23,12 +23,12 @@ export default async function Schedule() {
   console.log({ result });
 
   return (
-    <div className="border-x-1">
+    <div className="border-x-1 border-b-1 m-6 ">
       <div className="">
         <ScheduleMenu scheduleTasks={result} />
       </div>
 
-      <div className="scrolling-container overflow-y-scroll h-[70dvh] w-[70wvh]">
+      <div className="scrolling-container overflow-y-scroll h-[70dvh] w-full ">
         <ListOfScheduleTasks scheduleTasks={result} />
       </div>
     </div>

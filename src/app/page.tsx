@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import React from "react";
 import { auth } from "../../auth";
+
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 
@@ -58,15 +59,17 @@ export default async function AllTasksView() {
           <p className="px-2 py-2">Recently Created </p>
           <div
             id="task-scroll-container"
-            className=" border-t-1 border-dotted bg-neutral-900 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[40dvh]"
+            className=" border-t-1 border-dotted bg-neutral-800 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[40dvh]"
           >
-            <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
             <ListOfTasks currentTasks={tasks} />
           </div>
         </div>
+
         <div className="w-1/2 flex flex-col border-1 border-dotted ml-6 dark:bg-neutral-900">
-          <p className="border-b-1 border-dotted px-2 py-2 ">Reminders </p>
-          <ListOfReminderTasks />
+          <p className="border-b-1 border-dotted px-2 py-2">Reminders </p>
+          <div className="dark:bg-neutral-800 h-full w-full">
+            <ListOfReminderTasks />
+          </div>
         </div>
       </div>
 
@@ -75,9 +78,8 @@ export default async function AllTasksView() {
           <p className="px-2 py-2">Priorities </p>
           <div
             id="task-scroll-container"
-            className=" border-t-1 border-dotted bg-neutral-900 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[27dvh]"
+            className=" border-t-1 border-dotted bg-neutral-800 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[27dvh]"
           >
-            <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div>
             <ListOfTasks currentTasks={tasks} />
           </div>
         </div>
@@ -95,3 +97,7 @@ export default async function AllTasksView() {
     </ClientWrapper>*/
 
 //xl:max-w-200 md:max-w-130 lg:max-w-150
+
+{
+  /* <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div> */
+}

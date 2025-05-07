@@ -52,7 +52,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
 
   return (
     <>
-      <div ref={scrollDivRef} className="overflow-hidden">
+      <div ref={scrollDivRef} className="overflow-hidden border-r-1 ">
         <div>
           {scheduleTasks?.map(
             (item) =>
@@ -85,14 +85,14 @@ export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
               )}
             </div>
           ) : (
-            <div className="w-100" key={date}>
-              <h1 id={date} className="font-bold py-2 px-5">
+            <div className=" bg-neutral-800 w-full" key={date}>
+              <h3 id={date} className="font-bold py-2 px-5">
                 {reformat(date)}
-              </h1>
+              </h3>
               <hr></hr>
               <div className="flex align-center h-full">
                 <div className="py-5  px-5 h-full   wrap-normal text-neutral-500">
-                  <button className="flex  w-200 [&>*]:mr-2">
+                  <button className="flex  [&>*]:mr-2">
                     <PlusIcon className="fill-neutral-100 w-5" />
                     new task
                   </button>

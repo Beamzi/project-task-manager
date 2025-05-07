@@ -31,7 +31,7 @@ export default function ScheduleTask({
   };
 
   return (
-    <div className="overflow-hidden bg-neutral-800">
+    <div className="overflow-hidden bg-neutral-800 w-full ">
       {!overDue ? (
         <>
           <h3 id={dateId} className="font-bold pb-3 pt-3 px-5">
@@ -46,7 +46,7 @@ export default function ScheduleTask({
         </>
       )}
 
-      <div className="flex align-center h-full">
+      <div className="flex align-center h-full w-full">
         <div className="pt-3 px-3 h-full wrap-normal text-neutral-500">
           <span className="flex wrap-normal [&>*]:mr-2 ">
             <CheckCircleIcon className="stroke-neutral-300 min-w-5 " />

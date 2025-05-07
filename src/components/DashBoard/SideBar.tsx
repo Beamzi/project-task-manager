@@ -32,25 +32,26 @@ export default function SideBar({ className }: { className: string }) {
           Overview
         </Link>
 
-        <button>
+        <Link href={"/inbox"}>
           <InboxIcon />
           Inbox
-        </button>
-        <button>
+        </Link>
+        <Link href={"/schedule"}>
           <CalendarDaysIcon />
           Schedule
-        </button>
+        </Link>
 
-        <button>
+        <Link href={"/priorities"}>
           <StarIcon />
           Priorities
-        </button>
+        </Link>
 
         <NewProjectBtn />
-        <button>
+
+        <Link href={"/projects"}>
           <ListBulletIcon />
           All Projects
-        </button>
+        </Link>
         <ProjectList />
       </aside>
     </>
