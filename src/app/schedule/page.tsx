@@ -1,8 +1,8 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../../auth";
-import ListOfScheduleTasks from "@/components/Lists/ListOfScheduleTasks";
-import ScheduleMenu from "@/components/ScheduleMenu";
+import ListOfScheduleTasks from "@/components/Schedule/ListOfScheduleTasks";
+import ScheduleMenu from "@/components/Schedule/ScheduleMenu";
 async function getTasksByDueDate() {
   const session = await auth();
   if (session) {

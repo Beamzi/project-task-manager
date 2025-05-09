@@ -1,47 +1,28 @@
 "use client";
 
 import React, { useEffect } from "react";
-import ScheduleTask from "../ScheduleTask";
-import { format, eachDayOfInterval, parseISO } from "date-fns";
+import ScheduleTask from "./ScheduleTask";
+import { format, parseISO } from "date-fns";
 import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { useState, useRef, useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { dateRange, ScheduleTasks } from "./helpers";
 
-interface Props {
-  scheduleTasks:
-    | {
-        title: string;
-        date: Date;
-        content: string | null;
-        id: string;
-        published: boolean;
-        authorId: string | null;
-        projectId: string | null;
-        priority: boolean;
-        createdAt: Date;
-      }[]
-    | undefined;
-}
-
-export default function ListOfScheduleTasks({ scheduleTasks }: Props) {
+export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
   const [overDue, isOverDue] = useState(true);
-  const latestTask = scheduleTasks?.[scheduleTasks.length - 1];
 
   const context = useContext(DashBoardContext);
   if (!context) {
     throw new Error("scrollDivRef not loaded");
   }
-
   const { scrollDivRef } = context;
 
-  const getDateRange = eachDayOfInterval({
-    start: new Date(),
-    end: new Date(latestTask.date),
-  });
+  const getDateRange = dateRange({ scheduleTasks });
 
   const taskDates = scheduleTasks?.map((item) =>
     format(new Date(item.date), "yyyy-MM-dd")
   );
+
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
 
   const reformat = (date: string) => {

@@ -27,7 +27,7 @@ export default function ScheduleMenuItems({
           behavior: "smooth",
         });
       }}
-      className="flex justify-center px-2"
+      className="flex justify-center px-2 "
     >{`${day + dayNum}`}</button>
   );
 }

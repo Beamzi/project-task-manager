@@ -45,7 +45,7 @@ export default function ProjectAssignBtn({
 
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
-          <p className="">{`Assigned to ${titleCheck}`}</p>
+          <p className="break-all">{`Assigned to ${titleCheck}`}</p>
         ) : (
           projects?.map((item) => (
             <div key={item.id}>

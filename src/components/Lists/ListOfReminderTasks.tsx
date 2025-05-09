@@ -3,8 +3,8 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
-import ListOfScheduleTasks from "./ListOfScheduleTasks";
-import ScheduleTask from "../ScheduleTask";
+import ListOfScheduleTasks from "../Schedule/ListOfScheduleTasks";
+import ScheduleTask from "../Schedule/ScheduleTask";
 
 export default function ListOfReminderTasks() {
   const tasksByDueDate = useContext(TaskDueDateContext);

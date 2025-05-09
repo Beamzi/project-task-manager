@@ -69,8 +69,8 @@ export default function EditComment({
       <div key={id} className="w-full">
         <div className="flex w-full h-7  ">
           <div className="w-full ">
-            <span className="font-bold">{`${name} `}</span>
-            <span className="text-xs text-neutral-400 pl-2">
+            <span className="break-all font-bold">{`${name} `}</span>
+            <span className="break-all text-xs text-neutral-400 pl-2">
               {format(new Date(createdAt), "MMM d h:mm a")};
             </span>
           </div>
@@ -111,7 +111,7 @@ export default function EditComment({
           <div className="flex w-full ">
             {!edit ? (
               <>
-                <p className="w-full min-h-10 text-neutral-400 py-2 px-2">
+                <p className="break-all w-full min-h-10  text-neutral-400 py-2 px-2">
                   {content}
                 </p>
                 <div className="min-h-23.5"></div>
@@ -119,7 +119,7 @@ export default function EditComment({
             ) : (
               <div className="flex w-full flex-col">
                 <textarea
-                  className=" outline-1 outline-white py-2 px-2"
+                  className="break-all outline-1 outline-white py-2 px-2"
                   onChange={(e) => setNewContent(e.target.value)}
                   value={newContent}
                 ></textarea>

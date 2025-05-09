@@ -2,36 +2,24 @@
 
 import React from "react";
 import ScheduleMenuItems from "./ScheduleMenuItems";
-import { eachDayOfInterval, format, parseISO } from "date-fns";
-import { useEffect, useState, useContext } from "react";
+import { format, parseISO } from "date-fns";
+import { useEffect, useState, useContext, useRef } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
+import { dateRange, ScheduleTasks } from "./helpers";
+import { map } from "motion/react-client";
+import Task from "../Task";
+import { arrayBuffer } from "stream/consumers";
 
-interface Props {
-  scheduleTasks:
-    | {
-        title: string;
-        date: Date;
-        content: string | null;
-        id: string;
-        published: boolean;
-        authorId: string | null;
-        projectId: string | null;
-        priority: boolean;
-        createdAt: Date;
-      }[]
-    | undefined;
-}
-
-export default function ScheduleMenu({ scheduleTasks }: Props) {
-  const latestTask = scheduleTasks?.[scheduleTasks.length - 1];
+export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
   const [inView, setInView] = useState("");
   const [sequence, setSequence] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [calendarOpen, setCalendarOpen] = useState(false);
+  const [activeSequence, setActiveSequence] = useState(0);
 
   const context = useContext(DashBoardContext);
 
@@ -39,23 +27,39 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
     throw new Error("scrollDivRef not loaded");
   }
   const { scrollDivRef } = context;
-
-  const getDateRange = eachDayOfInterval({
-    start: new Date(),
-    end: new Date(latestTask.date),
-  });
-
+  const getDateRange = dateRange({ scheduleTasks });
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
+
+  const activeDates = () => {
+    const extract = scheduleTasks?.map(
+      (task) => `${format(new Date(task.date), "yyyy-MM-dd")}`
+    );
+    const result = extract?.filter(
+      (date, index) => extract.indexOf(date) === index
+    );
+    return result;
+  };
+  const getActiveDates = activeDates();
+
+  const prevActiveSequence = useRef<number>(0);
 
   useEffect(() => {
     const scrollingDiv = document.querySelector(".scrolling-container");
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setInView(entry.target.id);
             setSequence(formattedDates.indexOf(entry.target.id));
+
+            const newActiveSequence = getActiveDates?.indexOf(entry.target.id);
+
+            if (newActiveSequence !== -1 && newActiveSequence !== undefined) {
+              prevActiveSequence.current = newActiveSequence;
+              setActiveSequence(newActiveSequence);
+            } else {
+              setActiveSequence(prevActiveSequence.current);
+            }
           }
         });
       },
@@ -65,7 +69,6 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
         rootMargin: "0% 0px -90% 0px",
       }
     );
-
     formattedDates.forEach((date) => {
       const element = document.getElementById(date);
       if (element) {
@@ -80,15 +83,13 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
     if (!date) return;
     setStartDate(date);
     setCalendarOpen(false);
-    if (inViewParse >= new Date()) {
-      const validString = format(new Date(date), "yyyy-MM-dd");
+    const validString = format(new Date(date), "yyyy-MM-dd");
 
-      setInView(validString);
-      const el = document.getElementById(validString);
-      el?.scrollIntoView({
-        behavior: "smooth",
-      });
-    }
+    setInView(validString);
+    const element = document.getElementById(validString);
+    element?.scrollIntoView({
+      behavior: "smooth",
+    });
   };
 
   const inViewParse = parseISO(inView);
@@ -113,7 +114,7 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
           <CalendarDaysIcon className="mr-2" />
           {validParse()}
         </button>
-        <h3>Schedule</h3>
+        <h2>Schedule</h2>
 
         <div className="px-2 w-30 flex justify-end ">
           <button
@@ -155,6 +156,7 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
         <div className="absolute top-15 left-0">
           <DatePicker
             minDate={new Date()}
+            maxDate={getDateRange[getDateRange.length - 1]}
             inline
             selected={startDate}
             onChange={(date) => handleCalendar(date)}
@@ -164,21 +166,21 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
 
       <div className=" py-1 scroll-x-containers w-full flex justify-center">
         {formattedDates.map((date, i) => {
-          const windowSize = 8;
+          const windowSize = 7;
           const windowStart = Math.floor(sequence / windowSize) * windowSize;
           const windowEnd = windowStart + windowSize;
-
           if (i >= windowStart && i < windowEnd)
             return (
               <button
-                className={` px-4 lg:min-w-20 max-h-10 flex align-middle text-center justify-center content-center ${
-                  inView === date && "text-rose-600"
+                className={` scale-90 px-4 lg:min-w-20 max-h-10 flex align-middle text-center justify-center content-center ${
+                  inView === date &&
+                  "text-rose-600 scale-120 transition-all duration-50 "
                 }`}
                 id={`${date}-horizontal`}
                 onClick={(e) => {
                   setInView(date);
-                  const el = document.getElementById(date);
-                  el.scrollIntoView({
+                  const element = document.getElementById(date);
+                  element?.scrollIntoView({
                     // behavior: "smooth",
                   });
                 }}
@@ -189,18 +191,31 @@ export default function ScheduleMenu({ scheduleTasks }: Props) {
       </div>
 
       <div className="flex border-t-1 justify-center py-1 flex-col text-center">
-        <h1>active dates</h1>
-        <div className="flex justify-center">
-          {scheduleTasks?.map((item) => {
-            return (
-              <ScheduleMenuItems
-                key={item.id}
-                date={item.date}
-                title={item.title}
-                taskId={item.id}
-                content={item.content}
-              ></ScheduleMenuItems>
-            );
+        <h2 className="py-2 text-sm ">Active Dates</h2>
+        <div className="flex justify-center py-1">
+          {getActiveDates?.map((item, i) => {
+            const windowSize = 7;
+            const windowStart =
+              Math.floor(activeSequence / windowSize) * windowSize;
+            const windowEnd = windowStart + windowSize;
+            if (i >= windowStart && i < windowEnd)
+              return (
+                <button
+                  key={i}
+                  onClick={() => {
+                    const element = document.getElementById(item);
+                    element?.scrollIntoView({
+                      behavior: "smooth",
+                    });
+                  }}
+                  className={`flex justify-center px-2 scale-90  ${
+                    inView === item &&
+                    "text-rose-300 scale-120 transition-all duration-100 "
+                  }`}
+                >
+                  {format(new Date(item), "eee d")}
+                </button>
+              );
           })}
         </div>
       </div>

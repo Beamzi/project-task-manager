@@ -54,6 +54,7 @@ export default async function AllTasksView() {
         <div className="border-b-1 border-dotted relative bottom-1.5 outline-white w-full"></div>
         <h2 className="min-w-53 text-right">You have 12 active projects</h2>
       </div>
+
       <div className="flex px-6 relative bg-transparent  justify-center">
         <div className="border-1 border-dotted w-1/2 bg-neutral-900">
           <p className="px-2 py-2">Recently Created </p>

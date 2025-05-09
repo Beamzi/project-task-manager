@@ -44,18 +44,18 @@ export default function ProjectView({
 
   return (
     <div className="px-3 w-full py-2 border-1 align-middle flex flex-col">
-      <h3 className="text-sm text-start py-2">
+      <h3 className="break-all text-sm text-start py-2">
         {project?.tasks?.[0]?.author?.name}
       </h3>
       <input
         onChange={(e) => setTitle(e.target.value)}
         value={title}
-        className="text-lg pb-2"
+        className="break-all text-lg pb-2 w-full"
       ></input>
       <textarea
         onChange={(e) => setDescription(e.target.value)}
         value={description}
-        className=" h-45 my-2"
+        className="break-all h-45 my-2"
         //defaultValue={project?.description ?? ""}
       ></textarea>
 

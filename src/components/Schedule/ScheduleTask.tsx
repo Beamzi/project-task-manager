@@ -48,11 +48,11 @@ export default function ScheduleTask({
 
       <div className="flex align-center h-full w-full">
         <div className="pt-3 px-3 h-full wrap-normal text-neutral-500">
-          <span className="flex wrap-normal [&>*]:mr-2 ">
+          <span className="break-all flex wrap-normal [&>*]:mr-2 ">
             <CheckCircleIcon className="stroke-neutral-300 min-w-5 " />
             {title}
           </span>
-          <p className="wrap-normal pl-7 pb-2">{content}</p>
+          <p className="break-all pl-7 pb-2">{content}</p>
           {!overDue ? (
             <>
               <hr className="pt-2"></hr>
