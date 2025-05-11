@@ -4,6 +4,7 @@ import { auth } from "../../auth";
 
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
+import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 
 async function getTasks() {
   const session = await auth();
@@ -45,7 +46,7 @@ export default async function AllTasksView() {
 
   return (
     <>
-      <div className="px-5 py-6 flex justify-start bg-transparent ">
+      <div className="px-5 pt-6 flex justify-start bg-transparent ">
         <h2 className="text-start min-w-45">
           {tasks[0]
             ? `Welcome Back, ${firstNameOfUser}`
@@ -55,24 +56,12 @@ export default async function AllTasksView() {
         <h2 className="min-w-53 text-right">You have 12 active projects</h2>
       </div>
 
-      <div className="flex px-6 relative bg-transparent  justify-center">
-        <div className="border-1 border-dotted w-1/2 bg-neutral-900">
-          <p className="px-2 py-2">Recently Created </p>
-          <div
-            id="task-scroll-container"
-            className=" border-t-1 border-dotted bg-neutral-800 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[40dvh]"
-          >
-            <ListOfTasks currentTasks={tasks} />
-          </div>
-        </div>
-
-        <div className="w-1/2 flex flex-col border-1 border-dotted ml-6 dark:bg-neutral-900">
-          <p className="border-b-1 border-dotted px-2 py-2">Reminders </p>
-          <div className="dark:bg-neutral-800 h-full w-full">
-            <ListOfReminderTasks />
-          </div>
-        </div>
-      </div>
+      <FirstRowContainers
+        leftData={<ListOfTasks currentTasks={tasks}></ListOfTasks>}
+        rightData={<ListOfReminderTasks />}
+        leftTitle="Recently Created"
+        rightTitle="Reminders"
+      ></FirstRowContainers>
 
       <div className=" flex px-6 pt-6 relative bg-transparent  justify-center ">
         <div className="border-1 border-dotted w-2/2 bg-neutral-900">

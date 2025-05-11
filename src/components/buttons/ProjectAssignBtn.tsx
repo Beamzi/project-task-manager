@@ -28,6 +28,7 @@ export default function ProjectAssignBtn({
   const [list, setList] = useState(false);
   const [titleCheck, setTitleCheck] = useState("");
   const [assignCheck, setAssignCheck] = useState(false);
+  const [abbreviation, setAbbreviations] = useState("border-5");
 
   return (
     <div
@@ -45,12 +46,22 @@ export default function ProjectAssignBtn({
 
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
-          <p className="break-all">{`Assigned to ${titleCheck}`}</p>
+          <>
+            <span className=" invisible absolute lg:visible lg:relative">
+              Assigned to{" "}
+            </span>
+            <span className={`overflow-hidden`}>{`${titleCheck}`}</span>
+          </>
         ) : (
           projects?.map((item) => (
-            <div key={item.id}>
+            <div className="" key={item.id}>
               {item.id === projectIdOfTask ? (
-                <p>{`Assigned to ${item.title}`}</p>
+                <>
+                  <span className="invisible absolute lg:visible lg:relative">
+                    Assigned To
+                  </span>
+                  <span>{`${item.title}`}</span>
+                </>
               ) : null}
             </div>
           ))

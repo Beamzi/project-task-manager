@@ -58,7 +58,8 @@ export default async function DashBoard({
 
             <div className="z-2 flex w-vw relative justify-center bg-transparent h-[90dvh] w-full">
               <SideBar className="dark:bg-neutral-800 min-w-45  xl:max-w-50  md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1  md:relative fixed h-full left-0 md:top-0" />
-              <main className="noise-overlay border-x-1 border-b-1 w-vw dark:bg-neutral-950 h-full w-full">
+              {/* watch out for this flex-col in main */}
+              <main className="flex flex-col items-center noise-overlay border-x-1 border-b-1 w-vw dark:bg-neutral-950 h-full w-full">
                 {children}
               </main>
             </div>

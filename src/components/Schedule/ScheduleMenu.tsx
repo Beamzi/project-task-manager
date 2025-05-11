@@ -91,7 +91,6 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
       behavior: "smooth",
     });
   };
-
   const inViewParse = parseISO(inView);
 
   const validParse = () =>
