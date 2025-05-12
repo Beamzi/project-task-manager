@@ -54,7 +54,10 @@ export default function Task({
   const [onHover, setOnHover] = useState(
     minimise && `opacity-0 hover:opacity-100`
   );
+  const [parentHover, setParentHover] = useState(false);
   const [showTimeOptions, setShowTimeOptions] = useState(false);
+  const [localPriorityState, setLocalPriorityState] = useState(priority);
+
   const formattedTrueDate = format(new Date(date), "yyyy-MM-dd'T'HH:mm");
 
   const [state, dispatch] = useReducer(reducer, {
@@ -99,24 +102,28 @@ export default function Task({
   return (
     <>
       <motion.div
-        onHoverStart={() => setOnHover("")}
-        onHoverEnd={() => setOnHover("opacity-0 hover:opacity-100")}
+        onHoverStart={() => {
+          setOnHover("");
+          setParentHover(true);
+        }}
+        onHoverEnd={() => {
+          setOnHover("opacity-0 hover:opacity-100");
+          setParentHover(false);
+        }}
         id={id}
         initial={!minimise && { height: 500 }}
         transition={{ duration: 0.3 }}
         animate={minimise ? { height: 104 } : { height: 330 }}
-        className={` origin-top ${
-          minimise &&
-          "origin-top hello relative hover:ml-5 transition-all duration-300"
-        }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 py-2 px-3 flex flex-col bg-neutral-800 `}
+        className={`origin-top ${
+          minimise && "origin-top hello hover:ml-5  transition-all duration-300"
+        }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted py-2 px-3 flex flex-col`}
       >
-        {/* <h3 className="bg-transparent my-1 text-end">{author}</h3> */}
-
         <div className="flex py-1">
           <ProjectAssignBtn
             taskId={id}
             projectIdOfTask={projectId}
             minimise={minimise}
+            parentHover={parentHover}
           ></ProjectAssignBtn>
 
           <div
@@ -135,17 +142,33 @@ export default function Task({
             <RemoveTaskBtn id={id}></RemoveTaskBtn>
           </div>
         </div>
-        <input
-          value={select ? state.newTitle : title}
-          onChange={(e) =>
-            dispatch({ type: "change-values", propTitle: e.target.value })
-          }
-          onClick={() => setSelect(true)}
-          type="text"
-          className={`py-1 px-2 text-md font-medium ${
-            minimise && "bg-transparent text-neutral-400"
-          }`}
-        ></input>
+
+        {minimise ? (
+          <p
+            onClick={() => setSelect(true)}
+            className={`py-1   px-2 text-md font-medium ${
+              minimise && "-mt-2 bg-transparent text-neutral-400"
+            }`}
+          >
+            {title}
+          </p>
+        ) : (
+          <motion.input
+            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, scaleY: 0 }}
+            animate={{ opacity: 1, scaleY: 1 }}
+            value={select ? state.newTitle : title}
+            onChange={(e) =>
+              dispatch({ type: "change-values", propTitle: e.target.value })
+            }
+            onClick={() => setSelect(true)}
+            type="text"
+            className={`py-1 px-2 text-md font-medium origin-top ${
+              minimise && "-mt-2 bg-transparent text-neutral-400"
+            }`}
+          ></motion.input>
+        )}
+
         {minimise && (
           <p className=" px-2 text-sm  text-rose-300">
             {minimise && format(new Date(date), "EEE MMM d")}
@@ -155,8 +178,11 @@ export default function Task({
         {!minimise && (
           <>
             <motion.textarea
-              {...motionProps}
-              className=" text-sm font-light origin-bottom  px-2 py-1 min-h-35 border-y-1"
+              // {...motionProps}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              className=" text-sm font-light origin-top  px-2 py-1 min-h-35 border-y-1"
               value={select ? state.newContent : content}
               onChange={(e) =>
                 dispatch({
@@ -167,14 +193,17 @@ export default function Task({
               onClick={() => setSelect(true)}
             ></motion.textarea>
 
-            <div
-              {...motionProps}
+            <motion.div
+              // {...motionProps}
+              transition={{ duration: 0.3, delay: 0.4 }}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
               className="relative"
               onClick={() => setShowTimeOptions(showTimeOptions ? false : true)}
             >
               {format(new Date(date), "EEE MMM d")}
-            </div>
-            <div>
+            </motion.div>
+            <motion.div>
               {showTimeOptions && (
                 <TimeOptions
                   setQuickDate={setQuickDate}
@@ -183,9 +212,15 @@ export default function Task({
                   callApi={updateTask}
                 ></TimeOptions>
               )}
-            </div>
+            </motion.div>
 
-            <motion.div {...motionProps} className="flex py-1 ">
+            <motion.div
+              // {...motionProps}
+              transition={{ duration: 0.3, delay: 0.5 }}
+              initial={{ opacity: 0, scaleY: 0 }}
+              animate={{ opacity: 1, scaleY: 1 }}
+              className="flex py-1 "
+            >
               <div className="w-2/4 dark:bg-neutral-900">
                 <button
                   onClick={() => {
@@ -198,7 +233,12 @@ export default function Task({
                   <CheckCircleIcon className="ml-2 stroke-green-400" />
                 </button>
               </div>
-              <PriorityBtn id={id} priorityState={priority}></PriorityBtn>
+              <PriorityBtn
+                id={id}
+                priorityState={priority}
+                localPriorityState={localPriorityState}
+                setLocalPriorityState={setLocalPriorityState}
+              ></PriorityBtn>
             </motion.div>
           </>
         )}

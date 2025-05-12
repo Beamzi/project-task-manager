@@ -31,7 +31,7 @@ export default function ScheduleTask({
   };
 
   return (
-    <div className="overflow-hidden bg-neutral-800 w-full ">
+    <div className="overflow-hidden  w-full ">
       {!overDue ? (
         <>
           <h3 id={dateId} className="font-bold pb-3 pt-3 px-5">

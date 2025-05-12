@@ -72,7 +72,11 @@ body > * {
   );
 }
 
-
+/* bg-linear-[25deg,red_5%,yellow_60%,lime_90%,teal */
+.first-row-containers {
+  background: #000000;
+background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
+}
 
 @layer components {
   /* variable classes first  */
@@ -121,7 +125,7 @@ body > * {
     @apply dark:bg-neutral-900
   }
   * {
-    @apply  dark:border-neutral-600 ; 
+    @apply  dark:border-neutral-700 ; 
   }
   input, textarea {
     @apply text-neutral-500

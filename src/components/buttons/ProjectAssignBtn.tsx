@@ -14,10 +14,12 @@ export default function ProjectAssignBtn({
   taskId,
   projectIdOfTask,
   minimise,
+  parentHover,
 }: {
   taskId: string;
   projectIdOfTask: string;
   minimise: boolean;
+  parentHover: boolean;
 }) {
   const projects = useContext(projectContext);
 
@@ -29,12 +31,14 @@ export default function ProjectAssignBtn({
   const [titleCheck, setTitleCheck] = useState("");
   const [assignCheck, setAssignCheck] = useState(false);
   const [abbreviation, setAbbreviations] = useState("border-5");
-
+  // bg-linear-to-r/srgb from-neutral-900 to-neutral-800
   return (
     <div
-      className={`${
-        minimise && "dark:bg-linear-to-r/srgb from-neutral-900 to-neutral-800"
-      } flex flex-col w-full py-1 px-2 relative dark:bg-neutral-900`}
+      className={` ${
+        minimise &&
+        parentHover &&
+        "bg-linear-to-r/srgb from-neutral-900 to-neutral-800"
+      } flex flex-col w-full py-1 px-2 relative`}
     >
       <button
         className={`hover:text-rose-600 text-md font-light  text-start flex transition-all duration-300 hover:[&>*]: ${
@@ -47,10 +51,10 @@ export default function ProjectAssignBtn({
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
           <>
-            <span className=" invisible absolute lg:visible lg:relative">
-              Assigned to{" "}
+            <span className="invisible absolute lg:visible lg:relative">
+              Assigned to
             </span>
-            <span className={`overflow-hidden`}>{`${titleCheck}`}</span>
+            <span className={`w-`}>{`${titleCheck}`}</span>
           </>
         ) : (
           projects?.map((item) => (

@@ -13,11 +13,15 @@ import { motion, AnimatePresence } from "motion/react";
 export default function PriorityBtn({
   id,
   priorityState,
+  localPriorityState,
+  setLocalPriorityState,
 }: {
   id: string;
   priorityState: boolean;
+  localPriorityState: boolean;
+  setLocalPriorityState: (value: boolean) => void;
 }) {
-  const [localPriorityState, setLocalPriorityState] = useState(priorityState);
+  // const [localPriorityState, setLocalPriorityState] = useState(priorityState);
   const [toggleItem, setToggleItem] = useState("");
   const [unpriority, setUnpriority] = useState(false);
   const [tipReveal, setTipReveal] = useState(false);
@@ -67,7 +71,10 @@ export default function PriorityBtn({
       >
         {localPriorityState ? (
           <>
-            <StarIconSolid className="fill-rose-600 transition-all duration-300" />
+            <StarIconSolid
+              className={`fill-rose-600 transition-all duration-300
+              `}
+            />
           </>
         ) : (
           <StarIconOutline className="transition-all duration-300" />
@@ -135,12 +142,13 @@ export default function PriorityBtn({
                         setTipReveal(false);
                         setRestart(true);
                         setUnpriority(false);
+
                         setTimeout(() => {
                           setLocalPriorityState(false);
                           setRestart(false);
                         }, 100);
                       }}
-                      className={`${toggleItem}  p-3 hover:bg-neutral-800 hover:text-rose-600 hover:outline-1`}
+                      className={`${toggleItem} p-3 hover:bg-neutral-800 hover:text-rose-600 hover:outline-1`}
                     >
                       unprioritise?
                     </motion.button>
