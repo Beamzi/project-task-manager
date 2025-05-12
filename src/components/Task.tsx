@@ -114,8 +114,11 @@ export default function Task({
         initial={!minimise && { height: 500 }}
         transition={{ duration: 0.3 }}
         animate={minimise ? { height: 104 } : { height: 330 }}
-        className={`origin-top ${
-          minimise && "origin-top hello hover:ml-5  transition-all duration-300"
+        //please just be aware of this p offset if layout problems
+        className={`origin-top  ${
+          minimise
+            ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
+            : "pl-4"
         }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted py-2 px-3 flex flex-col`}
       >
         <div className="flex py-1">
@@ -146,7 +149,7 @@ export default function Task({
         {minimise ? (
           <p
             onClick={() => setSelect(true)}
-            className={`py-1   px-2 text-md font-medium ${
+            className={`py-1 px-2 text-md font-medium overflow-hidden whitespace-nowrap text-ellipsis w-42 lg:w-60  ${
               minimise && "-mt-2 bg-transparent text-neutral-400"
             }`}
           >

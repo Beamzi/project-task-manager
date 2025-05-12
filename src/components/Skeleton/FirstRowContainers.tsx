@@ -24,7 +24,7 @@ export default function FirstRowContainers({
           <div className="rounded-2xl overflow-hidden">
             <div
               id="task-scroll-container"
-              className={`relative z-10 rounded-2xl  border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex  w-full flex-wrap  overflow-y-scroll content-start min-h-[40dvh] ${
+              className={`relative z-10 rounded-2xl  border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2   flex w-full flex-wrap overflow-y-scroll content-start min-h-[40dvh] ${
                 height ? height : localHeight
               }`}
             >
@@ -42,7 +42,7 @@ export default function FirstRowContainers({
           </p>
           <div className="rounded-2xl overflow-hidden">
             <div
-              className={`first-row-containers  rounded-2xl  border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 overflow-y-scroll overflow-x-hidden flex content-start flex-wrap  dark:bg-neutral-800 ${
+              className={`first-row-containers rounded-2xl  border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 overflow-y-scroll overflow-x-hidden flex  w-full content-start flex-wrap  dark:bg-neutral-800 ${
                 height ? height : localHeight
               } w-full`}
             >

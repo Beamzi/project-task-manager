@@ -10,6 +10,9 @@ import { motion } from "motion/react";
 import ChevronDown from "../icons/ChevronDown";
 import DropDown from "../icons/DropDown";
 
+const overflowEllipsis =
+  "overflow-hidden whitespace-nowrap text-ellipsis w-18 lg:w-18 xl:w-25 md:w-18";
+
 export default function ProjectAssignBtn({
   taskId,
   projectIdOfTask,
@@ -51,21 +54,21 @@ export default function ProjectAssignBtn({
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
           <>
-            <span className="invisible absolute lg:visible lg:relative">
+            <span className="invisible absolute lg:visible lg:relative min-w-20">
               Assigned to
             </span>
-            <span className={`w-`}>{`${titleCheck}`}</span>
+            <p className={`${overflowEllipsis}`}>{`${titleCheck}`}</p>
           </>
         ) : (
           projects?.map((item) => (
             <div className="" key={item.id}>
               {item.id === projectIdOfTask ? (
-                <>
-                  <span className="invisible absolute lg:visible lg:relative">
-                    Assigned To
+                <div className="flex">
+                  <span className="invisible absolute lg:visible lg:relative min-w-20">
+                    Assigned to
                   </span>
-                  <span>{`${item.title}`}</span>
-                </>
+                  <p className={`${overflowEllipsis}`}>{`${item.title}`}</p>
+                </div>
               ) : null}
             </div>
           ))

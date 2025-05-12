@@ -17,7 +17,7 @@ export default function ListOfReminderTasks() {
   console.log(tasksByDueDate, "asdasdasdd");
   return (
     <>
-      <div className="scrolling-container h-[40dvh] ">
+      <div className="flex flex-wrap justify-center items-center content-center">
         {tasksByDueDate?.map(
           (item) =>
             item.date < new Date() && (

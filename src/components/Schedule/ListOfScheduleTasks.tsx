@@ -33,7 +33,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
 
   return (
     <>
-      <div ref={scrollDivRef} className="overflow-hidden border-r-1 ">
+      <div ref={scrollDivRef} className="overflow-hidden  ">
         <div>
           {scheduleTasks?.map(
             (item) =>

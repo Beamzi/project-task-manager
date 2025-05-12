@@ -7,6 +7,8 @@ interface Props {
   id: string;
   title: string;
 }
+const overflowEllipsis =
+  "block overflow-hidden whitespace-nowrap text-ellipsis w-30";
 
 export default function ProjectListBtn({ id, title }: Props) {
   const [active, setActive] = useState(false);
@@ -19,7 +21,9 @@ export default function ProjectListBtn({ id, title }: Props) {
       ></div>
       <Link
         onClick={() => setActive(true)}
-        className={`py-1 text-sm ${active ? `text-white` : "text-neutral-400"}`}
+        className={`${overflowEllipsis} text-start py-1 text-sm ${
+          active ? `text-white` : "text-neutral-400"
+        }`}
         href={`/projects/${id}`}
       >
         {title}

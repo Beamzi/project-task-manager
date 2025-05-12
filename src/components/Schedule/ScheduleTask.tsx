@@ -13,6 +13,9 @@ export interface Props {
   overDue?: boolean;
 }
 
+const overflowEllipsis =
+  "block overflow-hidden whitespace-nowrap text-ellipsis w-10";
+
 export default function ScheduleTask({
   dateId,
   title,
@@ -31,38 +34,44 @@ export default function ScheduleTask({
   };
 
   return (
-    <div className="overflow-hidden  w-full ">
+    <div className="overflow-hidden w-full border-b-1 border-dotted ">
       {!overDue ? (
         <>
-          <h3 id={dateId} className="font-bold pb-3 pt-3 px-5">
+          <h3 id={dateId} className={`font-bold pt-3 px-5`}>
             {getDate()}
           </h3>
-          <hr></hr>
         </>
       ) : (
         <>
-          <h3 className=" pb-3 pt-3 px-5">Overdue</h3>
-          <hr></hr>
+          <h3 className="pt-3 px-5">Overdue</h3>
         </>
       )}
 
       <div className="flex align-center h-full w-full">
-        <div className="pt-3 px-3 h-full wrap-normal text-neutral-500">
-          <span className="break-all flex wrap-normal [&>*]:mr-2 ">
-            <CheckCircleIcon className="stroke-neutral-300 min-w-5 " />
-            {title}
-          </span>
-          <p className="break-all pl-7 pb-2">{content}</p>
+        <div className="pt-3 px-3 h-full w-full wrap-normal text-neutral-500">
+          <div className="[&>*]:mr-2 flex">
+            <CheckCircleIcon className={`stroke-neutral-300 min-w-5`} />
+            <span
+              className={`block [&>*]:mr-2 overflow-hidden whitespace-nowrap text-ellipsis xl:max-w-70 lg:max-w-60 md:max-w-25`}
+            >
+              {title}
+            </span>
+          </div>
+          <p
+            className={`block pl-7 pb-2  xl:max-w-85 lg:max-w-80 md:max-w-40  overflow-hidden whitespace-nowrap text-ellipsis`}
+          >
+            {content}
+          </p>
           {!overDue ? (
             <>
-              <hr className="pt-2"></hr>
-              <button className="flex  [&>*]:mr-2">
+              {/* <hr className="pt-2"></hr> */}
+              <button className="flex [&>*]:mr-2">
                 <PlusIcon className="fill-neutral-100 w-5 pb-3" />
                 new task
               </button>
             </>
           ) : (
-            <span className="text-red-700 ">{getDate()}</span>
+            <span className="block text-red-700 pb-3">{getDate()}</span>
           )}
 
           {/* {overDue && <h3 className="text-red-700">{getDate()}</h3>} */}
