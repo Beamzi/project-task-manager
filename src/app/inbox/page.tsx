@@ -1,43 +1,43 @@
 import React from "react";
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../../auth";
-import ListOfTasks from "@/components/Lists/ListOfTasks";
-import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
-import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
+import InboxClient from "@/components/InboxClient";
+import { Prisma } from "@prisma/client";
 
-async function getTasksMostRecent() {
+const getTasksForSortingQuery = {
+  orderBy: {
+    date: "asc",
+  },
+  include: {
+    author: {
+      select: { name: true },
+    },
+  },
+} as const;
+
+export type TasksForSorting = Prisma.TaskGetPayload<
+  typeof getTasksForSortingQuery
+>;
+
+async function getTasksForSorting() {
   const session = await auth();
   if (session) {
     const tasks = await prisma.task.findMany({
       where: {
         author: { id: session?.user?.id },
       },
-      orderBy: {
-        createdAt: "asc",
-      },
-      include: {
-        author: {
-          select: { name: true },
-        },
-      },
+      ...getTasksForSortingQuery,
     });
     return tasks;
   } else return [];
 }
 
 export default async function Inbox() {
-  const tasks = await getTasksMostRecent();
+  const tasks = await getTasksForSorting();
 
   return (
     <>
-      <>
-        <FirstRowContainers
-          leftData={<ListOfTasks currentTasks={tasks} />}
-          rightData={<ListOfReminderTasks />}
-          leftTitle="All Tasks"
-          rightTitle="????"
-        ></FirstRowContainers>
-      </>
+      <InboxClient tasks={tasks} />
     </>
   );
 }

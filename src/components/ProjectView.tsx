@@ -22,8 +22,6 @@ export default function ProjectView({
   const [title, setTitle] = useState(project?.title);
   const [description, setDescription] = useState(project?.description);
 
-  console.log({ project });
-
   async function updateProject() {
     try {
       await fetch("/api/update-project", {

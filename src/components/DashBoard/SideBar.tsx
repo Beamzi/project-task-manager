@@ -6,6 +6,7 @@ import NewProjectBtn from "../buttons/NewProjectBtn";
 import ProjectList from "../Lists/ProjectList";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import Link from "next/link";
+import SearchTasks from "../SearchTasks";
 
 import {
   StarIcon,
@@ -26,6 +27,7 @@ export default function SideBar({ className }: { className: string }) {
   return (
     <>
       <aside className={`${className} ${sideMenu}`}>
+        <SearchTasks />
         <NewTaskBtn />
         <Link className="flex" href={"/"}>
           <HomeIcon />
