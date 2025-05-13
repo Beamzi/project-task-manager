@@ -78,6 +78,11 @@ body > * {
 background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
 }
 
+.gradient-for-inner-containers {
+  background: #000000;
+background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
+}
+
 @layer components {
   /* variable classes first  */
   .text-hover {

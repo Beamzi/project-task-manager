@@ -11,7 +11,7 @@ import ChevronDown from "../icons/ChevronDown";
 import DropDown from "../icons/DropDown";
 
 const overflowEllipsis =
-  "overflow-hidden whitespace-nowrap text-ellipsis w-18 lg:w-18 xl:w-25 md:w-18";
+  "overflow-hidden whitespace-nowrap text-ellipsis w-18 lg:w-18 xl:w-22 md:w-18";
 
 export default function ProjectAssignBtn({
   taskId,

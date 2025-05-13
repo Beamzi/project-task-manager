@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "../../../auth";
 import InboxClient from "@/components/InboxClient";
 import { Prisma } from "@prisma/client";
+import Fuse from "fuse.js";
 
 const getTasksForSortingQuery = {
   orderBy: {

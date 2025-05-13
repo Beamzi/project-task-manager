@@ -20,10 +20,7 @@ interface Props {
   id: string;
   priority: boolean;
   projectId: string | null;
-  taskParentClasses: string;
 }
-
-interface viewSpecificProps {}
 
 function reducer(state, action) {
   switch (action.type) {
