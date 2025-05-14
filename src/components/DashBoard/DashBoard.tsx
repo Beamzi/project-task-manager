@@ -52,11 +52,11 @@ export default async function DashBoard({
       <TaskDueDateProvider value={tasksByDueDate}>
         <ProjectProvider value={projects}>
           <DashBoardOverlay />
-          <div className="relative w-vw md:p-5 overflow-hidden">
+          <div className="w-vw md:p-5 overflow-hidden ">
             <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
             <TopBar className="z-2 dark:bg-neutral-800 invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
 
-            <div className="z-2 flex w-vw relative justify-center bg-transparent h-[90dvh] w-full">
+            <div className="flex w-vw justify-center bg-transparent h-[90dvh] w-full">
               <SideBar className="dark:bg-neutral-800 min-w-45  xl:max-w-50  md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1  md:relative fixed h-full left-0 md:top-0" />
               {/* watch out for this flex-col in main */}
               <main className="flex flex-col items-center noise-overlay border-x-1 border-b-1 w-vw dark:bg-neutral-950 h-full w-full">

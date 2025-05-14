@@ -21,18 +21,31 @@ const operations = [
 
 export default function SortByButtons({
   setAction,
+  setTypeInterpolate,
 }: {
   setAction: (value: string) => void;
+  setTypeInterpolate: (
+    value: "title" | "content" | "date" | "createdAt" | "priority"
+  ) => void;
 }) {
+  const [iconReset, setIconReset] = useState(0);
+  const [toolTipIndex, setToolTipIndex] = useState(0);
+
   return (
     <div className="w-full">
-      <ul className="flex flex-col py-6 ml-0.5 justify-center items-center content-center  w-full">
+      <ul className="flex flex-col py-6  justify-center items-center content-center  w-full">
         {operations.map((item, index) => (
           <SortButton
             key={`${item}${index}`}
             setAction={setAction}
+            setTypeInterpolate={setTypeInterpolate}
             operation={item.type}
             icon={item.icon}
+            setIconReset={setIconReset}
+            iconReset={iconReset}
+            btnIndex={index}
+            toolTipIndex={toolTipIndex}
+            setToolTipIndex={setToolTipIndex}
           ></SortButton>
         ))}
       </ul>
