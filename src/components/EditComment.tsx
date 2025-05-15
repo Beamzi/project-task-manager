@@ -11,6 +11,7 @@ interface Props {
   content: string;
   createdAt: Date;
   profileImg: string | null | undefined;
+  localDelete?: boolean;
 }
 
 export default function EditComment({
@@ -19,10 +20,12 @@ export default function EditComment({
   name,
   createdAt,
   profileImg,
+  localDelete,
 }: Props) {
   const [edit, setEdit] = useState(false);
   const [newContent, setNewContent] = useState(content);
   const [initOptions, setInitOptions] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
 
   async function updateComment() {
     try {
@@ -56,7 +59,7 @@ export default function EditComment({
 
   return (
     <>
-      <div className="flex pt-3">
+      <div className={`flex pt-3 ${isDeleted && "hidden"}`}>
         {/* // TOPBAR BELOW */}
         <Image
           className="rounded-full mr-3 relative top-1 h-full"
@@ -96,7 +99,10 @@ export default function EditComment({
                   {initOptions ? (
                     <>
                       <button
-                        onClick={deleteComment}
+                        onClick={() => {
+                          deleteComment();
+                          setIsDeleted(true);
+                        }}
                         className="absolute top-5 left-0 border-1"
                       >
                         delete?

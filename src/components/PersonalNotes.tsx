@@ -21,6 +21,10 @@ interface Props {
 
 export default function PersonalNotes({ comments, profileImg }: Props) {
   const [localComment, setLocalComment] = useState<string[]>([]);
+  const [commentId, setCommentId] = useState<string[]>([]);
+
+  // const [commentsIndex, setLocalComment];
+  // const [isDeleted, setIsDeleted] = useState(false);
 
   return (
     <div className="border-1 flex flex-col justify-center w-full">
@@ -33,23 +37,25 @@ export default function PersonalNotes({ comments, profileImg }: Props) {
             name={comments.author?.name}
             createdAt={comments.createdAt}
             profileImg={profileImg}
-            localComment={localComment}
-            setLocalComment={setLocalComment}
           ></EditComment>
         ))}
       </div>
 
       {localComment && (
         <div>
-          {localComment.map((item, index) => (
-            <EditComment
-              key={index}
-              content={item}
-              name={comments[0].author?.name}
-              profileImg={profileImg}
-              createdAt={new Date()}
-            />
-          ))}
+          {localComment.map((item, index) => {
+            return (
+              <EditComment
+                key={index}
+                id={commentId[index]}
+                content={item}
+                name={comments[0].author?.name}
+                profileImg={profileImg}
+                createdAt={new Date()}
+                localDelete={true}
+              />
+            );
+          })}
         </div>
       )}
 
@@ -59,6 +65,8 @@ export default function PersonalNotes({ comments, profileImg }: Props) {
           profileImg={profileImg}
           localComment={localComment}
           setLocalComment={setLocalComment}
+          setCommentId={setCommentId}
+          commentId={commentId}
         />
       </div>
     </div>

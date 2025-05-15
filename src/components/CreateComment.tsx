@@ -8,19 +8,22 @@ interface Props {
   projectId: string | undefined | null;
   profileImg: string | undefined | null;
   setLocalComment: React.Dispatch<React.SetStateAction<string[]>>;
+  setCommentId: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export default function CreateComment({
   projectId,
   profileImg,
   setLocalComment,
+  setCommentId,
 }: Props) {
   const [content, setContent] = useState("Leave a comment?");
   const [comment, setComment] = useState(false);
+  // const [commentId, setCommentId] = useState("");
   // const [localArr, setLocalArr] = useState<string[]>([]);
   async function createComment() {
     try {
-      await fetch("/api/create-comment", {
+      const request = await fetch("/api/create-comment", {
         method: "POST",
         headers: {
           "Content-Type": "applications/json",
@@ -30,6 +33,8 @@ export default function CreateComment({
           projectId: projectId ? projectId : null,
         }),
       });
+      const response = await request.json();
+      setCommentId((prev) => [...prev, response.result.id]);
     } catch (e) {
       console.error(e);
     }
