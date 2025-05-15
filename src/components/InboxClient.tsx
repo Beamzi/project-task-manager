@@ -57,7 +57,11 @@ export default function InboxClient({ tasks }: Props) {
         <h3 className="px-2 text-xl py-2 border-b-1 border-dotted">Inbox</h3>
       </div>
 
-      <SearchClient searching={searching} setSearching={setSearching} />
+      <SearchClient
+        searching={searching}
+        setSearching={setSearching}
+        autoFocus={false}
+      />
       <FirstRowContainers
         leftData={
           searching.length > 0 ? (

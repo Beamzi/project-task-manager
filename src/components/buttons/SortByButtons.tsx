@@ -33,7 +33,7 @@ export default function SortByButtons({
 
   return (
     <div className="w-full">
-      <ul className="flex flex-col py-6  justify-center items-center content-center  w-full">
+      <ul className="flex flex-col py-6 justify-center items-center content-center  w-full">
         {operations.map((item, index) => (
           <SortButton
             key={`${item}${index}`}

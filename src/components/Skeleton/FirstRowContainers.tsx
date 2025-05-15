@@ -38,7 +38,7 @@ export default function FirstRowContainers({
           >
             <div
               id="task-scroll-container"
-              className={`relative z-10 rounded-2xl  border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex w-full flex-wrap ${
+              className={`relative z-10  rounded-2xl  border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2  flex w-full flex-wrap ${
                 leftScrollYDisable ? "" : "overflow-y-scroll"
               } content-start min-h-[40dvh] ${height ? height : localHeight}`}
             >

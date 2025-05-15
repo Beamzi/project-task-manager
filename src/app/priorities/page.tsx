@@ -4,6 +4,7 @@ import { auth } from "../../../auth";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
+import PersonalNotes from "@/components/PersonalNotes";
 
 async function getPriorities() {
   const session = await auth();
@@ -34,7 +35,7 @@ export default async function Priorities() {
     <>
       <FirstRowContainers
         leftData={<ListOfTasks currentTasks={priorityTasks}></ListOfTasks>}
-        rightData={<ListOfReminderTasks />}
+        rightData={<PersonalNotes />}
         leftTitle="Prioritised"
         rightTitle="personal Notes"
       ></FirstRowContainers>

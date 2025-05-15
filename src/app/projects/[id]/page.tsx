@@ -66,7 +66,7 @@ export default async function CurrentProject({ params }: Props) {
         rightData={<ListOfTasks currentTasks={tasks} />}
         leftTitle="Project"
         rightTitle="Project Tasks"
-        height="height-[70dvh]"
+        height="h-[70dvh]"
       ></FirstRowContainers>
     </>
   );

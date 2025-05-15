@@ -36,6 +36,7 @@ export default function SearchModal() {
                 setSearching={setSearching}
                 xlWidth="a"
                 inputWidth="w-[calc(100%-4rem)]"
+                autoFocus={true}
               />
 
               <SingleContainer

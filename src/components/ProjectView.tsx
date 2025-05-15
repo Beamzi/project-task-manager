@@ -41,7 +41,7 @@ export default function ProjectView({
   }
 
   return (
-    <div className="px-3 w-full py-2 border-1 align-middle flex flex-col">
+    <div className="px-3 pr-2  w-full py-2 flex flex-col">
       <h3 className="break-all text-sm text-start py-2">
         {project?.tasks?.[0]?.author?.name}
       </h3>

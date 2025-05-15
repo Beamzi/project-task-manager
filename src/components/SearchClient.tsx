@@ -10,6 +10,7 @@ interface Props {
   setSearching: (value: string) => void;
   xlWidth?: string;
   inputWidth?: string;
+  autoFocus: boolean;
 }
 
 export default function SearchClient({
@@ -17,6 +18,7 @@ export default function SearchClient({
   setSearching,
   xlWidth,
   inputWidth,
+  autoFocus,
 }: Props) {
   const searchRef = useRef<HTMLInputElement>(null);
   const [searchClick, setSearchClick] = useState(false);
@@ -48,6 +50,7 @@ export default function SearchClient({
           </motion.div>
           <motion.input
             whileFocus={{ scale: 0.95 }}
+            autoFocus={autoFocus}
             onBlur={() => setSearchClick(false)}
             ref={searchRef}
             placeholder="Search..."
