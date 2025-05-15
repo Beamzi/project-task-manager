@@ -26,16 +26,43 @@ async function getPriorities() {
   } else return [];
 }
 
+async function getNonProjectComments() {
+  const session = await auth();
+  if (session) {
+    const comments = await prisma.comments.findMany({
+      where: {
+        author: { id: session?.user?.id },
+        projectId: null,
+      },
+      include: {
+        author: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+    return comments;
+  } else return [];
+}
+
 export default async function Priorities() {
   const priorityTasks = await getPriorities();
+  const comments = await getNonProjectComments();
   console.log(priorityTasks);
   //   <ListOfTasks currentTasks={priorityTasks}></ListOfTasks>{" "}
+  const session = await auth();
 
   return (
     <>
       <FirstRowContainers
         leftData={<ListOfTasks currentTasks={priorityTasks}></ListOfTasks>}
-        rightData={<PersonalNotes />}
+        rightData={
+          <PersonalNotes
+            comments={comments}
+            profileImg={session?.user?.image}
+          />
+        }
         leftTitle="Prioritised"
         rightTitle="personal Notes"
       ></FirstRowContainers>

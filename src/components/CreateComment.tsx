@@ -5,14 +5,19 @@ import { useState } from "react";
 import Image from "next/image";
 
 interface Props {
-  projectId: string | undefined;
+  projectId: string | undefined | null;
   profileImg: string | undefined | null;
+  setLocalComment: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export default function CreateComment({ projectId, profileImg }: Props) {
+export default function CreateComment({
+  projectId,
+  profileImg,
+  setLocalComment,
+}: Props) {
   const [content, setContent] = useState("Leave a comment?");
   const [comment, setComment] = useState(false);
-
+  // const [localArr, setLocalArr] = useState<string[]>([]);
   async function createComment() {
     try {
       await fetch("/api/create-comment", {
@@ -22,7 +27,7 @@ export default function CreateComment({ projectId, profileImg }: Props) {
         },
         body: JSON.stringify({
           content: content,
-          projectId: projectId,
+          projectId: projectId ? projectId : null,
         }),
       });
     } catch (e) {
@@ -44,7 +49,11 @@ export default function CreateComment({ projectId, profileImg }: Props) {
           loading="lazy"
         ></Image>
         <textarea
-          onChange={(e) => setContent(e.target.value)}
+          minLength={1}
+          maxLength={200}
+          onChange={(e) => {
+            setContent(e.target.value);
+          }}
           value={content}
           onClick={() => setComment(true)}
           className="border-1 rounded-sm mx-2 my-2 w-full h-10 pt-2 pl-2  relative"
@@ -55,12 +64,17 @@ export default function CreateComment({ projectId, profileImg }: Props) {
           <button className="w-full" onClick={() => setComment(false)}>
             cancel
           </button>
-          <button onClick={createComment} className="w-full bg-black py-1">
+          <button
+            onClick={() => {
+              createComment();
+              setLocalComment((prev) => [...prev, content]);
+            }}
+            className="w-full bg-black py-1"
+          >
             submit
           </button>
         </div>
       ) : null}
     </div>
   );
-  s;
 }
