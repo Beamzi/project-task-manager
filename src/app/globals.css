@@ -42,15 +42,15 @@ h3 {
 
 
 
-body > * {
+ /* body > * {
   background: repeating-linear-gradient(
     45deg,
-    rgb(34, 34, 34) 0px,    /* Start color at 0px */
-    rgb(34, 34, 34) 1px,    /* Same color up to 1px */
-    #000000 1px,            /* IMMEDIATE switch to black at 1px */
-    #000000 10px            /* Black continues to 20px */
+    rgb(34, 34, 34) 0px,   
+    rgb(34, 34, 34) 1px,   
+    #000000 1px,           
+    #000000 10px           
   );
-}
+} */
 
 .inner-background {
   background: repeating-linear-gradient(
@@ -71,6 +71,20 @@ body > * {
     #272727 5px            /* Black continues to 20px */
   );
 }
+
+.document-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* position: absolute; 
+  left: 0; 
+  right: 0; 
+  margin-inline: auto; 
+  width: fit-content; */
+}
+
+
 
 /* bg-linear-[25deg,red_5%,yellow_60%,lime_90%,teal */
 .first-row-containers {

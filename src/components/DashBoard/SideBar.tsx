@@ -1,13 +1,11 @@
 "use client";
 
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import NewTaskBtn from "../buttons/NewTaskBtn";
 import NewProjectBtn from "../buttons/NewProjectBtn";
 import ProjectList from "../Lists/ProjectList";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import Link from "next/link";
-import SearchTasks from "../SearchTasks";
-
 import {
   StarIcon,
   CheckCircleIcon,
@@ -17,17 +15,22 @@ import {
   CalendarDaysIcon,
 } from "@heroicons/react/24/outline";
 
-export default function SideBar({ className }: { className: string }) {
-  const context = useContext(DashBoardContext);
-  if (!context) {
-    throw new Error("dashboard globals not loaded");
-  }
+import { TaskDueDateContext } from "@/context/TaskDueDateContext";
+import SearchModal from "../SearchModal";
 
-  const { sideMenu, setSideMenu } = context;
+export default function SideBar({ className }: { className: string }) {
+  const dashBoardProps = useContext(DashBoardContext);
+
+  if (!dashBoardProps) {
+    throw new Error("context not provided");
+  }
+  const { sideMenu, setSideMenu } = dashBoardProps;
+
   return (
     <>
       <aside className={`${className} ${sideMenu}`}>
-        <SearchTasks />
+        <SearchModal />
+
         <NewTaskBtn />
         <Link className="flex" href={"/"}>
           <HomeIcon />
@@ -59,3 +62,5 @@ export default function SideBar({ className }: { className: string }) {
     </>
   );
 }
+
+// w-100 h-100 mx-auto border-1 absolute left-0 right-0 fixed inset-0 z-100
