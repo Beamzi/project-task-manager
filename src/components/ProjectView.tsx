@@ -21,6 +21,7 @@ export default function ProjectView({
 }: ProjectViewProps) {
   const [title, setTitle] = useState(project?.title);
   const [description, setDescription] = useState(project?.description);
+  const [localComment, setLocalComment] = useState<string[]>([]);
 
   async function updateProject() {
     try {
@@ -76,7 +77,25 @@ export default function ProjectView({
         ))}
       </div>
 
-      <CreateComment projectId={project?.id} profileImg={profileImg} />
+      {localComment && (
+        <div>
+          {localComment.map((item, index) => (
+            <EditComment
+              key={index}
+              content={item}
+              name={comments?.[0].author?.name}
+              profileImg={profileImg}
+              createdAt={new Date()}
+            />
+          ))}
+        </div>
+      )}
+
+      <CreateComment
+        projectId={project?.id}
+        profileImg={profileImg}
+        setLocalComment={setLocalComment}
+      />
     </div>
   );
 }

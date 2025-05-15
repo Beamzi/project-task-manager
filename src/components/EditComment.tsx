@@ -7,7 +7,7 @@ import CreateComment from "./CreateComment";
 
 interface Props {
   name: string | null | undefined;
-  id: string;
+  id?: string;
   content: string;
   createdAt: Date;
   profileImg: string | null | undefined;
