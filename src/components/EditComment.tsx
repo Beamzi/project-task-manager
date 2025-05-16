@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { useState } from "react";
 import Image from "next/image";
 import CreateComment from "./CreateComment";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 interface Props {
   name: string | null | undefined;
@@ -57,6 +58,10 @@ export default function EditComment({
     }
   }
 
+  const firstLastName = name?.split(" ");
+
+  const lastInitial = firstLastName?.[1]?.slice(0, 1);
+
   return (
     <>
       <div className={`flex pt-3 ${isDeleted && "hidden"}`}>
@@ -73,28 +78,28 @@ export default function EditComment({
         {/* {`${localComment}`} */}
         <div key={id} className="w-full">
           <div className="flex w-full h-7  ">
-            <div className="w-full ">
-              <span className="break-all font-bold">{`${name} `}</span>
-              <span className="break-all text-xs text-neutral-400 pl-2">
-                {format(new Date(createdAt), "MMM d h:mm a")};
+            <div className="w-full flex align-middle content-center items-center">
+              <span className="block overflow-hidden whitespace-nowrap text-ellipsis font-bold">{`${firstLastName?.[0]} ${lastInitial}`}</span>
+              <span className="block text-xs text-neutral-400 md:pl-2 pl-2 overflow-hidden whitespace-nowrap text-ellipsis min-[900px]:w-16 lg:w-30 sm:w-25.5">
+                {format(new Date(createdAt), "MMM d h:mm a")}
               </span>
             </div>
             {!edit && (
-              <div className="flex align-middle h-full content-center  items-center">
+              <div className="flex align-middle h-full content-center items-center">
                 <button
-                  className=" px-2"
+                  className=" "
                   onClick={() => {
                     setEdit(edit ? false : true);
                   }}
                 >
-                  edit
+                  <PencilSquareIcon className="w-5 h-5 stroke-neutral-400 hover:stroke-rose-600 transition-all duration-100" />
                 </button>
-                <div className="flex relative flex-col w-full align-middle  justify-center ">
+                <div className="  flex relative flex-col w-full align-middle   justify-center">
                   <button
                     className="w-full  justify-center"
                     onClick={() => setInitOptions(initOptions ? false : true)}
                   >
-                    x
+                    <TrashIcon className="w-5 h-5 hover:stroke-rose-600 stroke-neutral-400 transition-all duration-100" />
                   </button>
                   {initOptions ? (
                     <>
@@ -103,7 +108,7 @@ export default function EditComment({
                           deleteComment();
                           setIsDeleted(true);
                         }}
-                        className="absolute top-5 left-0 border-1"
+                        className=" bg-black p-2 rounded-xl absolute top-6 -left-11 border-1 hover:text-rose-600"
                       >
                         delete?
                       </button>

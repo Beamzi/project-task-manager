@@ -4,12 +4,21 @@ import { format } from "date-fns";
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import TimeOptions from "./TimeOptions";
+interface Props {
+  setShowForm: (type: boolean) => void;
+}
 
-export default function NewTask() {
+export default function NewTask({ setShowForm }: Props) {
   const router = useRouter();
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+
+  const trueDate = new Date();
+
+  const [quickDate, setQuickDate] = useState<Date>(trueDate);
+  const [showTimeOptions, setShowTimeOptions] = useState(false);
 
   async function createTask(event) {
     event.preventDefault();
@@ -36,43 +45,55 @@ export default function NewTask() {
   console.log(getYear, "current year bla");
 
   return (
-    <form
-      onSubmit={createTask}
-      className="border-2 flex flex-col p-5 [&>*]:my-2"
-    >
-      <label>
-        title
-        <input
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-          className="border-2 w-full"
-          type="text"
-        ></input>
-      </label>
-      <label>
-        date
-        <input
-          onChange={(event) => setDate(event.target.value)}
-          value={date}
-          className="border-2 w-full"
-          type="datetime-local"
-          min={`${currentDate}`}
-          max={`${getYear()}-12-31T23:59`}
-        ></input>
-      </label>
-      <label>
-        description
-        <input
-          value={content}
-          onChange={(event) => setContent(event.target.value)}
-          className="border-2 w-full"
-          type="text"
-        ></input>
-      </label>
-      <button className="border-2 w-full py-3" type="submit">
-        submit
-      </button>
-    </form>
+    <>
+      <div
+        onClick={() => setShowForm(false)}
+        className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+      ></div>
+      <form
+        onSubmit={createTask}
+        className="fixed md:w-120 min-w-80 top-[50%] left-[50%] z-100 translate-[-50%]  flex flex-col p-5 [&>*]:my-2 gradient-for-inner-containers border-1 rounded-xl outline-4 -outline-offset-5 outline-neutral-900"
+      >
+        <label>
+          title
+          <input
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+            className="border-2 w-full"
+            type="text"
+          ></input>
+        </label>
+        <label>
+          {/* <TimeOptions
+            setQuickDate={setQuickDate}
+            trueDate={trueDate}
+            setShowTimeOptions={setShowTimeOptions}
+            isNewTask={true}
+            // callApi={updateTask}
+          ></TimeOptions> */}
+          date
+          <input
+            onChange={(event) => setDate(event.target.value)}
+            value={date}
+            className="border-2 w-full"
+            type="datetime-local"
+            min={`${currentDate}`}
+            max={`${getYear()}-12-31T23:59`}
+          ></input>
+        </label>
+        <label>
+          description
+          <textarea
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+            className="border-2 w-full"
+          ></textarea>
+        </label>
+        <button className="border-2 w-full py-3" type="submit">
+          submit
+        </button>
+      </form>
+    </>
   );
 }
 

@@ -22,6 +22,7 @@ export default function ProjectView({
   const [title, setTitle] = useState(project?.title);
   const [description, setDescription] = useState(project?.description);
   const [localComment, setLocalComment] = useState<string[]>([]);
+  const [commentId, setCommentId] = useState<string[]>([]);
 
   async function updateProject() {
     try {
@@ -82,10 +83,12 @@ export default function ProjectView({
           {localComment.map((item, index) => (
             <EditComment
               key={index}
+              id={commentId[index]}
               content={item}
               name={comments?.[0].author?.name}
               profileImg={profileImg}
               createdAt={new Date()}
+              localDelete={true}
             />
           ))}
         </div>
@@ -95,6 +98,8 @@ export default function ProjectView({
         projectId={project?.id}
         profileImg={profileImg}
         setLocalComment={setLocalComment}
+        setCommentId={setCommentId}
+        commentId={commentId}
       />
     </div>
   );

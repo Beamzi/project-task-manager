@@ -51,6 +51,8 @@ export default function InboxClient({ tasks }: Props) {
     return tasksCopy;
   };
 
+  const tasksCopy = orderBy(action, typeInterpolate, tasks);
+
   return (
     <>
       <div className="w-full px-6 pt-6 xl:w-[80%]">
@@ -65,14 +67,9 @@ export default function InboxClient({ tasks }: Props) {
       <FirstRowContainers
         leftData={
           searching.length > 0 ? (
-            <ListOfSearchTasks
-              currentTasks={orderBy(action, typeInterpolate, tasks)}
-              searching={searching}
-            />
+            <ListOfSearchTasks currentTasks={tasksCopy} searching={searching} />
           ) : (
-            <ListOfTasks
-              currentTasks={orderBy(action, typeInterpolate, tasks)}
-            />
+            <ListOfTasks currentTasks={tasksCopy} />
           )
         }
         height="h-[60dvh]"
