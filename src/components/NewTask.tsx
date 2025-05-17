@@ -14,6 +14,7 @@ export default function NewTask({ setShowForm }: Props) {
   const [date, setDate] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isNewTask, setIsNewTask] = useState(false);
 
   const trueDate = new Date();
 
@@ -28,9 +29,13 @@ export default function NewTask({ setShowForm }: Props) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title: title, content: content, date: date }),
+        body: JSON.stringify({
+          title: title,
+          content: content,
+          date: quickDate,
+        }),
       });
-      router.refresh();
+      // router.refresh();
     } catch (e) {
       console.error(e);
     }
@@ -50,10 +55,7 @@ export default function NewTask({ setShowForm }: Props) {
         onClick={() => setShowForm(false)}
         className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
       ></div>
-      <form
-        onSubmit={createTask}
-        className="fixed md:w-120 min-w-80 top-[50%] left-[50%] z-100 translate-[-50%]  flex flex-col p-5 [&>*]:my-2 gradient-for-inner-containers border-1 rounded-xl outline-4 -outline-offset-5 outline-neutral-900"
-      >
+      <div className="fixed md:w-120 min-w-80 top-[50%] left-[50%] z-100 translate-[-50%]  flex flex-col p-5 [&>*]:my-2 gradient-for-inner-containers border-1 rounded-xl outline-4 -outline-offset-5 outline-neutral-900">
         <label>
           title
           <input
@@ -64,22 +66,27 @@ export default function NewTask({ setShowForm }: Props) {
           ></input>
         </label>
         <label>
-          {/* <TimeOptions
-            setQuickDate={setQuickDate}
-            trueDate={trueDate}
-            setShowTimeOptions={setShowTimeOptions}
-            isNewTask={true}
-            // callApi={updateTask}
-          ></TimeOptions> */}
-          date
-          <input
-            onChange={(event) => setDate(event.target.value)}
-            value={date}
-            className="border-2 w-full"
-            type="datetime-local"
-            min={`${currentDate}`}
-            max={`${getYear()}-12-31T23:59`}
-          ></input>
+          <button
+            onClick={() => {
+              setShowTimeOptions(showTimeOptions ? false : true);
+              setIsNewTask(true);
+            }}
+          >
+            {isNewTask && !showTimeOptions
+              ? `${format(new Date(quickDate), "eee MMM d")}`
+              : "Pick A Date"}
+          </button>
+          <div>
+            {showTimeOptions && (
+              <TimeOptions
+                quickDate={quickDate}
+                setQuickDate={setQuickDate}
+                trueDate={trueDate}
+                setShowTimeOptions={setShowTimeOptions}
+                isNewTask={isNewTask}
+              ></TimeOptions>
+            )}
+          </div>
         </label>
         <label>
           description
@@ -89,10 +96,14 @@ export default function NewTask({ setShowForm }: Props) {
             className="border-2 w-full"
           ></textarea>
         </label>
-        <button className="border-2 w-full py-3" type="submit">
+        <button
+          onClick={createTask}
+          className="border-2 w-full py-3"
+          type="submit"
+        >
           submit
         </button>
-      </form>
+      </div>
     </>
   );
 }

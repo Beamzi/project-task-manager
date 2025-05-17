@@ -19,16 +19,20 @@ import {
 } from "@heroicons/react/24/solid";
 
 interface Props {
+  quickDate?: Date;
   setQuickDate: (value: Date) => void;
   trueDate: Date;
   setShowTimeOptions: (value: boolean) => void;
-  callApi: (scopedDate: Date) => Promise<void>;
+  callApi?: (scopedDate: Date) => Promise<void>;
+  isNewTask?: boolean;
 }
 export default function TimeOptions({
+  quickDate,
   setQuickDate,
   trueDate,
   setShowTimeOptions,
   callApi,
+  isNewTask,
 }: Props) {
   const [showCalendar] = useState(true);
   const [time, setTime] = useState("");
@@ -43,9 +47,13 @@ export default function TimeOptions({
 
   const handleDateChange = (date: Date | null) => {
     if (date) {
-      callApi(date);
       setQuickDate(date);
-      setShowTimeOptions(false);
+      if (!isNewTask && callApi) {
+        callApi(date);
+      }
+      setTimeout(() => {
+        setShowTimeOptions(false);
+      });
     }
   };
 
@@ -76,9 +84,13 @@ export default function TimeOptions({
           <li className="w-full ">
             <button
               onClick={() => {
-                callApi(getEndOfDay());
                 setQuickDate(getEndOfDay());
-                setShowTimeOptions(false);
+                if (!isNewTask && callApi) {
+                  callApi(getEndOfDay());
+                }
+                setTimeout(() => {
+                  setShowTimeOptions(false);
+                });
               }}
               className=" date-options "
             >
@@ -89,9 +101,13 @@ export default function TimeOptions({
           <li>
             <button
               onClick={() => {
-                callApi(getTomorrow());
                 setQuickDate(getTomorrow());
-                setShowTimeOptions(false);
+                if (!isNewTask && callApi) {
+                  callApi(getTomorrow());
+                }
+                setTimeout(() => {
+                  setShowTimeOptions(false);
+                });
               }}
               className="date-options "
             >
@@ -102,9 +118,13 @@ export default function TimeOptions({
           <li>
             <button
               onClick={() => {
-                callApi(getNextWeek());
-                setShowTimeOptions(false);
                 setQuickDate(getNextWeek());
+                if (!isNewTask && callApi) {
+                  callApi(getNextWeek());
+                }
+                setTimeout(() => {
+                  setShowTimeOptions(false);
+                });
               }}
               className="date-options "
             >
@@ -115,7 +135,7 @@ export default function TimeOptions({
         </ul>
         {showCalendar && (
           <DatePicker
-            selected={trueDate}
+            selected={isNewTask ? quickDate : trueDate}
             onChange={handleDateChange}
             inline
             minDate={new Date()}
@@ -152,8 +172,12 @@ export default function TimeOptions({
                 alert("please select a valid time of day");
               } else {
                 setQuickDate(parseIso);
-                callApi(parseIso);
-                setShowTimeOptions(false);
+                if (!isNewTask && callApi) {
+                  callApi(parseIso);
+                }
+                setTimeout(() => {
+                  setShowTimeOptions(false);
+                });
               }
             }}
             type="submit"
@@ -188,9 +212,13 @@ export default function TimeOptions({
             className="bg-black"
             onClick={() => {
               const parseIso = parseISO(isoInput);
-              callApi(parseIso);
               setQuickDate(parseIso);
-              setShowTimeOptions(false);
+              if (!isNewTask && callApi) {
+                callApi(parseIso);
+              }
+              setTimeout(() => {
+                setShowTimeOptions(false);
+              });
             }}
           >
             submit
