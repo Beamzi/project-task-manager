@@ -2,7 +2,7 @@
 
 import ProjectAssignBtn from "./buttons/ProjectAssignBtn";
 import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
-import { useContext, useReducer, useState } from "react";
+import { useContext, useEffect, useReducer, useState } from "react";
 import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
 import { CheckCircleIcon, CheckIcon } from "@heroicons/react/24/outline";
@@ -71,10 +71,12 @@ export default function Task({
   }
   const { globalMinimised, setGlobalMinimised } = context;
 
-  const motionProps = {
-    initial: status === "initial" ? { opacity: 1 } : { opacity: 0 },
-    animate: { opacity: 1 },
-  };
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     updateTask(quickDate);
+  //   }, 200);
+  // }, [quickDate]);
+
   //Type '(scopedDate: Date) => Promise<void>'
   async function updateTask(scopedDate: Date) {
     try {

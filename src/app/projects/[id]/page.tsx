@@ -4,6 +4,7 @@ import ProjectView from "@/components/ProjectView";
 import { Prisma } from "@prisma/client";
 import { auth } from "../../../../auth";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
+import RemoveProject from "@/components/buttons/RemoveProject";
 
 interface Props {
   params: {
@@ -55,6 +56,7 @@ export default async function CurrentProject({ params }: Props) {
   console.log({ session });
   return (
     <>
+      <RemoveProject project={project} />
       <FirstRowContainers
         leftData={
           <ProjectView

@@ -141,7 +141,7 @@ background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
     @apply dark:bg-black
   }
   textarea, input {
-    @apply dark:bg-neutral-900
+    @apply dark:bg-neutral-900 px-2 py-1
   }
   * {
     @apply  dark:border-neutral-700 ; 

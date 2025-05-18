@@ -7,12 +7,8 @@ export async function POST(request: Request) {
     const res = await request.json()
     const session = await auth()
 
-    console.log({res}, 'its alive!!!!!!!!!!!!!!!!!!!!! OMFG!!!!')
-
-    const { title, content, date } = res
-
-    
-
+    const { title, content, date, projectId } = res
+    if (projectId !== undefined) {
     const result = await prisma.task.create({
         data: {
             published: true,
@@ -21,10 +17,27 @@ export async function POST(request: Request) {
             content: content,
             author: {
                 connect: {id: session?.user?.id}
+            },
+            project: {
+                connect: {id: projectId}
             }
         }
     })
-    
     return NextResponse.json({result})
+    }
+    else {
+        const result = await prisma.task.create({
+        data: {
+            published: true,
+            title: title,
+            date: new Date(date),
+            content: content,
+            author: {
+                connect: {id: session?.user?.id}
+            },
+        }
+    })
+    return NextResponse.json({result})
+    }
 
 }
