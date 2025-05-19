@@ -98,6 +98,9 @@ background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
 }
 
 @layer components {
+  input:focus, textarea:focus {
+    @apply outline-1 -outline-offset-1 outline-black bg-neutral-800 
+}
   /* variable classes first  */
   .text-hover {
     @apply hover:text-rose-600 transition-all duration-300;
@@ -120,6 +123,12 @@ background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
     @apply text-sm
   }
 
+  .all-tasks {
+    button, a {
+      @apply rounded-sm
+    }
+  }
+
   aside {
     button, a {
       @apply p-2  bg-transparent  flex text-center items-center text-neutral-100 
@@ -138,11 +147,12 @@ background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
 
 
   body > * {
-    @apply dark:bg-black
+    @apply dark:bg-black 
   }
   textarea, input {
-    @apply dark:bg-neutral-900 px-2 py-1
+    @apply px-2 py-1 dark:bg-neutral-900
   }
+
   * {
     @apply  dark:border-neutral-700 ; 
   }

@@ -43,7 +43,7 @@ export default function PriorityBtn({
   }
 
   return (
-    <div className="z-5  py-1 flex w-2/4 justify-end relative dark:bg-neutral-900">
+    <div className="z-5 py-0.5 flex w-2/4 justify-end relative ">
       <motion.button
         //keep an eye on this
         key={restart ? "restart" : "normal"}
@@ -56,7 +56,7 @@ export default function PriorityBtn({
                 scale: 0.8,
               }
         }
-        className={`w-20 flex justify-center ml-2 bg-neutral-800 border-1  ${
+        className={`w-20 flex justify-center ml-2 border-1  ${
           (localPriorityState && "asd") ||
           "hover:[&>*]:fill-rose-600 hover:[&>*]:stroke-rose-600 transition-all duration-100 hover:border-x-5 hover:[&>*]:scale-120"
         }`}
@@ -84,20 +84,20 @@ export default function PriorityBtn({
       <div
         onMouseEnter={() => setTipReveal(true)}
         onMouseLeave={() => setTipReveal(false)}
-        className={`select- none w-5 px-4 mx-1 text-center flex flex-col relative items-center justify-center ${
+        className={`select- none w-5 ml-2 px-4 text-center flex flex-col relative items-center justify-center ${
           (localPriorityState &&
             `${
               (unpriority && "border-1 border-transparent") ||
-              " hover:bg-neutral-700 transition-all duration-300 border-x-1 rounded-sm"
+              " hover:bg-neutral-900 transition-all duration-300 border-x-1 rounded-sm"
             }  border-transparent`) ||
-          `unselected  bg-neutral-400 border-1 `
+          `unselected rounded-sm  border-1 `
         } `}
       >
         {tipReveal && !localPriorityState ? (
           <Tooltip className=""></Tooltip>
         ) : null}
         {!localPriorityState && (
-          <QuestionMarkCircleIcon className="h-full stroke-neutral-300 " />
+          <QuestionMarkCircleIcon className="h-full stroke-neutral-300 rounded-" />
         )}
         {localPriorityState && (
           // init is intentionally specific to a single event
