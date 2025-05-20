@@ -5,6 +5,7 @@ import { auth } from "../../auth";
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
+import SingleContainer from "@/components/Skeleton/SingleContainer";
 
 async function getTasks() {
   const session = await auth();
@@ -46,14 +47,12 @@ export default async function AllTasksView() {
 
   return (
     <>
-      <div className="px-5 pt-6 flex justify-start bg-transparent ">
-        <h2 className="text-start min-w-45">
+      <div className="break-words px-5 py-3 absolute top-20 right-10 bg-black border-1 rounded-xl w-60  flex content-center items-center align-middle  flex-shrink-0 justify-start  ">
+        <h2 className=" text-[clamp(1rem,2dvh,1.5rem)]">
           {tasks[0]
-            ? `Welcome Back, ${firstNameOfUser}`
-            : `Welcome, ${firstNameOfUser}`}
+            ? `Welcome Back, ${firstNameOfUser}, You have 12 active projects `
+            : `Welcome, ${firstNameOfUser}, Click 'New Project or create task to get started! `}
         </h2>
-        <div className="border-b-1 border-dotted relative bottom-1.5 outline-white w-full"></div>
-        <h2 className="min-w-53 text-right">You have 12 active projects</h2>
       </div>
 
       <FirstRowContainers
@@ -61,19 +60,13 @@ export default async function AllTasksView() {
         rightData={<ListOfReminderTasks />}
         leftTitle="Recently Created"
         rightTitle="Reminders"
+        height="h-[50dvh] "
       ></FirstRowContainers>
 
-      <div className=" flex px-6 pt-6 relative bg-transparent  justify-center ">
-        <div className="border-1 border-dotted w-2/2 bg-neutral-900">
-          <p className="px-2 py-2">Priorities </p>
-          <div
-            id="task-scroll-container"
-            className=" border-t-1 border-dotted bg-neutral-800 flex justify-center w-full relative flex-wrap overflow-y-scroll h-[27dvh]"
-          >
-            <ListOfTasks currentTasks={tasks} />
-          </div>
-        </div>
-      </div>
+      <SingleContainer
+        data={<ListOfTasks currentTasks={tasks} />}
+        height="h-full"
+      />
     </>
   );
 }

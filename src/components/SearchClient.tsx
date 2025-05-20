@@ -26,12 +26,12 @@ export default function SearchClient({
   return (
     <>
       <div
-        className={`px-6  ${
+        className={`px-[clamp(16px,2vw,24px)]  ${
           xlWidth ? "aa" : "xl:px-7"
         } w-full flex border- justify-center items-center content-center `}
       >
         <div
-          className={`gradient-for-inner-containers border-1 outline-5 -outline-offset-6 outline-neutral-900 rounded-2xl w-full flex px-6 mt-6  py-4 ${
+          className={`gradient-for-inner-containers border-1 outline-5 -outline-offset-6 outline-neutral-900 rounded-2xl w-full flex px-[clamp(16px,2vw,24px)] py-[clamp(8px,2vh,16px)] mt-[clamp(16px,2vh,24px)] ${
             xlWidth ? xlWidth : "xl:w-[80%]"
           }`}
         >
@@ -57,7 +57,7 @@ export default function SearchClient({
             value={searching}
             onChange={(e) => setSearching(e.target.value)}
             type="search"
-            className={`border-1 py-2 px-3 ${
+            className={`border-1 py-[clamp(4px,1vh,8px)] px-3 ${
               inputWidth ? inputWidth : "w-1/2"
             } text-neutral-300 rounded-lg`}
           ></motion.input>

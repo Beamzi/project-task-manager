@@ -52,14 +52,12 @@ export default async function DashBoard({
       <TaskDueDateProvider value={tasksByDueDate}>
         <ProjectProvider value={projects}>
           <DashBoardOverlay />
-          <div className="w-vw md:p-5 overflow-hidden ">
+          <div className="box-border h-screen md:p-5  overflow-hidden flex flex-col ">
             <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
-            <TopBar className="z-2 dark:bg-neutral-800 invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
-
-            <div className="flex w-vw justify-center bg-transparent h-[90dvh] w-full">
-              <SideBar className="dark:bg-neutral-800 min-w-45  xl:max-w-50  md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1  md:relative fixed h-full left-0 md:top-0" />
-              {/* watch out for this flex-col in main */}
-              <main className="flex flex-col items-center noise-overlay border-x-1 border-b-1 w-vw dark:bg-neutral-950 h-full w-full">
+            <TopBar className="z-2 gradient-for-thin-containers  invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
+            <div className=" flex flex-1 overflow-hidden justify-center  w-full h-full">
+              <SideBar className=" gradient-for-vert-containers   min-w-45  xl:max-w-50 md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1 md:relative fixed h-full left-0 md:top-0" />
+              <main className="gradient-for-main flex flex-col h-full flex-1 min-h-0 items-center  border-x-1 border-b-1 py-[clamp(16px,5vw,38px)] w-vw dark:bg-neutral-950 w-full">
                 {children}
               </main>
             </div>

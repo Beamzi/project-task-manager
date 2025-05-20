@@ -40,8 +40,6 @@ h3 {
   font-weight: 600
 }
 
-
-
  /* body > * {
   background: repeating-linear-gradient(
     45deg,
@@ -72,32 +70,75 @@ h3 {
   );
 }
 
-.document-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* position: absolute; 
-  left: 0; 
-  right: 0; 
-  margin-inline: auto; 
-  width: fit-content; */
+
+
+.custom-top-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 16px;
+  width: 200px;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    #ff69b4 30%,
+    #ff69b4 70%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  filter: drop-shadow(0 0 6px #ff69b4) drop-shadow(0 0 12px #ff69b4);
+  z-index: 1000; 
+  pointer-events: none;
 }
 
 
+.down-light-shadow {
+  
+  box-shadow: 1px 10px 1px 11px rgb(35, 35, 35)
+}
 
-/* bg-linear-[25deg,red_5%,yellow_60%,lime_90%,teal */
-.first-row-containers {
+
+.gradient-for-vert-containers {
   background: #000000;
-background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
+background: linear-gradient(180deg,rgb(20, 20, 20) 0%, rgb(36, 36, 36) 100%);
 }
+
+.gradient-for-thin-containers {
+  background: #000000;
+background: linear-gradient(90deg,rgb(20, 20, 20) 10%, rgb(36, 36, 36) 100%);
+}
+
+
+.first-row-containers {
+background: #000000;
+background: linear-gradient(360deg,rgba(15, 15, 15, 1) 0%, rgba(25, 25, 25, 1) 33%, rgba(35, 35, 35, 1) 66%, rgba(35, 35, 35, 1) 100%);
+}
+
+
 
 .gradient-for-inner-containers {
   background: #000000;
-background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
+background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 50%);
 }
 
+.gradient-for-main {
+background: #575757;
+background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
+}
+
+
 @layer components {
+  .text-scaley-sm {
+    @apply text-[clamp(0.6rem,1.5vh,0.875rem)]
+  }
+  .text-scaley-base {
+    @apply text-[clamp(0.7rem,2vh,1rem)]
+  }
+  .text-scaley-lg {
+    @apply text-[clamp(0.8rem,2.5vh,1.125rem)]
+  }
+
   input:focus, textarea:focus {
     @apply outline-1 -outline-offset-1 outline-black bg-neutral-800 
 }
@@ -110,7 +151,6 @@ background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
   }
   .li-hover {
     @apply border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 
-
   }
 
   button, ul, li, div {
@@ -168,6 +208,8 @@ background: linear-gradient(29deg,rgb(20, 20, 20) 0%, rgb(49, 49, 49) 100%);
 /* .task-shadows {
   box-shadow: 1px 1px 20px 5px black;
 } */
+
+
 
 
 #gradient-overlay {

@@ -138,13 +138,13 @@ export default function Task({
         id={id}
         initial={!minimise && { height: 500 }}
         transition={{ duration: 0.3 }}
-        animate={minimise ? { height: 104 } : { height: 330 }}
+        animate={minimise ? { height: 90 } : { height: 280 }}
         //please just be aware of this p offset if layout problems
-        className={`origin-top all-tasks  ${
+        className={`origin-top all-tasks tasks-custom-breakpoint  ${
           minimise
             ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
             : "pl-4"
-        }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted py-2 px-3 flex flex-col`}
+        }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted  px-3 flex flex-col`}
       >
         <div className="flex py-1">
           <ProjectAssignBtn
@@ -171,7 +171,7 @@ export default function Task({
         {minimise ? (
           <p
             onClick={() => setSelect(true)}
-            className={`py-1 px-2 text-md font-medium overflow-hidden whitespace-nowrap text-ellipsis w-42 lg:w-60  ${
+            className={`py-1 px-2 text-scaley-base  font-medium overflow-hidden whitespace-nowrap text-ellipsis w-42 lg:w-60  ${
               minimise && "-mt-2 bg-transparent text-neutral-400"
             }`}
           >
@@ -188,15 +188,15 @@ export default function Task({
             }}
             onClick={() => setSelect(true)}
             type="text"
-            className={`rounded-t-lg text-md text-neutral-400 ${
+            className={`rounded-t-lg text-scaley-base text-neutral-400 ${
               !editing ? "" : `inset-shadow-sm inset-shadow-rose-600`
-            } py-1 px-2 text-md font-medium origin-top ${
+            } py-1 px-2 text-scaley-base font-medium origin-top ${
               minimise && "-mt-2 bg-transparent text-neutral-400"
             }`}
           ></motion.input>
         )}
         {minimise && (
-          <p className=" px-2 text-sm text-rose-300">
+          <p className=" px-2 text-scaley-sm text-rose-300">
             {minimise && format(new Date(quickDate), "EEE MMM d")}
           </p>
         )}
@@ -212,11 +212,9 @@ export default function Task({
               transition={{ duration: 0.3, delay: 0.2 }}
               initial={{ opacity: 0, scaleY: 0 }}
               animate={{ opacity: 1, scaleY: 1 }}
-              className={`rounded-b-xl text-sm ${
-                editing && select
-                  ? `inset-shadow-sm  inset-shadow-rose-600`
-                  : ""
-              } text-sm  font-light origin-top px-2 py-1 min-h-35`}
+              className={`rounded-b-xl text-scaley-sm ${
+                editing && select ? `inset-shadow-sm inset-shadow-rose-600` : ""
+              } text-scaley-sm  font-light origin-top px-2 py-1 h-[clamp(2rem,13vh,10rem)]`}
               value={select ? state.newContent : content}
               onChange={(e) =>
                 dispatch({

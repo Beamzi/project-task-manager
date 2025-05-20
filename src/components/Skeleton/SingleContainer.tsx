@@ -21,22 +21,28 @@ export default function SingleContainer({
   return (
     <>
       <div
-        className={`flex px-6 w-full ${
+        className={`px-[clamp(16px,2vw,24px)] w-full pb-[clamp(16px,2vw,24px)] flex flex-1 flex-col h-full min-h-0 ${
           xlWidth ? xlWidth : "xl:w-[80%]"
-        } pt-6 bg-transparent justify-center`}
+        } bg-transparent justify-center ${
+          !title && "pt-[clamp(16px,2vw,24px)]"
+        }`}
+
+        // mb-[clamp(16px,2vw,24px)]
       >
-        <div className={width ? width : `w-1/2`}>
+        <div className={width ? width : `h-full w-2/2`}>
           {title && (
-            <p className="px-2 py-2  border-t-1 border-dotted">{title}</p>
+            <p className="px-2 py-2 border-t-1 border-dotted">{title}</p>
           )}
           <div
-            className={`rounded-2xl ${scrollYDisable ? "" : "overflow-hidden"}`}
+            className={`h-full rounded-2xl ${
+              scrollYDisable ? "" : "overflow-hidden"
+            }`}
           >
             <div
               id="task-scroll-container"
-              className={`relative z-10 rounded-2xl  border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex w-full flex-wrap ${
-                scrollYDisable ? "" : "overflow-y-scroll"
-              } content-start min-h-[40dvh] ${height ? height : localHeight}`}
+              className={`relative z-10 rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex w-full flex-wrap   ${
+                scrollYDisable ? "" : "overflow-y-auto "
+              } content-start  ${height ? height : localHeight}`}
             >
               {data}
               {/* <ListOfTasks currentTasks={priorityTasks}></ListOfTasks>{" "} */}

@@ -10,6 +10,7 @@ interface Props {
   height?: string;
   leftScrollYDisable?: boolean;
   rightScrollYDisable?: boolean;
+  ifBottomRow?: boolean;
 }
 const localHeight = "h-[40dvh]";
 
@@ -21,26 +22,36 @@ export default function FirstRowContainers({
   leftWidth,
   rightWidth,
   height,
+  ifBottomRow,
   leftScrollYDisable,
   rightScrollYDisable,
 }: Props) {
   return (
     <>
-      <div className=" flex px-6 w-full xl:w-[80%] pt-6 bg-transparent justify-center">
-        <div className={leftWidth ? leftWidth : `w-1/2`}>
+      <div
+        className={`flex  px-[clamp(16px,2vw,24px)] min-h-0 w-full ${
+          ifBottomRow && "h-full pb-[clamp(16px,2vw,24px)]"
+        } xl:w-[80%] bg-transparent justify-center ${
+          !leftTitle && "pt-[clamp(16px,2vw,24px)]"
+        }`}
+      >
+        <div className={leftWidth ? leftWidth : `min-h-0 w-1/2`}>
           {leftTitle && (
-            <p className="px-2 py-2  border-t-1 border-dotted">{leftTitle}</p>
+            <p className="px-2 py-2 text-scaley-lg border-dotted">
+              {leftTitle}
+            </p>
           )}
           <div
-            className={`rounded-2xl ${
+            className={`rounded-2xl flex-1 relative custom-top-accent  flex-col h-full min-h-0 ${
               leftScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
+            <div className="absolute z-15 down-light-shadow  scale-x-85 rounded-2xl  top-0.5 left-0 h-1 w-full"></div>
             <div
               id="task-scroll-container"
-              className={`relative z-10  rounded-2xl  border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2  flex w-full flex-wrap ${
+              className={` rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10 relative   flex w-full flex-wrap ${
                 leftScrollYDisable ? "" : "overflow-y-scroll"
-              } content-start min-h-[40dvh] ${height ? height : localHeight}`}
+              } content-start  ${height ? height : localHeight}`}
             >
               {leftData}
               {/* <ListOfTasks currentTasks={priorityTasks}></ListOfTasks>{" "} */}
@@ -48,25 +59,27 @@ export default function FirstRowContainers({
           </div>
         </div>
 
-        {/* lg:min-w-[36dvw] */}
-
         <div
-          className={`${rightWidth ? rightWidth : "w-1/2"} flex flex-col ml-6`}
+          className={`${
+            rightWidth ? rightWidth : "min-h-0 w-1/2 "
+          } flex flex-col ml-[clamp(16px,2vw,24px)]`}
         >
           {rightTitle && (
-            <p className=" bg-transparent border-t-1 border-dotted px-2 py-2">
+            <p className=" text-scaley-lg bg-transparent  border-dotted px-2 py-2">
               {rightTitle}
             </p>
           )}
 
           <div
-            className={`rounded-2xl ${
+            className={`rounded-2xl flex-1 flex-col h-full min-h-0 ${
               rightScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
             <div
               className={`${
-                rightScrollYDisable ? "" : "overflow-y-scroll overflow-x-hidden"
+                rightScrollYDisable
+                  ? ""
+                  : "min-h-0 overflow-y-scroll overflow-x-hidden"
               } first-row-containers rounded-2xl  border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full content-start flex-wrap  dark:bg-neutral-800 ${
                 height ? height : localHeight
               } w-full`}
@@ -80,4 +93,3 @@ export default function FirstRowContainers({
     </>
   );
 }
-// `${scrollY ? overflow-y-scroll overflow-x-hidden : ''

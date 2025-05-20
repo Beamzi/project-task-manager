@@ -7,8 +7,6 @@ import SortByButtons from "./buttons/SortByButtons";
 import ListOfTasks from "./Lists/ListOfTasks";
 import { TasksForSorting } from "@/app/inbox/page";
 import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import { motion } from "motion/react";
 import SearchClient from "./SearchClient";
 
 interface Props {
@@ -55,8 +53,10 @@ export default function InboxClient({ tasks }: Props) {
 
   return (
     <>
-      <div className="w-full px-6 pt-6 xl:w-[80%]">
-        <h3 className="px-2 text-xl py-2 border-b-1 border-dotted">Inbox</h3>
+      <div className="w-full px-[clamp(16px,2vw,24px)] xl:w-[80%]">
+        <h3 className="px-2 text-[clamp(20px,2vw,24px)] border-b-1 border-dotted">
+          Inbox
+        </h3>
       </div>
 
       <SearchClient
@@ -72,8 +72,9 @@ export default function InboxClient({ tasks }: Props) {
             <ListOfTasks currentTasks={tasksCopy} />
           )
         }
-        height="h-[60dvh]"
+        height="h-full"
         leftWidth="w-4/2 xl:w-6/2"
+        ifBottomRow={true}
         rightScrollYDisable={true}
         rightData={
           <SortByButtons
