@@ -6,6 +6,7 @@ import { auth } from "../../../../auth";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 import RemoveProject from "@/components/buttons/RemoveProject";
 
+import { redirect } from "next/navigation";
 interface Props {
   params: {
     id: string;
@@ -55,6 +56,10 @@ export default async function CurrentProject({ params }: Props) {
 
         ...fullProjectQuery,
       });
+
+      if (!project || project.authorId !== session?.user?.id) {
+        redirect("/not-found");
+      }
       return project;
     } else return null;
   }
