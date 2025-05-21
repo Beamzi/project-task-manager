@@ -37,10 +37,12 @@ const fullProjectQuery = {
 export type FullProject = Prisma.ProjectGetPayload<typeof fullProjectQuery>;
 
 export default async function CurrentProject({ params }: Props) {
+  const session = await auth();
   const { id } = await params;
+
   async function getProject() {
     const project = await prisma.project.findUnique({
-      where: { id },
+      where: { id: id },
 
       ...fullProjectQuery,
     });
@@ -50,7 +52,6 @@ export default async function CurrentProject({ params }: Props) {
   const project = await getProject();
   const tasks = project?.tasks;
   const comments = project?.comments;
-  const session = await auth();
   const profileImg = session?.user?.image;
 
   console.log({ session });
@@ -66,8 +67,6 @@ export default async function CurrentProject({ params }: Props) {
           ></ProjectView>
         }
         rightData={<ListOfTasks currentTasks={tasks} />}
-        leftTitle="Project"
-        rightTitle="Project Tasks"
         height="h-[70dvh]"
       ></FirstRowContainers>
     </>

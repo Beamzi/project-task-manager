@@ -17,6 +17,7 @@ import {
 
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
 import SearchModal from "../SearchModal";
+import { usePathname } from "next/navigation";
 
 export default function SideBar({ className }: { className: string }) {
   const dashBoardProps = useContext(DashBoardContext);
@@ -25,39 +26,43 @@ export default function SideBar({ className }: { className: string }) {
     throw new Error("context not provided");
   }
   const { sideMenu, setSideMenu } = dashBoardProps;
+  const pathName = usePathname();
 
+  const active = (path: string) =>
+    `${
+      pathName === path &&
+      "bg-neutral-700/50 [&>*]:stroke-rose-600 text-white hover:text-black  hover:bg-white"
+    }`;
   return (
     <>
       <aside className={`${className} ${sideMenu}`}>
         <SearchModal />
-
         <NewTaskBtn />
-        <Link className="flex" href={"/"}>
+        <Link className={`flex ${active("/")}`} href={"/"}>
           <HomeIcon />
           Overview
         </Link>
-
-        <Link href={"/inbox"}>
+        <Link className={`flex ${active("/inbox")}`} href={"/inbox"}>
           <InboxIcon />
           Inbox
         </Link>
-        <Link href={"/schedule"}>
+        <Link className={`flex ${active("/schedule")}`} href={"/schedule"}>
           <CalendarDaysIcon />
           Schedule
         </Link>
 
-        <Link href={"/priorities"}>
+        <Link className={`flex ${active("/priorities")}`} href={"/priorities"}>
           <StarIcon />
           Priorities
         </Link>
 
         <NewProjectBtn />
 
-        <Link href={"/projects"}>
+        <Link className={`flex ${active("/projects")}`} href={"/projects"}>
           <ListBulletIcon />
           All Projects
         </Link>
-        <ProjectList />
+        <ProjectList active={active} />
       </aside>
     </>
   );

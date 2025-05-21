@@ -1,10 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
 import { FullProject } from "@/app/projects/[id]/page";
 import EditComment from "./EditComment";
+import SaveOnchange from "./SaveOnchange";
+import { desc } from "motion/react-client";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 interface ProjectViewProps {
   project: FullProject | null;
@@ -19,10 +22,12 @@ export default function ProjectView({
   comments,
   profileImg,
 }: ProjectViewProps) {
-  const [title, setTitle] = useState(project?.title);
+  const [title, setTitle] = useState(project?.title ?? "");
   const [description, setDescription] = useState(project?.description);
   const [localComment, setLocalComment] = useState<string[]>([]);
   const [commentId, setCommentId] = useState<string[]>([]);
+  const [editing, setEditing] = useState(false);
+  const [init, setInit] = useState(true);
 
   async function updateProject() {
     try {
@@ -42,26 +47,68 @@ export default function ProjectView({
     }
   }
 
+  const previousTitle = useRef(title);
+  const previousDescription = useRef(description);
+
+  useEffect(() => {
+    if (
+      title !== previousTitle.current ||
+      description !== previousDescription.current
+    ) {
+      setInit(false);
+      setEditing(true);
+    }
+
+    const debounce = setTimeout(() => {
+      if (
+        title !== previousTitle.current ||
+        description !== previousDescription.current
+      ) {
+        updateProject();
+        setEditing(false);
+        setInit(false);
+      }
+    }, 400);
+
+    const edit = setTimeout(() => {
+      setEditing(false);
+    }, 410);
+
+    return () => {
+      clearTimeout(edit);
+      clearTimeout(debounce);
+    };
+  }, [title, description]);
+
   return (
-    <div className="px-3 pr-2  w-full py-2 flex flex-col">
+    <div className="px-3 pr-2 w-full py-2 flex flex-col">
       <h3 className="break-all text-sm text-start py-2">
         {project?.tasks?.[0]?.author?.name}
       </h3>
       <input
+        maxLength={25}
         onChange={(e) => setTitle(e.target.value)}
         value={title}
-        className="break-all text-lg pb-2 w-full"
+        className="break-all rounded-lg text-lg pb-2 w-full"
       ></input>
       <textarea
+        maxLength={500}
         onChange={(e) => setDescription(e.target.value)}
         value={description}
-        className="break-all h-45 my-2"
+        className="break-all rounded-lg h-45 my-2"
         //defaultValue={project?.description ?? ""}
       ></textarea>
 
-      <button onClick={() => updateProject()} className="border-1 py-2 mx-5">
-        submit
-      </button>
+      {init ? (
+        <div className="flex py-1 px-2  w-22 h-8 justify-center align-middle items-center">
+          Saved
+          <div className="ml-2 flex">
+            <CheckCircleIcon className=" stroke-green-400" />
+          </div>
+        </div>
+      ) : (
+        <SaveOnchange editing={editing} />
+      )}
 
       <div className="py-2">
         <h1 className="py-2">comments</h1>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 interface Props {
   title: string;
@@ -32,19 +32,18 @@ export default function LinkTaskToProjectBtn({
       });
 
       const data = await response.json();
-
-      console.log(data, "fuckoffdickeahd");
     } catch (e) {
       console.error(e);
     }
   }
+
   return (
     <button
       className=" w-full text-left p-1"
       onClick={() => {
         linkTask();
         setList(false);
-        router.refresh();
+        // router.refresh();
         setTitleCheck(title);
         setAssignCheck(true);
       }}

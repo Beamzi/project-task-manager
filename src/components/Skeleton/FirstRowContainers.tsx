@@ -42,14 +42,15 @@ export default function FirstRowContainers({
             </p>
           )}
           <div
-            className={`rounded-2xl flex-1 relative custom-top-accent  flex-col h-full min-h-0 ${
+            className={`rounded-2xl flex-1 jsutify-center align-middle relative custom-top-accent  flex-col h-full min-h-0 ${
               leftScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
-            <div className="absolute z-15 down-light-shadow  scale-x-85 rounded-2xl  top-0.5 left-0 h-1 w-full"></div>
+            {/* down-light-shadow  */}
+            <div className="absolute z-15 bg-neutral-800 border-neutral-900 scale-x-99  border-t-5 border-x-4 rounded-t-2xl left-0 top-[1px] h-6  w-full"></div>
             <div
               id="task-scroll-container"
-              className={` rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10 relative   flex w-full flex-wrap ${
+              className={` pt-4 rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10 relative flex w-full  flex-wrap ${
                 leftScrollYDisable ? "" : "overflow-y-scroll"
               } content-start  ${height ? height : localHeight}`}
             >
@@ -71,7 +72,7 @@ export default function FirstRowContainers({
           )}
 
           <div
-            className={`rounded-2xl flex-1 flex-col h-full min-h-0 ${
+            className={`rounded-2xl flex-1  flex-col h-full min-h-0 ${
               rightScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
@@ -79,7 +80,7 @@ export default function FirstRowContainers({
               className={`${
                 rightScrollYDisable
                   ? ""
-                  : "min-h-0 overflow-y-scroll overflow-x-hidden"
+                  : "min-h-0 overflow-y-scroll relative z-10 overflow-x-hidden"
               } first-row-containers rounded-2xl  border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full content-start flex-wrap  dark:bg-neutral-800 ${
                 height ? height : localHeight
               } w-full`}

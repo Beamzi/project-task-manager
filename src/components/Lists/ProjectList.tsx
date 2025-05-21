@@ -6,7 +6,11 @@ import { prisma } from "@/lib/prisma";
 import ProjectListBtn from "./ProjectListBtn";
 import { projectContext } from "@/context/ProjectContext";
 
-export default function ProjectList() {
+export default function ProjectList({
+  active,
+}: {
+  active: (value: string) => void;
+}) {
   const projects = useContext(projectContext);
 
   if (!projects) {
@@ -19,6 +23,7 @@ export default function ProjectList() {
           key={item.id}
           title={item.title}
           id={item.id}
+          active={active}
         ></ProjectListBtn>
       ))}
     </div>

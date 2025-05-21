@@ -21,7 +21,8 @@ export default function CreateComment({
   const [comment, setComment] = useState(false);
   // const [commentId, setCommentId] = useState("");
   // const [localArr, setLocalArr] = useState<string[]>([]);
-  async function createComment() {
+  async function createComment(event) {
+    event?.preventDefault();
     try {
       const request = await fetch("/api/create-comment", {
         method: "POST",
@@ -41,7 +42,13 @@ export default function CreateComment({
   }
 
   return (
-    <div className="flex flex-col ">
+    <form
+      onSubmit={(e) => {
+        createComment(e);
+        setLocalComment((prev) => [...prev, content]);
+      }}
+      className="flex flex-col "
+    >
       {/* <button>leave a comment?</button> */}
       <div className="flex justify-center align-middle content-center items-center">
         <Image
@@ -54,32 +61,39 @@ export default function CreateComment({
           loading="lazy"
         ></Image>
         <textarea
-          minLength={1}
+          minLength={5}
           maxLength={200}
+          required
           onChange={(e) => {
             setContent(e.target.value);
           }}
-          value={content}
+          placeholder="Leave a comment?"
+          // value={content}
           onClick={() => setComment(true)}
           className="border-1 rounded-sm mx-2 my-2 w-full h-10 pt-2 pl-2  relative"
         ></textarea>
       </div>
       {comment ? (
         <div className="w-full flex border-1">
-          <button className="w-full" onClick={() => setComment(false)}>
+          <button
+            type="button"
+            className="w-full"
+            onClick={() => setComment(false)}
+          >
             cancel
           </button>
           <button
-            onClick={() => {
-              createComment();
-              setLocalComment((prev) => [...prev, content]);
-            }}
+            type="submit"
+            // onClick={() => {
+            //   createComment();
+            //   setLocalComment((prev) => [...prev, content]);
+            // }}
             className="w-full bg-black py-1"
           >
             submit
           </button>
         </div>
       ) : null}
-    </div>
+    </form>
   );
 }

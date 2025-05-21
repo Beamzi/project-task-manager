@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useState, useContext } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { createPortal } from "react-dom";
 import SearchClient from "./SearchClient";
 import SingleContainer from "./Skeleton/SingleContainer";

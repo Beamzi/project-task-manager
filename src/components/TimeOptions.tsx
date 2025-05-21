@@ -58,16 +58,19 @@ export default function TimeOptions({
   };
 
   const getEndOfDay = () => {
+    const currentDate = new Date();
     currentDate.setHours(23, 59, 59, 999);
     return currentDate;
   };
 
   const getTomorrow = () => {
+    const currentDate = new Date();
     currentDate.setHours(currentDate.getHours() + 24);
     return currentDate;
   };
 
   const getNextWeek = () => {
+    const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 7);
     return currentDate;
   };
@@ -83,6 +86,7 @@ export default function TimeOptions({
         <ul className="bg-neutral-900  ">
           <li className="w-full ">
             <button
+              type="button"
               onClick={() => {
                 setQuickDate(getEndOfDay());
                 if (!isNewTask && callApi) {
@@ -100,6 +104,7 @@ export default function TimeOptions({
           </li>
           <li>
             <button
+              type="button"
               onClick={() => {
                 setQuickDate(getTomorrow());
                 if (!isNewTask && callApi) {
@@ -117,6 +122,7 @@ export default function TimeOptions({
           </li>
           <li>
             <button
+              type="button"
               onClick={() => {
                 setQuickDate(getNextWeek());
                 if (!isNewTask && callApi) {
@@ -144,6 +150,7 @@ export default function TimeOptions({
         )}
       </div>
       <button
+        type="button"
         className="py-2 px-2 "
         onClick={() => setTimeOption(timeOption ? false : true)}
       >
@@ -157,6 +164,7 @@ export default function TimeOptions({
             type="time"
           ></input>
           <button
+            type="button"
             className="bg-black p-2"
             onClick={() => {
               const trueDateFormat = format(
@@ -180,7 +188,6 @@ export default function TimeOptions({
                 });
               }
             }}
-            type="submit"
           >
             submit
           </button>
@@ -188,6 +195,7 @@ export default function TimeOptions({
       )}
 
       <button
+        type="button"
         className="py-2 px-2"
         onClick={() => setIsoOption(isoOption ? false : true)}
       >
@@ -209,9 +217,18 @@ export default function TimeOptions({
             max={`${getYear()}-12-31T23:59`}
           ></input>
           <button
+            type="button"
             className="bg-black"
             onClick={() => {
               const parseIso = parseISO(isoInput);
+              const current = new Date();
+              const maxDate = new Date(`${getYear()}-12-31T23:59`);
+
+              if (parseIso < current || parseIso > maxDate) {
+                alert("Please select a valid date");
+                return;
+              }
+
               setQuickDate(parseIso);
               if (!isNewTask && callApi) {
                 callApi(parseIso);

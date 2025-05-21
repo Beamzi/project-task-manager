@@ -24,13 +24,15 @@ export default function NewProjectBtn() {
   return (
     <>
       <button onClick={() => setProjectTitleInput(true)}>
-        {" "}
         <PlusIcon />
         New Project
       </button>
       {projectTitleInput && (
         <form onSubmit={createProject}>
           <input
+            minLength={3}
+            maxLength={25}
+            required
             className="border-2"
             value={projectTitle}
             type="text"

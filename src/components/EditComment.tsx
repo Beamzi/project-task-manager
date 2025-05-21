@@ -21,7 +21,6 @@ export default function EditComment({
   name,
   createdAt,
   profileImg,
-  localDelete,
 }: Props) {
   const [edit, setEdit] = useState(false);
   const [newContent, setNewContent] = useState(content);
@@ -131,6 +130,7 @@ export default function EditComment({
               ) : (
                 <div className="flex w-full flex-col">
                   <textarea
+                    maxLength={200}
                     className="break-all outline-1 outline-white py-2 px-2"
                     onChange={(e) => setNewContent(e.target.value)}
                     value={newContent}

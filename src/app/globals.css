@@ -92,7 +92,6 @@ h3 {
   pointer-events: none;
 }
 
-
 .down-light-shadow {
   
   box-shadow: 1px 10px 1px 11px rgb(35, 35, 35)
@@ -171,13 +170,13 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 
   aside {
     button, a {
-      @apply p-2  bg-transparent  flex text-center items-center text-neutral-100 
+      @apply p-2 rounded-sm  bg-transparent  flex text-center items-center text-neutral-100 
     }
     button:hover, a:hover {
-      @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 rounded-sm  [&>*]:stroke-black
+      @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 [&>*]:stroke-black [&>*]:scale-120 
     }
     svg {
-      @apply mr-2 w-5 stroke-neutral-400
+      @apply mr-2 w-5 stroke-neutral-400 duration-300 transition-all
     }
   }
 

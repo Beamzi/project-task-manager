@@ -41,7 +41,7 @@ export default function ProjectAssignBtn({
         minimise &&
         parentHover &&
         "bg-linear-to-r/srgb from-neutral-900 to-neutral-800"
-      } flex flex-col w-full py-1 px-2 relative`}
+      } flex flex-col w-full py-1 px-2 ${list && "relative z-4"} `}
     >
       <button
         className={`hover:text-rose-600 text-md font-light  text-start flex transition-all duration-300 hover:[&>*]: ${
@@ -54,19 +54,13 @@ export default function ProjectAssignBtn({
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
           <>
-            <span className="invisible absolute lg:visible lg:relative min-w-20">
-              Assigned to
-            </span>
             <p className={`${overflowEllipsis}`}>{`${titleCheck}`}</p>
           </>
         ) : (
           projects?.map((item) => (
             <div className="" key={item.id}>
               {item.id === projectIdOfTask ? (
-                <div className="flex">
-                  <span className="invisible absolute lg:visible lg:relative min-w-20">
-                    Assigned to
-                  </span>
+                <div className={`flex `}>
                   <p className={`${overflowEllipsis}`}>{`${item.title}`}</p>
                 </div>
               ) : null}

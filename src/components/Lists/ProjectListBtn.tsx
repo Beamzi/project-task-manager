@@ -6,23 +6,20 @@ import { useState } from "react";
 interface Props {
   id: string;
   title: string;
+  active: (value: string) => void;
 }
 const overflowEllipsis =
   "block overflow-hidden whitespace-nowrap text-ellipsis w-30";
 
-export default function ProjectListBtn({ id, title }: Props) {
-  const [active, setActive] = useState(false);
+export default function ProjectListBtn({ id, title, active }: Props) {
+  // const [active, setActive] = useState(false);
   return (
     <div className="flex overflow-hidden w-[95%]">
-      <div
-        className={`border-l-2 pl-3 ml-4 ${
-          active ? "border-white" : "border-neutral-600"
-        }`}
-      ></div>
+      <div className={`border-l-2 pl-3 ml-4 border-neutral-600`}></div>
       <Link
-        onClick={() => setActive(true)}
-        className={`${overflowEllipsis} text-start py-1 text-sm ${
-          active ? `text-white` : "text-neutral-400"
+        className={`${overflowEllipsis} ${active(
+          `/projects/${id}`
+        )} text-start py-1 text-sm text-neutral-400
         }`}
         href={`/projects/${id}`}
       >

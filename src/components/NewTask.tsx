@@ -3,12 +3,10 @@
 import { format } from "date-fns";
 
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { createElement, useContext, useState } from "react";
 import TimeOptions from "./TimeOptions";
-import ProjectAssignBtn from "./buttons/ProjectAssignBtn";
 import { projectContext } from "@/context/ProjectContext";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { error } from "console";
 import {
   CheckCircleIcon,
   XCircleIcon,
@@ -65,7 +63,12 @@ export default function NewTask({ setShowForm }: Props) {
   console.log(getYear, "current year bla");
 
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        createTask(e);
+        setShowForm(false);
+      }}
+    >
       <div
         onClick={() => setShowForm(false)}
         className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
@@ -73,12 +76,18 @@ export default function NewTask({ setShowForm }: Props) {
       <div className="fixed md:w-120 min-w-80 top-[50%] left-[50%] z-100 translate-[-50%]  flex flex-col p-5 gradient-for-inner-containers border-1 rounded-xl outline-4 -outline-offset-5 outline-neutral-900">
         <input
           value={title}
+          required
+          minLength={1}
+          maxLength={25}
           placeholder="Title"
           onChange={(event) => setTitle(event.target.value)}
           className=" w-full text-lg rounded-t-lg"
           type="text"
         ></input>
         <textarea
+          required
+          minLength={1}
+          maxLength={500}
           value={content}
           placeholder="Description"
           onChange={(event) => setContent(event.target.value)}
@@ -86,6 +95,7 @@ export default function NewTask({ setShowForm }: Props) {
         ></textarea>
         <div className="flex py-2">
           <button
+            type="button"
             className="border-1 rounded-lg mr-2"
             onClick={() => {
               setShowTimeOptions(showTimeOptions ? false : true);
@@ -111,6 +121,7 @@ export default function NewTask({ setShowForm }: Props) {
           </div>
           <div className="relative">
             <button
+              type="button"
               className="border-1 rounded-lg"
               onClick={() => setShowProjects(showProjects ? false : true)}
             >
@@ -136,6 +147,7 @@ export default function NewTask({ setShowForm }: Props) {
                   projects.map((item) => (
                     <li key={item.id} className="w-full">
                       <button
+                        type="button"
                         onClick={() => {
                           setNewTaskProjectId(item.id);
                           setShowProjects(false);
@@ -156,17 +168,18 @@ export default function NewTask({ setShowForm }: Props) {
         </div>
         <div className="flex">
           <button
+            type="submit"
             onClick={(e) => {
-              createTask(e);
-              setShowForm(false);
+              // createTask(e);
+              // setShowForm(false);
             }}
             className="border-1 rounded-lg w-1/2 mr-2 text-center py-2"
-            type="submit"
           >
             <CheckCircleIcon />
             Submit
           </button>
           <button
+            type="button"
             onClick={() => setShowForm(false)}
             className="border-1 rounded-lg w-1/2 "
           >
@@ -175,7 +188,7 @@ export default function NewTask({ setShowForm }: Props) {
           </button>
         </div>
       </div>
-    </>
+    </form>
   );
 }
 

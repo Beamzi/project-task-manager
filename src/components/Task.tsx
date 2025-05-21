@@ -18,6 +18,7 @@ import { DashBoardContext } from "@/context/DashBoardContext";
 import { format } from "date-fns";
 import TimeOptions from "./TimeOptions";
 import { transform } from "next/dist/build/swc/generated-native";
+import SaveOnchange from "./SaveOnchange";
 
 interface Props {
   author: string | null | undefined;
@@ -179,6 +180,7 @@ export default function Task({
           </p>
         ) : (
           <motion.input
+            maxLength={25}
             transition={{ duration: 0.3 }}
             initial={{ opacity: 0, scaleY: 0 }}
             animate={{ opacity: 1, scaleY: 1 }}
@@ -200,14 +202,10 @@ export default function Task({
             {minimise && format(new Date(quickDate), "EEE MMM d")}
           </p>
         )}
-        {/* `$
-        {!editing
-          ? "bg-neutral-900 min-h-35 "
-          : `text-sm font-light origin-top px-2 py-1 min-h-35 =`}
-        ` */}
         {!minimise && (
           <>
             <motion.textarea
+              maxLength={500}
               // {...motionProps}
               transition={{ duration: 0.3, delay: 0.2 }}
               initial={{ opacity: 0, scaleY: 0 }}
@@ -229,7 +227,7 @@ export default function Task({
               transition={{ duration: 0.3, delay: 0.4 }}
               initial={{ opacity: 0, scaleY: 0 }}
               animate={{ opacity: 1, scaleY: 1 }}
-              className="relative flex border-1 w-full text-left p-1 mt-2"
+              className="relative flex border-1 w-full text-left p-1 mt-2  hover:text-rose-600 "
               onClick={() => setShowTimeOptions(showTimeOptions ? false : true)}
             >
               <CalendarDaysIcon className="mr-1 w-5" />
@@ -253,52 +251,7 @@ export default function Task({
               animate={{ opacity: 1, scaleY: 1 }}
               className="flex py-1.5 "
             >
-              <div className="w-2/4">
-                <div
-                  onClick={() => {
-                    updateTask(quickDate);
-                  }}
-                  className="flex py-1 px-2  w-22 h-8 justify-center align-middle items-center"
-                >
-                  {editing ? (
-                    <div className="flex w-20  ">
-                      <div className="w-10 origin-left ">
-                        <motion.div
-                          transition={{ duration: 0.9 }}
-                          initial={{ width: 5 }}
-                          animate={{ width: 30 }}
-                          className=" w-10 h-5 overflow-hidden origin-right"
-                        >
-                          . . .
-                        </motion.div>
-                      </div>
-                      <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        className="mr-2 flex"
-                      >
-                        <PencilIcon className=" w-4 stroke-rose-400 " />
-                      </motion.div>
-                    </div>
-                  ) : (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      className="flex origin-right"
-                    >
-                      Saved
-                      <motion.div
-                        initial={{ scale: 2 }}
-                        animate={{ scale: 1 }}
-                        className="ml-2 flex"
-                      >
-                        <CheckCircleIcon className=" stroke-green-400" />
-                      </motion.div>
-                    </motion.div>
-                  )}
-                  {/* Saved */}
-                </div>
-              </div>
+              <SaveOnchange editing={editing} />
               <PriorityBtn
                 id={id}
                 priorityState={priority}

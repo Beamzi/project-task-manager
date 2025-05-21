@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import ChevronDown from "./icons/ChevronDown";
 import DropDown from "./icons/DropDown";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
