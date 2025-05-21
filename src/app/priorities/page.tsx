@@ -61,6 +61,7 @@ export default async function Priorities() {
           <PersonalNotes
             comments={comments}
             profileImg={session?.user?.image}
+            name={session?.user?.name}
           />
         }
         leftTitle="Prioritised"

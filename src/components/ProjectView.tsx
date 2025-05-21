@@ -15,8 +15,6 @@ interface ProjectViewProps {
   profileImg: string | null | undefined;
 }
 
-const reducer = (state, action) => {};
-
 export default function ProjectView({
   project,
   comments,
@@ -132,7 +130,7 @@ export default function ProjectView({
               key={index}
               id={commentId[index]}
               content={item}
-              name={comments?.[0].author?.name}
+              name={project?.author?.name}
               profileImg={profileImg}
               createdAt={new Date()}
               localDelete={true}
@@ -146,7 +144,6 @@ export default function ProjectView({
         profileImg={profileImg}
         setLocalComment={setLocalComment}
         setCommentId={setCommentId}
-        commentId={commentId}
       />
     </div>
   );

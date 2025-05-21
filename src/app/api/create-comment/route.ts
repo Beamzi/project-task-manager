@@ -14,7 +14,6 @@ export async function POST(request: Request) {
             content: content,
             projectId: projectId,
             authorId: session?.user?.id,
-
         }
     })
     return NextResponse.json({result})

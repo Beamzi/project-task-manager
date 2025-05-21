@@ -6,6 +6,7 @@ import EditComment from "./EditComment";
 
 interface Props {
   profileImg: string | undefined | null;
+  name: string | undefined | null;
   comments: ({
     author: {
       name: string | null;
@@ -19,7 +20,7 @@ interface Props {
   })[];
 }
 
-export default function PersonalNotes({ comments, profileImg }: Props) {
+export default function PersonalNotes({ comments, profileImg, name }: Props) {
   const [localComment, setLocalComment] = useState<string[]>([]);
   const [commentId, setCommentId] = useState<string[]>([]);
 
@@ -49,7 +50,7 @@ export default function PersonalNotes({ comments, profileImg }: Props) {
                 key={index}
                 id={commentId[index]}
                 content={item}
-                name={comments[0].author?.name}
+                name={name}
                 profileImg={profileImg}
                 createdAt={new Date()}
                 localDelete={true}
@@ -63,10 +64,8 @@ export default function PersonalNotes({ comments, profileImg }: Props) {
         <CreateComment
           projectId={null}
           profileImg={profileImg}
-          localComment={localComment}
           setLocalComment={setLocalComment}
           setCommentId={setCommentId}
-          commentId={commentId}
         />
       </div>
     </div>

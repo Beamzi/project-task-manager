@@ -14,6 +14,9 @@ interface Props {
 
 const fullProjectQuery = {
   include: {
+    author: {
+      select: { name: true },
+    },
     tasks: {
       include: {
         author: {
@@ -43,7 +46,12 @@ export default async function CurrentProject({ params }: Props) {
   async function getProject() {
     if (session) {
       const project = await prisma.project.findUnique({
-        where: { id: id },
+        where: {
+          id: id,
+          author: {
+            id: session?.user?.id,
+          },
+        },
 
         ...fullProjectQuery,
       });

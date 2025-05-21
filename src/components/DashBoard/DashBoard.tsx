@@ -10,8 +10,10 @@ import MobileHeader from "./MobileHeader";
 import TopBar from "./TopBar";
 
 async function getProjects() {
+  const session = await auth();
+
   const projects = await prisma.project.findMany({
-    where: { published: true },
+    where: { author: { id: session?.user?.id } },
     select: {
       title: true,
       id: true,
@@ -22,6 +24,7 @@ async function getProjects() {
 
 async function getTasksByDueDate() {
   const session = await auth();
+
   if (session) {
     const result = await prisma.task.findMany({
       where: { author: { id: session?.user?.id } },
