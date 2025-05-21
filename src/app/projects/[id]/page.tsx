@@ -41,12 +41,14 @@ export default async function CurrentProject({ params }: Props) {
   const { id } = await params;
 
   async function getProject() {
-    const project = await prisma.project.findUnique({
-      where: { id: id },
+    if (session) {
+      const project = await prisma.project.findUnique({
+        where: { id: id },
 
-      ...fullProjectQuery,
-    });
-    return project;
+        ...fullProjectQuery,
+      });
+      return project;
+    } else return null;
   }
 
   const project = await getProject();

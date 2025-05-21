@@ -18,7 +18,7 @@ model Comments {
   projectId String?
   author    User?   @relation(fields: [authorId], references: [id])
   authorId  String?
-  createdAt DateTime @default(now()) 
+  createdAt DateTime @default(now())
 }
 
 model Project {
@@ -26,10 +26,11 @@ model Project {
   title       String
   description String
   published   Boolean  @default(false)
+  author      User?   @relation(fields: [authorId], references: [id])
+  authorId  String?
   tasks       Task[]
   comments    Comments[]
 }
-
 
 model Task {
   id        String     @default(cuid()) @id
@@ -56,6 +57,7 @@ model User {
   sessions      Session[]
   tasks         Task[]
   comments      Comments[]
+  projects      Project[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
   
