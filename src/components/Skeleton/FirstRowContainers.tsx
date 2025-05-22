@@ -82,7 +82,7 @@ export default function FirstRowContainers({
                 rightScrollYDisable
                   ? ""
                   : "min-h-0 overflow-y-scroll relative z-10 overflow-x-hidden"
-              } first-row-containers rounded-2xl  border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full content-start flex-wrap  dark:bg-neutral-800 ${
+              } first-row-containers rounded-2xl  border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full content-start flex-wrap   ${
                 height ? height : localHeight
               } w-full`}
             >

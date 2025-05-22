@@ -40,20 +40,26 @@ export default function SideBar({ className }: { className: string }) {
       <aside className={`${className} ${sideMenu}`}>
         <SearchModal />
         <NewTaskBtn />
-        <Link className={`flex ${active("/")}`} href={"/"}>
+        <Link className={`buttons flex ${active("/")}`} href={"/"}>
           <HomeIcon />
           Overview
         </Link>
-        <Link className={`flex ${active("/inbox")}`} href={"/inbox"}>
+        <Link className={`buttons flex ${active("/inbox")}`} href={"/inbox"}>
           <InboxIcon />
           Inbox
         </Link>
-        <Link className={`flex ${active("/schedule")}`} href={"/schedule"}>
+        <Link
+          className={`buttons flex ${active("/schedule")}`}
+          href={"/schedule"}
+        >
           <CalendarDaysIcon />
           Schedule
         </Link>
 
-        <Link className={`flex ${active("/priorities")}`} href={"/priorities"}>
+        <Link
+          className={`buttons flex ${active("/priorities")}`}
+          href={"/priorities"}
+        >
           <StarIcon />
           Priorities
         </Link>

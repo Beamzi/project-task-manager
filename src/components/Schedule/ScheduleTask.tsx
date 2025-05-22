@@ -13,6 +13,9 @@ export interface Props {
   overDue?: boolean;
 }
 
+const overflowEllipsis =
+  "block overflow-hidden whitespace-nowrap text-ellipsis w-10";
+
 export default function ScheduleTask({
   dateId,
   title,
@@ -68,7 +71,9 @@ export default function ScheduleTask({
               </button>
             </>
           ) : (
-            <span className="block text-red-700 pb-3">{getDate()}</span>
+            <span className="block will-change-auto text-red-700 pb-3">
+              {getDate()}
+            </span>
           )}
 
           {/* {overDue && <h3 className="text-red-700">{getDate()}</h3>} */}

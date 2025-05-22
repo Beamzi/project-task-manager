@@ -1,7 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import {
+  PlusIcon,
+  XCircleIcon,
+  CheckCircleIcon,
+} from "@heroicons/react/24/outline";
 import { request } from "http";
 
 interface Props {
@@ -17,8 +21,9 @@ export default function NewProjectBtn({
   projectListIds,
   setProjectListIds,
 }: Props) {
-  const [projectTitleInput, setProjectTitleInput] = useState(false);
+  const [projectInput, setProjectInput] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   async function createProject(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,7 +33,7 @@ export default function NewProjectBtn({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title: projectTitle }),
+        body: JSON.stringify({ title: projectTitle, description: description }),
       });
       const response = await request.json();
       setProjectListIds([...projectListIds, response.result.id]);
@@ -38,28 +43,62 @@ export default function NewProjectBtn({
   }
   return (
     <>
-      <button type="button" onClick={() => setProjectTitleInput(true)}>
+      <button type="button" onClick={() => setProjectInput(true)}>
         <PlusIcon />
         New Project
       </button>
-      {projectTitleInput && (
-        <form
-          onSubmit={(event) => {
-            setProjectListClient([...projectListClient, projectTitle]);
-            createProject(event);
-          }}
-        >
-          <input
-            minLength={3}
-            maxLength={25}
-            required
-            className="border-2"
-            value={projectTitle}
-            type="text"
-            onChange={(e) => setProjectTitle(e.target.value)}
-          ></input>
-          <button type="submit">submit</button>
-        </form>
+      {projectInput && (
+        <>
+          <div
+            onClick={() => setProjectInput(false)}
+            className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+          ></div>
+
+          <form
+            aria-placeholder="project title"
+            className="gradient-for-inner-containers rounded-xl  border-1 outline-4 -outline-offset-5 p-4 w-100 outline-neutral-900 fixed z-50 top-[50%] left-[50%] translate-[-50%]"
+            onSubmit={(event) => {
+              setProjectListClient([...projectListClient, projectTitle]);
+              createProject(event);
+              setProjectInput(false);
+            }}
+          >
+            <input
+              placeholder="Project Title"
+              minLength={3}
+              maxLength={25}
+              required
+              className="rounded-t-md py-2  text-lg w-full"
+              value={projectTitle}
+              type="text"
+              onChange={(e) => setProjectTitle(e.target.value)}
+            ></input>
+            <textarea
+              placeholder="Description"
+              minLength={3}
+              maxLength={500}
+              required
+              className="rounded-b-md py-2 mb-2 w-full"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+
+            <div className="flex">
+              <button className="w-full border-1 py-2 rounded-md" type="submit">
+                <CheckCircleIcon />
+                Submit
+              </button>
+              <button
+                onClick={() => setProjectInput(false)}
+                className="w-full border-1 py-2 ml-2 rounded-md"
+                type="submit"
+              >
+                <XCircleIcon />
+                Cancel
+              </button>
+            </div>
+          </form>
+        </>
       )}
     </>
   );
