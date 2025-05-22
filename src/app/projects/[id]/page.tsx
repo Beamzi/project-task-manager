@@ -5,6 +5,7 @@ import { Prisma } from "@prisma/client";
 import { auth } from "../../../../auth";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 import RemoveProject from "@/components/buttons/RemoveProject";
+import { UserPlusIcon } from "@heroicons/react/24/outline";
 
 import { redirect } from "next/navigation";
 interface Props {
@@ -69,10 +70,16 @@ export default async function CurrentProject({ params }: Props) {
   const comments = project?.comments;
   const profileImg = session?.user?.image;
 
-  console.log({ session });
   return (
     <>
-      <RemoveProject project={project} />
+      <section className="w-full px-[clamp(16px,2vw,24px)]  xl:w-[80%]">
+        <div className=" gradient-for-thin-containers border-1 flex justify-end rounded-xl py-2 px-2 outline-4 -outline-offset-5 outline-neutral-900">
+          <button className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2">
+            <UserPlusIcon className="w-6" />
+          </button>
+          <RemoveProject project={project} />
+        </div>
+      </section>
       <FirstRowContainers
         leftData={
           <ProjectView
@@ -82,7 +89,8 @@ export default async function CurrentProject({ params }: Props) {
           ></ProjectView>
         }
         rightData={<ListOfTasks currentTasks={tasks} />}
-        height="h-[70dvh]"
+        height="h-full"
+        ifBottomRow={true}
       ></FirstRowContainers>
     </>
   );

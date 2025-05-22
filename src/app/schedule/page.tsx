@@ -20,7 +20,6 @@ async function getTasksByDueDate() {
 
 export default async function Schedule() {
   const result = await getTasksByDueDate();
-  console.log({ result });
 
   return (
     <div className="border-x-1 border-b-1 m-6 ">

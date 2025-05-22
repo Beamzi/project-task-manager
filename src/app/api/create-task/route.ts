@@ -6,7 +6,6 @@ import { auth } from "../../../../auth"
 export async function POST(request: Request) {
     const res = await request.json()
     const session = await auth()
-
     const { title, content, date, projectId } = res
     if (projectId !== undefined) {
     const result = await prisma.task.create({
@@ -39,5 +38,4 @@ export async function POST(request: Request) {
     })
     return NextResponse.json({result})
     }
-
 }

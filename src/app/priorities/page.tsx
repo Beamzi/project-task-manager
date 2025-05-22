@@ -3,7 +3,6 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "../../../auth";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
-import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import PersonalNotes from "@/components/PersonalNotes";
 
 async function getPriorities() {
@@ -49,8 +48,6 @@ async function getNonProjectComments() {
 export default async function Priorities() {
   const priorityTasks = await getPriorities();
   const comments = await getNonProjectComments();
-  console.log(priorityTasks);
-  //   <ListOfTasks currentTasks={priorityTasks}></ListOfTasks>{" "}
   const session = await auth();
 
   return (

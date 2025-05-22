@@ -13,9 +13,6 @@ export interface Props {
   overDue?: boolean;
 }
 
-const overflowEllipsis =
-  "block overflow-hidden whitespace-nowrap text-ellipsis w-10";
-
 export default function ScheduleTask({
   dateId,
   title,

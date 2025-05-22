@@ -27,6 +27,8 @@ export default function SideBar({ className }: { className: string }) {
   }
   const { sideMenu, setSideMenu } = dashBoardProps;
   const pathName = usePathname();
+  const [projectListClient, setProjectListClient] = useState<string[]>([]);
+  const [projectListIds, setProjectListIds] = useState<string[]>([]);
 
   const active = (path: string) =>
     `${
@@ -56,13 +58,22 @@ export default function SideBar({ className }: { className: string }) {
           Priorities
         </Link>
 
-        <NewProjectBtn />
+        <NewProjectBtn
+          projectListClient={projectListClient}
+          setProjectListClient={setProjectListClient}
+          projectListIds={projectListIds}
+          setProjectListIds={setProjectListIds}
+        />
 
         <Link className={`flex ${active("/projects")}`} href={"/projects"}>
           <ListBulletIcon />
           All Projects
         </Link>
-        <ProjectList active={active} />
+        <ProjectList
+          projectListClient={projectListClient}
+          active={active}
+          projectListIds={projectListIds}
+        />
       </aside>
     </>
   );

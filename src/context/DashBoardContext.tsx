@@ -6,9 +6,10 @@ interface Props {
   setModal: (value: boolean) => void;
   sideMenu: string;
   setSideMenu: (value: string) => void;
-  scrollDivRef: RefObject<HTMLDivElement | null>; // ✅ Correct type
+  scrollDivRef: RefObject<HTMLDivElement | null>;
   globalMinimised: boolean;
   setGlobalMinimised: (value: boolean) => void;
-  taskParentClasses: string;
+  removeProjectFromDashboard: string[];
+  setRemoveProjectFromDashboard: React.Dispatch<React.SetStateAction<string[]>>;
 }
 export const DashBoardContext = createContext<Props | null>(null);

@@ -6,7 +6,7 @@ export default function SignInBtn() {
       className="flex flex-col align-middle justify-center ml-2"
       action={async () => {
         "use server";
-        await signIn("google");
+        await signIn("google", { redirectTo: "/" });
       }}
     >
       <button className="" type="submit">
@@ -15,5 +15,3 @@ export default function SignInBtn() {
     </form>
   );
 }
-
-//{ redirectTo: "/dashboard" }

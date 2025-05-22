@@ -4,13 +4,8 @@ import { auth } from "../../../../auth"
 
 export async function POST(request: Request) {
     const session = await auth()
-
     const res = await request.json()
-
-    console.log({res})
-
     const { taskId, projectId} = res
-
     const result = await prisma.task.update({
         where: {id: taskId, author: {id: session?.user?.id}},
         data: {
@@ -19,6 +14,5 @@ export async function POST(request: Request) {
             }
         }
     })
-
     return NextResponse.json({result})
 }

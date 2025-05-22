@@ -5,9 +5,7 @@ import { auth } from "../../../../auth"
 
 export async function POST(request: Request) {
     const session = await auth()
-    console.log({session})
     const res = await request.json()
-
     const { projectId, content} = res
     const result = await prisma.comments.create({
         data: {

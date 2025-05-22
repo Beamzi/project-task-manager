@@ -27,17 +27,18 @@ export default function FirstRowContainers({
   rightScrollYDisable,
 }: Props) {
   return (
+    // we usually put this next to h-full in ifbottomRow, but for now it's commented pb-[clamp(16px,2vw,24px)]
     <>
       <div
         className={`flex  px-[clamp(16px,2vw,24px)] min-h-0 w-full ${
-          ifBottomRow && "h-full pb-[clamp(16px,2vw,24px)]"
+          ifBottomRow && "h-full "
         } xl:w-[80%] bg-transparent justify-center ${
           !leftTitle && "pt-[clamp(16px,2vw,24px)]"
         }`}
       >
         <div className={leftWidth ? leftWidth : `min-h-0 w-1/2`}>
           {leftTitle && (
-            <p className="px-2 py-2 text-scaley-lg border-dotted">
+            <p className="px-2  text-start py-2 text-scaley-lg border-dotted">
               {leftTitle}
             </p>
           )}
@@ -66,7 +67,7 @@ export default function FirstRowContainers({
           } flex flex-col ml-[clamp(16px,2vw,24px)]`}
         >
           {rightTitle && (
-            <p className=" text-scaley-lg bg-transparent  border-dotted px-2 py-2">
+            <p className=" text-scaley-lg  bg-transparent  border-dotted px-2 py-2">
               {rightTitle}
             </p>
           )}

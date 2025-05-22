@@ -6,8 +6,7 @@ import { auth } from "../../../../auth"
 
 
 export async function POST(request: Request) {
-        const session = await auth()
-
+    const session = await auth()
     const res = await request.json()
     const { search } = res
     const result = await prisma.task.findMany({

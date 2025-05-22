@@ -4,10 +4,8 @@ import { auth } from "../../../../auth"
 
 
 export async function DELETE(request: Request) {
-        const session = await auth()
-    
+    const session = await auth()
     const res = await request.json()
-    console.log({res})
     const { id } = res
     const result = await prisma.task.delete({
         where: {id: id, author: {id: session?.user?.id}}

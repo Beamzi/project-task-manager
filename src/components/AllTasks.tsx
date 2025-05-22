@@ -7,16 +7,10 @@ import { DashBoardContext } from "@/context/DashBoardContext";
 
 export default function AllTasks() {
   const tasks = useContext(TaskContext);
-  const dashboardProps = useContext(DashBoardContext);
-
-  const { taskParentClasses } = dashboardProps;
 
   return (
     <>
-      <ListOfTasks
-        currentTasks={tasks}
-        taskParentClasses={taskParentClasses}
-      ></ListOfTasks>
+      <ListOfTasks currentTasks={tasks}></ListOfTasks>
     </>
   );
 }

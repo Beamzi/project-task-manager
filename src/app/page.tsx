@@ -31,14 +31,6 @@ async function getTasks() {
 }
 
 export default async function AllTasksView() {
-  const result = await prisma.$queryRaw`
-  SELECT 
-    table_name,
-    pg_size_pretty(pg_total_relation_size(quote_ident(table_name))) as size
-  FROM information_schema.tables
-  WHERE table_schema = 'public'
-  ORDER BY pg_total_relation_size(quote_ident(table_name)) DESC;
-`;
   const session = await auth();
   const tasks = await getTasks();
 
@@ -69,18 +61,4 @@ export default async function AllTasksView() {
       />
     </>
   );
-}
-
-/* <div className="flex border-1 ml-4">
-          <EasySelect modelList={tasks} />
-        </div> */
-// bg-linear-0 from-rose-900 to-neutral-900
-/*    <ClientWrapper tasks={tasks}>i
-      <div>THIS IS TASK VIEW PAGE</dv>
-    </ClientWrapper>*/
-
-//xl:max-w-200 md:max-w-130 lg:max-w-150
-
-{
-  /* <div className="OVERLAY task-scroll-shadow h-0 sticky top-0 z-10 left-0 w-[100%]"></div> */
 }

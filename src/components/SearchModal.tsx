@@ -46,7 +46,7 @@ export default function SearchModal() {
                     searching={searching}
                   />
                 }
-                width="w-4/2"
+                width="w-2/2"
                 xlWidth="a"
               ></SingleContainer>
             </div>

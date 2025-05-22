@@ -19,9 +19,10 @@ export default function SingleContainer({
   xlWidth,
 }: Props) {
   return (
+    //pb-[clamp(16px,2vw,24px)]
     <>
       <div
-        className={`px-[clamp(16px,2vw,24px)] w-full pb-[clamp(16px,2vw,24px)] flex flex-1 flex-col h-full min-h-0 ${
+        className={`px-[clamp(16px,2vw,24px)] w-full  flex flex-1 flex-col h-full min-h-0 ${
           xlWidth ? xlWidth : "xl:w-[80%]"
         } bg-transparent justify-center ${
           !title && "pt-[clamp(16px,2vw,24px)]"

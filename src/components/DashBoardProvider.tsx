@@ -8,6 +8,9 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
   const [sideMenu, setSideMenu] = useState("");
   const scrollDivRef = useRef<HTMLDivElement | null>(null);
   const [globalMinimised, setGlobalMinimised] = useState(false);
+  const [removeProjectFromDashboard, setRemoveProjectFromDashboard] = useState<
+    string[]
+  >([]);
 
   return (
     <DashBoardContext.Provider
@@ -19,6 +22,8 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
         scrollDivRef,
         globalMinimised,
         setGlobalMinimised,
+        removeProjectFromDashboard,
+        setRemoveProjectFromDashboard,
       }}
     >
       {children}

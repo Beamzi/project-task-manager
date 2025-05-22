@@ -1,6 +1,4 @@
 import React from "react";
-import SignInBtn from "../buttons/SignInBtn";
-import { SignOutBtn } from "../buttons/SignOutBtn";
 import Image from "next/image";
 import { auth } from "../../../auth";
 import ProfileTopBar from "../ProfileTopBar";
