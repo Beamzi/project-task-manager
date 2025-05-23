@@ -4,7 +4,13 @@ import React from "react";
 import { motion } from "motion/react";
 import { ChevronUpIcon } from "@heroicons/react/24/solid";
 
-export default function ChevronUp({ isRendered }: { isRendered: boolean }) {
+export default function ChevronUp({
+  isRendered,
+  className,
+}: {
+  isRendered: boolean;
+  className: string;
+}) {
   return (
     <motion.div
       animate={isRendered ? { rotate: 0 } : { rotate: 180 }}
@@ -12,7 +18,9 @@ export default function ChevronUp({ isRendered }: { isRendered: boolean }) {
       className="mr-2 w-5"
     >
       <ChevronUpIcon
-        className={`text-white w-full h-full ${isRendered && "fill-white "}`}
+        className={`${className} text-white w-full h-full ${
+          isRendered && "fill-white "
+        }`}
       />
     </motion.div>
   );

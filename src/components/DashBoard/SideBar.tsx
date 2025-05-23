@@ -67,20 +67,21 @@ export default function SideBar({ className }: { className: string }) {
           setProjectListClient={setProjectListClient}
           projectListIds={projectListIds}
           setProjectListIds={setProjectListIds}
+          setIsRendered={setIsRendered}
         />
-        {/* <Link className={`flex ${active("/projects")}`} href={"/projects"}> */}
         <div className=" flex justify-between">
           <button
+            id={"all-projects"}
+            className="all-projects hover:bg-transparent hover:[&>svg]:scale-120 hover:[&>svg]:stroke-rose-600  "
             onClick={() => {
               setIsRendered(isRendered ? false : true);
             }}
           >
-            <div className="flex items-center pointer-events-none">
-              <ListBulletIcon />
-              All Projects
-            </div>
-            <div className=" flex justify-center align-middle items-center content-center w-10 h-5">
-              <ChevronUp isRendered={isRendered} />
+            <ListBulletIcon className="" />
+
+            <span className="block mr-2">All Projects</span>
+            <div>
+              <ChevronUp className={""} isRendered={isRendered} />
             </div>
           </button>
         </div>

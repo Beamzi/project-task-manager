@@ -15,17 +15,25 @@ const container = {
     opacity: 1,
     transition: {
       delayChildren: 0.0,
-      staggerChildren: 0.2,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const itemMotion = {
-  hidden: { opacity: 0, y: 10 },
+  hidden: {
+    opacity: 0,
+    y: 10,
+    filter: "sepia(4) hue-rotate(190deg) saturate(300%) brightness(90%)",
+  },
   show: {
     opacity: 1,
     y: 0,
+    filter: "sepia(0) hue-rotate(0deg) saturate(0%) brightness(1)",
     transition: {
+      filter: {
+        duration: 0.9,
+      },
       type: "tween",
       ease: "easeOut",
       duration: 0.3,
@@ -42,12 +50,12 @@ const lineMotion = {
       scaleY: {
         type: "tween",
         ease: "easeInOut",
-        duration: 0.55,
+        duration: 0.2,
       },
       filter: {
         type: "tween",
         ease: "easeInOut",
-        duration: 0.4,
+        duration: 0.3,
       },
     },
   },

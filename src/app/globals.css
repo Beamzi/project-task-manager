@@ -130,6 +130,7 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
       @apply stroke-rose-600 scale-110 transition-all duration-200
     }
   }
+
   .nested-buttons {
     @apply hover:bg-white  hover:text-rose-600 transition-all duration-100
   }

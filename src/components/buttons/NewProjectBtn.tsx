@@ -13,6 +13,7 @@ interface Props {
   projectListClient: string[];
   projectListIds: string[];
   setProjectListIds: React.Dispatch<React.SetStateAction<string[]>>;
+  setIsRendered: (value: boolean) => void;
 }
 
 export default function NewProjectBtn({
@@ -20,6 +21,7 @@ export default function NewProjectBtn({
   projectListClient,
   projectListIds,
   setProjectListIds,
+  setIsRendered,
 }: Props) {
   const [projectInput, setProjectInput] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
@@ -61,6 +63,7 @@ export default function NewProjectBtn({
               setProjectListClient([...projectListClient, projectTitle]);
               createProject(event);
               setProjectInput(false);
+              setIsRendered(true);
             }}
           >
             <input
