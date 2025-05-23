@@ -53,6 +53,7 @@ export default async function Priorities() {
   return (
     <>
       <FirstRowContainers
+        rightId={true}
         leftData={<ListOfTasks currentTasks={priorityTasks}></ListOfTasks>}
         rightData={
           <PersonalNotes
@@ -62,7 +63,7 @@ export default async function Priorities() {
           />
         }
         leftTitle="Prioritised"
-        rightTitle="personal Notes"
+        rightTitle="Personal Notes"
       ></FirstRowContainers>
     </>
   );

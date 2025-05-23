@@ -72,7 +72,7 @@ export default async function CurrentProject({ params }: Props) {
 
   return (
     <>
-      <section className="w-full px-[clamp(16px,2vw,24px)]  xl:w-[80%]">
+      <section className="project-page-view w-full px-[clamp(16px,2vw,24px)]  xl:w-[80%]">
         <div className=" gradient-for-thin-containers border-1 flex justify-end rounded-xl py-2 px-2 outline-4 -outline-offset-5 outline-neutral-900">
           <button className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2">
             <UserPlusIcon className="w-6" />
@@ -81,6 +81,7 @@ export default async function CurrentProject({ params }: Props) {
         </div>
       </section>
       <FirstRowContainers
+        leftId={true}
         leftData={
           <ProjectView
             project={project}

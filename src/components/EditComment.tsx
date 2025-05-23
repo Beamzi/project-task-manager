@@ -93,9 +93,9 @@ export default function EditComment({
                 >
                   <PencilSquareIcon className="w-5 h-5 stroke-neutral-400 hover:stroke-rose-600 transition-all duration-100" />
                 </button>
-                <div className="  flex relative flex-col w-full align-middle   justify-center">
+                <div className=" flex relative flex-col w-full align-middle justify-center">
                   <button
-                    className="w-full  justify-center"
+                    className="w-full justify-center"
                     onClick={() => setInitOptions(initOptions ? false : true)}
                   >
                     <TrashIcon className="w-5 h-5 hover:stroke-rose-600 stroke-neutral-400 transition-all duration-100" />
@@ -118,33 +118,39 @@ export default function EditComment({
             )}
           </div>
           {/* TOPBAR ABOVE */}
-          <div className="flex ">
+          <div className="flex">
             <div className="flex w-full ">
               {!edit ? (
                 <>
                   <p className="break-all w-full min-h-10  text-neutral-400 py-2 px-2">
-                    {content}
+                    {newContent}
                   </p>
                   <div className="min-h-23.5"></div>
                 </>
               ) : (
-                <div className="flex w-full flex-col">
+                <div className="flex w-full  flex-col">
                   <textarea
                     maxLength={200}
-                    className="break-all outline-1 outline-white py-2 px-2"
+                    className="break-all outline-1 rounded-lg outline-white py-2 px-2"
                     onChange={(e) => setNewContent(e.target.value)}
                     value={newContent}
                   ></textarea>
-                  <div className="flex justify-end  py-1">
+                  <div className="flex justify-end  pt-2">
                     <button
-                      onClick={() => setEdit(false)}
-                      className="px-2 border-1 py-1 "
+                      onClick={() => {
+                        setNewContent(content);
+                        setEdit(false);
+                      }}
+                      className="nested-buttons px-2 rounded-md border-1 py-1"
                     >
                       cancel
                     </button>
                     <button
-                      onClick={updateComment}
-                      className="px-2  mx-1 border-1"
+                      onClick={() => {
+                        updateComment();
+                        setEdit(false);
+                      }}
+                      className="nested-buttons px-2 rounded-md mx-1 ml-1 border-1"
                     >
                       save
                     </button>

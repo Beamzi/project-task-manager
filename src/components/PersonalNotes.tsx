@@ -28,7 +28,7 @@ export default function PersonalNotes({ comments, profileImg, name }: Props) {
   // const [isDeleted, setIsDeleted] = useState(false);
 
   return (
-    <div className="border-1 flex flex-col justify-center w-full">
+    <div className="p-4 flex flex-col justify-center w-full">
       <div>
         {comments?.map((comments) => (
           <EditComment

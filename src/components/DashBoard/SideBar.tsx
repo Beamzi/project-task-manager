@@ -13,22 +13,28 @@ import {
   InboxIcon,
   HomeIcon,
   CalendarDaysIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from "@heroicons/react/24/outline";
 
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
 import SearchModal from "../SearchModal";
 import { usePathname } from "next/navigation";
+import ChevronDown from "../icons/ChevronDown";
+import ChevronUp from "../icons/ChevronUp";
 
 export default function SideBar({ className }: { className: string }) {
-  const dashBoardProps = useContext(DashBoardContext);
+  const pathName = usePathname();
+  const [isRendered, setIsRendered] = useState(true);
+  const [init, setInit] = useState(true);
+  const [projectListClient, setProjectListClient] = useState<string[]>([]);
+  const [projectListIds, setProjectListIds] = useState<string[]>([]);
 
+  const dashBoardProps = useContext(DashBoardContext);
   if (!dashBoardProps) {
     throw new Error("context not provided");
   }
-  const { sideMenu, setSideMenu } = dashBoardProps;
-  const pathName = usePathname();
-  const [projectListClient, setProjectListClient] = useState<string[]>([]);
-  const [projectListIds, setProjectListIds] = useState<string[]>([]);
+  const { sideMenu } = dashBoardProps;
 
   const active = (path: string) =>
     `${
@@ -37,49 +43,54 @@ export default function SideBar({ className }: { className: string }) {
     }`;
   return (
     <>
-      <aside className={`${className} ${sideMenu}`}>
+      <aside className={`sidebar ${className} ${sideMenu}`}>
         <SearchModal />
         <NewTaskBtn />
-        <Link className={`buttons flex ${active("/")}`} href={"/"}>
+        <Link className={` flex ${active("/")}`} href={"/"}>
           <HomeIcon />
           Overview
         </Link>
-        <Link className={`buttons flex ${active("/inbox")}`} href={"/inbox"}>
+        <Link className={` flex ${active("/inbox")}`} href={"/inbox"}>
           <InboxIcon />
           Inbox
         </Link>
-        <Link
-          className={`buttons flex ${active("/schedule")}`}
-          href={"/schedule"}
-        >
+        <Link className={` flex ${active("/schedule")}`} href={"/schedule"}>
           <CalendarDaysIcon />
           Schedule
         </Link>
-
-        <Link
-          className={`buttons flex ${active("/priorities")}`}
-          href={"/priorities"}
-        >
+        <Link className={` flex ${active("/priorities")}`} href={"/priorities"}>
           <StarIcon />
           Priorities
         </Link>
-
         <NewProjectBtn
           projectListClient={projectListClient}
           setProjectListClient={setProjectListClient}
           projectListIds={projectListIds}
           setProjectListIds={setProjectListIds}
         />
-
-        <Link className={`flex ${active("/projects")}`} href={"/projects"}>
-          <ListBulletIcon />
-          All Projects
-        </Link>
-        <ProjectList
-          projectListClient={projectListClient}
-          active={active}
-          projectListIds={projectListIds}
-        />
+        {/* <Link className={`flex ${active("/projects")}`} href={"/projects"}> */}
+        <div className=" flex justify-between">
+          <button
+            onClick={() => {
+              setIsRendered(isRendered ? false : true);
+            }}
+          >
+            <div className="flex items-center pointer-events-none">
+              <ListBulletIcon />
+              All Projects
+            </div>
+            <div className=" flex justify-center align-middle items-center content-center w-10 h-5">
+              <ChevronUp isRendered={isRendered} />
+            </div>
+          </button>
+        </div>
+        {isRendered && (
+          <ProjectList
+            projectListClient={projectListClient}
+            active={active}
+            projectListIds={projectListIds}
+          />
+        )}
       </aside>
     </>
   );

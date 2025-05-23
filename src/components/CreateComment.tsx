@@ -17,11 +17,10 @@ export default function CreateComment({
   setLocalComment,
   setCommentId,
 }: Props) {
-  const [content, setContent] = useState("Leave a comment?");
+  const [content, setContent] = useState("");
   const [comment, setComment] = useState(false);
-  // const [commentId, setCommentId] = useState("");
-  // const [localArr, setLocalArr] = useState<string[]>([]);
-  async function createComment(event) {
+
+  async function createComment(event: React.FormEvent<HTMLFormElement>) {
     event?.preventDefault();
     try {
       const request = await fetch("/api/create-comment", {
@@ -44,56 +43,68 @@ export default function CreateComment({
   return (
     <form
       onSubmit={(e) => {
+        setTimeout(() => {
+          const container = document.getElementById("task-scroll-container");
+          if (container) {
+            container.scrollTop = container.scrollHeight;
+          }
+        });
         createComment(e);
         setLocalComment((prev) => [...prev, content]);
+        setComment(false);
+        setContent("");
       }}
-      className="flex flex-col "
+      className="absolute z-20 bottom-3 rounded-xl  scale-92  shadow-[0px_14px_5px_1px_rgba(15,15,15,0.9)]  -left-[1px] w-full"
     >
-      {/* <button>leave a comment?</button> */}
-      <div className="flex justify-center align-middle content-center items-center">
-        <Image
-          className="w-8 rounded-full  h-8"
-          src={profileImg ?? ""}
-          width={30}
-          height={30}
-          style={{ objectFit: "contain" }}
-          alt="user profile picture"
-          loading="lazy"
-        ></Image>
-        <textarea
-          minLength={5}
-          maxLength={200}
-          required
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-          placeholder="Leave a comment?"
-          // value={content}
-          onClick={() => setComment(true)}
-          className="border-1 rounded-sm mx-2 my-2 w-full h-10 pt-2 pl-2  relative"
-        ></textarea>
-      </div>
-      {comment ? (
-        <div className="w-full flex border-1">
-          <button
-            type="button"
-            className="w-full"
-            onClick={() => setComment(false)}
-          >
-            cancel
-          </button>
-          <button
-            type="submit"
-            // onClick={() => {
-            //   createComment();
-            //   setLocalComment((prev) => [...prev, content]);
-            // }}
-            className="w-full bg-black py-1"
-          >
-            submit
-          </button>
+      <div
+        className="flex flex-col py-5 px-5 pb-10.5 border-1 rounded-xl backdrop-blur-2xl shadow-[0px_-50px_100px_1px_rgba(0,0,0,0.5)] 
+   "
+      >
+        <div className="flex justify-center  align-middle content-center items-center">
+          <Image
+            className="w-8 rounded-full  h-8"
+            src={profileImg ?? ""}
+            width={30}
+            height={30}
+            style={{ objectFit: "contain" }}
+            alt="user profile picture"
+            loading="lazy"
+          ></Image>
+          <textarea
+            minLength={5}
+            maxLength={200}
+            required
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+            placeholder="Leave a comment?"
+            onClick={() => setComment(true)}
+            className="border-1 rounded-sm mx-2 my-2 w-full h-10 pt-2 pl-2  text-neutral-200 relative"
+          ></textarea>
         </div>
-      ) : null}
+        {comment ? (
+          <div className="w-full flex absolute bottom-0.5 left-0 scale-80 ">
+            <button
+              type="submit"
+              className="w-full text-base  bg-black py-2.5 rounded-md nested-buttons border-1 mr-2"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              className="w-full text-base rounded-md border-1 py-2  nested-buttons duration-100 backdrop-blur-2xl"
+              onClick={() => {
+                setContent("");
+
+                setComment(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        ) : null}
+      </div>
     </form>
   );
 }

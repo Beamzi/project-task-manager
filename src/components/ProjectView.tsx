@@ -79,7 +79,7 @@ export default function ProjectView({
   }, [title, description]);
 
   return (
-    <div className="px-3 pr-2 w-full py-2 flex flex-col">
+    <div className="project-view px-3 pr-2 w-full py-2 flex flex-col">
       <h3 className="break-all text-sm text-start py-2">
         {project?.tasks?.[0]?.author?.name}
       </h3>
@@ -109,7 +109,7 @@ export default function ProjectView({
       )}
 
       <div className="py-2">
-        <h1 className="py-2">comments</h1>
+        <h1 className="py-2 ">Comments</h1>
         <hr></hr>
         {comments?.map((comment) => (
           <EditComment
