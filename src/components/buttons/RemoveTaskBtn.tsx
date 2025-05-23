@@ -28,31 +28,33 @@ function RemoveTaskBtn({ id }: { id: string }) {
         onClick={() => {
           setShowDelete(showDelete ? false : true);
         }}
-        className="w-10 border-1 relative px-2 flex justify-center mx-1 hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-120 hover:[&>*]:fill-rose-600"
+        className="ml-1 py-1 min-w-10 items-center content-center border-1  relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600"
       >
-        <DocumentCheckIcon className="py-1" />
+        <DocumentCheckIcon className="min-w-5 " />
         {/* <XMarkIcon className="absolute  -mt-[1px] transition-all duration-100" /> */}
       </button>
       {showDelete && (
-        <div className="break-words absolute top-7 right-0 border-1 bg-black rounded-xl p-2 w-30 ">
-          <p className="pb-2 text-center">Mark task as complete?</p>
-          <div className="flex justify-centera  items-center w-full content-center">
-            <button
-              className="nested-buttons border-1 p-1 mr-1 w-full"
-              onClick={() => {
-                deleteTask();
-              }}
-            >
-              Yes
-            </button>
-            <button
-              className="nested-buttons border-1 p-1 w-full"
-              onClick={() => {
-                setShowDelete(false);
-              }}
-            >
-              No
-            </button>
+        <div className="break-words absolute top-8.5 py-3  -right-0 border-1 bg-black rounded-xl p-2 w-70">
+          <div className="flex px-1 justify-between  items-center  content-center w-full align-middle">
+            <p className=" text-center">Mark task as complete?</p>
+            <div className="flex">
+              <button
+                className="nested-buttons mr-1 border-1 p-1 px-2 w-full"
+                onClick={() => {
+                  deleteTask();
+                }}
+              >
+                Yes
+              </button>
+              <button
+                className="nested-buttons border-1 px-2 p-1 w-full"
+                onClick={() => {
+                  setShowDelete(false);
+                }}
+              >
+                No
+              </button>
+            </div>
           </div>
         </div>
       )}

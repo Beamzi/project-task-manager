@@ -141,13 +141,13 @@ export default function Task({
         transition={{ duration: 0.3 }}
         animate={minimise ? { height: 90 } : { height: 280 }}
         //please just be aware of this p offset if layout problems
-        className={`origin-top all-tasks tasks-custom-breakpoint  ${
+        className={`origin-top all-tasks tasks-custom-breakpoint  pt-1 ${
           minimise
             ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
             : "pl-4"
         }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted  px-3 flex flex-col`}
       >
-        <div className="flex py-1">
+        <div className="flex  relative z-1 py-1">
           <ProjectAssignBtn
             taskId={id}
             projectIdOfTask={projectId}
@@ -157,7 +157,9 @@ export default function Task({
 
           <div
             className={`
-            flex justify-end py-1 pl-1 relative  ${minimise && onHover}`}
+            absolute top-1 right-0 z-10 flex justify-end pl-1   ${
+              minimise && onHover
+            }`}
           >
             <MinimiseTaskBtn
               id={id}
@@ -170,14 +172,17 @@ export default function Task({
           </div>
         </div>
         {minimise ? (
-          <p
-            onClick={() => setSelect(true)}
-            className={`py-1 px-2 text-scaley-base  font-medium overflow-hidden whitespace-nowrap text-ellipsis w-42 lg:w-60  ${
+          <button
+            onClick={() => {
+              setMinimise(false);
+              setSelect(true);
+            }}
+            className={`py-1   w-full text-start text-sm px-2 text-scaley-base  font-medium overflow-hidden whitespace-nowrap text-ellipsis   ${
               minimise && "-mt-2 bg-transparent text-neutral-400"
             }`}
           >
             {state.newTitle}
-          </p>
+          </button>
         ) : (
           <motion.input
             maxLength={25}
@@ -193,14 +198,17 @@ export default function Task({
             className={`rounded-t-lg text-scaley-base text-neutral-400 ${
               !editing ? "" : `inset-shadow-sm inset-shadow-rose-600`
             } py-1 px-2 text-scaley-base font-medium origin-top ${
-              minimise && "-mt-2 bg-transparent text-neutral-400"
+              minimise ? "-mt-2 bg-transparent text-neutral-400" : "mt-1"
             }`}
           ></motion.input>
         )}
         {minimise && (
-          <p className=" px-2 text-scaley-sm text-rose-300">
+          <button
+            onClick={() => setMinimise(false)}
+            className=" text-start text-sm px-2 text-scaley-sm text-rose-300"
+          >
             {minimise && format(new Date(quickDate), "EEE MMM d")}
-          </p>
+          </button>
         )}
         {!minimise && (
           <>

@@ -3,6 +3,7 @@
 import React from "react";
 
 import { MinusIcon } from "@heroicons/react/24/solid";
+import { PencilSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 
@@ -34,9 +35,15 @@ export default function MinimiseTaskBtn({
         globalMinimised ? setGlobalMinimised(false) : setGlobalMinimised(true);
         status === "closed" ? setStatus("open") : setStatus("closed");
       }}
-      className="w-10 border-1   relative px-2 flex  justify-center hover:border-x-5 transition-all duration-100 hover:[&>*]:scale-150 hover:[&>*]:fill-rose-600"
+      className={`w-10 items-center content-center border-1  relative px-2 flex  justify-center transition-all duration-100 ${
+        !minimise && "hover:[&>*]:scale-150 "
+      } hover:[&>*]:fill-rose-600`}
     >
-      <MinusIcon className="absolute top -mt-[1px]  transition-all duration-100"></MinusIcon>
+      {!minimise ? (
+        <MinusIcon className=" transition-all duration-100"></MinusIcon>
+      ) : (
+        <PencilSquareIcon className="absolute top transition-all duration-100" />
+      )}
     </button>
   );
 }
