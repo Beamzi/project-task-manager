@@ -5,7 +5,14 @@ import { useMemo } from "react";
 
 import { AllProjectsContext } from "@/context/AllProjectsContext";
 
-export default function AllProjectsProvider({ value, children }) {
+import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
+
+interface Props {
+  value: GetAllProjecttypeOf[];
+  children: React.ReactNode;
+}
+
+export default function AllProjectsProvider({ value, children }: Props) {
   const memoizedValue = useMemo(() => value, [value]);
 
   return (

@@ -1,28 +1,10 @@
 "use client";
 import React, { createContext } from "react";
 
-interface Props {
-  project: {
-    id: string;
-    title: string;
-    description: string;
-    published: boolean;
-    tasks: Array<{
-      author: { name: string | null } | null;
-    }> | null;
-  } | null;
-  comments:
-    | ({
-        author: {
-          name: string | null;
-        } | null;
-      } & {
-        id: string;
-        content: string;
-        projectId: string | null;
-        authorId: string | null;
-        createdAt: Date;
-      })[]
-    | undefined;
+import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
+
+export interface AllProjects {
+  project: GetAllProjecttypeOf;
 }
-export const AllProjectsContext = createContext(null);
+
+export const AllProjectsContext = createContext<GetAllProjecttypeOf[]>([]);

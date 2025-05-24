@@ -10,7 +10,7 @@ import RemoveProject from "@/components/buttons/RemoveProject";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 
-export default function ProjectViewAdapter({ id }) {
+export default function ProjectViewAdapter({ id }: { id: string }) {
   const allProjects = useContext(AllProjectsContext);
   const session = useContext(SessionContext);
 
