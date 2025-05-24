@@ -39,7 +39,7 @@ export default function LinkTaskToProjectBtn({
 
   return (
     <button
-      className=" w-full text-left p-1"
+      className=" w-full text-left p-1 "
       onClick={() => {
         linkTask();
         setList(false);

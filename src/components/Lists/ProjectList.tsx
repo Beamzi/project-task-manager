@@ -125,6 +125,7 @@ export default function ProjectList({
                   <Link
                     className="text-start w-full hover:text-rose-600 py-1 text-sm px-2 text-neutral-400"
                     href={`/projects/${projectListIds[index]}`}
+                    prefetch={true}
                   >
                     {item}
                   </Link>

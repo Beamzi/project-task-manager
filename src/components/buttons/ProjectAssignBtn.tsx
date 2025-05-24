@@ -33,7 +33,6 @@ export default function ProjectAssignBtn({
   const [list, setList] = useState(false);
   const [titleCheck, setTitleCheck] = useState("");
   const [assignCheck, setAssignCheck] = useState(false);
-  const [abbreviation, setAbbreviations] = useState("border-5");
   // bg-linear-to-r/srgb from-neutral-900 to-neutral-800
   return (
     <div
@@ -41,10 +40,10 @@ export default function ProjectAssignBtn({
         minimise &&
         parentHover &&
         "bg-linear-to-r/srgb from-neutral-900 to-neutral-800"
-      } flex flex-col w-full py-1 px-2 ${list && "relative z-4"} `}
+      } flex flex-col w-full py-1 px-2 ${list && ""} `}
     >
       <button
-        className={`hover:text-rose-600 text-md font-light  text-start flex transition-all duration-300 hover:[&>*]: ${
+        className={`hover:text-rose-600 text-md font-light text-start flex transition-all duration-300 hover:[&>*]: ${
           list && "text-rose-600"
         }`}
         onClick={() => (list ? setList(false) : setList(true))}
@@ -74,7 +73,7 @@ export default function ProjectAssignBtn({
           <motion.li
             initial={{ opacity: 0, scaleY: 0 }}
             animate={{ opacity: 1, scaleY: 1, transition: { duration: 0.1 } }}
-            className="pointer-none li-hover"
+            className="pointer-none li-hover "
             key={item.id}
           >
             <LinkTaskToProjectBtn

@@ -147,7 +147,7 @@ export default function Task({
             : "pl-4"
         }  hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted  px-3 flex flex-col`}
       >
-        <div className="flex  relative z-1 py-1">
+        <div className="flex  relative py-1">
           <ProjectAssignBtn
             taskId={id}
             projectIdOfTask={projectId}
@@ -257,7 +257,7 @@ export default function Task({
               transition={{ duration: 0.3, delay: 0.5 }}
               initial={{ opacity: 0, scaleY: 0 }}
               animate={{ opacity: 1, scaleY: 1 }}
-              className="flex py-1.5 "
+              className="flex py-1.5 relative z-20"
             >
               <SaveOnchange editing={editing} />
               <PriorityBtn
