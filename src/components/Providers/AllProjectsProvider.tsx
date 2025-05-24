@@ -13,6 +13,8 @@ interface Props {
 }
 
 export default function AllProjectsProvider({ value, children }: Props) {
+  // const memoizedValue = useMemo(() => value, [JSON.stringify(value)]);
+
   const memoizedValue = useMemo(() => value, [value]);
 
   return (

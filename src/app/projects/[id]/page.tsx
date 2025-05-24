@@ -1,83 +1,41 @@
 "use client";
-import { prisma } from "@/lib/prisma";
+
+import { AllProjectsContext } from "@/context/AllProjectsContext";
+import React from "react";
+import { useContext } from "react";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import ProjectView from "@/components/ProjectView";
-import { Prisma } from "@prisma/client";
-import { auth } from "../../../../auth";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 import RemoveProject from "@/components/buttons/RemoveProject";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
+import { SessionContext } from "@/context/SessionContext";
+import { useParams } from "next/navigation";
 
-import { redirect, useParams } from "next/navigation";
-import ProjectViewAdapter from "@/components/ProjectViewAdapter";
-// interface Props {
-//   params: {
-//     id: string;
-//   };
-// }
-
-// const fullProjectQuery = {
-//   include: {
-//     author: {
-//       select: { name: true },
-//     },
-//     tasks: {
-//       include: {
-//         author: {
-//           select: { name: true },
-//         },
-//       },
-//     },
-//     comments: {
-//       orderBy: {
-//         createdAt: "asc",
-//       },
-//       include: {
-//         author: {
-//           select: { name: true },
-//         },
-//       },
-//     },
-//   },
-// } as const;
-
-// export type FullProject = Prisma.ProjectGetPayload<typeof fullProjectQuery>;
-
-export default function CurrentProject() {
-  // const session = await auth();
-
+export default function ProjectDynamic() {
   const params = useParams();
   const id = params.id;
-  // const { id } = await params;
 
-  // async function getProject() {
-  //   if (session) {
-  //     const project = await prisma.project.findUnique({
-  //       where: {
-  //         id: id,
-  //         author: {
-  //           id: session?.user?.id,
-  //         },
-  //       },
-  //       ...fullProjectQuery,
-  //     });
+  const allProjects = useContext(AllProjectsContext);
+  const session = useContext(SessionContext);
 
-  //     if (!project || project.authorId !== session?.user?.id) {
-  //       redirect("/not-found");
-  //     }
-  //     return project;
-  //   } else return null;
-  // }
+  if (!allProjects) {
+    throw new Error("projects not loaded");
+  }
+  if (!session) {
+    throw new Error("session lot loaded");
+  }
 
-  // const project = await getProject();
-  // const tasks = project?.tasks;
-  // const comments = project?.comments;
-  // const profileImg = session?.user?.image;
+  const currentProjectId = allProjects.findIndex((p) => p.id === id);
+
+  const project = allProjects[currentProjectId];
+
+  const tasks = project.tasks;
+  const comments = project.comments;
+  const profileImg = session?.user?.image;
 
   return (
     <>
-      <ProjectViewAdapter id={id}></ProjectViewAdapter>
-      {/* <section className="project-page-view w-full px-[clamp(16px,2vw,24px)]  xl:w-[80%]">
+      <section className="project-page-view w-full px-[clamp(16px,2vw,24px)]  xl:w-[80%]">
         <div className=" gradient-for-thin-containers border-1 flex justify-end rounded-xl py-2 px-2 outline-4 -outline-offset-5 outline-neutral-900">
           <button className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2">
             <UserPlusIcon className="w-6" />
@@ -97,7 +55,7 @@ export default function CurrentProject() {
         rightData={<ListOfTasks currentTasks={tasks} />}
         height="h-full"
         ifBottomRow={true}
-      ></FirstRowContainers> */}
+      ></FirstRowContainers>
     </>
   );
 }

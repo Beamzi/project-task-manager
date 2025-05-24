@@ -11,6 +11,9 @@ import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 
 export default function ProjectViewAdapter({ id }: { id: string }) {
+  const params = useParams();
+  const id = params.id;
+
   const allProjects = useContext(AllProjectsContext);
   const session = useContext(SessionContext);
 

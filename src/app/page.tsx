@@ -1,39 +1,25 @@
-import { prisma } from "@/lib/prisma";
-import React from "react";
-import { auth } from "../../auth";
+"use client";
 
+import React from "react";
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 import SingleContainer from "@/components/Skeleton/SingleContainer";
-import TestReadFile from "@/components/TestReadFile";
+import { useContext } from "react";
+import { TaskContext } from "@/context/TaskContext";
+import { SessionContext } from "@/context/SessionContext";
 
-async function getTasks() {
-  const session = await auth();
-  let empty: [] = [];
-  if (session) {
-    const tasks = await prisma.task.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-      where: {
-        author: { id: session?.user?.id },
-      },
-      include: {
-        author: {
-          select: { name: true },
-        },
-      },
-    });
-    return tasks;
-  } else {
-    return empty;
+export default function AllTasksView() {
+  const tasks = useContext(TaskContext);
+
+  if (!tasks) {
+    throw new Error("tasks not loaded ");
   }
-}
+  const session = useContext(SessionContext);
 
-export default async function AllTasksView() {
-  const session = await auth();
-  const tasks = await getTasks();
+  if (!session) {
+    throw new Error("session not loaded");
+  }
 
   const userName = session?.user?.name;
   const firstNameOfUser = userName?.substring(0, userName?.indexOf(" "));
