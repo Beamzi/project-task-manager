@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import AllTasks from "@/components/AllTasks";
 import SignInBtn from "@/components/buttons/SignInBtn";
-import TasksProvider from "@/components/TasksProvider";
+import TasksProvider from "@/components/Providers/tasksProviders/TasksProvider";
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../auth";
 import { SignOutBtn } from "@/components/buttons/SignOutBtn";

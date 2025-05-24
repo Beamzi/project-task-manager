@@ -4,15 +4,19 @@ import DashBoardOverlay from "./DashBoardOverlay";
 import { ProjectProvider } from "../ProjectProvider";
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../../auth";
-import { TaskDueDateProvider } from "../TaskDueDateProvider";
+import { TaskDueDateProvider } from "../Providers/tasksProviders/TaskDueDateProvider";
 import AllProjectsProvider from "../Providers/AllProjectsProvider";
 import { getAllProjects } from "@/lib/queries/getAllProjects";
 import CurrentSessionProvider from "../Providers/CurrentSessionProvider";
 import { getAllTasks } from "@/lib/queries/getAllTasks";
-import TasksProvider from "../TasksProvider";
-import AllTasksDueDateProvider from "../Providers/AllTasksDueDateProvider";
+import TasksProvider from "../Providers/tasksProviders/TasksProvider";
+import AllTasksDueDateProvider from "../Providers/tasksProviders/AllTasksDueDateProvider";
 import { getAllTasksByDueDate } from "@/lib/queries/getAllTasksByDueDate";
-
+import TasksProviderGroup from "../Providers/tasksProviders/TasksProviderGroup";
+import CommentsNonProjectProvider from "../Providers/CommentsNonProjectProvider";
+import { getNonProjectComments } from "@/lib/queries/getNonProjectComments";
+import PrioritiesProvider from "../Providers/PrioritiesProvider";
+import { getPriorities } from "@/lib/queries/getPriorities";
 import MobileHeader from "./MobileHeader";
 import TopBar from "./TopBar";
 
@@ -55,21 +59,26 @@ export default async function DashBoard({
   children: React.ReactNode;
 }) {
   const projects = await getProjects();
-  const tasksByDueDate = await getTasksByDueDate();
-
-  const allProjects = await getAllProjects();
-  const allTasks = await getAllTasks();
   const allTasksByDueDate = await getAllTasksByDueDate();
+  const tasksByDueDate = await getTasksByDueDate();
+  const allTasks = await getAllTasks();
+  const comments = await getNonProjectComments();
+  const priorities = await getPriorities();
+  const allProjects = await getAllProjects();
   const session = await auth();
 
   return (
     <DashBoardProvider>
       <CurrentSessionProvider value={session}>
         <AllProjectsProvider value={allProjects}>
-          <AllTasksDueDateProvider value={allTasksByDueDate}>
-            <TasksProvider value={allTasks}>
-              <TaskDueDateProvider value={tasksByDueDate}>
-                <ProjectProvider value={projects}>
+          <ProjectProvider value={projects}>
+            <TasksProviderGroup
+              allTasks={allTasks}
+              tasksByDueDate={tasksByDueDate}
+              allTasksByDueDate={allTasksByDueDate}
+            >
+              <CommentsNonProjectProvider value={comments}>
+                <PrioritiesProvider value={priorities}>
                   <DashBoardOverlay />
                   <div className="box-border h-screen md:p-5  overflow-hidden flex flex-col ">
                     <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
@@ -81,10 +90,10 @@ export default async function DashBoard({
                       </main>
                     </div>
                   </div>
-                </ProjectProvider>
-              </TaskDueDateProvider>
-            </TasksProvider>
-          </AllTasksDueDateProvider>
+                </PrioritiesProvider>
+              </CommentsNonProjectProvider>
+            </TasksProviderGroup>
+          </ProjectProvider>
         </AllProjectsProvider>
       </CurrentSessionProvider>
     </DashBoardProvider>

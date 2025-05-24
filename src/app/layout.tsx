@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import DashBoard from "@/components/DashBoard/DashBoard";
-import ClientWrapper from "@/components/TasksProvider";
+import ClientWrapper from "@/components/Providers/tasksProviders/TasksProvider";
 import { auth } from "../../auth";
 import SignInPrompt from "@/components/SignInPrompt";
 
