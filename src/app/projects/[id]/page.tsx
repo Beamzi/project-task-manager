@@ -6,6 +6,7 @@ import { useContext } from "react";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import ProjectView from "@/components/ProjectView";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
+
 import RemoveProject from "@/components/buttons/RemoveProject";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
@@ -14,7 +15,6 @@ import { useParams } from "next/navigation";
 export default function ProjectDynamic() {
   const params = useParams();
   const id = params.id;
-
   const allProjects = useContext(AllProjectsContext);
   const session = useContext(SessionContext);
 
@@ -26,16 +26,14 @@ export default function ProjectDynamic() {
   }
 
   const currentProjectId = allProjects.findIndex((p) => p.id === id);
-
   const project = allProjects[currentProjectId];
-
   const tasks = project.tasks;
   const comments = project.comments;
   const profileImg = session?.user?.image;
 
   return (
     <>
-      <section className="project-page-view w-full px-[clamp(16px,2vw,24px)]  xl:w-[80%]">
+      <section className="project-page-view w-full px-[clamp(16px,2vw,24px)] xl:w-[80%]">
         <div className=" gradient-for-thin-containers border-1 flex justify-end rounded-xl py-2 px-2 outline-4 -outline-offset-5 outline-neutral-900">
           <button className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2">
             <UserPlusIcon className="w-6" />

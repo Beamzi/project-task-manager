@@ -19,6 +19,7 @@ import { format } from "date-fns";
 import TimeOptions from "./TimeOptions";
 import { transform } from "next/dist/build/swc/generated-native";
 import SaveOnchange from "./SaveOnchange";
+import { createPortal } from "react-dom";
 
 interface Props {
   author: string | null | undefined;
@@ -241,15 +242,25 @@ export default function Task({
               <CalendarDaysIcon className="mr-1 w-5" />
               {format(new Date(quickDate), "EEE MMM d")}
             </motion.button>
-            <motion.div>
-              {showTimeOptions && (
-                <TimeOptions
-                  setQuickDate={setQuickDate}
-                  trueDate={date}
-                  setShowTimeOptions={setShowTimeOptions}
-                  callApi={updateTask}
-                ></TimeOptions>
-              )}
+            <motion.div className="relative z-100">
+              {showTimeOptions &&
+                createPortal(
+                  <>
+                    <div
+                      onClick={() => setShowTimeOptions(false)}
+                      className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                    ></div>
+                    <div className="fixed w-100 h-70 top-[50%] left-[50%] z-100 translate-[-50%] bg-transparent">
+                      <TimeOptions
+                        setQuickDate={setQuickDate}
+                        trueDate={date}
+                        setShowTimeOptions={setShowTimeOptions}
+                        callApi={updateTask}
+                      />
+                    </div>
+                  </>,
+                  document.body
+                )}
             </motion.div>
 
             <motion.div

@@ -13,10 +13,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import {
   ClockIcon,
   CalendarDaysIcon,
-  CalendarDateRangeIcon,
+  CogIcon,
   SunIcon,
   MoonIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 
 interface Props {
   quickDate?: Date;
@@ -26,6 +26,9 @@ interface Props {
   callApi?: (scopedDate: Date) => Promise<void>;
   isNewTask?: boolean;
 }
+const btnClasses =
+  "date-options rounded-lg py-2 hover:bg-white hover:[&>*]:stroke-black hover:[&>*]:scale-110 transition-all duration-200 [&>*]:mr-2";
+
 export default function TimeOptions({
   quickDate,
   setQuickDate,
@@ -81,167 +84,193 @@ export default function TimeOptions({
   });
 
   return (
-    <div className="absolute z-10 px-1 border-1 dark:bg-neutral-900 flex flex-col">
-      <div className="">
-        <ul className="bg-neutral-900  ">
-          <li className="w-full ">
-            <button
-              type="button"
-              onClick={() => {
-                setQuickDate(getEndOfDay());
-                if (!isNewTask && callApi) {
-                  callApi(getEndOfDay());
-                }
-                setTimeout(() => {
-                  setShowTimeOptions(false);
-                });
-              }}
-              className=" date-options "
-            >
-              <SunIcon />
-              today
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                setQuickDate(getTomorrow());
-                if (!isNewTask && callApi) {
-                  callApi(getTomorrow());
-                }
-                setTimeout(() => {
-                  setShowTimeOptions(false);
-                });
-              }}
-              className="date-options "
-            >
-              <MoonIcon />
-              tomorrow
-            </button>
-          </li>
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                setQuickDate(getNextWeek());
-                if (!isNewTask && callApi) {
-                  callApi(getNextWeek());
-                }
-                setTimeout(() => {
-                  setShowTimeOptions(false);
-                });
-              }}
-              className="date-options "
-            >
-              <CalendarDaysIcon />
-              next Week
-            </button>
-          </li>
-        </ul>
-        {showCalendar && (
-          <DatePicker
-            selected={isNewTask ? quickDate : trueDate}
-            onChange={handleDateChange}
-            inline
-            minDate={new Date()}
-            maxDate={lastDayOfYear}
-          />
-        )}
-      </div>
-      <button
-        type="button"
-        className="py-2 px-2 "
-        onClick={() => setTimeOption(timeOption ? false : true)}
-      >
-        set a time
-      </button>
-      {timeOption && (
-        <div>
-          <input
-            className="date-options"
-            onChange={(e) => setTime(e.target.value)}
-            type="time"
-          ></input>
+    <div className="absolute  gradient-for-thin-containers  outline-4 -outline-offset-5 outline-neutral-900 rounded-xl z-10 px-2 border-1 dark:bg-neutral-900 py-2 flex flex-row">
+      <ul className="bg-transparent -mt-0.5">
+        <li className=" ">
           <button
             type="button"
-            className="bg-black p-2"
             onClick={() => {
-              const trueDateFormat = format(
-                new Date(trueDate),
-                `yyyy-MM-dd'T'${time}`
-              );
-              const parseIso = parseISO(trueDateFormat);
-              if (
-                trueDate > new Date() &&
-                format(new Date(trueDate), "yyyy-MM-dd") ===
-                  format(new Date(), "yyyy-MM-dd")
-              ) {
-                alert("please select a valid time of day");
-              } else {
-                setQuickDate(parseIso);
-                if (!isNewTask && callApi) {
-                  callApi(parseIso);
-                }
-                setTimeout(() => {
-                  setShowTimeOptions(false);
-                });
-              }
-            }}
-          >
-            submit
-          </button>
-        </div>
-      )}
-
-      <button
-        type="button"
-        className="py-2 px-2"
-        onClick={() => setIsoOption(isoOption ? false : true)}
-      >
-        manual
-      </button>
-
-      {isoOption && (
-        <div>
-          <input
-            onChange={(event) => setIsoInput(event.target.value)}
-            value={
-              isoInput
-                ? isoInput
-                : format(new Date(trueDate), "yyyy-MM-dd'T'HH:mm")
-            }
-            className="border-2 w-full"
-            type="datetime-local"
-            min={`${format(new Date(), "yyyy-MM-dd'T'HH:mm")}`}
-            max={`${getYear()}-12-31T23:59`}
-          ></input>
-          <button
-            type="button"
-            className="bg-black"
-            onClick={() => {
-              const parseIso = parseISO(isoInput);
-              const current = new Date();
-              const maxDate = new Date(`${getYear()}-12-31T23:59`);
-
-              if (parseIso < current || parseIso > maxDate) {
-                alert("Please select a valid date");
-                return;
-              }
-
-              setQuickDate(parseIso);
+              setQuickDate(getEndOfDay());
               if (!isNewTask && callApi) {
-                callApi(parseIso);
+                callApi(getEndOfDay());
               }
               setTimeout(() => {
                 setShowTimeOptions(false);
               });
             }}
+            className={` ${btnClasses}`}
           >
-            submit
+            <SunIcon />
+            Today
           </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={() => {
+              setQuickDate(getTomorrow());
+              if (!isNewTask && callApi) {
+                callApi(getTomorrow());
+              }
+              setTimeout(() => {
+                setShowTimeOptions(false);
+              });
+            }}
+            className={` ${btnClasses}`}
+          >
+            <MoonIcon />
+            Tomorrow
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            onClick={() => {
+              setQuickDate(getNextWeek());
+              if (!isNewTask && callApi) {
+                callApi(getNextWeek());
+              }
+              setTimeout(() => {
+                setShowTimeOptions(false);
+              });
+            }}
+            className={` ${btnClasses}`}
+          >
+            <CalendarDaysIcon />
+            Next Week
+          </button>
+        </li>
+      </ul>
+
+      <div className="calendar-and-buttons">
+        {showCalendar && (
+          <div className="border-1 rounded-xl">
+            <DatePicker
+              selected={isNewTask ? quickDate : trueDate}
+              onChange={handleDateChange}
+              inline
+              minDate={new Date()}
+              maxDate={lastDayOfYear}
+              calendarClassName="custom-time-wrapper"
+            />
+          </div>
+        )}
+        <div className="set-a-time relative">
+          <button
+            type="button"
+            className={`date-options ${btnClasses} w-full`}
+            onClick={() => setTimeOption(timeOption ? false : true)}
+          >
+            <ClockIcon />
+            Set a time
+          </button>
+          {timeOption && (
+            <div className="absolute top-0 left-21 p-2 rounded-lg dark:bg-black border-1">
+              <input
+                className="date-options rounded-lg"
+                onChange={(e) => setTime(e.target.value)}
+                type="time"
+              ></input>
+              <div className="flex">
+                <button
+                  type="button"
+                  className=" p-2 w-full"
+                  onClick={() => {
+                    const trueDateFormat = format(
+                      new Date(trueDate),
+                      `yyyy-MM-dd'T'${time}`
+                    );
+                    const parseIso = parseISO(trueDateFormat);
+                    if (
+                      trueDate > new Date() &&
+                      format(new Date(trueDate), "yyyy-MM-dd") ===
+                        format(new Date(), "yyyy-MM-dd")
+                    ) {
+                      alert("please select a valid time of day");
+                    } else {
+                      setQuickDate(parseIso);
+                      if (!isNewTask && callApi) {
+                        callApi(parseIso);
+                      }
+                      setTimeout(() => {
+                        setShowTimeOptions(false);
+                      });
+                    }
+                  }}
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  className="w-full"
+                  onClick={() => setTimeOption(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
         </div>
-      )}
+
+        <div className="manual ">
+          <button
+            type="button"
+            className={`date-options ${btnClasses} w-full`}
+            onClick={() => setIsoOption(isoOption ? false : true)}
+          >
+            <CogIcon />
+            Manual
+          </button>
+
+          {isoOption && (
+            <div className="bg-black p-1 px-2 border-1 rounded-lg absolute">
+              <input
+                onChange={(event) => setIsoInput(event.target.value)}
+                value={
+                  isoInput
+                    ? isoInput
+                    : format(new Date(trueDate), "yyyy-MM-dd'T'HH:mm")
+                }
+                className="date-options w-full rounded-lg"
+                type="datetime-local"
+                min={`${format(new Date(), "yyyy-MM-dd'T'HH:mm")}`}
+                max={`${getYear()}-12-31T23:59`}
+              ></input>
+              <div className="flex">
+                <button
+                  type="button"
+                  className=" w-full"
+                  onClick={() => {
+                    const parseIso = parseISO(isoInput);
+                    const current = new Date();
+                    const maxDate = new Date(`${getYear()}-12-31T23:59`);
+                    if (parseIso < current || parseIso > maxDate) {
+                      alert("Please select a valid date");
+                      return;
+                    }
+                    setQuickDate(parseIso);
+                    if (!isNewTask && callApi) {
+                      callApi(parseIso);
+                    }
+                    setTimeout(() => {
+                      setShowTimeOptions(false);
+                    });
+                  }}
+                >
+                  Submit
+                </button>
+                <button
+                  type="button"
+                  className="w-full"
+                  onClick={() => setIsoOption(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

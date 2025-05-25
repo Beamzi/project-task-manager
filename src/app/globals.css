@@ -152,11 +152,13 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
     @apply hover:text-rose-600 transition-all duration-300;
   }
   .date-options {
-    @apply px-2 py-1 w-full text-left flex
+    @apply px-2 py-1 min-w-33 text-left flex rounded-2xl my-1 border-1 mr-2
   }
   .li-hover {
     @apply border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 
   }
+
+
 
   button, ul, li, div {
     @apply select-none 
@@ -170,7 +172,7 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 
   .all-tasks {
     button, a {
-      @apply rounded-sm
+      @apply rounded-sm 
     }
   }
 
@@ -213,11 +215,33 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
     @apply bg-transparent w-5
   }
 
-}
 
-/* .task-shadows {
-  box-shadow: 1px 1px 20px 5px black;
-} */
+
+
+/* questionable */
+  h2 {
+    @apply dark:!text-neutral-300
+  }
+  .custom-time-wrapper {
+    @apply dark:!bg-transparent !rounded-xl !overflow-hidden !border-none
+    }
+  .react-datepicker__header {
+    @apply !bg-transparent
+  }
+  .react-datepicker__day {
+    @apply dark:!text-neutral-400 dark:hover:!text-neutral-900
+  }
+  .react-datepicker__day--disabled {
+  @apply dark:!text-neutral-700
+  }
+  .react-datepicker__day--selected {
+    @apply !bg-rose-600 !text-white
+  }
+  .react-datepicker__day-name {
+    @apply dark:!text-white
+  }
+
+}
 
 
 
