@@ -178,7 +178,7 @@ export default function Task({
               setMinimise(false);
               setSelect(true);
             }}
-            className={`py-1   w-full text-start text-sm px-2 text-scaley-base  font-medium overflow-hidden whitespace-nowrap text-ellipsis   ${
+            className={`py-1 w-full text-start text-sm px-2 text-scaley-base  font-medium overflow-hidden whitespace-nowrap text-ellipsis   ${
               minimise && "-mt-2 bg-transparent text-neutral-400"
             }`}
           >

@@ -16,6 +16,7 @@ import {
   CogIcon,
   SunIcon,
   MoonIcon,
+  XCircleIcon,
 } from "@heroicons/react/24/outline";
 
 interface Props {
@@ -85,7 +86,7 @@ export default function TimeOptions({
 
   return (
     <div className="absolute  gradient-for-thin-containers  outline-4 -outline-offset-5 outline-neutral-900 rounded-xl z-10 px-2 border-1 dark:bg-neutral-900 py-2 flex flex-row">
-      <ul className="bg-transparent -mt-0.5">
+      <ul className="bg-transparent -mt-0.5 ">
         <li className=" ">
           <button
             type="button"
@@ -138,6 +139,13 @@ export default function TimeOptions({
           >
             <CalendarDaysIcon />
             Next Week
+          </button>
+          <button
+            onClick={() => setShowTimeOptions(false)}
+            className={` ${btnClasses}`}
+          >
+            <XCircleIcon />
+            Cancel
           </button>
         </li>
       </ul>
@@ -215,7 +223,7 @@ export default function TimeOptions({
         <div className="manual ">
           <button
             type="button"
-            className={`date-options ${btnClasses} w-full`}
+            className={` ${btnClasses} w-full`}
             onClick={() => setIsoOption(isoOption ? false : true)}
           >
             <CogIcon />
@@ -231,7 +239,7 @@ export default function TimeOptions({
                     ? isoInput
                     : format(new Date(trueDate), "yyyy-MM-dd'T'HH:mm")
                 }
-                className="date-options w-full rounded-lg"
+                className=" w-full rounded-lg"
                 type="datetime-local"
                 min={`${format(new Date(), "yyyy-MM-dd'T'HH:mm")}`}
                 max={`${getYear()}-12-31T23:59`}

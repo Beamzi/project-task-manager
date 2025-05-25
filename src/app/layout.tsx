@@ -4,9 +4,11 @@ import "./globals.css";
 import DashBoard from "@/components/DashBoard/DashBoard";
 import ClientWrapper from "@/components/Providers/tasksProviders/TasksProvider";
 import { auth } from "../../auth";
-import SignInPrompt from "@/components/SignInPrompt";
+import SignInPrompt from "@/components/Landing";
 
 import { Inter } from "next/font/google";
+import Landing from "@/components/Landing";
+import Test from "@/components/test";
 
 // If loading a variable font, you don't need to specify the font weight
 const inter = Inter({
@@ -41,11 +43,8 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
-        {session ? (
-          <DashBoard>{children}</DashBoard>
-        ) : (
-          <SignInPrompt></SignInPrompt>
-        )}
+        {/* <Test /> */}
+        {session ? <DashBoard>{children}</DashBoard> : <Landing></Landing>}
       </body>
     </html>
   );

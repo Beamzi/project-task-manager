@@ -70,6 +70,17 @@ h3 {
   );
 }
 
+.landing-background {
+  background: repeating-linear-gradient(
+    45deg,
+    rgb(34, 34, 34) 0px,    /* Start color at 0px */
+    rgb(34, 34, 34) 1px,    /* Same color up to 1px */
+    #00000000 1px,            /* IMMEDIATE switch to black at 1px */
+    #00000000 10px            /* Black continues to 20px */
+  );
+}
+
+
 .custom-top-accent::before {
   content: '';
   position: absolute;
@@ -188,7 +199,7 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
       @apply mr-2 w-5 stroke-neutral-400 duration-300 transition-all
   }
     button, a {
-      @apply p-2 rounded-sm  bg-transparent  flex text-center items-center text-neutral-100 
+      @apply p-2 rounded-sm bg-transparent flex text-center items-center text-neutral-100 
   }
 }
 

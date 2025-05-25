@@ -29,6 +29,8 @@ export default function Priorities() {
             name={session?.user?.name}
           />
         }
+        height="h-full"
+        ifBottomRow={true}
         leftTitle="Prioritised"
         rightTitle="Personal Notes"
       ></FirstRowContainers>

@@ -6,33 +6,17 @@ import ScheduleMenu from "@/components/Schedule/ScheduleMenu";
 import { useContext } from "react";
 import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
 
-// async function getTasksByDueDate() {
-//   const session = await auth();
-//   if (session) {
-//     const result = await prisma.task.findMany({
-//       orderBy: {
-//         date: "asc",
-//       },
-//       where: {
-//         author: { id: session?.user?.id },
-//       },
-//     });
-//     return result;
-//   }
-// }
-
 export default function Schedule() {
   const allTasksByDueDate = useContext(AllTasksDueDateContext);
 
-  // const result = await getTasksByDueDate();
-
   return (
-    <div className="border-x-1 border-b-1 m-6 ">
+    <div className="gradient-for-thin-containers min-h-0 flex flex-col border-1 rounded-2xl w-[80%] 2xl:w-[70%] outline-5 -outline-offset-6  outline-neutral-900">
       <div className="">
         <ScheduleMenu scheduleTasks={allTasksByDueDate} />
       </div>
 
-      <div className="scrolling-container overflow-y-scroll h-[70dvh] w-full ">
+      <div className="flex-1 flex-col rounded-b-2xl scrolling-container gradient-for-inner-containers  overflow-y-scroll h-full min-h-0 ">
+        {/* <div className="h-800"></div> */}
         <ListOfScheduleTasks scheduleTasks={allTasksByDueDate} />
       </div>
     </div>

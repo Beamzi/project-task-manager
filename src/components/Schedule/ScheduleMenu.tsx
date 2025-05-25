@@ -99,10 +99,10 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
       : format(new Date(), "eee d yyyy");
 
   return (
-    <div className="flex flex-col w-full border-t-1 relative">
-      <div className="px-2 py-2 flex justify-between">
+    <div className="flex flex-col w-full  relative">
+      <div className="px-4 py-4 flex justify-between">
         <button
-          className="flex w-30"
+          className="flex w-30 hover:text-rose-600"
           onClick={() => {
             setCalendarOpen(calendarOpen ? false : true);
             if (inViewParse >= new Date()) {
@@ -115,7 +115,7 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
         </button>
         <h2>Schedule</h2>
 
-        <div className="px-2 w-30 flex justify-end ">
+        <div className="px-2 w-30  flex justify-end ">
           <button
             onClick={() => {
               const currentIndex = formattedDates.indexOf(inView);
@@ -129,9 +129,9 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
                 });
               }
             }}
-            className="border-1 mr-1"
+            className="border-1 mr-1 rounded-md px-1 hover:scale-110 transition-all duration-100 hover:[&>*]:fill-rose-600 hover:[&>*]:scale-110"
           >
-            <ChevronLeftIcon className="pointer-events-none" />
+            <ChevronLeftIcon className="pointer-events-none transition-all duration-100" />
           </button>
           <button
             onClick={() => {
@@ -145,20 +145,21 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
                 });
               }
             }}
-            className="border-1 "
+            className="border-1 mr-1 rounded-md px-1 hover:scale-110 transition-all duration-100 hover:[&>*]:fill-rose-600 hover:[&>*]:scale-110"
           >
-            <ChevronRightIcon className="pointer-events-none" />
+            <ChevronRightIcon className="pointer-events-none transition-all duration-100" />
           </button>
         </div>
       </div>
       {calendarOpen && (
-        <div className="absolute top-15 left-0">
+        <div className="absolute top-15 left-0 z-100 gradient-for-thin-containers border-1 rounded-lg shadow-2xl shadow-black">
           <DatePicker
             minDate={new Date()}
             maxDate={getDateRange[getDateRange.length - 1]}
             inline
             selected={startDate}
             onChange={(date) => handleCalendar(date)}
+            calendarClassName="custom-time-wrapper"
           />
         </div>
       )}
@@ -171,7 +172,7 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
           if (i >= windowStart && i < windowEnd)
             return (
               <button
-                className={` scale-90 px-4 lg:min-w-20 max-h-10 flex align-middle text-center justify-center content-center ${
+                className={`scale-90 px-4 lg:min-w-20  hover:text-rose-600 flex align-middle text-center justify-center content-center ${
                   inView === date &&
                   "text-rose-600 scale-120 transition-all duration-50 "
                 }`}
@@ -193,11 +194,12 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
         <h2 className="py-2 text-sm ">Active Dates</h2>
         <div className="flex justify-center py-1">
           {getActiveDates?.map((item, i) => {
+            const now = format(new Date(), "yyyy-MM-dd");
             const windowSize = 7;
             const windowStart =
               Math.floor(activeSequence / windowSize) * windowSize;
             const windowEnd = windowStart + windowSize;
-            if (i >= windowStart && i < windowEnd)
+            if (i >= windowStart && i < windowEnd && item >= now)
               return (
                 <button
                   key={i}
@@ -207,7 +209,7 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
                       behavior: "smooth",
                     });
                   }}
-                  className={`flex justify-center px-2 scale-90  ${
+                  className={`flex justify-center px-2 hover:text-rose-300 scale-90  ${
                     inView === item &&
                     "text-rose-300 scale-120 transition-all duration-100 "
                   }`}

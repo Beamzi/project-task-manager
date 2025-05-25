@@ -33,7 +33,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
 
   return (
     <>
-      <div ref={scrollDivRef} className="overflow-hidden  ">
+      <div ref={scrollDivRef} className="overflow-hidden ">
         <div>
           {scheduleTasks?.map(
             (item) =>
@@ -66,7 +66,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
               )}
             </div>
           ) : (
-            <div className=" bg-neutral-800 w-full" key={date}>
+            <div className="  bg-neutral-800 w-full" key={date}>
               <h3 id={date} className="font-bold py-2 px-5">
                 {reformat(date)}
               </h3>
@@ -79,8 +79,6 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
                   </button>
                 </div>
               </div>
-
-              {/* {reformat(date)} */}
             </div>
           )
         )}
