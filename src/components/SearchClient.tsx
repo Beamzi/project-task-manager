@@ -32,7 +32,7 @@ export default function SearchClient({
       >
         <div
           className={`gradient-for-inner-containers border-1 outline-5 -outline-offset-6 outline-neutral-900 rounded-2xl w-full flex px-[clamp(16px,2vw,24px)] py-[clamp(8px,2vh,16px)] mt-[clamp(16px,2vh,24px)] ${
-            xlWidth ? xlWidth : "xl:w-[80%]"
+            xlWidth ? xlWidth : "2xl:w-[70%] xl:w-[80%]"
           }`}
         >
           <motion.div

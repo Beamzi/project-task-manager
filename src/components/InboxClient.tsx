@@ -53,7 +53,7 @@ export default function InboxClient({ tasks }: Props) {
 
   return (
     <>
-      <div className="w-full px-[clamp(16px,2vw,24px)] xl:w-[80%]">
+      <div className="w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%] xl:w-[80%]">
         <h3 className="px-2 text-[clamp(20px,2vw,24px)] border-b-1 border-dotted">
           Inbox
         </h3>

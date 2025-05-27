@@ -7,9 +7,12 @@ import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/solid";
 import { useState, useRef, useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { dateRange, ScheduleTasks } from "./helpers";
+import NewTask from "../NewTask";
 
 export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
   const [overDue, isOverDue] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [clickedDate, setClickedDate] = useState<Date>();
 
   const context = useContext(DashBoardContext);
   if (!context) {
@@ -24,11 +27,15 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
   );
 
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
-
   const reformat = (date: string) => {
     let reformattedDate = parseISO(date);
     const output = format(reformattedDate, "EEE MMM d");
     return output;
+  };
+
+  const toDate = (date: string) => {
+    const newDate = parseISO(date);
+    return newDate;
   };
 
   return (
@@ -73,7 +80,13 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
               <hr></hr>
               <div className="flex align-center h-full">
                 <div className="py-5  px-5 h-full   wrap-normal text-neutral-500">
-                  <button className="flex  [&>*]:mr-2">
+                  <button
+                    onClick={() => {
+                      setShowForm(true);
+                      setClickedDate(toDate(date));
+                    }}
+                    className="flex  [&>*]:mr-2"
+                  >
                     <PlusIcon className="fill-neutral-100 w-5" />
                     new task
                   </button>
@@ -83,6 +96,10 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
           )
         )}
       </div>
+
+      {showForm && (
+        <NewTask setShowForm={setShowForm} fixedDate={clickedDate} />
+      )}
     </>
   );
 }

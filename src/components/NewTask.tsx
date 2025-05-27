@@ -15,16 +15,19 @@ import {
 } from "@heroicons/react/24/outline";
 interface Props {
   setShowForm: (type: boolean) => void;
+  fixedDate?: Date;
 }
 
-export default function NewTask({ setShowForm }: Props) {
+export default function NewTask({ setShowForm, fixedDate }: Props) {
   const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isNewTask, setIsNewTask] = useState(false);
   const trueDate = new Date();
 
-  const [quickDate, setQuickDate] = useState<Date>(trueDate);
+  const [quickDate, setQuickDate] = useState<Date>(
+    fixedDate ? fixedDate : trueDate
+  );
   const [showTimeOptions, setShowTimeOptions] = useState(false);
   const [newTaskProjectId, setNewTaskProjectId] = useState("");
   const [showProjects, setShowProjects] = useState(false);
@@ -58,9 +61,7 @@ export default function NewTask({ setShowForm }: Props) {
 
   const currentDate = format(new Date(), "yyyy-MM-dd'T'HH:mm");
 
-  console.log(currentDate, "current date");
-
-  console.log(getYear, "current year bla");
+  console.log(fixedDate);
 
   return (
     <form
@@ -68,10 +69,11 @@ export default function NewTask({ setShowForm }: Props) {
         createTask(e);
         setShowForm(false);
       }}
+      className="new-task-local-scope"
     >
       <div
         onClick={() => setShowForm(false)}
-        className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+        className={` text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
       ></div>
       <div className="fixed md:w-120 min-w-80 top-[50%] left-[50%] z-100 translate-[-50%]  flex flex-col p-5 gradient-for-inner-containers border-1 rounded-xl outline-4 -outline-offset-5 outline-neutral-900">
         <input
@@ -96,7 +98,9 @@ export default function NewTask({ setShowForm }: Props) {
         <div className="flex py-2">
           <button
             type="button"
-            className="border-1 rounded-lg mr-2"
+            className={`border-1 rounded-lg mr-2 ${
+              fixedDate && "pointer-events-none bg-neutral-900 text-neutral-500"
+            }`}
             onClick={() => {
               setShowTimeOptions(showTimeOptions ? false : true);
               setIsNewTask(true);
@@ -104,7 +108,9 @@ export default function NewTask({ setShowForm }: Props) {
           >
             <CalendarIcon />
 
-            {isNewTask && !showTimeOptions
+            {fixedDate
+              ? `${format(new Date(fixedDate), "eee MMM d")}`
+              : isNewTask && !showTimeOptions
               ? `${format(new Date(quickDate), "eee MMM d")}`
               : "Pick A Date"}
           </button>

@@ -4,6 +4,7 @@ import { format } from "date-fns";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import NewTask from "../NewTask";
 
 export interface Props {
   dateId: string;
@@ -23,6 +24,8 @@ export default function ScheduleTask({
   content,
   overDue,
 }: Props) {
+  const [showForm, setShowForm] = useState(false);
+  const [fixedDate, setFixedDate] = useState<Date>();
   const dueDate = format(new Date(date), "yyyy-MM-dd");
   const currentDate = format(new Date(), "yyyy-MM-dd");
   const dateForDisplay = date.toString().slice(0, 10);
@@ -32,6 +35,10 @@ export default function ScheduleTask({
       dueDate === currentDate ? `Today ${dateForDisplay}` : `${dateForDisplay}`;
     return date;
   };
+
+  // const isDate = (date: string) => {
+  //   const newDate =
+  // }
 
   return (
     <div className="overflow-hidden w-full border-b-1 border-dotted ">
@@ -65,7 +72,13 @@ export default function ScheduleTask({
           {!overDue ? (
             <>
               {/* <hr className="pt-2"></hr> */}
-              <button className="flex [&>*]:mr-2">
+              <button
+                onClick={() => {
+                  setFixedDate(date);
+                  setShowForm(true);
+                }}
+                className="flex [&>*]:mr-2"
+              >
                 <PlusIcon className="fill-neutral-100 w-5 pb-3" />
                 new task
               </button>
@@ -74,6 +87,9 @@ export default function ScheduleTask({
             <span className="block will-change-auto text-red-700 pb-3">
               {getDate()}
             </span>
+          )}
+          {showForm && (
+            <NewTask setShowForm={setShowForm} fixedDate={fixedDate} />
           )}
 
           {/* {overDue && <h3 className="text-red-700">{getDate()}</h3>} */}

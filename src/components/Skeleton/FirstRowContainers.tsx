@@ -33,7 +33,7 @@ export default function FirstRowContainers({
   return (
     // we usually put this next to h-full in ifbottomRow, but for now it's commented pb-[clamp(16px,2vw,24px)]
     <>
-      <div className="flex w-full px-[clamp(16px,2vw,24px)] xl:w-[80%] ">
+      <div className="flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
         {leftTitle && (
           <p className="px-2 w-full  text-start py-2 text-scaley-lg border-dotted">
             {leftTitle}
@@ -49,7 +49,7 @@ export default function FirstRowContainers({
       <div
         className={`flex px-[clamp(16px,2vw,24px)] min-h-0 w-full ${
           ifBottomRow && "h-full "
-        } xl:w-[80%] bg-transparent justify-center ${
+        } 2xl:w-[70%] xl:w-[80%] bg-transparent justify-center ${
           !leftTitle && "pt-[clamp(16px,2vw,24px)]"
         }`}
       >
@@ -59,7 +59,6 @@ export default function FirstRowContainers({
               leftScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
-            {/* down-light-shadow  */}
             <div className="absolute z-15 bg-neutral-800 border-neutral-900 scale-x-99  border-t-5 border-x-4 rounded-t-2xl left-0 top-[1px] h-6  w-full"></div>
             <div
               id={`${leftId && "task-scroll-container"}`}
