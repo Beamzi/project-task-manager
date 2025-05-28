@@ -2,6 +2,7 @@ import React from "react";
 import { GiNotebook } from "react-icons/gi";
 import { GiBurningEmbers } from "react-icons/gi";
 import Timer from "../Timer";
+import Inventory from "../Inventory";
 
 interface Props {
   data: React.ReactElement;
@@ -51,32 +52,7 @@ export default function SingleContainer({
                 scrollYDisable ? "" : "overflow-y-auto "
               } content-start  ${height ? height : localHeight}`}
             >
-              <div className="h-full w-full py-5 flex">
-                <div className="w-1/3 flex  flex-col justify-center items-center h-full border-1 rounded-xl ml-5">
-                  <div></div>
-                  <GiBurningEmbers className="w-full h-10" />
-                  <p>Sprint</p>
-                  <Timer />
-                  {/* <p>{now.getTime()}</p> */}
-                  <button className="bg-black py-1 px-1">Start</button>
-                </div>
-                <div className="w-1/3 flex  flex-col justify-center items-center h-full border-1 rounded-xl mx-5">
-                  <div></div>
-                  <GiNotebook className="w-full h-10" />
-                  <p>Quick Notes</p>
-                  <button className="bg-black py-1 px-1">new note</button>
-                </div>
-                <div className="w-1/3 flex  flex-col justify-center items-center h-full border-1 rounded-xl mr-5">
-                  <div></div>
-                  <GiBurningEmbers className="w-full h-10" />
-                  <p>Inventory</p>
-                  <button className="bg-black py-1 px-1">check</button>
-                </div>
-              </div>
-
-              {/* /////////////////////////////////////////////////////// */}
-              {/* {data} */}
-              {/* /////////////////////////////////////////////////////// */}
+              {data}
             </div>
           </div>
         </div>

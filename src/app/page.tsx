@@ -8,6 +8,7 @@ import SingleContainer from "@/components/Skeleton/SingleContainer";
 import { useContext } from "react";
 import { TaskContext } from "@/context/TaskContext";
 import { SessionContext } from "@/context/SessionContext";
+import OverviewThreeSection from "@/components/OverviewThreeSection";
 
 export default function AllTasksView() {
   const tasks = useContext(TaskContext);
@@ -42,10 +43,7 @@ export default function AllTasksView() {
         height="h-[50dvh] "
       ></FirstRowContainers>
 
-      <SingleContainer
-        data={<ListOfTasks currentTasks={tasks} />}
-        height="h-full"
-      />
+      <SingleContainer data={<OverviewThreeSection />} height="h-full" />
     </>
   );
 }
