@@ -27,13 +27,13 @@ export default function AllTasksView() {
 
   return (
     <>
-      <div className="break-words px-5 py-3 absolute top-20 right-10 bg-black border-1 rounded-xl w-60  flex content-center items-center align-middle  flex-shrink-0 justify-start  ">
+      {/* <div className="break-words px-5 py-3 absolute top-20 right-10 bg-black border-1 rounded-xl w-60  flex content-center items-center align-middle  flex-shrink-0 justify-start  ">
         <h2 className=" text-[clamp(1rem,2dvh,1.5rem)]">
           {tasks[0]
             ? `Welcome Back, ${firstNameOfUser}, You have 12 active projects `
             : `Welcome, ${firstNameOfUser}, Click 'New Project or create task to get started! `}
         </h2>
-      </div>
+      </div> */}
 
       <FirstRowContainers
         leftData={<ListOfTasks currentTasks={tasks}></ListOfTasks>}

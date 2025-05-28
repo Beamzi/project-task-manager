@@ -1,4 +1,8 @@
-import React from "react";
+"use client";
+
+import { ChevronDoubleRightIcon } from "@heroicons/react/24/outline";
+import { ChevronDoubleLeftIcon } from "@heroicons/react/24/solid";
+import React, { useState, useEffect } from "react";
 
 interface Props {
   leftData: React.ReactElement;
@@ -30,10 +34,13 @@ export default function FirstRowContainers({
   leftId,
   rightId,
 }: Props) {
+  const [expand, setExpand] = useState(false);
+  const [comp, setComp] = useState();
+
   return (
     // we usually put this next to h-full in ifbottomRow, but for now it's commented pb-[clamp(16px,2vw,24px)]
     <>
-      <div className="flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
+      <div className="invisible absolute md:visible md:relative flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
         {leftTitle && (
           <p className="px-2 w-full  text-start py-2 text-scaley-lg border-dotted">
             {leftTitle}
@@ -46,6 +53,14 @@ export default function FirstRowContainers({
         )}
       </div>
 
+      <div className=" md:hidden flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
+        {leftTitle && (
+          <p className="px-2 w-full  text-start py-2 text-scaley-lg border-dotted">
+            {!expand ? `${leftTitle}` : `${rightTitle}`}
+          </p>
+        )}
+      </div>
+
       <div
         className={`flex px-[clamp(16px,2vw,24px)] min-h-0 w-full ${
           ifBottomRow && "h-full "
@@ -53,29 +68,55 @@ export default function FirstRowContainers({
           !leftTitle && "pt-[clamp(16px,2vw,24px)]"
         }`}
       >
-        <div className={leftWidth ? leftWidth : `min-h-0 w-1/2`}>
+        <div
+          onClick={() => setExpand(false)}
+          className={
+            leftWidth
+              ? leftWidth
+              : `min-h-0 md:w-1/2 w-1/8 ${!expand && "w-full md:1/2 "}`
+          }
+        >
           <div
             className={`rounded-2xl flex-1 justify-center align-middle relative custom-top-accent  flex-col h-full min-h-0 ${
               leftScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
-            <div className="absolute z-15 bg-neutral-800 border-neutral-900 scale-x-99  border-t-5 border-x-4 rounded-t-2xl left-0 top-[1px] h-6  w-full"></div>
             <div
               id={`${leftId && "task-scroll-container"}`}
-              className={` pt-4 rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10  pb-31 flex w-full flex-wrap ${
+              className={` rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10  pb-31 flex w-full flex-wrap  ${
+                expand && "!overflow-y-hidden md:!overflow-y-scroll"
+              }  ${
                 leftScrollYDisable
                   ? ""
                   : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden"
               } content-start  ${height ? height : localHeight}`}
             >
-              {leftData}
+              <div
+                className={`${
+                  !expand && "hidden"
+                } md:hidden flex items-center pb-4 justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
+              >
+                <ChevronDoubleRightIcon className="w-8" />
+              </div>
+              <div
+                className={`${
+                  expand && "invisible md:visible  opacity-0 md:opacity-100"
+                } w-full h-full`}
+              >
+                {leftData}
+              </div>
+              {/* {leftData} */}
+              {/* <div className="w-full">{leftData}</div> */}
             </div>
           </div>
         </div>
 
         <div
+          onClick={() => setExpand(true)}
           className={`${
-            rightWidth ? rightWidth : "min-h-0 w-1/2 "
+            rightWidth
+              ? rightWidth
+              : `min-h-0 md:w-1/2 w-1/8 ${expand && "w-full md:1/2 "}`
           } flex flex-col ml-[clamp(16px,2vw,24px)]`}
         >
           <div
@@ -89,12 +130,27 @@ export default function FirstRowContainers({
                 rightScrollYDisable
                   ? ""
                   : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden"
-              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap   ${
+              } ${
+                !expand && "!overflow-y-hidden md:!overflow-y-scroll"
+              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap  ${
                 height ? height : localHeight
               } w-full`}
             >
-              {rightData}
-              {/* <ListOfReminderTasks /> */}
+              <div
+                className={`${
+                  expand && "hidden"
+                } md:hidden flex pb-4 items-center justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
+              >
+                <ChevronDoubleLeftIcon className="w-8" />
+              </div>
+              <div
+                className={`${
+                  !expand && "invisible md:visible opacity-0 md:opacity-100"
+                } w-full h-full`}
+              >
+                {" "}
+                {rightData}
+              </div>
             </div>
           </div>
         </div>

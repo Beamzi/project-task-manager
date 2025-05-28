@@ -17,7 +17,7 @@ export default function OverviewThreeSection() {
       <div className="w-1/3 flex  flex-col justify-center items-center h-full border-1 rounded-xl ml-5">
         <div></div>
         <GiBurningEmbers className="w-full h-10" />
-        <p>Due Date Chart</p>
+        <p>Time Chart</p>
         <button
           onClick={() => setShowAnalytics(true)}
           className="bg-black py-1 px-1"
