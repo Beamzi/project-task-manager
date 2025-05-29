@@ -7,15 +7,12 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import NewTask from "../NewTask";
 
 export interface Props {
-  dateId: string;
+  dateId?: string;
   title: string;
   date: Date;
   content: string | null;
   overDue?: boolean;
 }
-
-const overflowEllipsis =
-  "block overflow-hidden whitespace-nowrap text-ellipsis w-10";
 
 export default function ScheduleTask({
   dateId,
@@ -35,10 +32,6 @@ export default function ScheduleTask({
       dueDate === currentDate ? `Today ${dateForDisplay}` : `${dateForDisplay}`;
     return date;
   };
-
-  // const isDate = (date: string) => {
-  //   const newDate =
-  // }
 
   return (
     <div className="overflow-hidden w-full border-b-1 border-dotted ">
@@ -91,8 +84,6 @@ export default function ScheduleTask({
           {showForm && (
             <NewTask setShowForm={setShowForm} fixedDate={fixedDate} />
           )}
-
-          {/* {overDue && <h3 className="text-red-700">{getDate()}</h3>} */}
         </div>
       </div>
     </div>

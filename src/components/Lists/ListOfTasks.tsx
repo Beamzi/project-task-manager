@@ -2,11 +2,10 @@
 
 import React from "react";
 import Task from "../Task";
-import { format } from "date-fns";
-import type { TaskType } from "@/context/TaskContext";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
 interface NewProps {
-  currentTasks: TaskType[] | undefined;
+  currentTasks: getAllTasksTypeOf[] | undefined;
 }
 
 export default function ListOfTasks({ currentTasks }: NewProps) {

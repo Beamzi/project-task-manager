@@ -3,12 +3,11 @@
 import React from "react";
 import { useContext, useState } from "react";
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
-import ListOfScheduleTasks from "../Schedule/ListOfScheduleTasks";
 import ScheduleTask from "../Schedule/ScheduleTask";
 
 export default function ListOfReminderTasks() {
   const tasksByDueDate = useContext(TaskDueDateContext);
-  const [overDue, isOverDue] = useState(true);
+  const [overDue] = useState(true);
 
   if (!tasksByDueDate) {
     throw new Error("dueDateTasks not loaded");

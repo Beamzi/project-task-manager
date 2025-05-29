@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import ScheduleTask from "./ScheduleTask";
 import { format, parseISO } from "date-fns";
-import { CheckCircleIcon, PlusIcon } from "@heroicons/react/24/solid";
-import { useState, useRef, useContext } from "react";
+import { PlusIcon } from "@heroicons/react/24/solid";
+import { useState, useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { dateRange, ScheduleTasks } from "./helpers";
 import NewTask from "../NewTask";
 
 export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
-  const [overDue, isOverDue] = useState(true);
+  const [overDue] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [clickedDate, setClickedDate] = useState<Date>();
 
@@ -48,7 +48,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
                 <ScheduleTask
                   overDue={overDue}
                   key={item.id}
-                  taskId={item.id}
+                  // taskId={item.id}
                   title={item.title}
                   date={item.date}
                   content={item.content}

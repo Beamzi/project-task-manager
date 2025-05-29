@@ -7,8 +7,6 @@ interface Props {
   setList: (value: boolean) => void;
   setTitleCheck: (value: string) => void;
   setAssignCheck: (value: boolean) => void;
-
-  titleCheck: string;
 }
 
 export default function LinkTaskToProjectBtn({

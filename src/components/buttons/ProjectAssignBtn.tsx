@@ -5,7 +5,6 @@ import { useContext } from "react";
 import { useState } from "react";
 import React from "react";
 import LinkTaskToProjectBtn from "./LinkTaskToProjectBtn";
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import { motion } from "motion/react";
 import ChevronDown from "../icons/ChevronDown";
 import DropDown from "../icons/DropDown";
@@ -20,7 +19,7 @@ export default function ProjectAssignBtn({
   parentHover,
 }: {
   taskId: string;
-  projectIdOfTask: string;
+  projectIdOfTask: string | null;
   minimise: boolean;
   parentHover: boolean;
 }) {
@@ -84,7 +83,7 @@ export default function ProjectAssignBtn({
               projectId={item.id}
               taskId={taskId}
             >
-              {item.title}
+              {/* {item.title} */}
             </LinkTaskToProjectBtn>
           </motion.li>
         ))}

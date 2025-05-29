@@ -3,15 +3,15 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
-import { FullProject } from "@/app/projects/[id]/page";
+// import { FullProject } from "@/app/projects/[id]/page";
 import EditComment from "./EditComment";
 import SaveOnchange from "./SaveOnchange";
-import { desc } from "motion/react-client";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
 interface ProjectViewProps {
-  project: FullProject | null;
-  comments: FullProject["comments"] | undefined;
+  project: GetAllProjecttypeOf | null;
+  comments: GetAllProjecttypeOf["comments"] | undefined;
   profileImg: string | null | undefined;
 }
 
@@ -79,7 +79,7 @@ export default function ProjectView({
   }, [title, description]);
 
   return (
-    <div className="project-view px-3 pr-2 w-full py-2 flex flex-col">
+    <div className="project-view px-3 pb-31 pr-2 w-full py-2 flex flex-col">
       <h3 className="break-all text-sm text-start py-2">
         {project?.tasks?.[0]?.author?.name}
       </h3>

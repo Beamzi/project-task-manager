@@ -5,19 +5,12 @@ import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
 import { useContext, useEffect, useReducer, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
-import {
-  CheckCircleIcon,
-  CheckIcon,
-  PencilSquareIcon,
-  PencilIcon,
-  CalendarDaysIcon,
-} from "@heroicons/react/24/outline";
+import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import MinimiseTaskBtn from "./buttons/MinimiseTaskBtn";
 import { motion } from "motion/react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { format } from "date-fns";
 import TimeOptions from "./TimeOptions";
-import { transform } from "next/dist/build/swc/generated-native";
 import SaveOnchange from "./SaveOnchange";
 import { createPortal } from "react-dom";
 
@@ -31,7 +24,20 @@ interface Props {
   projectId: string | null;
 }
 
-function reducer(state, action) {
+interface TaskState {
+  newTitle: string;
+  newContent: string | null;
+  newDate: string;
+}
+
+type TaskAction = {
+  type: "change-values";
+  propTitle?: string;
+  propContent?: string | null;
+  propDate?: string;
+};
+
+function reducer(state: TaskState, action: TaskAction) {
   switch (action.type) {
     case "change-values": {
       return {
@@ -143,13 +149,13 @@ export default function Task({
           transition={{ duration: 0.3 }}
           animate={minimise ? { height: 90 } : { height: 280 }}
           //please just be aware of this p offset if layout problems
-          className={`origin-top all-tasks tasks-custom-breakpoint  pt-1 ${
+          className={`origin-top  all-tasks tasks-custom-breakpoint    pt-1 ${
             minimise
               ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
-              : "pl-4"
-          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted px-3 flex flex-col`}
+              : "md:pl-4"
+          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted md:px-3 flex flex-col`}
         >
-          <div className="flex py-1">
+          <div className="flex py-1 ">
             <ProjectAssignBtn
               taskId={id}
               projectIdOfTask={projectId}
@@ -159,7 +165,7 @@ export default function Task({
 
             <div
               className={`
-            absolute top-1 py-1  right-0 z-10 flex justify-end pl-1 ${
+            absolute top-1 py-1  right-0 z-10 flex justify-end pl-1  ${
               minimise && onHover
             }`}
             >
@@ -179,11 +185,11 @@ export default function Task({
                 setMinimise(false);
                 setSelect(true);
               }}
-              className={`py-1 w-full text-start text-sm px-2 text-scaley-base  font-medium overflow-hidden whitespace-nowrap text-ellipsis   ${
+              className={`py-1   md:W-full text-start text-sm px-2 text-scaley-base font-medium overflow-hidden whitespace-nowrap text-ellipsis   ${
                 minimise && "-mt-2 bg-transparent text-neutral-400"
               }`}
             >
-              {state.newTitle}
+              {state.newTitle}asdasd
             </button>
           ) : (
             <motion.input
@@ -197,7 +203,7 @@ export default function Task({
               }}
               onClick={() => setSelect(true)}
               type="text"
-              className={`rounded-t-lg text-scaley-base text-neutral-400 ${
+              className={`rounded-t-lg w-full  text-scaley-base text-neutral-400 ${
                 !editing ? "" : `inset-shadow-sm inset-shadow-rose-600`
               } py-1 px-2 text-scaley-base font-medium origin-top ${
                 minimise ? "-mt-2 bg-transparent text-neutral-400" : "mt-1"
@@ -224,8 +230,8 @@ export default function Task({
                   editing && select
                     ? `inset-shadow-sm inset-shadow-rose-600`
                     : ""
-                } text-scaley-sm  font-light origin-top px-2 py-1 h-[clamp(2rem,13vh,10rem)]`}
-                value={select ? state.newContent : content}
+                } text-scaley-sm  font-light origin-top px-2  py-1 h-[clamp(2rem,13vh,10rem)]`}
+                value={(select ? state.newContent : content) ?? ""}
                 onChange={(e) =>
                   dispatch({
                     type: "change-values",
@@ -234,12 +240,11 @@ export default function Task({
                 }
                 onClick={() => setSelect(true)}
               ></motion.textarea>
-
               <motion.button
                 transition={{ duration: 0.3, delay: 0.4 }}
                 initial={{ opacity: 0, scaleY: 0 }}
                 animate={{ opacity: 1, scaleY: 1 }}
-                className="relative flex border-1 w-full text-left p-1 mt-2  hover:text-rose-600 "
+                className="relative flex border-1 w-full text-left p-1 mt-2   hover:text-rose-600 "
                 onClick={() =>
                   setShowTimeOptions(showTimeOptions ? false : true)
                 }
@@ -247,7 +252,7 @@ export default function Task({
                 <CalendarDaysIcon className="mr-1 w-5" />
                 {format(new Date(quickDate), "EEE MMM d")}
               </motion.button>
-              <motion.div className="relative z-100">
+              <motion.div className="relative z-100 ">
                 {showTimeOptions &&
                   createPortal(
                     <>
@@ -273,7 +278,7 @@ export default function Task({
                 transition={{ duration: 0.3, delay: 0.5 }}
                 initial={{ opacity: 0, scaleY: 0 }}
                 animate={{ opacity: 1, scaleY: 1 }}
-                className="flex py-1.5 relative z-20"
+                className="flex py-1.5 relative z-20 "
               >
                 <SaveOnchange editing={editing} />
                 <PriorityBtn
@@ -290,21 +295,3 @@ export default function Task({
     </>
   );
 }
-
-// <motion.input
-//   type="datetime-local"
-//   min={`${currentDate}`}
-//   max={`${getYear()}-12-31T23:59`}
-//   value={
-//     select
-//       ? state.newDate
-//       : format(new Date(date), "yyyy-MM-dd'T'HH:mm")
-//   }
-//   onChange={(e) => {
-//     dispatch({ type: "change-values", propDate: e.target.value });
-//   }}
-//   onClick={() => {
-//     setSelect(true);
-//   }}
-//   className="py-1 px-2 relative"
-// ></motion.input>

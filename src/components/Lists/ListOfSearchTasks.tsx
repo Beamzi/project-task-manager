@@ -2,10 +2,10 @@
 import React from "react";
 import Fuse, { Expression } from "fuse.js";
 import Task from "../Task";
-import { TasksForSorting } from "@/app/inbox/page";
+import { GetAllTasksByDueDateTypeOf } from "@/lib/queries/getAllTasksByDueDate";
 
 interface Props {
-  currentTasks: TasksForSorting[];
+  currentTasks: GetAllTasksByDueDateTypeOf[];
   searching: string | Expression;
 }
 export default function ListOfSearchTasks({ currentTasks, searching }: Props) {

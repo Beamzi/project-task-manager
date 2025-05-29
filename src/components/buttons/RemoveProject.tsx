@@ -1,12 +1,16 @@
 "use client";
 
 import React, { useContext, useState } from "react";
-import { FullProject } from "@/app/projects/[id]/page";
 import { MinusCircleIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { redirect } from "next/navigation";
+import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
-export default function RemoveProject({ project }: { project: FullProject }) {
+export default function RemoveProject({
+  project,
+}: {
+  project: GetAllProjecttypeOf;
+}) {
   const [showDelete, setShowDelete] = useState(false);
   async function deleteProject() {
     try {

@@ -6,10 +6,10 @@ import { createPortal } from "react-dom";
 import SearchClient from "./SearchClient";
 import SingleContainer from "./Skeleton/SingleContainer";
 import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
-import { TaskDueDateContext } from "@/context/TaskDueDateContext";
+import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
 
 export default function SearchModal() {
-  const tasks = useContext(TaskDueDateContext);
+  const tasks = useContext(AllTasksDueDateContext);
   if (!tasks) {
     throw new Error("context not provided");
   }

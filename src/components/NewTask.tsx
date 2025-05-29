@@ -2,8 +2,8 @@
 
 import { format } from "date-fns";
 
-import { useRouter } from "next/navigation";
-import { createElement, useContext, useState } from "react";
+import { FormEvent } from "react";
+import { useContext, useState } from "react";
 import TimeOptions from "./TimeOptions";
 import { projectContext } from "@/context/ProjectContext";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -19,7 +19,6 @@ interface Props {
 }
 
 export default function NewTask({ setShowForm, fixedDate }: Props) {
-  const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isNewTask, setIsNewTask] = useState(false);
@@ -36,7 +35,7 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
   const projects = useContext(projectContext);
   if (!projects) throw new Error("projects not loaded");
 
-  async function createTask(event) {
+  async function createTask(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
       await fetch("/api/create-task", {
@@ -51,17 +50,10 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
           projectId: newTaskProjectId ? newTaskProjectId : undefined,
         }),
       });
-      // router.refresh();
     } catch (e) {
       console.error(e);
     }
   }
-
-  const getYear = () => new Date().getFullYear();
-
-  const currentDate = format(new Date(), "yyyy-MM-dd'T'HH:mm");
-
-  console.log(fixedDate);
 
   return (
     <form
@@ -175,10 +167,6 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
         <div className="flex">
           <button
             type="submit"
-            onClick={(e) => {
-              // createTask(e);
-              // setShowForm(false);
-            }}
             className="border-1 rounded-lg w-1/2 mr-2 text-center py-2"
           >
             <CheckCircleIcon />
@@ -197,5 +185,3 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
     </form>
   );
 }
-
-//9999-12-31T23:59

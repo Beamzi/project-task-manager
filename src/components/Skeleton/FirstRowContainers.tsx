@@ -35,10 +35,8 @@ export default function FirstRowContainers({
   rightId,
 }: Props) {
   const [expand, setExpand] = useState(false);
-  const [comp, setComp] = useState();
 
   return (
-    // we usually put this next to h-full in ifbottomRow, but for now it's commented pb-[clamp(16px,2vw,24px)]
     <>
       <div className="invisible absolute md:visible md:relative flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
         {leftTitle && (
@@ -77,7 +75,7 @@ export default function FirstRowContainers({
           }
         >
           <div
-            className={`rounded-2xl flex-1 justify-center align-middle relative custom-top-accent  flex-col h-full min-h-0 ${
+            className={`rounded-2xl flex-1 justify-center align-middle relative custom-top-accent flex-col h-full min-h-0 ${
               leftScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
@@ -132,7 +130,7 @@ export default function FirstRowContainers({
                   : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden"
               } ${
                 !expand && "!overflow-y-hidden md:!overflow-y-scroll"
-              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap  ${
+              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
                 height ? height : localHeight
               } w-full`}
             >
@@ -148,7 +146,6 @@ export default function FirstRowContainers({
                   !expand && "invisible md:visible opacity-0 md:opacity-100"
                 } w-full h-full`}
               >
-                {" "}
                 {rightData}
               </div>
             </div>

@@ -3,11 +3,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
 import { project } from "@/context/ProjectContext";
-import type { TaskType } from "@/context/TaskContext";
+// import type { TaskType } from "@/context/TaskContext";
 interface NewProps {
-  modelList: TaskType[] | undefined | project[];
+  modelList: getAllTasksTypeOf[] | undefined | project[];
 }
 
 export default function EasySelect({ modelList }: NewProps) {

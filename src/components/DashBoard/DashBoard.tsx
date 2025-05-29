@@ -1,6 +1,5 @@
 import SideBar from "./SideBar";
 import { DashBoardProvider } from "../Providers/DashBoardProvider";
-import DashBoardOverlay from "./DashBoardOverlay";
 import { ProjectProvider } from "../Providers/ProjectProvider";
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../../auth";
@@ -76,7 +75,6 @@ export default async function DashBoard({
             >
               <CommentsNonProjectProvider value={comments}>
                 <PrioritiesProvider value={priorities}>
-                  <DashBoardOverlay />
                   <div className="box-border h-screen md:p-5  overflow-hidden flex flex-col ">
                     <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
                     <TopBar className="z-2 gradient-for-thin-containers invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>

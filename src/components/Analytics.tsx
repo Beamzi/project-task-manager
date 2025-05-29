@@ -23,7 +23,8 @@ export default function Analytics() {
     taskNumber: index + 1,
     title: item.title,
     daysBetween: Math.floor(
-      (new Date(item.date) - new Date(new Date())) / (1000 * 60 * 60 * 24)
+      (new Date(item.date).getTime() - new Date().getTime()) /
+        (1000 * 60 * 60 * 24)
     ),
     isPriority: item.priority,
   }));

@@ -22,7 +22,7 @@ const getAllProjectsQuery = {
         },
         comments: {
             orderBy: {
-                createdAt: 'desc'
+                createdAt: 'asc'
             },
             include: {
                 author: {

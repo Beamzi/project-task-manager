@@ -5,12 +5,13 @@ import { useState, useRef } from "react";
 import FirstRowContainers from "./Skeleton/FirstRowContainers";
 import SortByButtons from "./buttons/SortByButtons";
 import ListOfTasks from "./Lists/ListOfTasks";
-import { TasksForSorting } from "@/app/inbox/page";
 import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
 import SearchClient from "./SearchClient";
 
+import { GetAllTasksByDueDateTypeOf } from "@/lib/queries/getAllTasksByDueDate";
+
 interface Props {
-  tasks: TasksForSorting[];
+  tasks: GetAllTasksByDueDateTypeOf[];
 }
 
 export default function InboxClient({ tasks }: Props) {
