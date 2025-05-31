@@ -12,6 +12,20 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
     string[]
   >([]);
 
+  type TaskValues = {
+    title: string;
+    content: string;
+    date: Date;
+  };
+
+  const [newTaskValues, setNewTaskValues] = useState<TaskValues>({
+    title: "",
+    content: "",
+    date: new Date(),
+  });
+
+  const [newTaskFlag, setNewTaskFlag] = useState(false);
+
   return (
     <DashBoardContext.Provider
       value={{
@@ -24,6 +38,10 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
         setGlobalMinimised,
         removeProjectFromDashboard,
         setRemoveProjectFromDashboard,
+        newTaskValues,
+        setNewTaskValues,
+        newTaskFlag,
+        setNewTaskFlag,
       }}
     >
       {children}

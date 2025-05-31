@@ -11,5 +11,13 @@ interface Props {
   setGlobalMinimised: (value: boolean) => void;
   removeProjectFromDashboard: string[];
   setRemoveProjectFromDashboard: React.Dispatch<React.SetStateAction<string[]>>;
+  newTaskValues: { title: string; content: string; date: Date };
+  setNewTaskValues: (value: {
+    title: string;
+    content: string;
+    date: Date;
+  }) => void;
+  newTaskFlag: boolean;
+  setNewTaskFlag: (value: boolean) => void;
 }
 export const DashBoardContext = createContext<Props | null>(null);

@@ -16,7 +16,7 @@ export default function PriorityBtn({
   localPriorityState,
   setLocalPriorityState,
 }: {
-  id: string;
+  id?: string;
   priorityState: boolean;
   localPriorityState: boolean;
   setLocalPriorityState: (value: boolean) => void;

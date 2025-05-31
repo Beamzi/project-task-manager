@@ -7,18 +7,22 @@ import { useContext, useState } from "react";
 import TimeOptions from "./TimeOptions";
 import { projectContext } from "@/context/ProjectContext";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 import {
   CheckCircleIcon,
   XCircleIcon,
   CalendarIcon,
   ListBulletIcon,
 } from "@heroicons/react/24/outline";
+import { DashBoardContext } from "@/context/DashBoardContext";
 interface Props {
   setShowForm: (type: boolean) => void;
   fixedDate?: Date;
 }
 
 export default function NewTask({ setShowForm, fixedDate }: Props) {
+  const router = useRouter();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isNewTask, setIsNewTask] = useState(false);
@@ -35,6 +39,14 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
   const projects = useContext(projectContext);
   if (!projects) throw new Error("projects not loaded");
 
+  const dashboardProps = useContext(DashBoardContext);
+
+  if (!dashboardProps) {
+    throw new Error("dashboard context not loaded");
+  }
+
+  const { newTaskValues, setNewTaskValues, setNewTaskFlag } = dashboardProps;
+
   async function createTask(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
@@ -50,6 +62,8 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
           projectId: newTaskProjectId ? newTaskProjectId : undefined,
         }),
       });
+
+      router.refresh();
     } catch (e) {
       console.error(e);
     }
@@ -60,12 +74,14 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
       onSubmit={(e) => {
         createTask(e);
         setShowForm(false);
+        setNewTaskFlag(true);
+        setNewTaskValues({ title: title, content: content, date: quickDate });
       }}
       className="new-task-local-scope"
     >
       <div
         onClick={() => setShowForm(false)}
-        className={` text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+        className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
       ></div>
       <div className="fixed md:w-120 min-w-80 top-[50%] left-[50%] z-100 translate-[-50%]  flex flex-col p-5 gradient-for-inner-containers border-1 rounded-xl outline-4 -outline-offset-5 outline-neutral-900">
         <input

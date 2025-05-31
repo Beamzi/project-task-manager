@@ -15,13 +15,13 @@ import SaveOnchange from "./SaveOnchange";
 import { createPortal } from "react-dom";
 
 interface Props {
-  author: string | null | undefined;
+  author?: string | null | undefined;
   title: string;
   date: Date;
   content: string | null;
-  id: string;
+  id?: string;
   priority: boolean;
-  projectId: string | null;
+  projectId?: string | null;
 }
 
 interface TaskState {
@@ -155,7 +155,7 @@ export default function Task({
               : "md:pl-4"
           } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted md:px-3 flex flex-col`}
         >
-          <div className="flex py-1 ">
+          <div className="flex py-1">
             <ProjectAssignBtn
               taskId={id}
               projectIdOfTask={projectId}
@@ -189,7 +189,7 @@ export default function Task({
                 minimise && "-mt-2 bg-transparent text-neutral-400"
               }`}
             >
-              {state.newTitle}asdasd
+              {state.newTitle}
             </button>
           ) : (
             <motion.input

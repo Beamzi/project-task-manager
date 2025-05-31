@@ -40,7 +40,7 @@ export default function AllTasksView() {
         rightData={<ListOfReminderTasks />}
         leftTitle="Recently Created"
         rightTitle="Reminders"
-        height="h-[50dvh] "
+        height="h-[50dvh]"
       ></FirstRowContainers>
 
       <SingleContainer data={<OverviewThreeSection />} height="h-full" />

@@ -5,7 +5,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
 
-function RemoveTaskBtn({ id }: { id: string }) {
+function RemoveTaskBtn({ id }: { id?: string }) {
   const [showDelete, setShowDelete] = useState(false);
   const router = useRouter();
   async function deleteTask() {

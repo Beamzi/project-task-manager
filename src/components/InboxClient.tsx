@@ -77,6 +77,7 @@ export default function InboxClient({ tasks }: Props) {
         leftWidth="w-4/2 xl:w-6/2"
         ifBottomRow={true}
         rightScrollYDisable={true}
+        noExpand={true}
         rightData={
           <SortByButtons
             setAction={setAction}

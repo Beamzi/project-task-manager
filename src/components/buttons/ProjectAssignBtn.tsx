@@ -18,8 +18,8 @@ export default function ProjectAssignBtn({
   minimise,
   parentHover,
 }: {
-  taskId: string;
-  projectIdOfTask: string | null;
+  taskId?: string;
+  projectIdOfTask?: string | null;
   minimise: boolean;
   parentHover: boolean;
 }) {

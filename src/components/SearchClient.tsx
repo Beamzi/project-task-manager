@@ -28,7 +28,7 @@ export default function SearchClient({
       <div
         className={`px-[clamp(16px,2vw,24px)]  ${
           xlWidth ? "aa" : "xl:px-7"
-        } w-full flex border- justify-center items-center content-center `}
+        } w-full flex  justify-center items-center content-center `}
       >
         <div
           className={`gradient-for-inner-containers border-1 outline-5 -outline-offset-6 outline-neutral-900 rounded-2xl w-full flex px-[clamp(16px,2vw,24px)] py-[clamp(8px,2vh,16px)] mt-[clamp(16px,2vh,24px)] ${

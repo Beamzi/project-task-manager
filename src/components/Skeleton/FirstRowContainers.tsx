@@ -17,6 +17,7 @@ interface Props {
   ifBottomRow?: boolean;
   leftId?: boolean;
   rightId?: boolean;
+  noExpand?: boolean;
 }
 const localHeight = "h-[40dvh]";
 
@@ -33,6 +34,7 @@ export default function FirstRowContainers({
   rightScrollYDisable,
   leftId,
   rightId,
+  noExpand,
 }: Props) {
   const [expand, setExpand] = useState(false);
 
@@ -54,7 +56,7 @@ export default function FirstRowContainers({
       <div className=" md:hidden flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
         {leftTitle && (
           <p className="px-2 w-full  text-start py-2 text-scaley-lg border-dotted">
-            {!expand ? `${leftTitle}` : `${rightTitle}`}
+            {!noExpand && !expand ? `${leftTitle}` : `${rightTitle}`}
           </p>
         )}
       </div>
@@ -71,7 +73,9 @@ export default function FirstRowContainers({
           className={
             leftWidth
               ? leftWidth
-              : `min-h-0 md:w-1/2 w-1/8 ${!expand && "w-full md:1/2 "}`
+              : `min-h-0 md:w-1/2 w-1/8 ${
+                  !noExpand && !expand && "w-full md:1/2 "
+                }`
           }
         >
           <div
@@ -82,23 +86,30 @@ export default function FirstRowContainers({
             <div
               id={`${leftId && "task-scroll-container"}`}
               className={` rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10  pb-31 flex w-full flex-wrap  ${
-                expand && "!overflow-y-hidden md:!overflow-y-scroll"
+                !noExpand &&
+                expand &&
+                "!overflow-y-hidden md:!overflow-y-scroll"
               }  ${
                 leftScrollYDisable
                   ? ""
                   : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden"
               } content-start  ${height ? height : localHeight}`}
             >
+              {!noExpand && (
+                <div
+                  className={`${
+                    !noExpand && !expand && "hidden"
+                  } md:hidden flex items-center pb-4 justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
+                >
+                  <ChevronDoubleRightIcon className="w-8" />
+                </div>
+              )}
+
               <div
                 className={`${
-                  !expand && "hidden"
-                } md:hidden flex items-center pb-4 justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
-              >
-                <ChevronDoubleRightIcon className="w-8" />
-              </div>
-              <div
-                className={`${
-                  expand && "invisible md:visible  opacity-0 md:opacity-100"
+                  !noExpand &&
+                  expand &&
+                  "invisible md:visible  opacity-0 md:opacity-100"
                 } w-full h-full`}
               >
                 {leftData}
@@ -114,7 +125,9 @@ export default function FirstRowContainers({
           className={`${
             rightWidth
               ? rightWidth
-              : `min-h-0 md:w-1/2 w-1/8 ${expand && "w-full md:1/2 "}`
+              : `min-h-0 md:w-1/2 w-1/8 ${
+                  !noExpand && expand && "w-full md:1/2 "
+                }`
           } flex flex-col ml-[clamp(16px,2vw,24px)]`}
         >
           <div
@@ -129,21 +142,27 @@ export default function FirstRowContainers({
                   ? ""
                   : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden"
               } ${
-                !expand && "!overflow-y-hidden md:!overflow-y-scroll"
+                !noExpand &&
+                !expand &&
+                "!overflow-y-hidden md:!overflow-y-scroll"
               } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
                 height ? height : localHeight
               } w-full`}
             >
+              {!noExpand && (
+                <div
+                  className={`${
+                    !noExpand && expand && "hidden"
+                  } md:hidden flex pb-4 items-center justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
+                >
+                  <ChevronDoubleLeftIcon className="w-8" />
+                </div>
+              )}
               <div
                 className={`${
-                  expand && "hidden"
-                } md:hidden flex pb-4 items-center justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
-              >
-                <ChevronDoubleLeftIcon className="w-8" />
-              </div>
-              <div
-                className={`${
-                  !expand && "invisible md:visible opacity-0 md:opacity-100"
+                  !noExpand &&
+                  !expand &&
+                  "invisible md:visible opacity-0 md:opacity-100"
                 } w-full h-full`}
               >
                 {rightData}

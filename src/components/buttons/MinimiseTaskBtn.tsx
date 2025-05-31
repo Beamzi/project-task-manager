@@ -8,7 +8,7 @@ import { useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 
 interface Props {
-  id: string;
+  id?: string;
   setMinimise: (value: boolean) => void;
   minimise: boolean;
   setStatus: (value: string) => void;

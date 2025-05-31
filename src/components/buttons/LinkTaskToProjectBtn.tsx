@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 interface Props {
   title: string;
   projectId: string;
-  taskId: string;
+  taskId?: string;
   setList: (value: boolean) => void;
   setTitleCheck: (value: string) => void;
   setAssignCheck: (value: boolean) => void;
@@ -30,6 +30,7 @@ export default function LinkTaskToProjectBtn({
       });
 
       const data = await response.json();
+      router.refresh();
     } catch (e) {
       console.error(e);
     }
