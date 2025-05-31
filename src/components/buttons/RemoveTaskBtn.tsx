@@ -5,7 +5,12 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
 
-function RemoveTaskBtn({ id }: { id?: string }) {
+interface Props {
+  id?: string;
+  setHideInClient: (value: boolean) => void;
+}
+
+function RemoveTaskBtn({ id, setHideInClient }: Props) {
   const [showDelete, setShowDelete] = useState(false);
   const router = useRouter();
   async function deleteTask() {
@@ -17,7 +22,7 @@ function RemoveTaskBtn({ id }: { id?: string }) {
         },
         body: JSON.stringify({ id: id }),
       });
-      router.refresh();
+      // router.refresh();
     } catch (e) {
       console.error(e);
     }
@@ -42,6 +47,7 @@ function RemoveTaskBtn({ id }: { id?: string }) {
                 className="nested-buttons mr-1 border-1 p-1 px-2 w-full"
                 onClick={() => {
                   deleteTask();
+                  setHideInClient(true);
                 }}
               >
                 Yes

@@ -1,5 +1,12 @@
-import { createContext } from "react";
+import React, { createContext } from "react";
 import { RefObject } from "react";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
+
+export interface TaskInput {
+  title: string;
+  content: string;
+  date: Date;
+}
 
 interface Props {
   modal: boolean;
@@ -11,13 +18,11 @@ interface Props {
   setGlobalMinimised: (value: boolean) => void;
   removeProjectFromDashboard: string[];
   setRemoveProjectFromDashboard: React.Dispatch<React.SetStateAction<string[]>>;
-  newTaskValues: { title: string; content: string; date: Date };
-  setNewTaskValues: (value: {
-    title: string;
-    content: string;
-    date: Date;
-  }) => void;
-  newTaskFlag: boolean;
-  setNewTaskFlag: (value: boolean) => void;
+
+  setNewTaskValues: React.Dispatch<React.SetStateAction<TaskInput[]>>;
+  newTaskValues: TaskInput[];
+
+  setNewTaskResponse: React.Dispatch<React.SetStateAction<getAllTasksTypeOf[]>>;
+  newTaskResponse: getAllTasksTypeOf[];
 }
 export const DashBoardContext = createContext<Props | null>(null);

@@ -16,34 +16,29 @@ export default function ListOfTasks({ currentTasks }: NewProps) {
     throw new Error("dashboard context not loaded");
   }
 
-  const { newTaskValues, newTaskFlag, setNewTaskFlag } = dashboardProps;
+  const { newTaskValues, newTaskResponse } = dashboardProps;
 
-  const prevLength = useRef(currentTasks?.length || 0);
+  const newTaskValuesSorted = newTaskValues.sort(
+    (a, b) => b.date.getTime() - a.date.getTime()
+  );
 
-  useEffect(() => {
-    const currentLength = currentTasks?.length || 0;
-    const prevLengthRef = prevLength.current;
-
-    if (prevLengthRef < currentLength) {
-      setNewTaskFlag(false);
-    }
-
-    prevLength.current = currentLength;
-  }, [currentTasks, prevLength]);
+  const newTaskResponseSorted = newTaskResponse?.sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   return (
     <>
-      {newTaskFlag && (
+      {newTaskValuesSorted.map((item, index) => (
         <Task
-          // author={"temp"}
-          title={newTaskValues.title}
-          date={newTaskValues.date}
-          content={newTaskValues.content}
-          // id={"temp"}
-          priority={false}
-          // projectId={"temp"}
-        />
-      )}
+          key={item.title}
+          title={item.title}
+          date={item.date}
+          content={item.content}
+          priority={newTaskResponseSorted[index]?.priority}
+          id={newTaskResponseSorted[index]?.id}
+          projectId={newTaskResponseSorted[index]?.projectId}
+        ></Task>
+      ))}
 
       {currentTasks?.map((item) => (
         <Task
@@ -60,15 +55,3 @@ export default function ListOfTasks({ currentTasks }: NewProps) {
     </>
   );
 }
-
-// const prevLengthRef = useRef(currentTasks?.length || 0);
-
-// useEffect(() => {
-//   const currentLength = currentTasks?.length || 0;
-//   const prevLength = prevLengthRef.current;
-
-//   if (currentLength > prevLength) {
-//     setNewTaskFlag(false);
-//   }
-//   prevLengthRef.current = currentLength;
-// }, [currentTasks, newTaskFlag]);

@@ -45,12 +45,13 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
     throw new Error("dashboard context not loaded");
   }
 
-  const { newTaskValues, setNewTaskValues, setNewTaskFlag } = dashboardProps;
+  const { newTaskValues, setNewTaskValues, setNewTaskResponse } =
+    dashboardProps;
 
   async function createTask(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     try {
-      await fetch("/api/create-task", {
+      const request = await fetch("/api/create-task", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -62,8 +63,8 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
           projectId: newTaskProjectId ? newTaskProjectId : undefined,
         }),
       });
-
-      router.refresh();
+      const response = await request.json();
+      setNewTaskResponse((prev) => [...prev, response.result]);
     } catch (e) {
       console.error(e);
     }
@@ -74,8 +75,10 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
       onSubmit={(e) => {
         createTask(e);
         setShowForm(false);
-        setNewTaskFlag(true);
-        setNewTaskValues({ title: title, content: content, date: quickDate });
+        setNewTaskValues((prev) => [
+          ...prev,
+          { title: title, content: content, date: quickDate },
+        ]);
       }}
       className="new-task-local-scope"
     >

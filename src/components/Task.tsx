@@ -20,7 +20,7 @@ interface Props {
   date: Date;
   content: string | null;
   id?: string;
-  priority: boolean;
+  priority?: boolean;
   projectId?: string | null;
 }
 
@@ -68,9 +68,12 @@ export default function Task({
   );
   const [parentHover, setParentHover] = useState(false);
   const [showTimeOptions, setShowTimeOptions] = useState(false);
-  const [localPriorityState, setLocalPriorityState] = useState(priority);
+  const [localPriorityState, setLocalPriorityState] = useState(
+    priority ?? false
+  );
 
   const formattedTrueDate = format(new Date(date), "yyyy-MM-dd'T'HH:mm");
+  const [hideInClient, setHideInClient] = useState(false);
 
   const [state, dispatch] = useReducer(reducer, {
     newTitle: `${title}`,
@@ -133,7 +136,7 @@ export default function Task({
 
   return (
     <>
-      <div className="relative">
+      <div className={`${hideInClient && "hidden"} relative`}>
         <motion.div
           onHoverStart={() => {
             setOnHover("");
@@ -142,7 +145,6 @@ export default function Task({
           onHoverEnd={() => {
             setOnHover("opacity-0 hover:opacity-100");
             setParentHover(false);
-            // setAbsoluteHover
           }}
           id={id}
           initial={!minimise && { height: 500 }}
@@ -176,7 +178,10 @@ export default function Task({
                 status={status}
                 setStatus={setStatus}
               ></MinimiseTaskBtn>
-              <RemoveTaskBtn id={id}></RemoveTaskBtn>
+              <RemoveTaskBtn
+                id={id}
+                setHideInClient={setHideInClient}
+              ></RemoveTaskBtn>
             </div>
           </div>
           {minimise ? (
