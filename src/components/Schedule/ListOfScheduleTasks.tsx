@@ -19,7 +19,6 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
     throw new Error("scrollDivRef not loaded");
   }
   const { scrollDivRef } = context;
-
   const getDateRange = dateRange({ scheduleTasks });
 
   const taskDates = scheduleTasks?.map((item) =>

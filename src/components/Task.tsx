@@ -2,7 +2,15 @@
 
 import ProjectAssignBtn from "./buttons/ProjectAssignBtn";
 import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
-import { useContext, useEffect, useReducer, useState, useRef } from "react";
+import {
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+  useRef,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
@@ -13,6 +21,8 @@ import { format } from "date-fns";
 import TimeOptions from "./TimeOptions";
 import SaveOnchange from "./SaveOnchange";
 import { createPortal } from "react-dom";
+import { TaskContext } from "@/context/TaskContext";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
 interface Props {
   author?: string | null | undefined;
@@ -22,6 +32,7 @@ interface Props {
   id?: string;
   priority?: boolean;
   projectId?: string | null;
+  setAllTasksClient: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
 }
 
 interface TaskState {
@@ -58,6 +69,7 @@ export default function Task({
   id,
   priority,
   projectId,
+  setAllTasksClient,
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
@@ -84,11 +96,11 @@ export default function Task({
   const [quickDate, setQuickDate] = useState<Date>(date);
   const [editing, setEditing] = useState(false);
 
-  const context = useContext(DashBoardContext);
-
-  if (!context) {
-    throw new Error("dashboard props not loaded");
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) {
+    throw new Error("hello");
   }
+  // const { setAllTasksClient, allTasksClient } = tasksContext;
 
   const prevState = useRef(state);
 
@@ -100,6 +112,7 @@ export default function Task({
     const debounce = setTimeout(() => {
       if (state !== prevState.current) {
         updateTask(quickDate);
+
         // setEditing(false);
       }
     }, 400);
@@ -117,7 +130,7 @@ export default function Task({
   //Type '(scopedDate: Date) => Promise<void>'
   async function updateTask(scopedDate: Date) {
     try {
-      await fetch("/api/update-task", {
+      const request = await fetch("/api/update-task", {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -129,6 +142,19 @@ export default function Task({
           id: id,
         }),
       });
+
+      setAllTasksClient((prev) =>
+        prev.map((item) =>
+          item.id === id
+            ? {
+                ...item,
+                title: state.newTitle,
+                content: state.newContent,
+                date: scopedDate,
+              }
+            : item
+        )
+      );
     } catch (e) {
       console.error(e);
     }
@@ -136,7 +162,8 @@ export default function Task({
 
   return (
     <>
-      <div className={`${hideInClient && "hidden"} relative`}>
+      {/* ${hideInClient && "hidden"} */}
+      <div className={` ${hideInClient && "hidden"} relative`}>
         <motion.div
           onHoverStart={() => {
             setOnHover("");
@@ -181,6 +208,7 @@ export default function Task({
               <RemoveTaskBtn
                 id={id}
                 setHideInClient={setHideInClient}
+                setAllTasksClient={setAllTasksClient}
               ></RemoveTaskBtn>
             </div>
           </div>

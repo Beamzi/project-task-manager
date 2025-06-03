@@ -3,7 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
-// import { FullProject } from "@/app/projects/[id]/page";
+
 import EditComment from "./EditComment";
 import SaveOnchange from "./SaveOnchange";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";

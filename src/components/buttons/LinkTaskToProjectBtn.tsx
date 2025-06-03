@@ -1,5 +1,8 @@
-import React, { useEffect } from "react";
+"use client";
+import React, { useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { DashBoardContext } from "@/context/DashBoardContext";
+import { TaskContext } from "@/context/TaskContext";
 interface Props {
   title: string;
   projectId: string;
@@ -18,6 +21,21 @@ export default function LinkTaskToProjectBtn({
   setAssignCheck,
 }: Props) {
   const router = useRouter();
+
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) {
+    throw new Error("hello");
+  }
+  const { setAllTasksClient, allTasksClient } = tasksContext;
+
+  useEffect(() => {
+    const findProjectId = allTasksClient.find((p) => (p.projectId = projectId));
+
+    if (findProjectId) {
+      setAssignCheck(true);
+    }
+  }, [projectId, allTasksClient]);
+
   async function linkTask() {
     // const { list, setList } = listState;
     try {
@@ -30,7 +48,14 @@ export default function LinkTaskToProjectBtn({
       });
 
       const data = await response.json();
-      router.refresh();
+
+      setAllTasksClient((prev) =>
+        prev.map((item) =>
+          item.id === taskId ? { ...item, projectId: projectId } : item
+        )
+      );
+
+      // router.refresh();
     } catch (e) {
       console.error(e);
     }

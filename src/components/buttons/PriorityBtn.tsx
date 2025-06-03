@@ -6,9 +6,17 @@ import {
   StarIcon as StarIconOutline,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
-import { useContext, useState, useEffect } from "react";
+import {
+  useContext,
+  useState,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import Tooltip from "../Tooltip";
 import { motion, AnimatePresence } from "motion/react";
+import { DashBoardContext, TaskInput } from "@/context/DashBoardContext";
+import { TaskContext } from "@/context/TaskContext";
 
 export default function PriorityBtn({
   id,
@@ -22,11 +30,29 @@ export default function PriorityBtn({
   setLocalPriorityState: (value: boolean) => void;
 }) {
   // const [localPriorityState, setLocalPriorityState] = useState(priorityState);
+
+  // const context = useContext(DashBoardContext);
+  // if (!context) throw new Error("asasdas");
+  // const { newTaskValues, setNewTaskValues } = context;
+
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) {
+    throw new Error("hello");
+  }
+  const { setAllTasksClient, allTasksClient } = tasksContext;
+
   const [toggleItem, setToggleItem] = useState("");
   const [unpriority, setUnpriority] = useState(false);
   const [tipReveal, setTipReveal] = useState(false);
   const [restart, setRestart] = useState(false);
   const [onInteraction, setOnInteraction] = useState(false);
+
+  useEffect(() => {
+    const item = allTasksClient.find((t) => t.id === id);
+    if (item) {
+      setLocalPriorityState(item.priority ?? false);
+    }
+  }, [id, allTasksClient]);
 
   async function makePriority(value: boolean) {
     try {
@@ -37,6 +63,12 @@ export default function PriorityBtn({
         },
         body: JSON.stringify({ priority: value, id: id }),
       });
+
+      setAllTasksClient((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, priority: value } : item
+        )
+      );
     } catch (e) {
       console.error(e);
     }

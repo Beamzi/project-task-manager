@@ -1,11 +1,16 @@
 "use client";
 
 import { DashBoardContext } from "@/context/DashBoardContext";
-import { TaskInput } from "@/context/DashBoardContext";
 import React, { useState, useRef } from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
-export function DashBoardProvider({ children }: { children: React.ReactNode }) {
+export function DashBoardProvider({
+  children,
+  allTasks,
+}: {
+  children: React.ReactNode;
+  allTasks: getAllTasksTypeOf[];
+}) {
   const [modal, setModal] = useState(false);
   const [sideMenu, setSideMenu] = useState("");
   const scrollDivRef = useRef<HTMLDivElement | null>(null);
@@ -14,11 +19,12 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
     string[]
   >([]);
 
-  const [newTaskValues, setNewTaskValues] = useState<TaskInput[]>([]);
-
-  const [newTaskResponse, setNewTaskResponse] = useState<getAllTasksTypeOf[]>(
-    []
-  );
+  interface CommentData {
+    content: string;
+    createdAt: Date;
+    id: string;
+  }
+  const [localComment, setLocalComment] = useState<CommentData[]>([]);
 
   return (
     <DashBoardContext.Provider
@@ -32,10 +38,8 @@ export function DashBoardProvider({ children }: { children: React.ReactNode }) {
         setGlobalMinimised,
         removeProjectFromDashboard,
         setRemoveProjectFromDashboard,
-        setNewTaskValues,
-        newTaskValues,
-        newTaskResponse,
-        setNewTaskResponse,
+        localComment,
+        setLocalComment,
       }}
     >
       {children}

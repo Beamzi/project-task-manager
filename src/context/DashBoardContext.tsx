@@ -2,10 +2,10 @@ import React, { createContext } from "react";
 import { RefObject } from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
-export interface TaskInput {
-  title: string;
+interface CommentData {
   content: string;
-  date: Date;
+  createdAt: Date;
+  id: string;
 }
 
 interface Props {
@@ -18,11 +18,8 @@ interface Props {
   setGlobalMinimised: (value: boolean) => void;
   removeProjectFromDashboard: string[];
   setRemoveProjectFromDashboard: React.Dispatch<React.SetStateAction<string[]>>;
-
-  setNewTaskValues: React.Dispatch<React.SetStateAction<TaskInput[]>>;
-  newTaskValues: TaskInput[];
-
-  setNewTaskResponse: React.Dispatch<React.SetStateAction<getAllTasksTypeOf[]>>;
-  newTaskResponse: getAllTasksTypeOf[];
+  localComment: CommentData[];
+  setLocalComment: React.Dispatch<React.SetStateAction<CommentData[]>>;
 }
+
 export const DashBoardContext = createContext<Props | null>(null);

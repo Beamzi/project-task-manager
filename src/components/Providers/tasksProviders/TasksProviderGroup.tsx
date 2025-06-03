@@ -22,7 +22,8 @@ export default function TasksProviderGroup({
   return (
     <AllTasksDueDateProvider value={allTasksByDueDate}>
       <TaskDueDateProvider value={tasksByDueDate}>
-        <TasksProvider value={allTasks}>{children}</TasksProvider>
+        {children}
+        {/* <TasksProvider allTasks={allTasks}></TasksProvider> */}
       </TaskDueDateProvider>
     </AllTasksDueDateProvider>
   );

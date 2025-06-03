@@ -15,6 +15,8 @@ import {
   ListBulletIcon,
 } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { TaskContext } from "@/context/TaskContext";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 interface Props {
   setShowForm: (type: boolean) => void;
   fixedDate?: Date;
@@ -39,16 +41,13 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
   const projects = useContext(projectContext);
   if (!projects) throw new Error("projects not loaded");
 
-  const dashboardProps = useContext(DashBoardContext);
-
-  if (!dashboardProps) {
-    throw new Error("dashboard context not loaded");
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) {
+    throw new Error("hello");
   }
+  const { setAllTasksClient, allTasksClient } = tasksContext;
 
-  const { newTaskValues, setNewTaskValues, setNewTaskResponse } =
-    dashboardProps;
-
-  async function createTask(event: FormEvent<HTMLFormElement>) {
+  async function createTask(event: FormEvent<HTMLFormElement>, tempId: string) {
     event.preventDefault();
     try {
       const request = await fetch("/api/create-task", {
@@ -61,10 +60,18 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
           content: content,
           date: quickDate,
           projectId: newTaskProjectId ? newTaskProjectId : undefined,
+          createdAt: new Date(),
         }),
       });
+
       const response = await request.json();
-      setNewTaskResponse((prev) => [...prev, response.result]);
+      setAllTasksClient((prev) =>
+        prev.map((item) =>
+          item.id === tempId ? { ...item, id: response.result.id } : item
+        )
+      );
+
+      // setNewTaskResponse((prev) => [...prev, response.result]);
     } catch (e) {
       console.error(e);
     }
@@ -73,12 +80,20 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
   return (
     <form
       onSubmit={(e) => {
-        createTask(e);
-        setShowForm(false);
-        setNewTaskValues((prev) => [
+        const tempId = crypto.randomUUID();
+
+        setAllTasksClient((prev) => [
           ...prev,
-          { title: title, content: content, date: quickDate },
+          {
+            title: title,
+            content: content,
+            date: quickDate,
+            id: tempId,
+          } as getAllTasksTypeOf,
         ]);
+
+        createTask(e, tempId);
+        setShowForm(false);
       }}
       className="new-task-local-scope"
     >

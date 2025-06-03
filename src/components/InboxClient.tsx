@@ -1,12 +1,13 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useState, useRef } from "react";
+import { useState, useRef, useContext } from "react";
 import FirstRowContainers from "./Skeleton/FirstRowContainers";
 import SortByButtons from "./buttons/SortByButtons";
 import ListOfTasks from "./Lists/ListOfTasks";
 import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
 import SearchClient from "./SearchClient";
+import { DashBoardContext } from "@/context/DashBoardContext";
 
 import { GetAllTasksByDueDateTypeOf } from "@/lib/queries/getAllTasksByDueDate";
 
@@ -15,6 +16,14 @@ interface Props {
 }
 
 export default function InboxClient({ tasks }: Props) {
+  const dashboardProps = useContext(DashBoardContext);
+
+  if (!dashboardProps) {
+    throw new Error("dashboard context not loaded");
+  }
+
+  const { newTaskValues, newTaskResponse } = dashboardProps;
+
   const [action, setAction] = useState("");
   const [typeInterpolate, setTypeInterpolate] = useState<
     "title" | "content" | "date" | "createdAt" | "priority"
@@ -26,7 +35,9 @@ export default function InboxClient({ tasks }: Props) {
     typeInterpolate: "title" | "content" | "date" | "createdAt" | "priority",
     tasks: Props["tasks"]
   ) => {
-    const tasksCopy = [...tasks];
+    const copy = [...tasks];
+    const tasksCopy = copy.concat(newTaskResponse);
+
     //just be aware of any type here
     if (action === "desc")
       tasksCopy.sort((a, b) =>
@@ -52,6 +63,8 @@ export default function InboxClient({ tasks }: Props) {
 
   const tasksCopy = orderBy(action, typeInterpolate, tasks);
 
+  // const finalCopy = tasksCopy.concat(newTaskResponse);
+
   return (
     <>
       <div className="w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%] xl:w-[80%]">
@@ -68,9 +81,16 @@ export default function InboxClient({ tasks }: Props) {
       <FirstRowContainers
         leftData={
           searching.length > 0 ? (
-            <ListOfSearchTasks currentTasks={tasksCopy} searching={searching} />
+            <ListOfSearchTasks
+              currentTasks={tasksCopy}
+              // newTaskResponse={newTaskResponse}
+              searching={searching}
+            />
           ) : (
-            <ListOfTasks currentTasks={tasksCopy} />
+            <ListOfTasks
+              currentTasks={tasksCopy}
+              currentTasksInbox={tasksCopy}
+            />
           )
         }
         height="h-full"

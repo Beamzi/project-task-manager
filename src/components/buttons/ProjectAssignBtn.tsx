@@ -32,7 +32,8 @@ export default function ProjectAssignBtn({
   const [list, setList] = useState(false);
   const [titleCheck, setTitleCheck] = useState("");
   const [assignCheck, setAssignCheck] = useState(false);
-  // bg-linear-to-r/srgb from-neutral-900 to-neutral-800
+  // bg-linear-to-r/srgb from-neutral-900 to-neutral-800;
+
   return (
     <div
       className={` ${

@@ -15,6 +15,7 @@ import PrioritiesProvider from "../Providers/PrioritiesProvider";
 import { getPriorities } from "@/lib/queries/getPriorities";
 import MobileHeader from "./MobileHeader";
 import TopBar from "./TopBar";
+import TasksProvider from "../Providers/tasksProviders/TasksProvider";
 
 async function getProjects() {
   const session = await auth();
@@ -64,33 +65,34 @@ export default async function DashBoard({
   const session = await auth();
 
   return (
-    <DashBoardProvider>
-      <CurrentSessionProvider value={session}>
-        <AllProjectsProvider value={allProjects}>
-          <ProjectProvider value={projects}>
-            <TasksProviderGroup
-              allTasks={allTasks}
-              tasksByDueDate={tasksByDueDate}
-              allTasksByDueDate={allTasksByDueDate}
-            >
-              <CommentsNonProjectProvider value={comments}>
-                <PrioritiesProvider value={priorities}>
-                  <div className="box-border h-screen md:p-5  overflow-hidden flex flex-col ">
-                    <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
-                    <TopBar className="z-2 gradient-for-thin-containers invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
-                    <div className=" flex flex-1 overflow-hidden justify-center  w-full h-full">
-                      <SideBar className=" gradient-for-vert-containers min-w-45 xl:max-w-50 md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1 md:relative fixed h-full left-0 md:top-0" />
-                      <main className="gradient-for-main flex flex-col h-full flex-1 min-h-0 items-center  border-x-1 border-b-1 py-[clamp(16px,10vw,50px)] w-vw dark:bg-neutral-950 w-full">
-                        {children}
-                      </main>
+    <TasksProvider allTasks={allTasks}>
+      <DashBoardProvider allTasks={allTasks}>
+        <CurrentSessionProvider value={session}>
+          <AllProjectsProvider value={allProjects}>
+            <ProjectProvider value={projects}>
+              <TasksProviderGroup
+                tasksByDueDate={tasksByDueDate}
+                allTasksByDueDate={allTasksByDueDate}
+              >
+                <CommentsNonProjectProvider value={comments}>
+                  <PrioritiesProvider value={priorities}>
+                    <div className="box-border h-screen md:p-5  overflow-hidden flex flex-col ">
+                      <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>
+                      <TopBar className="z-2 gradient-for-thin-containers invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
+                      <div className=" flex flex-1 overflow-hidden justify-center  w-full h-full">
+                        <SideBar className=" gradient-for-vert-containers min-w-45 xl:max-w-50 md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1 md:relative fixed h-full left-0 md:top-0" />
+                        <main className="gradient-for-main flex flex-col h-full flex-1 min-h-0 items-center  border-x-1 border-b-1 py-[clamp(16px,10vw,50px)] w-vw dark:bg-neutral-950 w-full">
+                          {children}
+                        </main>
+                      </div>
                     </div>
-                  </div>
-                </PrioritiesProvider>
-              </CommentsNonProjectProvider>
-            </TasksProviderGroup>
-          </ProjectProvider>
-        </AllProjectsProvider>
-      </CurrentSessionProvider>
-    </DashBoardProvider>
+                  </PrioritiesProvider>
+                </CommentsNonProjectProvider>
+              </TasksProviderGroup>
+            </ProjectProvider>
+          </AllProjectsProvider>
+        </CurrentSessionProvider>
+      </DashBoardProvider>
+    </TasksProvider>
   );
 }

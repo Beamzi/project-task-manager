@@ -11,6 +11,7 @@ import RemoveProject from "@/components/buttons/RemoveProject";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 import { useParams } from "next/navigation";
+import { DashBoardContext } from "@/context/DashBoardContext";
 
 export default function ProjectDynamic() {
   const params = useParams();
@@ -24,6 +25,9 @@ export default function ProjectDynamic() {
   if (!session) {
     throw new Error("session lot loaded");
   }
+
+  const dashboardContext = useContext(DashBoardContext);
+  if (!dashboardContext) throw new Error("asdasdaosd");
 
   const currentProjectId = allProjects.findIndex((p) => p.id === id);
   const project = allProjects[currentProjectId];

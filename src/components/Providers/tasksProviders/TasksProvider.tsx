@@ -2,17 +2,20 @@
 import { TaskContext } from "@/context/TaskContext";
 import React from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
-
-// interface Props {
-//   tasks: TaskType[];
-//   children: React.ReactNode;
-// }
+import { useMemo, useState } from "react";
 
 interface Props {
-  value: getAllTasksTypeOf[];
   children: React.ReactNode;
+  allTasks: getAllTasksTypeOf[];
 }
 
-export default function TasksProvider({ value, children }: Props) {
-  return <TaskContext.Provider value={value}>{children}</TaskContext.Provider>;
+export default function TasksProvider({ children, allTasks }: Props) {
+  const [allTasksClient, setAllTasksClient] =
+    useState<getAllTasksTypeOf[]>(allTasks);
+
+  return (
+    <TaskContext.Provider value={{ allTasksClient, setAllTasksClient }}>
+      {children}
+    </TaskContext.Provider>
+  );
 }

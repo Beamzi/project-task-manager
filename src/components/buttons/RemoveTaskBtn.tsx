@@ -2,17 +2,20 @@
 
 import { useRouter } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
-
+import { DashBoardContext, TaskInput } from "@/context/DashBoardContext";
+import { SetStateAction, Dispatch } from "react";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 interface Props {
   id?: string;
   setHideInClient: (value: boolean) => void;
+  setAllTasksClient: React.Dispatch<React.SetStateAction<getAllTasksTypeOf[]>>;
 }
 
-function RemoveTaskBtn({ id, setHideInClient }: Props) {
+function RemoveTaskBtn({ id, setHideInClient, setAllTasksClient }: Props) {
   const [showDelete, setShowDelete] = useState(false);
-  const router = useRouter();
+
   async function deleteTask() {
     try {
       await fetch("/api/delete-task", {
@@ -22,11 +25,12 @@ function RemoveTaskBtn({ id, setHideInClient }: Props) {
         },
         body: JSON.stringify({ id: id }),
       });
-      // router.refresh();
     } catch (e) {
       console.error(e);
     }
+    setAllTasksClient((prev) => prev.filter((item) => item.id !== id));
   }
+
   return (
     <>
       <button

@@ -1,10 +1,16 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { format } from "date-fns";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Image from "next/image";
-import CreateComment from "./CreateComment";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { DashBoardContext } from "@/context/DashBoardContext";
+
+interface CommentData {
+  content: string;
+  createdAt: Date;
+  id: string;
+}
 
 interface Props {
   name: string | null | undefined;
@@ -13,6 +19,8 @@ interface Props {
   createdAt: Date;
   profileImg: string | null | undefined;
   localDelete?: boolean;
+  localComment: CommentData[];
+  setLocalComment: React.Dispatch<React.SetStateAction<CommentData[]>>;
 }
 
 export default function EditComment({
@@ -21,15 +29,24 @@ export default function EditComment({
   name,
   createdAt,
   profileImg,
+  localComment,
+  setLocalComment,
 }: Props) {
   const [edit, setEdit] = useState(false);
+
+  const localIndex = localComment.findIndex((p) => p.id === id);
+
+  // const [newContent, setNewContent] = useState(
+  //   localComment[localIndex]?.content
+  // );
+
   const [newContent, setNewContent] = useState(content);
   const [initOptions, setInitOptions] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
 
   async function updateComment() {
     try {
-      await fetch("/api/edit-comment", {
+      const request = await fetch("/api/edit-comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,10 +56,17 @@ export default function EditComment({
           id: id,
         }),
       });
+
+      setLocalComment((prev) =>
+        prev.map((item) =>
+          item.id === id ? { ...item, content: newContent } : item
+        )
+      );
     } catch (e) {
       console.error(e);
     }
   }
+
   async function deleteComment() {
     try {
       await fetch("/api/delete-comment", {
@@ -52,18 +76,22 @@ export default function EditComment({
           id: id,
         }),
       });
+
+      setLocalComment((prev) => prev.filter((item) => item.id !== id));
     } catch (e) {
       console.error(e);
     }
   }
-
   const firstLastName = name?.split(" ");
 
   const lastInitial = firstLastName?.[1]?.slice(0, 1);
-
+  // ${isDeleted && "hidden"}
   return (
     <>
-      <div className={`flex pt-3 ${isDeleted && "hidden"}`}>
+      <div
+        className={`flex pt-3   ${isDeleted && "hidden"}
+`}
+      >
         {/* // TOPBAR BELOW */}
         <Image
           className="rounded-full mr-3 relative top-1 h-full"
