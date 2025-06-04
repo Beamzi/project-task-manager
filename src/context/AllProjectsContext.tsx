@@ -1,10 +1,11 @@
 "use client";
-import React, { createContext } from "react";
+import React, { createContext, Dispatch, SetStateAction } from "react";
 
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
-export interface AllProjects {
-  project: GetAllProjecttypeOf;
+export interface Props {
+  allProjectsClient: GetAllProjecttypeOf[];
+  setAllProjectsClient: Dispatch<SetStateAction<GetAllProjecttypeOf[]>>;
 }
 
-export const AllProjectsContext = createContext<GetAllProjecttypeOf[]>([]);
+export const AllProjectsContext = createContext<Props | null>(null);

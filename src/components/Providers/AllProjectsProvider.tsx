@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useMemo } from "react";
 
 import { AllProjectsContext } from "@/context/AllProjectsContext";
@@ -8,17 +8,21 @@ import { AllProjectsContext } from "@/context/AllProjectsContext";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
 interface Props {
-  value: GetAllProjecttypeOf[];
+  allProjects: GetAllProjecttypeOf[];
   children: React.ReactNode;
 }
 
-export default function AllProjectsProvider({ value, children }: Props) {
+export default function AllProjectsProvider({ allProjects, children }: Props) {
+  const [allProjectsClient, setAllProjectsClient] =
+    useState<GetAllProjecttypeOf[]>(allProjects);
   // const memoizedValue = useMemo(() => value, [JSON.stringify(value)]);
 
-  const memoizedValue = useMemo(() => value, [value]);
+  // const memoizedValue = useMemo(() => value, [value]);
 
   return (
-    <AllProjectsContext.Provider value={memoizedValue}>
+    <AllProjectsContext.Provider
+      value={{ allProjectsClient, setAllProjectsClient }}
+    >
       {children}
     </AllProjectsContext.Provider>
   );

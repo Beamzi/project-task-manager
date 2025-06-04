@@ -12,6 +12,7 @@ import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 import { useParams } from "next/navigation";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { TaskContext } from "@/context/TaskContext";
 
 export default function ProjectDynamic() {
   const params = useParams();
@@ -26,14 +27,23 @@ export default function ProjectDynamic() {
     throw new Error("session lot loaded");
   }
 
-  const dashboardContext = useContext(DashBoardContext);
-  if (!dashboardContext) throw new Error("asdasdaosd");
+  const { setAllProjectsClient, allProjectsClient } = allProjects;
 
-  const currentProjectId = allProjects.findIndex((p) => p.id === id);
-  const project = allProjects[currentProjectId];
-  const tasks = project.tasks;
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) throw new Error("tasks not loaded");
+  const { setAllTasksClient, allTasksClient } = tasksContext;
+
+  const currentProjectId = allProjectsClient.findIndex((p) => p.id === id);
+  const project = allProjectsClient[currentProjectId];
+  //const tasks = project.tasks;
   const comments = project.comments;
   const profileImg = session?.user?.image;
+
+  const allTasksClientCopy = [...allTasksClient];
+
+  const projectAssignedTasks = allTasksClientCopy.filter(
+    (item) => item.projectId === id
+  );
 
   return (
     <>
@@ -52,9 +62,15 @@ export default function ProjectDynamic() {
             project={project}
             comments={comments}
             profileImg={profileImg}
+            setAllProjectsClient={setAllProjectsClient}
           ></ProjectView>
         }
-        rightData={<ListOfTasks currentTasks={tasks} />}
+        rightData={
+          <ListOfTasks
+            allTasksClientCopy={projectAssignedTasks}
+            setAllTasksClient={setAllTasksClient}
+          />
+        }
         height="h-full"
         ifBottomRow={true}
       ></FirstRowContainers>

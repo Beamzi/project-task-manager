@@ -67,7 +67,7 @@ export default async function DashBoard({
     // <TasksProvider allTasks={allTasks}>
     <DashBoardProvider allTasks={allTasks}>
       <CurrentSessionProvider value={session}>
-        <AllProjectsProvider value={allProjects}>
+        <AllProjectsProvider allProjects={allProjects}>
           <ProjectProvider value={projects}>
             <TasksProviderGroup
               tasksByDueDate={tasksByDueDate}
