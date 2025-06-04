@@ -15,7 +15,6 @@ import PrioritiesProvider from "../Providers/PrioritiesProvider";
 import { getPriorities } from "@/lib/queries/getPriorities";
 import MobileHeader from "./MobileHeader";
 import TopBar from "./TopBar";
-import TasksProvider from "../Providers/tasksProviders/TasksProvider";
 
 async function getProjects() {
   const session = await auth();
@@ -75,7 +74,7 @@ export default async function DashBoard({
               allTasksByDueDate={allTasksByDueDate}
               allTasks={allTasks}
             >
-              <CommentsNonProjectProvider value={comments}>
+              <CommentsNonProjectProvider comments={comments}>
                 <PrioritiesProvider priorities={priorities}>
                   <div className="box-border h-screen md:p-5  overflow-hidden flex flex-col ">
                     <MobileHeader className=" md:hidden small-menu  h-20 w-full border-b-1 sticky top-0 z-3"></MobileHeader>

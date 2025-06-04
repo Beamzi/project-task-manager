@@ -1,7 +1,6 @@
 "use client";
 
-import React from "react";
-import ScheduleMenuItems from "./ScheduleMenuItems";
+import React, { Dispatch, SetStateAction } from "react";
 import { format, parseISO } from "date-fns";
 import { useEffect, useState, useContext, useRef } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
@@ -9,12 +8,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import { ChevronRightIcon, ChevronLeftIcon } from "@heroicons/react/24/solid";
-import { dateRange, ScheduleTasks } from "./helpers";
-import { map } from "motion/react-client";
-import Task from "../Task";
-import { arrayBuffer } from "stream/consumers";
+import { dateRange } from "./helpers";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
-export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
+interface Props {
+  allTasksClientCopy: getAllTasksTypeOf[];
+  setAllTasksClient?: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
+}
+
+export default function ScheduleMenu({
+  allTasksClientCopy,
+  setAllTasksClient,
+}: Props) {
   const [inView, setInView] = useState("");
   const [sequence, setSequence] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
@@ -26,12 +31,12 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
   if (!context) {
     throw new Error("scrollDivRef not loaded");
   }
-  const { scrollDivRef } = context;
-  const getDateRange = dateRange({ scheduleTasks });
+  //const { scrollDivRef } = context;
+  const getDateRange = dateRange({ allTasksClientCopy });
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
 
   const activeDates = () => {
-    const extract = scheduleTasks?.map(
+    const extract = allTasksClientCopy?.map(
       (task) => `${format(new Date(task.date), "yyyy-MM-dd")}`
     );
     const result = extract?.filter(
@@ -177,7 +182,7 @@ export default function ScheduleMenu({ scheduleTasks }: ScheduleTasks) {
                   "text-rose-600 scale-120 transition-all duration-50 "
                 }`}
                 id={`${date}-horizontal`}
-                onClick={(e) => {
+                onClick={() => {
                   setInView(date);
                   const element = document.getElementById(date);
                   element?.scrollIntoView({

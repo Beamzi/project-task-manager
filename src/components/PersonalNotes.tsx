@@ -1,60 +1,25 @@
 "use client";
 
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import CreateComment from "./CreateComment";
 import EditComment from "./EditComment";
-import { DashBoardContext } from "@/context/DashBoardContext";
+import { CommentsNonProjectContext } from "@/context/CommentsNonProjectsContext";
 
 interface Props {
   profileImg: string | undefined | null;
   name: string | undefined | null;
-  comments: ({
-    author: {
-      name: string | null;
-    } | null;
-  } & {
-    id: string;
-    content: string;
-    projectId: string | null;
-    authorId: string | null;
-    createdAt: Date;
-  })[];
 }
 
-export default function PersonalNotes({ comments, profileImg, name }: Props) {
-  const dashboardProps = useContext(DashBoardContext);
-  if (!dashboardProps) throw new Error("no props loaded");
-  const { localComment, setLocalComment } = dashboardProps;
-
-  useEffect(() => {
-    // Only set localComment if empty, so you don’t overwrite user edits
-    if (localComment.length === 0 && comments.length > 0) {
-      setLocalComment(comments);
-    }
-  }, [comments, localComment, setLocalComment]);
+export default function PersonalNotes({ profileImg, name }: Props) {
+  const commentsContext = useContext(CommentsNonProjectContext);
+  if (!commentsContext) throw new Error("comments not loaded ");
+  const { setNoteCommentsClient, noteCommentsClient } = commentsContext;
 
   return (
     <div className="p-4 flex pb-31 flex-col justify-center w-full">
-      {/* <div>
-        {comments?.map((comments) => (
-          <EditComment
-            key={comments.id}
-            id={comments.id}
-            content={comments.content}
-            name={comments.author?.name}
-            createdAt={comments.createdAt}
-            profileImg={profileImg}
-            localComment={localComment}
-            setLocalComment={setLocalComment}
-          ></EditComment>
-        ))}
-      </div> */}
-
-      {/* {localComment.length > 0 && localComment.every(item => item.id) && ( */}
-
-      {localComment && (
+      {noteCommentsClient && (
         <div>
-          {localComment.map((item, index) => {
+          {noteCommentsClient.map((item) => {
             return (
               <EditComment
                 key={item.id}
@@ -64,8 +29,8 @@ export default function PersonalNotes({ comments, profileImg, name }: Props) {
                 profileImg={profileImg}
                 createdAt={item.createdAt}
                 localDelete={true}
-                localComment={localComment}
-                setLocalComment={setLocalComment}
+                noteCommentsClient={noteCommentsClient}
+                setNoteCommentsClient={setNoteCommentsClient}
               />
             );
           })}
@@ -76,7 +41,7 @@ export default function PersonalNotes({ comments, profileImg, name }: Props) {
         <CreateComment
           projectId={null}
           profileImg={profileImg}
-          setLocalComment={setLocalComment}
+          setNoteCommentsClient={setNoteCommentsClient}
         />
       </div>
     </div>

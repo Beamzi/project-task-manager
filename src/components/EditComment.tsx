@@ -1,16 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { format } from "date-fns";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { PencilSquareIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { DashBoardContext } from "@/context/DashBoardContext";
-
-interface CommentData {
-  content: string;
-  createdAt: Date;
-  id: string;
-}
+import { GetNonProjectCommentsTypeOf } from "@/lib/queries/getNonProjectComments";
 
 interface Props {
   name: string | null | undefined;
@@ -19,8 +13,10 @@ interface Props {
   createdAt: Date;
   profileImg: string | null | undefined;
   localDelete?: boolean;
-  localComment: CommentData[];
-  setLocalComment: React.Dispatch<React.SetStateAction<CommentData[]>>;
+  noteCommentsClient?: GetNonProjectCommentsTypeOf[];
+  setNoteCommentsClient: Dispatch<
+    SetStateAction<GetNonProjectCommentsTypeOf[]>
+  >;
 }
 
 export default function EditComment({
@@ -29,16 +25,11 @@ export default function EditComment({
   name,
   createdAt,
   profileImg,
-  localComment,
-  setLocalComment,
+  setNoteCommentsClient,
 }: Props) {
   const [edit, setEdit] = useState(false);
 
-  const localIndex = localComment.findIndex((p) => p.id === id);
-
-  // const [newContent, setNewContent] = useState(
-  //   localComment[localIndex]?.content
-  // );
+  // const localIndex = noteCommentsClient.findIndex((p) => p.id === id);
 
   const [newContent, setNewContent] = useState(content);
   const [initOptions, setInitOptions] = useState(false);
@@ -46,7 +37,7 @@ export default function EditComment({
 
   async function updateComment() {
     try {
-      const request = await fetch("/api/edit-comment", {
+      await fetch("/api/edit-comment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +48,7 @@ export default function EditComment({
         }),
       });
 
-      setLocalComment((prev) =>
+      setNoteCommentsClient((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, content: newContent } : item
         )
@@ -77,7 +68,7 @@ export default function EditComment({
         }),
       });
 
-      setLocalComment((prev) => prev.filter((item) => item.id !== id));
+      setNoteCommentsClient((prev) => prev.filter((item) => item.id !== id));
     } catch (e) {
       console.error(e);
     }

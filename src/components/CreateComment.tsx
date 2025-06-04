@@ -1,28 +1,39 @@
 "use client";
 
-import React from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 import { useState } from "react";
 import Image from "next/image";
+import { CommentsNonProjectContext } from "@/context/CommentsNonProjectsContext";
+import { GetNonProjectCommentsTypeOf } from "@/lib/queries/getNonProjectComments";
 
-interface CommentData {
-  content: string;
-  createdAt: Date;
-  id: string;
-}
+// interface CommentData {
+//   content: string;
+//   createdAt: Date;
+//   id: string;
+// }
 
 interface Props {
   projectId: string | undefined | null;
   profileImg: string | undefined | null;
-  setLocalComment: React.Dispatch<React.SetStateAction<CommentData[]>>;
+  setNoteCommentsClient: Dispatch<
+    SetStateAction<GetNonProjectCommentsTypeOf[]>
+  >;
 }
 
 export default function CreateComment({
   projectId,
   profileImg,
-  setLocalComment,
-}: Props) {
+  setNoteCommentsClient,
+}: // setLocalComment,
+Props) {
   const [content, setContent] = useState("");
   const [comment, setComment] = useState(false);
+
+  const commentsContext = useContext(CommentsNonProjectContext);
+
+  if (!commentsContext) throw new Error("Comments not loaded");
+
+  // const { noteCommentsClient } = commentsContext;
 
   async function createComment(
     event: React.FormEvent<HTMLFormElement>,
@@ -43,7 +54,7 @@ export default function CreateComment({
 
       const response = await request.json();
 
-      setLocalComment((prev) =>
+      setNoteCommentsClient((prev) =>
         prev.map((item) =>
           item.id === tempId ? { ...item, id: response.result.id } : item
         )
@@ -65,10 +76,13 @@ export default function CreateComment({
           }
         });
 
-        setLocalComment((prev) => [
-          ...prev,
-          { content: content, createdAt: new Date(), id: tempId },
-        ]);
+        setNoteCommentsClient(
+          (prev) =>
+            [
+              ...prev,
+              { content: content, createdAt: new Date(), id: tempId },
+            ] as GetNonProjectCommentsTypeOf[]
+        );
 
         createComment(e, tempId);
         setComment(false);

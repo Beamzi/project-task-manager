@@ -1,15 +1,21 @@
 "use client";
 
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import ScheduleTask from "./ScheduleTask";
 import { format, parseISO } from "date-fns";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { useState, useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
-import { dateRange, ScheduleTasks } from "./helpers";
+import { dateRange } from "./helpers";
 import NewTask from "../NewTask";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
-export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
+interface Props {
+  allTasksClientCopy: getAllTasksTypeOf[];
+  setAllTasksClient?: Dispatch<SetStateAction<getAllTasksTypeOf>>;
+}
+
+export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
   const [overDue] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [clickedDate, setClickedDate] = useState<Date>();
@@ -19,15 +25,15 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
     throw new Error("scrollDivRef not loaded");
   }
   const { scrollDivRef } = context;
-  const getDateRange = dateRange({ scheduleTasks });
+  const getDateRange = dateRange({ allTasksClientCopy });
 
-  const taskDates = scheduleTasks?.map((item) =>
+  const taskDates = allTasksClientCopy?.map((item) =>
     format(new Date(item.date), "yyyy-MM-dd")
   );
 
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
   const reformat = (date: string) => {
-    let reformattedDate = parseISO(date);
+    const reformattedDate = parseISO(date);
     const output = format(reformattedDate, "EEE MMM d");
     return output;
   };
@@ -41,7 +47,7 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
     <>
       <div ref={scrollDivRef} className="overflow-hidden ">
         <div>
-          {scheduleTasks?.map(
+          {allTasksClientCopy?.map(
             (item) =>
               item.date < new Date() && (
                 <ScheduleTask
@@ -56,10 +62,10 @@ export default function ListOfScheduleTasks({ scheduleTasks }: ScheduleTasks) {
           )}
         </div>
 
-        {formattedDates.map((date, i) =>
+        {formattedDates.map((date) =>
           taskDates?.includes(date) ? (
             <div className="" key={date}>
-              {scheduleTasks?.map((item) =>
+              {allTasksClientCopy?.map((item) =>
                 date === format(new Date(item.date), "yyyy-MM-dd") ? (
                   <ScheduleTask
                     key={item.id}

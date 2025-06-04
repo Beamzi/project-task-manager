@@ -1,18 +1,25 @@
 "use client";
 
 import { CommentsNonProjectContext } from "@/context/CommentsNonProjectsContext";
-import React from "react";
+import React, { useState } from "react";
 
 import { GetNonProjectCommentsTypeOf } from "@/lib/queries/getNonProjectComments";
 
 interface Props {
-  value: GetNonProjectCommentsTypeOf[];
+  comments: GetNonProjectCommentsTypeOf[];
   children: React.ReactNode;
 }
 
-export default function CommentsNonProjectProvider({ value, children }: Props) {
+export default function CommentsNonProjectProvider({
+  comments,
+  children,
+}: Props) {
+  const [noteCommentsClient, setNoteCommentsClient] =
+    useState<GetNonProjectCommentsTypeOf[]>(comments);
   return (
-    <CommentsNonProjectContext.Provider value={value}>
+    <CommentsNonProjectContext.Provider
+      value={{ noteCommentsClient, setNoteCommentsClient }}
+    >
       {children}
     </CommentsNonProjectContext.Provider>
   );

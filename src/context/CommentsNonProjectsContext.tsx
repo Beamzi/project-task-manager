@@ -1,8 +1,13 @@
 "use client";
 
 import { GetNonProjectCommentsTypeOf } from "@/lib/queries/getNonProjectComments";
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-export const CommentsNonProjectContext = createContext<
-  GetNonProjectCommentsTypeOf[]
->([]);
+interface Props {
+  noteCommentsClient: GetNonProjectCommentsTypeOf[];
+  setNoteCommentsClient: Dispatch<
+    SetStateAction<GetNonProjectCommentsTypeOf[]>
+  >;
+}
+
+export const CommentsNonProjectContext = createContext<Props | null>(null);

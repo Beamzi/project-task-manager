@@ -1,11 +1,14 @@
 "use client";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { format } from "date-fns";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 export interface Props {
   taskId: string;
   title: string;
   date: Date;
   content: string | null;
+  allTasksClientCopy: getAllTasksTypeOf[];
+  setAllTasksClient: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
 }
 
 export default function ScheduleMenuItems({
