@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useContext, useState } from "react";
 import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
-import { DashBoardContext, TaskInput } from "@/context/DashBoardContext";
+import { DashBoardContext } from "@/context/DashBoardContext";
 import { SetStateAction, Dispatch } from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 interface Props {

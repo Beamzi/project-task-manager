@@ -2,16 +2,21 @@
 
 import { PrioritiesContext } from "@/context/PrioritiesContext";
 import { GetPrioritiesTypeOf } from "@/lib/queries/getPriorities";
-import React from "react";
+import React, { useState } from "react";
 
 interface Props {
-  value: GetPrioritiesTypeOf[];
+  priorities: GetPrioritiesTypeOf[];
   children: React.ReactNode;
 }
 
-export default function PrioritiesProvider({ value, children }: Props) {
+export default function PrioritiesProvider({ priorities, children }: Props) {
+  const [priorityTasksClient, setPriorityTasksClient] =
+    useState<GetPrioritiesTypeOf[]>(priorities);
+
   return (
-    <PrioritiesContext.Provider value={value}>
+    <PrioritiesContext.Provider
+      value={{ priorityTasksClient, setPriorityTasksClient }}
+    >
       {children}
     </PrioritiesContext.Provider>
   );

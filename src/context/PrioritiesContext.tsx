@@ -1,6 +1,11 @@
 "use client";
 
 import { GetPrioritiesTypeOf } from "@/lib/queries/getPriorities";
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 
-export const PrioritiesContext = createContext<GetPrioritiesTypeOf[]>([]);
+interface Props {
+  priorityTasksClient: GetPrioritiesTypeOf[];
+  setPriorityTasksClient: Dispatch<SetStateAction<GetPrioritiesTypeOf[]>>;
+}
+
+export const PrioritiesContext = createContext<Props | null>(null);

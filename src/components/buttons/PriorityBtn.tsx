@@ -15,31 +15,32 @@ import {
 } from "react";
 import Tooltip from "../Tooltip";
 import { motion, AnimatePresence } from "motion/react";
-import { DashBoardContext, TaskInput } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
+import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
+import { PrioritiesContext } from "@/context/PrioritiesContext";
 
 export default function PriorityBtn({
   id,
   priorityState,
   localPriorityState,
   setLocalPriorityState,
+  setAllTasksClient,
 }: {
   id?: string;
   priorityState?: boolean;
   localPriorityState?: boolean;
   setLocalPriorityState: (value: boolean) => void;
+  setAllTasksClient: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
 }) {
-  // const [localPriorityState, setLocalPriorityState] = useState(priorityState);
-
-  // const context = useContext(DashBoardContext);
-  // if (!context) throw new Error("asasdas");
-  // const { newTaskValues, setNewTaskValues } = context;
-
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) {
     throw new Error("hello");
   }
-  const { setAllTasksClient, allTasksClient } = tasksContext;
+  const { allTasksClient } = tasksContext;
+
+  // const priorityTasksContext = useContext(PrioritiesContext);
+  // if (!priorityTasksContext) throw new Error("priority tasks not laoded");
+  // const { setPriorityTasksClient, priorityTasksClient } = priorityTasksContext;
 
   const [toggleItem, setToggleItem] = useState("");
   const [unpriority, setUnpriority] = useState(false);
@@ -69,6 +70,9 @@ export default function PriorityBtn({
           item.id === id ? { ...item, priority: value } : item
         )
       );
+
+      // const priority = allTasksClient.find((f) => f.id === id);
+      // setPriorityTasksClient((prev) => (priority ? [...prev, priority] : prev));
     } catch (e) {
       console.error(e);
     }

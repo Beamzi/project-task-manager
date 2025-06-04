@@ -89,6 +89,7 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
             content: content,
             date: quickDate,
             id: tempId,
+            createdAt: new Date(),
           } as getAllTasksTypeOf,
         ]);
 

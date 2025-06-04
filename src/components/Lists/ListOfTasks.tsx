@@ -1,33 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Task from "../Task";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import { useContext, useEffect, useRef } from "react";
-import { DashBoardContext } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
 
 interface NewProps {
-  currentTasks: getAllTasksTypeOf[] | undefined;
-  currentTasksInbox?: getAllTasksTypeOf[];
+  allTasksClientCopy: getAllTasksTypeOf[];
+  setAllTasksClient: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
 }
 
-export default function ListOfTasks({ currentTasks }: NewProps) {
-  // const dashboardProps = useContext(DashBoardContext);
-  // if (!dashboardProps) {
-  //   throw new Error("dashboard context not loaded");
-  // }
-  // const { newTaskValues } = dashboardProps;
-
-  const tasksContext = useContext(TaskContext);
-  if (!tasksContext) {
-    throw new Error("task context not loaded");
-  }
-  const { allTasksClient, setAllTasksClient } = tasksContext;
-
+export default function ListOfTasks({
+  setAllTasksClient,
+  allTasksClientCopy,
+}: NewProps) {
   return (
     <>
-      {allTasksClient.map((item, index) => (
+      {allTasksClientCopy.map((item, index) => (
         <Task
           key={item.id}
           title={item.title}

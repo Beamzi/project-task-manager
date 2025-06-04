@@ -21,7 +21,7 @@ export async function getAllTasks() {
             author: { id: session?.user?.id },
         },
         orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
         },
         ...getAllTasksQuery
 

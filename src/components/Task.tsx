@@ -319,6 +319,7 @@ export default function Task({
                   priorityState={priority}
                   localPriorityState={localPriorityState}
                   setLocalPriorityState={setLocalPriorityState}
+                  setAllTasksClient={setAllTasksClient}
                 ></PriorityBtn>
               </motion.div>
             </>

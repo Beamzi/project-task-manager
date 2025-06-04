@@ -11,13 +11,7 @@ import { SessionContext } from "@/context/SessionContext";
 import OverviewThreeSection from "@/components/OverviewThreeSection";
 
 export default function Overview() {
-  const tasks = useContext(TaskContext);
-
-  if (!tasks) {
-    throw new Error("tasks not loaded ");
-  }
   const session = useContext(SessionContext);
-
   if (!session) {
     throw new Error("session not loaded");
   }
@@ -25,10 +19,27 @@ export default function Overview() {
   const userName = session?.user?.name;
   const firstNameOfUser = userName?.substring(0, userName?.indexOf(" "));
 
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) {
+    throw new Error("task context not loaded");
+  }
+  const { allTasksClient, setAllTasksClient } = tasksContext;
+
+  const allTasksClientCreatedAt = [...allTasksClient];
+
+  allTasksClientCreatedAt.sort(
+    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
+  );
+
   return (
     <>
       <FirstRowContainers
-        leftData={<ListOfTasks currentTasks={tasks}></ListOfTasks>}
+        leftData={
+          <ListOfTasks
+            allTasksClientCopy={allTasksClientCreatedAt}
+            setAllTasksClient={setAllTasksClient}
+          ></ListOfTasks>
+        }
         rightData={<ListOfReminderTasks />}
         leftTitle="Recently Created"
         rightTitle="Reminders"

@@ -10,19 +10,18 @@ import SearchClient from "./SearchClient";
 import { DashBoardContext } from "@/context/DashBoardContext";
 
 import { GetAllTasksByDueDateTypeOf } from "@/lib/queries/getAllTasksByDueDate";
+import { TaskContext } from "@/context/TaskContext";
 
 interface Props {
   tasks: GetAllTasksByDueDateTypeOf[];
 }
 
 export default function InboxClient({ tasks }: Props) {
-  const dashboardProps = useContext(DashBoardContext);
-
-  if (!dashboardProps) {
-    throw new Error("dashboard context not loaded");
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) {
+    throw new Error("task context not loaded");
   }
-
-  const { newTaskValues, newTaskResponse } = dashboardProps;
+  const { allTasksClient, setAllTasksClient } = tasksContext;
 
   const [action, setAction] = useState("");
   const [typeInterpolate, setTypeInterpolate] = useState<
@@ -35,8 +34,8 @@ export default function InboxClient({ tasks }: Props) {
     typeInterpolate: "title" | "content" | "date" | "createdAt" | "priority",
     tasks: Props["tasks"]
   ) => {
-    const copy = [...tasks];
-    const tasksCopy = copy.concat(newTaskResponse);
+    const tasksCopy = [...tasks];
+    // const tasksCopy = copy.concat(newTaskResponse);
 
     //just be aware of any type here
     if (action === "desc")
@@ -61,7 +60,7 @@ export default function InboxClient({ tasks }: Props) {
     return tasksCopy;
   };
 
-  const tasksCopy = orderBy(action, typeInterpolate, tasks);
+  const tasksCopy = orderBy(action, typeInterpolate, allTasksClient);
 
   // const finalCopy = tasksCopy.concat(newTaskResponse);
 
@@ -82,14 +81,14 @@ export default function InboxClient({ tasks }: Props) {
         leftData={
           searching.length > 0 ? (
             <ListOfSearchTasks
-              currentTasks={tasksCopy}
-              // newTaskResponse={newTaskResponse}
+              allTasksClientCopy={tasksCopy}
+              setAllTasksClient={setAllTasksClient}
               searching={searching}
             />
           ) : (
             <ListOfTasks
-              currentTasks={tasksCopy}
-              currentTasksInbox={tasksCopy}
+              allTasksClientCopy={tasksCopy}
+              setAllTasksClient={setAllTasksClient}
             />
           )
         }
