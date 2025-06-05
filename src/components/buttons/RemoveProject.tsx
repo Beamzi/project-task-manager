@@ -1,17 +1,26 @@
 "use client";
 
-import React, { useContext, useState } from "react";
+import React, { Dispatch, SetStateAction, useContext, useState } from "react";
 import { MinusCircleIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { redirect } from "next/navigation";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
+import { AllProjectsContext } from "@/context/AllProjectsContext";
+import { ParamValue } from "next/dist/server/request/params";
 
 export default function RemoveProject({
   project,
+  projectId,
+  allProjectsClient,
+  setAllProjectsClient,
 }: {
   project: GetAllProjecttypeOf;
+  projectId: ParamValue;
+  allProjectsClient?: GetAllProjecttypeOf[];
+  setAllProjectsClient: Dispatch<SetStateAction<GetAllProjecttypeOf[]>>;
 }) {
   const [showDelete, setShowDelete] = useState(false);
+
   async function deleteProject() {
     try {
       await fetch("/api/delete-project", {
@@ -21,10 +30,29 @@ export default function RemoveProject({
         },
         body: JSON.stringify({ projectId: project.id }),
       });
+      setAllProjectsClient((prev) =>
+        prev.filter((item) => item.id !== projectId)
+      );
     } catch (e) {
       console.error(e);
     }
   }
+
+  // async function deleteCommentsOfProject() {
+  //   try {
+  //     await fetch("/api/delete-comment", {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         id: id,
+  //       }),
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // }
 
   const context = useContext(DashBoardContext);
   if (!context) {

@@ -22,13 +22,13 @@ export default function ProjectListBtn({
   variantItems,
   variantLines,
 }: Props) {
-  const context = useContext(DashBoardContext);
-  if (!context) {
-    throw new Error("dashboard props not loaded");
-  }
+  // const context = useContext(DashBoardContext);
+  // if (!context) {
+  //   throw new Error("dashboard props not loaded");
+  // }
 
-  const { removeProjectFromDashboard } = context;
-  const index = removeProjectFromDashboard.indexOf(id);
+  // const { removeProjectFromDashboard } = context;
+  // const index = removeProjectFromDashboard.indexOf(id);
 
   return (
     <div className="flex w-full">
@@ -41,9 +41,7 @@ export default function ProjectListBtn({
         className={`flex overflow-hidden w-[95%]`}
       >
         <Link
-          className={`hover:text-rose-600 ${
-            id === removeProjectFromDashboard[index] && "hidden"
-          } ${overflowEllipsis} ${active(
+          className={`hover:text-rose-600 ${overflowEllipsis} ${active(
             `/projects/${id}`
           )} text-start py-1 text-sm  text-neutral-400
         }`}

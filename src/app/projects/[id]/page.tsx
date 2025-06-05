@@ -35,7 +35,6 @@ export default function ProjectDynamic() {
 
   const currentProjectId = allProjectsClient.findIndex((p) => p.id === id);
   const project = allProjectsClient[currentProjectId];
-  //const tasks = project.tasks;
   const comments = project.comments;
   const profileImg = session?.user?.image;
 
@@ -52,7 +51,12 @@ export default function ProjectDynamic() {
           <button className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2">
             <UserPlusIcon className="w-6" />
           </button>
-          <RemoveProject project={project} />
+          <RemoveProject
+            project={project}
+            projectId={id}
+            allProjectsClient={allProjectsClient}
+            setAllProjectsClient={setAllProjectsClient}
+          />
         </div>
       </section>
       <FirstRowContainers
@@ -60,8 +64,10 @@ export default function ProjectDynamic() {
         leftData={
           <ProjectView
             project={project}
+            projectId={id}
             comments={comments}
             profileImg={profileImg}
+            allProjectsClient={allProjectsClient}
             setAllProjectsClient={setAllProjectsClient}
           ></ProjectView>
         }

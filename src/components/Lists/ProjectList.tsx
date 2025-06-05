@@ -8,6 +8,7 @@ import Link from "next/link";
 import { motion } from "motion/react";
 import { generateKey } from "crypto";
 import { withRouter } from "next/router";
+import { AllProjectsContext } from "@/context/AllProjectsContext";
 
 const container = {
   hidden: { opacity: 0 },
@@ -72,18 +73,9 @@ export default function ProjectList({
 }) {
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  const projects = useContext(projectContext);
-
-  if (!projects) {
-    throw new Error("no project");
-  }
-
-  const context = useContext(DashBoardContext);
-  if (!context) {
-    throw new Error("dashboard props not loaded");
-  }
-
-  const { removeProjectFromDashboard } = context;
+  const allProjectsContext = useContext(AllProjectsContext);
+  if (!allProjectsContext) throw new Error("projects not loaded");
+  const { setAllProjectsClient, allProjectsClient } = allProjectsContext;
 
   return (
     <>
@@ -94,7 +86,7 @@ export default function ProjectList({
         animate="show"
         // onAnimationComplete={() => setHasAnimated(true)}
       >
-        {projects.map((item) => (
+        {allProjectsClient.map((item) => (
           <ProjectListBtn
             key={item.id}
             title={item.title}
@@ -104,36 +96,6 @@ export default function ProjectList({
             variantLines={lineMotion}
           />
         ))}
-
-        {projectListClient.map((item, index) => {
-          const isHidden = removeProjectFromDashboard.includes(
-            projectListIds[index]
-          );
-          return (
-            <div key={`${item}${index}`}>
-              <div className="flex">
-                <motion.div
-                  variants={lineMotion}
-                  className="origin-top border-l-2 pl-3 border-rose-600 text-start ml-4 "
-                ></motion.div>
-                <motion.div
-                  variants={itemMotion}
-                  className={`${
-                    isHidden ? "hidden" : ""
-                  } flex overflow-hidden w-[95%]`}
-                >
-                  <Link
-                    className="text-start w-full hover:text-rose-600 py-1 text-sm px-2 text-neutral-400"
-                    href={`/projects/${projectListIds[index]}`}
-                    prefetch={true}
-                  >
-                    {item}
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-          );
-        })}
       </motion.div>
     </>
   );

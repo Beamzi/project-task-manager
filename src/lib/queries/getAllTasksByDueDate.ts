@@ -15,7 +15,6 @@ const getAllTasksQuery = {
 
 export async function getAllTasksByDueDate() {
   const session = await auth();
-//   if (session) {
     const result = await prisma.task.findMany({
         orderBy: {
             date: "asc",
@@ -26,6 +25,4 @@ export async function getAllTasksByDueDate() {
         ...getAllTasksQuery
     });
     return result;
-  
-//   else return []
 }

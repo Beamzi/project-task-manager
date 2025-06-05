@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { useState } from "react";
 import CreateComment from "./CreateComment";
 
@@ -8,24 +14,40 @@ import EditComment from "./EditComment";
 import SaveOnchange from "./SaveOnchange";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
+import { AllCommentsContext } from "@/context/AllCommentsContext";
+import { ParamValue } from "next/dist/server/request/params";
 
 interface ProjectViewProps {
   project: GetAllProjecttypeOf | null;
+  projectId?: ParamValue;
   comments: GetAllProjecttypeOf["comments"] | undefined;
   profileImg: string | null | undefined;
+  allProjectsClient: GetAllProjecttypeOf[];
+  setAllProjectsClient: Dispatch<SetStateAction<GetAllProjecttypeOf[]>>;
 }
 
 export default function ProjectView({
   project,
+  projectId,
   comments,
   profileImg,
+  allProjectsClient,
+  setAllProjectsClient,
 }: ProjectViewProps) {
   const [title, setTitle] = useState(project?.title ?? "");
   const [description, setDescription] = useState(project?.description);
-  const [localComment, setLocalComment] = useState<string[]>([]);
-  const [commentId, setCommentId] = useState<string[]>([]);
   const [editing, setEditing] = useState(false);
   const [init, setInit] = useState(true);
+
+  const allCommentsContext = useContext(AllCommentsContext);
+  if (!allCommentsContext) throw new Error("comments not loaded");
+  const { setAllCommentsClient, allCommentsClient } = allCommentsContext;
+
+  const allCommentsClientCopy = [...allCommentsClient];
+
+  const commentsOfProject = allCommentsClientCopy.filter(
+    (item) => item.projectId === projectId
+  );
 
   async function updateProject() {
     try {
@@ -40,6 +62,14 @@ export default function ProjectView({
           description: description,
         }),
       });
+
+      setAllProjectsClient((prev) =>
+        prev.map((item) =>
+          item.id === projectId
+            ? { ...item, title: title, description: description ?? "" }
+            : item
+        )
+      );
     } catch (e) {
       console.error(e);
     }
@@ -111,7 +141,7 @@ export default function ProjectView({
       <div className="py-2">
         <h1 className="py-2 ">Comments</h1>
         <hr></hr>
-        {comments?.map((comment) => (
+        {commentsOfProject?.map((comment) => (
           <EditComment
             key={comment.id}
             id={comment.id}
@@ -119,31 +149,17 @@ export default function ProjectView({
             name={comment.author?.name}
             createdAt={comment.createdAt}
             profileImg={profileImg}
+            commentsClient={commentsOfProject}
+            setCommentsClient={setAllCommentsClient}
           ></EditComment>
         ))}
       </div>
 
-      {localComment && (
-        <div>
-          {localComment.map((item, index) => (
-            <EditComment
-              key={index}
-              id={commentId[index]}
-              content={item}
-              name={project?.author?.name}
-              profileImg={profileImg}
-              createdAt={new Date()}
-              localDelete={true}
-            />
-          ))}
-        </div>
-      )}
-
       <CreateComment
         projectId={project?.id}
         profileImg={profileImg}
-        setLocalComment={setLocalComment}
-        setCommentId={setCommentId}
+        setCommentsClient={setAllCommentsClient}
+        // setCommentId={setCommentId}
       />
     </div>
   );

@@ -17,7 +17,7 @@ export default function ListOfTasks({
 }: NewProps) {
   return (
     <>
-      {allTasksClientCopy.map((item, index) => (
+      {allTasksClientCopy.map((item) => (
         <Task
           key={item.id}
           title={item.title}

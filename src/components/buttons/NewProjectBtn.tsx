@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   PlusIcon,
   XCircleIcon,
   CheckCircleIcon,
 } from "@heroicons/react/24/outline";
 import { request } from "http";
+import { AllProjectsContext } from "@/context/AllProjectsContext";
+import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
 interface Props {
   setProjectListClient: React.Dispatch<React.SetStateAction<string[]>>;
@@ -27,8 +29,17 @@ export default function NewProjectBtn({
   const [projectTitle, setProjectTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  async function createProject(event: React.FormEvent<HTMLFormElement>) {
+  const allProjectsContext = useContext(AllProjectsContext);
+
+  if (!allProjectsContext) throw new Error("projects not loaded");
+  const { setAllProjectsClient, allProjectsClient } = allProjectsContext;
+
+  async function createProject(
+    event: React.FormEvent<HTMLFormElement>,
+    tempId: string
+  ) {
     event.preventDefault();
+
     try {
       const request = await fetch("/api/create-project", {
         method: "POST",
@@ -39,6 +50,12 @@ export default function NewProjectBtn({
       });
       const response = await request.json();
       setProjectListIds([...projectListIds, response.result.id]);
+
+      setAllProjectsClient((prev) =>
+        prev.map((item) =>
+          item.id === tempId ? { ...item, id: response.result.id } : item
+        )
+      );
     } catch (e) {
       console.error(e);
     }
@@ -60,8 +77,18 @@ export default function NewProjectBtn({
             aria-placeholder="project title"
             className="gradient-for-inner-containers rounded-xl  border-1 outline-4 -outline-offset-5 p-4 w-100 outline-neutral-900 fixed z-50 top-[50%] left-[50%] translate-[-50%]"
             onSubmit={(event) => {
+              const tempId = crypto.randomUUID();
+
               setProjectListClient([...projectListClient, projectTitle]);
-              createProject(event);
+              setAllProjectsClient((prev) => [
+                ...prev,
+                {
+                  title: projectTitle,
+                  description: description,
+                  id: tempId,
+                } as GetAllProjecttypeOf,
+              ]);
+              createProject(event, tempId);
               setProjectInput(false);
               setIsRendered(true);
             }}

@@ -13,10 +13,8 @@ interface Props {
   createdAt: Date;
   profileImg: string | null | undefined;
   localDelete?: boolean;
-  noteCommentsClient?: GetNonProjectCommentsTypeOf[];
-  setNoteCommentsClient: Dispatch<
-    SetStateAction<GetNonProjectCommentsTypeOf[]>
-  >;
+  commentsClient?: GetNonProjectCommentsTypeOf[];
+  setCommentsClient: Dispatch<SetStateAction<GetNonProjectCommentsTypeOf[]>>;
 }
 
 export default function EditComment({
@@ -25,11 +23,11 @@ export default function EditComment({
   name,
   createdAt,
   profileImg,
-  setNoteCommentsClient,
+  setCommentsClient,
 }: Props) {
   const [edit, setEdit] = useState(false);
 
-  // const localIndex = noteCommentsClient.findIndex((p) => p.id === id);
+  // const localIndex = commentsClient.findIndex((p) => p.id === id);
 
   const [newContent, setNewContent] = useState(content);
   const [initOptions, setInitOptions] = useState(false);
@@ -48,7 +46,7 @@ export default function EditComment({
         }),
       });
 
-      setNoteCommentsClient((prev) =>
+      setCommentsClient((prev) =>
         prev.map((item) =>
           item.id === id ? { ...item, content: newContent } : item
         )
@@ -68,7 +66,7 @@ export default function EditComment({
         }),
       });
 
-      setNoteCommentsClient((prev) => prev.filter((item) => item.id !== id));
+      setCommentsClient((prev) => prev.filter((item) => item.id !== id));
     } catch (e) {
       console.error(e);
     }
