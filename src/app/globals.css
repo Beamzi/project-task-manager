@@ -194,6 +194,9 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
     button:hover, a:hover {
       @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 
     }
+
+
+    /* QUESTIONABLE  */
     button:hover > svg, a:hover > svg {
       @apply scale-120 stroke-black transition-all duration-200
   }

@@ -7,11 +7,12 @@ import Timer from "./Timer";
 import Inventory from "./Inventory";
 import { createPortal } from "react-dom";
 import Analytics from "./Analytics";
+import PersonalNotes from "./PersonalNotes";
 
 export default function OverviewThreeSection() {
   const [showInventory, setShowInventory] = useState(false);
   const [showAnalytics, setShowAnalytics] = useState(false);
-
+  const [showNotes, setShowNotes] = useState(false);
   return (
     <div className="h-full w-full py-5 flex">
       <div className="w-1/3 flex  flex-col justify-center items-center h-full border-1 rounded-xl ml-5">
@@ -45,7 +46,25 @@ export default function OverviewThreeSection() {
         <div></div>
         <GiNotebook className="w-full h-10" />
         <p>Quick Notes</p>
-        <button className="bg-black py-1 px-1">new note</button>
+        <button
+          onClick={() => setShowNotes(true)}
+          className="bg-black py-1 px-1"
+        >
+          new note
+        </button>
+        {showNotes &&
+          createPortal(
+            <>
+              <div
+                onClick={() => setShowNotes(false)}
+                className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+              ></div>
+              <div className=" gradient-for-inner-containers border-1 z-1000 h-[80vh] rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
+                <PersonalNotes />
+              </div>
+            </>,
+            document.body
+          )}
       </div>
       <div className="w-1/3 flex  flex-col justify-center items-center h-full border-1 rounded-xl mr-5">
         <div></div>

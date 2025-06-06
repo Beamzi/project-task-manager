@@ -10,13 +10,14 @@ import { Jersey_10_Charted } from "next/font/google";
 import { SessionContext } from "@/context/SessionContext";
 
 interface Props {
-  //project: GetAllProjecttypeOf;
+  isNote?: boolean;
   projectId: string | undefined | null;
   profileImg: string | undefined | null;
   setCommentsClient: Dispatch<SetStateAction<GetAllCommentsTypeof[]>>;
 }
 
 export default function CreateComment({
+  isNote,
   projectId,
   profileImg,
   setCommentsClient,
@@ -87,15 +88,18 @@ export default function CreateComment({
     >
       <div className="flex flex-col py-5 px-5 pb-10.5 border-1 rounded-xl backdrop-blur-2xl shadow-[0px_-50px_100px_1px_rgba(0,0,0,0.5)]">
         <div className="flex justify-center  align-middle content-center items-center">
-          <Image
-            className="w-8 rounded-full h-8"
-            src={profileImg ?? ""}
-            width={30}
-            height={30}
-            style={{ objectFit: "contain" }}
-            alt="user profile picture"
-            loading="lazy"
-          ></Image>
+          {!isNote && (
+            <Image
+              className="w-8 rounded-full h-8"
+              src={profileImg ?? ""}
+              width={30}
+              height={30}
+              style={{ objectFit: "contain" }}
+              alt="user profile picture"
+              loading="lazy"
+            ></Image>
+          )}
+
           <textarea
             minLength={5}
             maxLength={200}
@@ -104,7 +108,7 @@ export default function CreateComment({
             onChange={(e) => {
               setContent(e.target.value);
             }}
-            placeholder="Leave a comment?"
+            placeholder={`${isNote ? "Add a note?" : "Leave a comment?"}`}
             onClick={() => setComment(true)}
             className="border-1 rounded-sm mx-2 my-2 w-full h-10 pt-2 pl-2 text-neutral-200 relative"
           ></textarea>

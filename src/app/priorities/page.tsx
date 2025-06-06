@@ -36,14 +36,14 @@ export default function Priorities() {
         }
         rightData={
           <PersonalNotes
-            comments={comments}
+            // comments={comments}
             profileImg={session?.user?.image}
             name={session?.user?.name}
           />
         }
         height="h-full"
         ifBottomRow={true}
-        leftTitle="Prioritised"
+        leftTitle="Priority Tasks"
         rightTitle="Personal Notes"
       ></FirstRowContainers>
     </>
