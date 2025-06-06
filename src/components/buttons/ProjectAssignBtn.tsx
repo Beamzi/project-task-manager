@@ -49,7 +49,6 @@ export default function ProjectAssignBtn({
         onClick={() => (list ? setList(false) : setList(true))}
       >
         <ChevronDown isRendered={list} />
-
         {!projectIdOfTask && !assignCheck && "Projects"}
         {assignCheck ? (
           <>

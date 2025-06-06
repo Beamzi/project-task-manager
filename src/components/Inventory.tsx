@@ -7,18 +7,29 @@ import { ChevronRightIcon, MinusIcon } from "@heroicons/react/24/outline";
 import React, { useContext } from "react";
 import { SiListmonk } from "react-icons/si";
 import { LuDot } from "react-icons/lu";
+import { TaskContext } from "@/context/TaskContext";
+import { AllProjectsContext } from "@/context/AllProjectsContext";
+import { AllCommentsContext } from "@/context/AllCommentsContext";
 
 const ellipsis = "overflow-hidden whitespace-nowrap text-ellipsis w-40";
 
 export default function Inventory() {
-  const projects = useContext(projectContext);
-  const tasks = useContext(TaskDueDateContext);
-  const priorities = useContext(PrioritiesContext);
-  const notes = useContext(CommentsNonProjectContext);
-
-  if (!projects || !tasks || !priorities || !notes) {
+  const projectsContext = useContext(AllProjectsContext);
+  const tasksContext = useContext(TaskContext);
+  const commentsContext = useContext(AllCommentsContext);
+  if (!projectsContext || !tasksContext || !commentsContext) {
     throw new Error("context not loaded");
   }
+  const { allTasksClient } = tasksContext;
+  const { allProjectsClient } = projectsContext;
+  const { allCommentsClient } = commentsContext;
+
+  const priorities = [
+    ...allTasksClient.filter((item) => item.priority === true),
+  ];
+  const notes = [...allCommentsClient.filter((item) => !item.projectId)];
+  const tasks = [...allTasksClient];
+  const projects = [...allProjectsClient];
 
   return (
     <div className="flex flex-wrap md:min-w-100 lg:min-w-200">

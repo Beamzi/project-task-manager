@@ -1,5 +1,6 @@
 "use client";
 import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
+import { TaskContext } from "@/context/TaskContext";
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
 import { eachDayOfInterval } from "date-fns";
 import React, { useContext } from "react";
@@ -14,10 +15,13 @@ import {
 } from "recharts";
 
 export default function Analytics() {
-  const allTasksDueDate = useContext(AllTasksDueDateContext);
-  if (!allTasksDueDate) {
-    throw new Error("tasks not loaded");
-  }
+  const tasksContext = useContext(TaskContext);
+  if (!tasksContext) throw new Error("tasks not loaded");
+  const { allTasksClient } = tasksContext;
+
+  const allTasksDueDate = [
+    ...allTasksClient.sort((a, b) => a.date.getTime() - b.date.getTime()),
+  ];
 
   const tasksParse = allTasksDueDate.map((item, index) => ({
     taskNumber: index + 1,

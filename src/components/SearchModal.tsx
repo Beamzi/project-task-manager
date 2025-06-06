@@ -8,20 +8,15 @@ import SingleContainer from "./Skeleton/SingleContainer";
 import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
 import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { TaskContext } from "@/context/TaskContext";
 
 export default function SearchModal() {
-  const tasks = useContext(AllTasksDueDateContext);
+  const tasks = useContext(TaskContext);
   if (!tasks) {
     throw new Error("context not provided");
   }
 
-  const dashboardProps = useContext(DashBoardContext);
-
-  if (!dashboardProps) {
-    throw new Error("dashboard context not loaded");
-  }
-
-  const { newTaskValues, newTaskResponse } = dashboardProps;
+  const { setAllTasksClient, allTasksClient } = tasks;
 
   const [showSearch, setShowSearch] = useState(false);
   const [searching, setSearching] = useState("");
@@ -51,8 +46,8 @@ export default function SearchModal() {
               <SingleContainer
                 data={
                   <ListOfSearchTasks
-                    currentTasks={tasks}
-                    newTaskResponse={newTaskResponse}
+                    allTasksClientCopy={allTasksClient}
+                    setAllTasksClient={setAllTasksClient}
                     searching={searching}
                   />
                 }

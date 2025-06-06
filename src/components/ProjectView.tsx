@@ -16,6 +16,7 @@ import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 import { AllCommentsContext } from "@/context/AllCommentsContext";
 import { ParamValue } from "next/dist/server/request/params";
+import { SessionContext } from "@/context/SessionContext";
 
 interface ProjectViewProps {
   project: GetAllProjecttypeOf | null;
@@ -38,6 +39,9 @@ export default function ProjectView({
   const [description, setDescription] = useState(project?.description);
   const [editing, setEditing] = useState(false);
   const [init, setInit] = useState(true);
+
+  const session = useContext(SessionContext);
+  if (!session) throw new Error("session not loaded");
 
   const allCommentsContext = useContext(AllCommentsContext);
   if (!allCommentsContext) throw new Error("comments not loaded");
@@ -146,7 +150,7 @@ export default function ProjectView({
             key={comment.id}
             id={comment.id}
             content={comment.content}
-            name={comment.author?.name}
+            name={session.user?.name}
             createdAt={comment.createdAt}
             profileImg={profileImg}
             commentsClient={commentsOfProject}
@@ -159,7 +163,6 @@ export default function ProjectView({
         projectId={project?.id}
         profileImg={profileImg}
         setCommentsClient={setAllCommentsClient}
-        // setCommentId={setCommentId}
       />
     </div>
   );

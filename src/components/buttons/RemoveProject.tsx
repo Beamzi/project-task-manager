@@ -7,15 +7,14 @@ import { redirect } from "next/navigation";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 import { AllProjectsContext } from "@/context/AllProjectsContext";
 import { ParamValue } from "next/dist/server/request/params";
+import { useRouter } from "next/navigation";
 
 export default function RemoveProject({
   project,
-  projectId,
   allProjectsClient,
   setAllProjectsClient,
 }: {
   project: GetAllProjecttypeOf;
-  projectId: ParamValue;
   allProjectsClient?: GetAllProjecttypeOf[];
   setAllProjectsClient: Dispatch<SetStateAction<GetAllProjecttypeOf[]>>;
 }) {
@@ -30,29 +29,30 @@ export default function RemoveProject({
         },
         body: JSON.stringify({ projectId: project.id }),
       });
+
       setAllProjectsClient((prev) =>
-        prev.filter((item) => item.id !== projectId)
+        prev.filter((item) => item.id !== project.id)
       );
     } catch (e) {
       console.error(e);
     }
   }
 
-  // async function deleteCommentsOfProject() {
-  //   try {
-  //     await fetch("/api/delete-comment", {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         id: id,
-  //       }),
-  //     });
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // }
+  async function deleteCommentsOfProject() {
+    try {
+      await fetch("/api/batch-delete-project-comments", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          projectId: project.id,
+        }),
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   const context = useContext(DashBoardContext);
   if (!context) {
@@ -80,8 +80,12 @@ export default function RemoveProject({
                   ...removeProjectFromDashboard,
                   project.id,
                 ]);
-                deleteProject();
-                redirect("/");
+
+                deleteCommentsOfProject();
+                setTimeout(() => {
+                  deleteProject();
+                  redirect("/");
+                });
               }}
               className="border-1 rounded-md p-2 mr-2 w-full hover:bg-white hover:text-rose-600 transition-colors duration-50"
             >

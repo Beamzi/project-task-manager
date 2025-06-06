@@ -11,7 +11,6 @@ import RemoveProject from "@/components/buttons/RemoveProject";
 import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 import { useParams } from "next/navigation";
-import { DashBoardContext } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
 
 export default function ProjectDynamic() {
@@ -53,7 +52,6 @@ export default function ProjectDynamic() {
           </button>
           <RemoveProject
             project={project}
-            projectId={id}
             allProjectsClient={allProjectsClient}
             setAllProjectsClient={setAllProjectsClient}
           />

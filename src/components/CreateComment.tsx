@@ -5,8 +5,12 @@ import { useState } from "react";
 import Image from "next/image";
 import { GetNonProjectCommentsTypeOf } from "@/lib/queries/getNonProjectComments";
 import { GetAllCommentsTypeof } from "@/lib/queries/getAllComments";
+import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
+import { Jersey_10_Charted } from "next/font/google";
+import { SessionContext } from "@/context/SessionContext";
 
 interface Props {
+  //project: GetAllProjecttypeOf;
   projectId: string | undefined | null;
   profileImg: string | undefined | null;
   setCommentsClient: Dispatch<SetStateAction<GetAllCommentsTypeof[]>>;
@@ -43,6 +47,8 @@ export default function CreateComment({
           item.id === tempId ? { ...item, id: response.result.id } : item
         )
       );
+
+      //   console.log(session.user?.name);
     } catch (e) {
       console.error(e);
     }
