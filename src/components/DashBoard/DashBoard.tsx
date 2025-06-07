@@ -85,7 +85,7 @@ export default async function DashBoard({
                       <TopBar className="z-2 gradient-for-thin-containers invisible relative md:h-12 h-0 md:border-y-1 w-full md:visible"></TopBar>
                       <div className=" flex flex-1 overflow-hidden justify-center  w-full h-full">
                         <SideBar className=" gradient-for-vert-containers min-w-45 xl:max-w-50 md:visible invisible flex flex-col px-1 py-2 border-l-1 border-b-1 md:relative fixed h-full left-0 md:top-0" />
-                        <main className="gradient-for-main flex flex-col h-full flex-1 min-h-0 items-center  border-x-1 border-b-1 py-[clamp(16px,10vw,50px)] w-vw dark:bg-neutral-950 w-full">
+                        <main className="gradient-for-main flex flex-col h-full flex-1 min-h-0 items-center  border-x-1 border-b-1 py-[clamp(8px,4vh,50px)] w-vw dark:bg-neutral-950 w-full">
                           {children}
                         </main>
                       </div>

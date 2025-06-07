@@ -137,6 +137,24 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 }
 
 
+@media (min-height: 1000px) {
+  .custom-height-media {
+      height: 63dvh;
+  }
+}
+
+@media (max-height: 1000px) {
+  .custom-height-media {
+      height: 57dvh;
+  }
+}
+
+@media (max-height: 800px) {
+  .custom-height-media {
+      height: 50dvh;
+  }
+}
+
 @layer components {
   .project-page-view {
     button:hover > svg {

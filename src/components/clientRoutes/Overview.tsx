@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { TaskContext } from "@/context/TaskContext";
 import { SessionContext } from "@/context/SessionContext";
 import OverviewThreeSection from "@/components/OverviewThreeSection";
+import ThreeSection from "../Skeleton/ThreeSection";
 
 export default function Overview() {
   const session = useContext(SessionContext);
@@ -30,7 +31,7 @@ export default function Overview() {
   allTasksClientCreatedAt.sort(
     (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
   );
-
+  // h-[50vh]
   return (
     <>
       <FirstRowContainers
@@ -43,10 +44,10 @@ export default function Overview() {
         rightData={<ListOfReminderTasks />}
         leftTitle="Recently Created"
         rightTitle="Reminders"
-        height="h-[50dvh]"
+        height="h-[50dvh] custom-height-media"
       ></FirstRowContainers>
 
-      <SingleContainer data={<OverviewThreeSection />} height="h-full" />
+      <OverviewThreeSection />
     </>
   );
 }

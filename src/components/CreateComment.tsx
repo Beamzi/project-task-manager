@@ -87,7 +87,7 @@ export default function CreateComment({
       className="absolute z-20 bottom-3 rounded-xl scale-92 shadow-[0px_14px_5px_1px_rgba(15,15,15,0.9)] -left-[1px] w-full"
     >
       <div className="flex flex-col py-5 px-5 pb-10.5 border-1 rounded-xl backdrop-blur-2xl shadow-[0px_-50px_100px_1px_rgba(0,0,0,0.5)]">
-        <div className="flex justify-center  align-middle content-center items-center">
+        <div className="flex justify-center align-middle content-center items-center">
           {!isNote && (
             <Image
               className="w-8 rounded-full h-8"

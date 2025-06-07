@@ -42,12 +42,12 @@ export default function FirstRowContainers({
     <>
       <div className="invisible absolute md:visible md:relative flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
         {leftTitle && (
-          <p className="px-2 w-full  text-start py-2 text-scaley-lg border-dotted">
+          <p className="px-2 w-full text-start text-base pb-2 -mt-1 border-dotted">
             {leftTitle}
           </p>
         )}
         {rightTitle && (
-          <p className="ml-[clamp(16px,2vw,24px)] text-scaley-lg bg-transparent  w-full border-dotted px-2 py-2">
+          <p className="ml-[clamp(16px,2vw,24px)] text-base pb-2 -mt-1 bg-transparent w-full border-dotted px-2">
             {rightTitle}
           </p>
         )}
@@ -55,14 +55,14 @@ export default function FirstRowContainers({
 
       <div className=" md:hidden flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
         {leftTitle && (
-          <p className="px-2 w-full  text-start py-2 text-scaley-lg border-dotted">
+          <p className="px-2 w-full  text-start pb-2 -mt-1 text-base  border-dotted">
             {!noExpand && !expand ? `${leftTitle}` : `${rightTitle}`}
           </p>
         )}
       </div>
 
       <div
-        className={`flex px-[clamp(16px,2vw,24px)] min-h-0 w-full ${
+        className={`flex px-[clamp(16px,2vw,24px)]  min-h-0 w-full ${
           ifBottomRow && "h-full "
         } 2xl:w-[70%] xl:w-[80%] bg-transparent justify-center ${
           !leftTitle && "pt-[clamp(16px,2vw,24px)]"
