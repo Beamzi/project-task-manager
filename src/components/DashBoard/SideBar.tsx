@@ -15,6 +15,7 @@ import {
   CalendarDaysIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  PlusIcon,
 } from "@heroicons/react/24/outline";
 
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
@@ -29,6 +30,8 @@ export default function SideBar({ className }: { className: string }) {
   const [init, setInit] = useState(true);
   const [projectListClient, setProjectListClient] = useState<string[]>([]);
   const [projectListIds, setProjectListIds] = useState<string[]>([]);
+
+  const [showProjectForm, setShowProjectForm] = useState(false);
 
   const dashBoardProps = useContext(DashBoardContext);
   if (!dashBoardProps) {
@@ -62,13 +65,19 @@ export default function SideBar({ className }: { className: string }) {
           <StarIcon />
           Priorities
         </Link>
-        <NewProjectBtn
-          projectListClient={projectListClient}
-          setProjectListClient={setProjectListClient}
-          projectListIds={projectListIds}
-          setProjectListIds={setProjectListIds}
-          setIsRendered={setIsRendered}
-        />
+
+        <button
+          className="flex"
+          type="button"
+          onClick={() => setShowProjectForm(true)}
+        >
+          <PlusIcon />
+          New Project
+        </button>
+        {showProjectForm && (
+          <NewProjectBtn setShowProjectForm={setShowProjectForm} />
+        )}
+
         <div className=" flex justify-between">
           <button
             id={"all-projects"}

@@ -6,36 +6,23 @@ import { auth } from "../../../../auth"
 export async function POST(request: Request) {
     const res = await request.json()
     const session = await auth()
-    const { title, content, date, projectId } = res
-    if (projectId !== undefined) {
+    const { title, content, date, priority, projectId } = res
+    const taskData = {
+        data: {
+            published: true,
+            title: title,
+            date: new Date(date),
+            content: content,
+            priority: priority,
+            author: {
+                connect: {id: session?.user?.id}
+            },
+            ...projectId && {project: { connect: {id: projectId}}}
+        }
+    }
+
     const result = await prisma.task.create({
-        data: {
-            published: true,
-            title: title,
-            date: new Date(date),
-            content: content,
-            author: {
-                connect: {id: session?.user?.id}
-            },
-            project: {
-                connect: {id: projectId}
-            }
-        }
+        ...taskData
     })
     return NextResponse.json({result})
-    }
-    else {
-        const result = await prisma.task.create({
-        data: {
-            published: true,
-            title: title,
-            date: new Date(date),
-            content: content,
-            author: {
-                connect: {id: session?.user?.id}
-            },
-        }
-    })
-    return NextResponse.json({result})
-    }
 }

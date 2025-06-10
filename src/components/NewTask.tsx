@@ -1,46 +1,58 @@
 "use client";
 
 import { format } from "date-fns";
-
 import { FormEvent } from "react";
 import { useContext, useState } from "react";
 import TimeOptions from "./TimeOptions";
 import { projectContext } from "@/context/ProjectContext";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, StarIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
+import { motion } from "motion/react";
 import {
   CheckCircleIcon,
   XCircleIcon,
   CalendarIcon,
   ListBulletIcon,
 } from "@heroicons/react/24/outline";
-import { DashBoardContext } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 interface Props {
+  isPriority?: boolean;
+  isAssigned?: boolean;
+  currentProjectId?: string;
+  currentProjectTitle?: string;
   setShowForm: (type: boolean) => void;
   fixedDate?: Date;
 }
 
-export default function NewTask({ setShowForm, fixedDate }: Props) {
-  const router = useRouter();
-
+export default function NewTask({
+  setShowForm,
+  fixedDate,
+  isAssigned,
+  isPriority,
+  currentProjectId,
+  currentProjectTitle,
+}: Props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isNewTask, setIsNewTask] = useState(false);
   const trueDate = new Date();
-
   const [quickDate, setQuickDate] = useState<Date>(
     fixedDate ? fixedDate : trueDate
   );
   const [showTimeOptions, setShowTimeOptions] = useState(false);
-  const [newTaskProjectId, setNewTaskProjectId] = useState("");
+  const [newTaskProjectId, setNewTaskProjectId] = useState(
+    isAssigned ? currentProjectId : ""
+  );
+  const [newTaskIsPriority, setNewTaskIsPriority] = useState(
+    isPriority ? isPriority : false
+  );
   const [showProjects, setShowProjects] = useState(false);
-  const [projectTitle, setProjectTitle] = useState("");
-
+  const [projectTitle, setProjectTitle] = useState(
+    isAssigned ? currentProjectTitle : ""
+  );
   const projects = useContext(projectContext);
   if (!projects) throw new Error("projects not loaded");
-
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) {
     throw new Error("hello");
@@ -59,6 +71,7 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
           title: title,
           content: content,
           date: quickDate,
+          priority: newTaskIsPriority,
           projectId: newTaskProjectId ? newTaskProjectId : undefined,
           createdAt: new Date(),
         }),
@@ -90,6 +103,8 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
             date: quickDate,
             id: tempId,
             createdAt: new Date(),
+            priority: newTaskIsPriority,
+            projectId: newTaskProjectId ? newTaskProjectId : undefined,
           } as getAllTasksTypeOf,
         ]);
 
@@ -155,7 +170,9 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
           <div className="relative">
             <button
               type="button"
-              className="border-1 rounded-lg"
+              className={`border-1 rounded-lg ${
+                isAssigned && "pointer-events-none bg-neutral-900"
+              }`}
               onClick={() => setShowProjects(showProjects ? false : true)}
             >
               <ListBulletIcon />
@@ -198,6 +215,21 @@ export default function NewTask({ setShowForm, fixedDate }: Props) {
               </ul>
             )}
           </div>
+          <button
+            onClick={() =>
+              setNewTaskIsPriority(newTaskIsPriority ? false : true)
+            }
+            type="button"
+            className={`${
+              isPriority && "pointer-events-none bg-neutral-900"
+            } ml-2 border-1 rounded-lg ${
+              newTaskIsPriority &&
+              "[&>*]:fill-rose-600 [&>*]:stroke-rose-600 hover:bg-transparent hover:text-neutral-200 hover:border-neutral-500"
+            }`}
+          >
+            <StarIcon />
+            Priority
+          </button>
         </div>
         <div className="flex">
           <button

@@ -1,7 +1,5 @@
 "use client";
 import React, { useContext, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { DashBoardContext } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
 interface Props {
   title: string;
@@ -10,6 +8,7 @@ interface Props {
   setList: (value: boolean) => void;
   setTitleCheck: (value: string) => void;
   setAssignCheck: (value: boolean) => void;
+  isFirstProject?: boolean;
 }
 
 export default function LinkTaskToProjectBtn({
@@ -19,22 +18,13 @@ export default function LinkTaskToProjectBtn({
   setList,
   setTitleCheck,
   setAssignCheck,
+  isFirstProject,
 }: Props) {
-  const router = useRouter();
-
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) {
     throw new Error("hello");
   }
   const { setAllTasksClient, allTasksClient } = tasksContext;
-
-  useEffect(() => {
-    const findProjectId = allTasksClient.find((p) => (p.projectId = projectId));
-
-    if (findProjectId) {
-      setAssignCheck(true);
-    }
-  }, [projectId, allTasksClient]);
 
   async function linkTask() {
     // const { list, setList } = listState;
@@ -63,7 +53,7 @@ export default function LinkTaskToProjectBtn({
 
   return (
     <button
-      className=" w-full text-left p-1 "
+      className="w-full min-w-25 text-left p-1 "
       onClick={() => {
         linkTask();
         setList(false);

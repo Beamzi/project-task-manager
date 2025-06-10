@@ -17,6 +17,7 @@ function RemoveTaskBtn({ id, setHideInClient, setAllTasksClient }: Props) {
   const [showDelete, setShowDelete] = useState(false);
 
   async function deleteTask() {
+    setAllTasksClient((prev) => prev.filter((item) => item.id !== id));
     try {
       await fetch("/api/delete-task", {
         method: "DELETE",
@@ -28,7 +29,6 @@ function RemoveTaskBtn({ id, setHideInClient, setAllTasksClient }: Props) {
     } catch (e) {
       console.error(e);
     }
-    setAllTasksClient((prev) => prev.filter((item) => item.id !== id));
   }
 
   return (

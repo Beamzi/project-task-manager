@@ -36,9 +36,7 @@ export default function ProjectDynamic() {
   const project = allProjectsClient[currentProjectId];
   const comments = project.comments;
   const profileImg = session?.user?.image;
-
   const allTasksClientCopy = [...allTasksClient];
-
   const projectAssignedTasks = allTasksClientCopy.filter(
     (item) => item.projectId === id
   );
@@ -71,6 +69,9 @@ export default function ProjectDynamic() {
         }
         rightData={
           <ListOfTasks
+            isAssigned={true}
+            projectId={project.id}
+            projectTitle={project.title}
             allTasksClientCopy={projectAssignedTasks}
             setAllTasksClient={setAllTasksClient}
           />

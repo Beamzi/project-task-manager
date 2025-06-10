@@ -186,7 +186,7 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
     @apply px-2 py-1 min-w-33 text-left flex rounded-2xl my-1 border-1 mr-2
   }
   .li-hover {
-    @apply border-x-1 border-b-1 origin-top h-full hover:bg-neutral-800 hover:py-1 hover:ml-2 hover:-mr-2 px-1 hover:border-transparent  hover:outline-1 outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-3 
+    @apply origin-top h-full hover:bg-neutral-800 hover:py-1   px-1 hover:border-transparent  outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-5
   }
 
 
@@ -208,11 +208,10 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
   }
 
 
-  .sidebar, .new-task-local-scope {
+  .sidebar, .new-task-local-scope, .new-project-local-scope {
     button:hover, a:hover {
       @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 
     }
-
 
     /* QUESTIONABLE  */
     button:hover > svg, a:hover > svg {
@@ -225,6 +224,8 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
       @apply p-2 rounded-sm bg-transparent flex text-center items-center text-neutral-100 
   }
 }
+
+
 
 
   .date-options:hover {

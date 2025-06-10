@@ -30,6 +30,7 @@ export default function Priorities() {
         rightId={true}
         leftData={
           <ListOfTasks
+            isPriority={true}
             allTasksClientCopy={priorityFilter}
             setAllTasksClient={setAllTasksClient}
           ></ListOfTasks>
