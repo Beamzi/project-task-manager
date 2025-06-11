@@ -2,7 +2,7 @@
 
 import React, { Dispatch, SetStateAction } from "react";
 import ScheduleTask from "./ScheduleTask";
-import { format, parseISO } from "date-fns";
+import { format, parseISO, endOfDay } from "date-fns";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { useState, useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
@@ -15,6 +15,9 @@ interface Props {
   setAllTasksClient?: Dispatch<SetStateAction<getAllTasksTypeOf>>;
 }
 
+const endOfToday = new Date();
+endOfToday.setHours(0, 0, 0, 0);
+
 export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
   const [overDue] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -25,7 +28,7 @@ export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
     throw new Error("scrollDivRef not loaded");
   }
   const { scrollDivRef } = context;
-  const getDateRange = dateRange({ allTasksClientCopy });
+  const getDateRange = dateRange(allTasksClientCopy);
 
   const taskDates = allTasksClientCopy?.map((item) =>
     format(new Date(item.date), "yyyy-MM-dd")
@@ -48,31 +51,35 @@ export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
       <div ref={scrollDivRef} className="overflow-hidden ">
         <div>
           {allTasksClientCopy?.map(
-            (item) =>
-              item.date < new Date() && (
+            (item, index) =>
+              item.date < endOfToday && (
                 <ScheduleTask
                   overDue={overDue}
                   key={item.id}
-                  // taskId={item.id}
+                  id={item.id}
                   title={item.title}
                   date={item.date}
                   content={item.content}
+                  taskDates={taskDates}
+                  dateIndex={index}
                 ></ScheduleTask>
               )
           )}
         </div>
-
         {formattedDates.map((date) =>
           taskDates?.includes(date) ? (
             <div className="" key={date}>
-              {allTasksClientCopy?.map((item) =>
+              {allTasksClientCopy?.map((item, index) =>
                 date === format(new Date(item.date), "yyyy-MM-dd") ? (
                   <ScheduleTask
                     key={item.id}
+                    id={item.id}
                     dateId={date}
                     title={item.title}
                     date={item.date}
                     content={item.content}
+                    taskDates={taskDates}
+                    dateIndex={index}
                   />
                 ) : null
               )}

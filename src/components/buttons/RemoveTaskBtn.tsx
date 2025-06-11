@@ -37,13 +37,13 @@ function RemoveTaskBtn({ id, setHideInClient, setAllTasksClient }: Props) {
         onClick={() => {
           setShowDelete(showDelete ? false : true);
         }}
-        className="ml-1 py-1 min-w-10 items-center content-center border-1  relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600"
+        className="ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600"
       >
         <DocumentCheckIcon className="min-w-5 " />
         {/* <XMarkIcon className="absolute  -mt-[1px] transition-all duration-100" /> */}
       </button>
       {showDelete && (
-        <div className="break-words absolute top-8.5 py-3  -right-0 border-1 bg-black rounded-xl p-2 w-70">
+        <div className="break-words absolute top-11 py-3  -right-0 border-1 bg-black rounded-xl p-2 w-70">
           <div className="flex px-1 justify-between  items-center  content-center w-full align-middle">
             <p className=" text-center">Mark task as complete?</p>
             <div className="flex">

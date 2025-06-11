@@ -8,11 +8,15 @@ import { GiFlyingTrout } from "react-icons/gi";
 import { CalendarIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { TaskContext } from "@/context/TaskContext";
 import Link from "next/link";
+import { format } from "date-fns";
 
 export default function ListOfReminderTasks() {
   // const tasksByDueDate = useContext(TaskDueDateContext);
   const [overDue] = useState(true);
   const [showForm, setShowForm] = useState(false);
+
+  const endOfToday = new Date();
+  endOfToday.setHours(0, 0, 0, 0);
 
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) throw new Error("tasks not loaded");
@@ -21,6 +25,10 @@ export default function ListOfReminderTasks() {
   const tasksByDueDate = [
     ...allTasksClient.sort((a, b) => b.date.getTime() - a.date.getTime()),
   ];
+
+  const taskDates = tasksByDueDate?.map((item) =>
+    format(new Date(item.date), "yyyy-MM-dd")
+  );
 
   return (
     <>
@@ -40,27 +48,31 @@ export default function ListOfReminderTasks() {
 
       <div className="flex flex-wrap justify-center items-center content-center">
         {tasksByDueDate?.map(
-          (item) =>
-            item.date < new Date() && (
+          (item, index) =>
+            item.date < endOfToday && (
               <ScheduleTask
                 overDue={overDue}
                 key={item.id}
-                // taskId={item.id}
+                id={item.id}
                 title={item.title}
                 date={item.date}
                 content={item.content}
+                taskDates={taskDates}
+                dateIndex={index}
               ></ScheduleTask>
             )
         )}
         {tasksByDueDate?.map(
-          (item) =>
-            item.date > new Date() && (
+          (item, index) =>
+            item.date >= endOfToday && (
               <ScheduleTask
                 key={item.id}
-                // taskId={item.id}
+                id={item.id}
                 title={item.title}
                 date={item.date}
                 content={item.content}
+                taskDates={taskDates}
+                dateIndex={index}
               ></ScheduleTask>
             )
         )}
