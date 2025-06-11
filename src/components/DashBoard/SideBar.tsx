@@ -23,6 +23,7 @@ import SearchModal from "../SearchModal";
 import { usePathname } from "next/navigation";
 import ChevronDown from "../icons/ChevronDown";
 import ChevronUp from "../icons/ChevronUp";
+import { motion } from "motion/react";
 
 export default function SideBar({ className }: { className: string }) {
   const pathName = usePathname();
@@ -42,11 +43,16 @@ export default function SideBar({ className }: { className: string }) {
   const active = (path: string) =>
     `${
       pathName === path &&
-      "bg-neutral-700/50 [&>*]:stroke-rose-600 text-white hover:text-black  hover:bg-white"
+      "bg-neutral-700/50 [&>*]:stroke-rose-600 text0 text-white hover:text-black  hover:bg-white"
     }`;
+
   return (
     <>
-      <aside className={`sidebar ${className} ${sideMenu}`}>
+      <motion.aside
+        animate={sideMenu === "visible" ? { scaleX: [0, 1] } : {}}
+        transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }}
+        className={`sidebar md:visible origin-left ${className} ${sideMenu} `}
+      >
         <SearchModal />
         <NewTaskBtn />
         <Link className={` flex ${active("/")}`} href={"/"}>
@@ -101,7 +107,7 @@ export default function SideBar({ className }: { className: string }) {
             projectListIds={projectListIds}
           />
         )}
-      </aside>
+      </motion.aside>
     </>
   );
 }
