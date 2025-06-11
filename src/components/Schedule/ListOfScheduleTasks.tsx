@@ -85,11 +85,13 @@ export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
               )}
             </div>
           ) : (
-            <div className="  bg-neutral-800 w-full" key={date}>
-              <h3 id={date} className="font-bold py-2 px-5">
+            <div className=" bg-neutral-800 w-full" key={date}>
+              <h3
+                id={date}
+                className="font-bold py-1 px-5 border-b-1 border-dotted"
+              >
                 {reformat(date)}
               </h3>
-              <hr></hr>
               <div className="flex align-center h-full">
                 <div className="py-5  px-5 h-full   wrap-normal text-neutral-500">
                   <button

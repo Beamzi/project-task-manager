@@ -23,7 +23,7 @@ export default function ListOfReminderTasks() {
   const { setAllTasksClient, allTasksClient } = tasksContext;
 
   const tasksByDueDate = [
-    ...allTasksClient.sort((a, b) => b.date.getTime() - a.date.getTime()),
+    ...allTasksClient.sort((a, b) => a.date.getTime() - b.date.getTime()),
   ];
 
   const taskDates = tasksByDueDate?.map((item) =>
@@ -59,6 +59,7 @@ export default function ListOfReminderTasks() {
                 content={item.content}
                 taskDates={taskDates}
                 dateIndex={index}
+                isReminderView={true}
               ></ScheduleTask>
             )
         )}
@@ -73,6 +74,7 @@ export default function ListOfReminderTasks() {
                 content={item.content}
                 taskDates={taskDates}
                 dateIndex={index}
+                isReminderView={true}
               ></ScheduleTask>
             )
         )}

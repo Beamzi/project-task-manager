@@ -33,6 +33,7 @@ interface Props {
   priority?: boolean;
   projectId?: string | null;
   setAllTasksClient: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
+  initMaximise?: boolean;
 }
 
 interface TaskState {
@@ -69,11 +70,12 @@ export default function Task({
   id,
   priority,
   projectId,
+  initMaximise,
   setAllTasksClient,
 }: Props) {
   const router = useRouter();
   const [select, setSelect] = useState(false);
-  const [minimise, setMinimise] = useState(true);
+  const [minimise, setMinimise] = useState(initMaximise ? false : true);
   const [status, setStatus] = useState("initial");
   const [onHover, setOnHover] = useState(
     minimise && `opacity-0 hover:opacity-100`
@@ -182,7 +184,7 @@ export default function Task({
             minimise
               ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
               : "md:pl-4"
-          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-dotted md:px-3 flex flex-col`}
+          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-neutral-700/50 border-dotted md:px-3 flex flex-col`}
         >
           <div className="flex py-1">
             <ProjectAssignBtn
@@ -198,13 +200,16 @@ export default function Task({
               minimise && onHover
             }`}
             >
-              <MinimiseTaskBtn
-                id={id}
-                setMinimise={setMinimise}
-                minimise={minimise}
-                status={status}
-                setStatus={setStatus}
-              ></MinimiseTaskBtn>
+              {!initMaximise && (
+                <MinimiseTaskBtn
+                  id={id}
+                  setMinimise={setMinimise}
+                  minimise={minimise}
+                  status={status}
+                  setStatus={setStatus}
+                ></MinimiseTaskBtn>
+              )}
+
               <RemoveTaskBtn
                 id={id}
                 setHideInClient={setHideInClient}
