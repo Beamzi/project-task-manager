@@ -12,7 +12,7 @@ export function DashBoardProvider({
   allTasks: getAllTasksTypeOf[];
 }) {
   const [modal, setModal] = useState(false);
-  const [sideMenu, setSideMenu] = useState("");
+  const [sideMenu, setSideMenu] = useState(false);
   const scrollDivRef = useRef<HTMLDivElement | null>(null);
   const [globalMinimised, setGlobalMinimised] = useState(false);
   const [removeProjectFromDashboard, setRemoveProjectFromDashboard] = useState<

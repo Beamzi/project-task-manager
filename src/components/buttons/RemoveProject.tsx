@@ -5,9 +5,6 @@ import { MinusCircleIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { redirect } from "next/navigation";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
-import { AllProjectsContext } from "@/context/AllProjectsContext";
-import { ParamValue } from "next/dist/server/request/params";
-import { useRouter } from "next/navigation";
 
 export default function RemoveProject({
   project,

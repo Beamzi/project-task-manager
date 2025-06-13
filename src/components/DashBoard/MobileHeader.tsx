@@ -15,18 +15,14 @@ export default function MobileHeader({ className }: { className: string }) {
   const { sideMenu, setSideMenu } = context;
 
   return (
-    <div className={`${className}   flex space-around`}>
+    <div className={`${className} flex space-around`}>
       <motion.button
         whileHover={{ scale: 1.2 }}
         whileTap={{ scale: 0.8 }}
-        onClick={() =>
-          sideMenu === "visible"
-            ? setSideMenu("invisible opacity-0")
-            : setSideMenu("visible")
-        }
+        onClick={() => setSideMenu(sideMenu ? false : true)}
       >
         <Bars3Icon
-          className={`w-20 p-5 ${sideMenu === "visible" && "fill-rose-600"}`}
+          className={`w-20 p-5 ${sideMenu && "fill-rose-600"}`}
         ></Bars3Icon>
       </motion.button>
 

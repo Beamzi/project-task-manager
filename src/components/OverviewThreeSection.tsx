@@ -1,16 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import {
-  GiChart,
-  GiDuration,
-  GiFlatPlatform,
-  GiForwardSun,
-  GiFountainPen,
-  GiNotebook,
-  GiPencil,
-  GiStack,
-} from "react-icons/gi";
+import { GiDuration, GiPencil, GiStack } from "react-icons/gi";
 import { GiBurningEmbers } from "react-icons/gi";
 import Timer from "./Timer";
 import Inventory from "./Inventory";
@@ -27,7 +18,7 @@ export default function OverviewThreeSection() {
   return (
     <>
       <ThreeSection
-        height="h-full "
+        height="h-full"
         data={
           <>
             <CardContainer
@@ -45,9 +36,9 @@ export default function OverviewThreeSection() {
                       <>
                         <div
                           onClick={() => setShowAnalytics(false)}
-                          className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                          className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%]  left-[50%] z-999 w-full h-full translate-[-50%]`}
                         ></div>
-                        <div className="bg-black border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
+                        <div className="gradient-for-inner-containers scale-65 md:scale-90 border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
                           <Analytics />
                         </div>
                       </>,
@@ -57,6 +48,7 @@ export default function OverviewThreeSection() {
               }
               height="h-full"
             />
+
             <CardContainer
               isCenterCard={true}
               data={
@@ -85,38 +77,38 @@ export default function OverviewThreeSection() {
               }
               height="h-full"
             />
-            <div className="invisible md:visible absolute top-0 left-0 md:relative">
-              <CardContainer
-                data={
-                  <>
-                    <button
-                      onClick={() =>
-                        setShowInventory(showInventory ? false : true)
-                      }
-                      className="w-full  flex flex-col justify-center items-center h-full"
-                    >
-                      <GiStack className="w-full h-10" />
-                      <p>Inventory</p>
-                    </button>
-                    {showInventory &&
-                      createPortal(
-                        <>
-                          <div
-                            onClick={() => setShowInventory(false)}
-                            className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
-                          ></div>
-                          <div className="bg-black border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
-                            <Inventory />
-                          </div>
-                        </>,
-                        document.body
-                      )}
-                  </>
-                }
-                height="h-full
+
+            <CardContainer
+              disabled={true}
+              data={
+                <>
+                  <button
+                    onClick={() =>
+                      setShowInventory(showInventory ? false : true)
+                    }
+                    className="w-full  flex flex-col justify-center items-center h-full"
+                  >
+                    <GiStack className="w-full h-10" />
+                    <p>Inventory</p>
+                  </button>
+                  {showInventory &&
+                    createPortal(
+                      <>
+                        <div
+                          onClick={() => setShowInventory(false)}
+                          className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                        ></div>
+                        <div className="bg-black border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
+                          <Inventory />
+                        </div>
+                      </>,
+                      document.body
+                    )}
+                </>
+              }
+              height="h-full
 "
-              />
-            </div>
+            />
           </>
         }
       />

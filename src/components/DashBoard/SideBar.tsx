@@ -24,6 +24,8 @@ import { usePathname } from "next/navigation";
 import ChevronDown from "../icons/ChevronDown";
 import ChevronUp from "../icons/ChevronUp";
 import { motion } from "motion/react";
+import { SessionContext } from "@/context/SessionContext";
+import ProfileTopBar from "../ProfileTopBar";
 
 export default function SideBar({ className }: { className: string }) {
   const pathName = usePathname();
@@ -33,9 +35,9 @@ export default function SideBar({ className }: { className: string }) {
   const [projectListIds, setProjectListIds] = useState<string[]>([]);
 
   const [showProjectForm, setShowProjectForm] = useState(false);
-
+  const session = useContext(SessionContext);
   const dashBoardProps = useContext(DashBoardContext);
-  if (!dashBoardProps) {
+  if (!dashBoardProps || !session) {
     throw new Error("context not provided");
   }
   const { sideMenu } = dashBoardProps;
@@ -43,16 +45,20 @@ export default function SideBar({ className }: { className: string }) {
   const active = (path: string) =>
     `${
       pathName === path &&
-      "bg-neutral-700/50 [&>*]:stroke-rose-600 text0 text-white hover:text-black  hover:bg-white"
+      "bg-neutral-700/50 [&>*]:stroke-rose-600 text0 text-white hover:text-black hover:bg-white"
     }`;
 
   return (
     <>
       <motion.aside
-        animate={sideMenu === "visible" ? { scaleX: [0, 1] } : {}}
+        animate={sideMenu ? { scaleX: [0, 1] } : {}}
         transition={{ type: "tween", ease: "easeInOut", duration: 0.2 }}
-        className={`sidebar md:visible origin-left ${className} ${sideMenu} `}
+        className={`sidebar origin-left md:opacity-100 ${className} ${
+          sideMenu ? "visible !opacity-100" : "invisible opacity-0 "
+        } `}
       >
+        <ProfileTopBar session={session}></ProfileTopBar>
+
         <SearchModal />
         <NewTaskBtn />
         <Link className={` flex ${active("/")}`} href={"/"}>
@@ -107,6 +113,8 @@ export default function SideBar({ className }: { className: string }) {
             projectListIds={projectListIds}
           />
         )}
+
+        <div></div>
       </motion.aside>
     </>
   );

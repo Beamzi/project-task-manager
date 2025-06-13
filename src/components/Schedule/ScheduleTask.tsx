@@ -74,7 +74,9 @@ export default function ScheduleTask({
       ) : (
         <>
           {taskDates[dateIndex] !== taskDates[dateIndex - 1] && (
-            <h3 className=" py-1 px-5 border-b-1 border-dotted">Overdue</h3>
+            <h3 className=" py-1 px-5 border-b-1 border-dotted bg-neutral-900">
+              Overdue
+            </h3>
           )}
         </>
       )}

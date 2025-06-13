@@ -1,8 +1,4 @@
 import React from "react";
-import { GiNotebook } from "react-icons/gi";
-import { GiBurningEmbers } from "react-icons/gi";
-import Timer from "../Timer";
-import Inventory from "../Inventory";
 
 interface Props {
   data: React.ReactElement;
@@ -12,6 +8,7 @@ interface Props {
   scrollYDisable?: boolean;
   xlWidth?: string;
   isCenterCard?: boolean;
+  disabled?: boolean;
 }
 const localHeight = "h-[40dvh]";
 
@@ -23,6 +20,7 @@ export default function CardContainer({
   scrollYDisable,
   xlWidth,
   isCenterCard,
+  disabled,
 }: Props) {
   const now = new Date();
 
@@ -31,7 +29,10 @@ export default function CardContainer({
     <>
       <div
         className={`${
-          isCenterCard && "px-[clamp(16px,2vw,24px)]"
+          disabled && "invisible md:visible absolute md:relative top-0 left-0  "
+        } ${
+          isCenterCard &&
+          "md:px-[clamp(16px,2vw,24px)] pl-[clamp(16px,2vw,24px)] "
         } w-full flex flex-1 flex-col h-full min-h-0 ${
           xlWidth ? xlWidth : "2xl:w-[70%] xl:w-[80%]"
         } bg-transparent justify-center ${
@@ -49,7 +50,7 @@ export default function CardContainer({
           >
             <div
               id="task-scroll-container"
-              className={`relative z-10 rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex w-full flex-wrap   ${
+              className={`relative z-10 rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex w-full flex-wrap ${
                 scrollYDisable ? "" : "overflow-y-auto "
               } content-start  ${height ? height : localHeight}`}
             >

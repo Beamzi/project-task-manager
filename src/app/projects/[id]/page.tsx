@@ -23,7 +23,7 @@ export default function ProjectDynamic() {
     throw new Error("projects not loaded");
   }
   if (!session) {
-    throw new Error("session lot loaded");
+    throw new Error("session not loaded");
   }
 
   const { setAllProjectsClient, allProjectsClient } = allProjects;

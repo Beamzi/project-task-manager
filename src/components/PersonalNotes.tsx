@@ -65,7 +65,7 @@ export default function PersonalNotes({ profileImg, name }: Props) {
   }, [newContent, setAllCommentsClient]);
 
   return (
-    <div className=" flex flex-col w-full h-full  items-center  ml-0.5 p-2 ">
+    <div className=" flex flex-col w-full h-full  items-center  ml-0.5 p-2">
       <p className="w-full text-end pb-2 px-2 rounded-t-xl">{createdAt}</p>
       {personalNotes && (
         <div className="flex w-full h-full pb-20">

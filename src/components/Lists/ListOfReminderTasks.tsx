@@ -9,6 +9,7 @@ import { CalendarIcon, EyeIcon } from "@heroicons/react/24/outline";
 import { TaskContext } from "@/context/TaskContext";
 import Link from "next/link";
 import { format } from "date-fns";
+import DatePicker from "react-datepicker";
 
 export default function ListOfReminderTasks() {
   // const tasksByDueDate = useContext(TaskDueDateContext);
@@ -47,6 +48,20 @@ export default function ListOfReminderTasks() {
       )}
 
       <div className="flex flex-wrap justify-center items-center content-center">
+        {/* <div className="border-1 rounded-xl">
+          <DatePicker
+            // selected={isNewTask ? quickDate : trueDate}
+            // onChange={handleDateChange}
+            inline
+            minDate={new Date()}
+            // maxDate={lastDayOfYear}
+            calendarClassName="custom-time-wrapper"
+          />
+        </div> */}
+        {/* 
+        {tasksByDueDate?.map((item) => (
+          <div key={item.id} className="w-10 h-5 mx-1 border-1"></div>
+        ))} */}
         {tasksByDueDate?.map(
           (item, index) =>
             item.date < endOfToday && (
@@ -63,6 +78,7 @@ export default function ListOfReminderTasks() {
               ></ScheduleTask>
             )
         )}
+
         {tasksByDueDate?.map(
           (item, index) =>
             item.date >= endOfToday && (

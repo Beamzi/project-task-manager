@@ -34,11 +34,12 @@ export default function Analytics() {
   }));
 
   const renderLineChart = (
-    <div>
-      <ResponsiveContainer width={700} height={300}>
+    <div className="">
+      <ResponsiveContainer width={500} height={250}>
         <LineChart
+          className=""
           data={tasksParse}
-          margin={{ top: 40, right: 30, left: 60, bottom: 20 }}
+          margin={{ top: 40, right: 30, left: 0, bottom: 20 }}
         >
           <XAxis
             dataKey="taskNumber"
@@ -58,7 +59,7 @@ export default function Analytics() {
               style: { textAnchor: "middle" }, // Centers the text better
             }}
           />
-          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <CartesianGrid stroke="#eee" strokeDasharray="1 1" />
           <Tooltip
             contentStyle={{
               color: "black",
@@ -80,8 +81,8 @@ export default function Analytics() {
     </div>
   );
   return (
-    <div>
-      <h3 onClick={() => console.log(tasksParse)}>Days Left For Each Task</h3>
+    <div className="">
+      <h3>Days Left For Each Task</h3>
       {renderLineChart}
     </div>
   );

@@ -15,15 +15,26 @@ export default function ProfileTopBar({ session }: Props) {
   const [showOptions, setShowOptions] = useState(false);
   console.log({ session });
   return (
-    <div className=" relative flex justify-center items-center align-middle">
+    <div className=" relative flex  justify-start items-center align-middle pt-1 pb-2">
+      <Image
+        className="rounded-full mx-1"
+        src={session?.user?.image}
+        width={30}
+        height={30}
+        style={{ objectFit: "contain" }}
+        //  loading="lazy"
+        loading={undefined} // Explicitly set to undefined
+        priority={true}
+        alt="user profile picture"
+      ></Image>
       <button
         className={`hover:text-rose-600 transition-all duration-300 flex ${
           showOptions && "text-rose-600"
         }`}
         onClick={() => setShowOptions(showOptions ? false : true)}
       >
-        <ChevronDown isRendered={showOptions} />
         {session.user.name}
+        <ChevronDown className="ml-2" isRendered={showOptions} />
       </button>
       <DropDown isRendered={showOptions}>
         <li className="li-hover pointer-none">
@@ -36,17 +47,6 @@ export default function ProfileTopBar({ session }: Props) {
           </button>
         </li>
       </DropDown>
-      <Image
-        className="rounded-full mx-2"
-        src={session?.user?.image}
-        width={30}
-        height={30}
-        style={{ objectFit: "contain" }}
-        //  loading="lazy"
-        loading={undefined} // Explicitly set to undefined
-        priority={true}
-        alt="user profile picture"
-      ></Image>
     </div>
   );
 }

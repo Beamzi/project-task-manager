@@ -11,8 +11,8 @@ interface CommentData {
 interface Props {
   modal: boolean;
   setModal: (value: boolean) => void;
-  sideMenu: string;
-  setSideMenu: (value: string) => void;
+  sideMenu: boolean;
+  setSideMenu: (value: boolean) => void;
   scrollDivRef: RefObject<HTMLDivElement | null>;
   globalMinimised: boolean;
   setGlobalMinimised: (value: boolean) => void;
