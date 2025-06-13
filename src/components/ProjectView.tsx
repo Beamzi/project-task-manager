@@ -66,14 +66,6 @@ export default function ProjectView({
           description: description,
         }),
       });
-
-      setAllProjectsClient((prev) =>
-        prev.map((item) =>
-          item.id === projectId
-            ? { ...item, title: title, description: description ?? "" }
-            : item
-        )
-      );
     } catch (e) {
       console.error(e);
     }
@@ -83,6 +75,13 @@ export default function ProjectView({
   const previousDescription = useRef(description);
 
   useEffect(() => {
+    setAllProjectsClient((prev) =>
+      prev.map((item) =>
+        item.id === projectId
+          ? { ...item, title: title, description: description ?? "" }
+          : item
+      )
+    );
     if (
       title !== previousTitle.current ||
       description !== previousDescription.current

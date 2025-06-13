@@ -5,6 +5,7 @@ import { MinusCircleIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { redirect } from "next/navigation";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
+import { LuBookCheck } from "react-icons/lu";
 
 export default function RemoveProject({
   project,
@@ -65,11 +66,11 @@ export default function RemoveProject({
           setShowDelete(showDelete ? false : true);
         }}
       >
-        <MinusCircleIcon className="w-6" />
+        <LuBookCheck className="w-full h-6" />
       </button>
       {showDelete && (
         <div className="absolute top-12 z-100 p-3 -right-2 border-1 bg-black rounded-xl w-50">
-          <p className="">Are you sure you want to delete this project?</p>
+          <p className="">Mark This Project As Completed?</p>
           <div className="flex mt-2">
             <button
               onClick={() => {

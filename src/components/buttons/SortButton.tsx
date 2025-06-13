@@ -4,6 +4,9 @@ import { useState } from "react";
 import type { SVGProps } from "react";
 
 import { motion } from "motion/react";
+import { LuArrowBigDownDash } from "react-icons/lu";
+import { LuArrowBigUpDash } from "react-icons/lu";
+import { LuArrowBigLeftDash } from "react-icons/lu";
 
 import {
   ChevronDoubleDownIcon,
@@ -64,7 +67,7 @@ export default function SortButton({
 
   return (
     <>
-      <li className="flex relative  ">
+      <li className="flex relative   ">
         {showToolTip && (
           <div className="absolute top-0 -left-35 z-100 bg-black p-5 w-30 rounded-xl border-1">
             {toolTips[btnIndex]}
@@ -75,7 +78,7 @@ export default function SortButton({
           onClick={() => {
             handleInversion(`${operation}`);
           }}
-          className="flex"
+          className="flex justify-center items-center h-full  p-1 rounded-md ml-1"
         >
           <motion.div
             whileHover={{ scale: 1.2 }}
@@ -96,13 +99,13 @@ export default function SortButton({
             }`}
           >
             {iconReset !== btnIndex ? (
-              <ChevronDoubleLeftIcon className=" w-7" />
+              <LuArrowBigLeftDash className=" w-6 h-6" />
             ) : init ? (
-              <ChevronDoubleLeftIcon className="w-7" />
+              <LuArrowBigLeftDash className="w-6 h-6" />
             ) : invertSort ? (
-              <ChevronDoubleDownIcon className="w-7" />
+              <LuArrowBigDownDash className="w-6 h-6" />
             ) : (
-              <ChevronDoubleUpIcon className="w-7" />
+              <LuArrowBigUpDash className="w-6 h-6" />
             )}
           </motion.div>
         </button>

@@ -19,7 +19,7 @@ export default function Schedule() {
   allTasksClientCopy.sort((a, b) => b.date.getTime() - a.date.getTime());
 
   return (
-    <div className="gradient-for-thin-containers min-h-0 flex flex-col border-1 rounded-2xl w-[80%] 2xl:w-[70%] outline-5 -outline-offset-6  outline-neutral-900">
+    <div className="mt-[clamp(8px,4vh,50px)] gradient-for-thin-containers min-h-0 flex flex-col border-1 rounded-2xl w-[calc(100%-4dvw)] 2xl:w-[calc(72%-4dvw)] xl:w-[calc(72%-4dvw)] outline-5 -outline-offset-6  outline-neutral-900">
       <div className="">
         <ScheduleMenu
           allTasksClientCopy={allTasksClientCopy}

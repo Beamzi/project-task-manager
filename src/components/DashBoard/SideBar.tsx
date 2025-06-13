@@ -26,6 +26,14 @@ import ChevronUp from "../icons/ChevronUp";
 import { motion } from "motion/react";
 import { SessionContext } from "@/context/SessionContext";
 import ProfileTopBar from "../ProfileTopBar";
+import { LuHouse } from "react-icons/lu";
+import { LuInbox } from "react-icons/lu";
+import { LuCalendarCheck } from "react-icons/lu";
+import { LuStar } from "react-icons/lu";
+import { LuPlus } from "react-icons/lu";
+import { LuBox } from "react-icons/lu";
+import { LuGrid2X2Plus } from "react-icons/lu";
+import { LuDiamondPlus } from "react-icons/lu";
 
 export default function SideBar({ className }: { className: string }) {
   const pathName = usePathname();
@@ -62,19 +70,19 @@ export default function SideBar({ className }: { className: string }) {
         <SearchModal />
         <NewTaskBtn />
         <Link className={` flex ${active("/")}`} href={"/"}>
-          <HomeIcon />
+          <LuHouse className="w-5 h-5" />
           Overview
         </Link>
         <Link className={` flex ${active("/inbox")}`} href={"/inbox"}>
-          <InboxIcon />
+          <LuInbox className="w-5 h-5" />
           Inbox
         </Link>
         <Link className={` flex ${active("/schedule")}`} href={"/schedule"}>
-          <CalendarDaysIcon />
+          <LuCalendarCheck className="w-5 h-5" />
           Schedule
         </Link>
         <Link className={` flex ${active("/priorities")}`} href={"/priorities"}>
-          <StarIcon />
+          <LuStar className="w-5 h-5" />
           Priorities
         </Link>
 
@@ -83,7 +91,7 @@ export default function SideBar({ className }: { className: string }) {
           type="button"
           onClick={() => setShowProjectForm(true)}
         >
-          <PlusIcon />
+          <LuDiamondPlus className="w-5 h-5" />
           New Project
         </button>
         {showProjectForm && (
@@ -98,7 +106,7 @@ export default function SideBar({ className }: { className: string }) {
               setIsRendered(isRendered ? false : true);
             }}
           >
-            <ListBulletIcon className="" />
+            <LuBox className="w-5 h-5" />
 
             <span className="block mr-2">All Projects</span>
             <div>

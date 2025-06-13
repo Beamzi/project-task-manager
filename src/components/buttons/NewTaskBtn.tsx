@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import NewTask from "../NewTask";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { LuPlus } from "react-icons/lu";
 
 function NewTaskBtn() {
   const [showForm, setShowForm] = useState(false);
@@ -15,7 +16,7 @@ function NewTaskBtn() {
   return (
     <>
       <button onClick={() => setShowForm(true)}>
-        <PlusIcon />
+        <LuPlus className="w-5 h-5" />
         Create Task
       </button>
       {showForm && <NewTask setShowForm={setShowForm} />}

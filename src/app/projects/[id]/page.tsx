@@ -1,7 +1,7 @@
 "use client";
 
 import { AllProjectsContext } from "@/context/AllProjectsContext";
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import ProjectView from "@/components/ProjectView";
@@ -12,6 +12,10 @@ import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 import { useParams } from "next/navigation";
 import { TaskContext } from "@/context/TaskContext";
+import { LuTimerReset } from "react-icons/lu";
+import { LuBookCheck } from "react-icons/lu";
+import { LuUserPlus } from "react-icons/lu";
+import TopBarContainer from "@/components/Skeleton/TopBarContainer";
 
 export default function ProjectDynamic() {
   const params = useParams();
@@ -32,6 +36,8 @@ export default function ProjectDynamic() {
   if (!tasksContext) throw new Error("tasks not loaded");
   const { setAllTasksClient, allTasksClient } = tasksContext;
 
+  const [showTeamTooltip, setShowTeamTooltip] = useState(false);
+
   const currentProjectId = allProjectsClient.findIndex((p) => p.id === id);
   const project = allProjectsClient[currentProjectId];
   const comments = project.comments;
@@ -43,18 +49,30 @@ export default function ProjectDynamic() {
 
   return (
     <>
-      <section className="project-page-view w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%] xl:w-[80%]">
-        <div className=" gradient-for-thin-containers border-1 flex justify-end rounded-xl py-2 px-2 outline-4 -outline-offset-5 outline-neutral-900">
-          <button className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2">
-            <UserPlusIcon className="w-6" />
-          </button>
-          <RemoveProject
-            project={project}
-            allProjectsClient={allProjectsClient}
-            setAllProjectsClient={setAllProjectsClient}
-          />
-        </div>
-      </section>
+      <TopBarContainer
+        title={project.title}
+        data={
+          <>
+            <button
+              onClick={() => setShowTeamTooltip(showTeamTooltip ? false : true)}
+              className="border-1 w-10 flex justify-center items-center content-center px-2 py-1 rounded-lg mr-2"
+            >
+              <LuUserPlus className="w-full h-6" />
+            </button>
+            {showTeamTooltip && (
+              <div className="absolute top-10 right-14 bg-black border-1 w-40 rounded-lg p-2 z-1000 w-">
+                <p>Team Collaboration Coming Soon</p>
+              </div>
+            )}
+            <RemoveProject
+              project={project}
+              allProjectsClient={allProjectsClient}
+              setAllProjectsClient={setAllProjectsClient}
+            />
+          </>
+        }
+      />
+
       <FirstRowContainers
         leftId={true}
         leftData={

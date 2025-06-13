@@ -11,6 +11,7 @@ import { DashBoardContext } from "@/context/DashBoardContext";
 
 import { GetAllTasksByDueDateTypeOf } from "@/lib/queries/getAllTasksByDueDate";
 import { TaskContext } from "@/context/TaskContext";
+import TopBarContainer from "./Skeleton/TopBarContainer";
 
 interface Props {
   tasks: GetAllTasksByDueDateTypeOf[];
@@ -66,12 +67,6 @@ export default function InboxClient({ tasks }: Props) {
 
   return (
     <>
-      <div className="w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%] xl:w-[80%]">
-        <h3 className="px-2 text-[clamp(20px,2vw,24px)] border-b-1 border-dotted">
-          Inbox
-        </h3>
-      </div>
-
       <SearchClient
         searching={searching}
         setSearching={setSearching}
@@ -93,7 +88,7 @@ export default function InboxClient({ tasks }: Props) {
           )
         }
         height="h-full"
-        leftWidth="w-4/2 xl:w-6/2"
+        leftWidth="w-6/2 xl:w-6/2"
         ifBottomRow={true}
         rightScrollYDisable={true}
         noExpand={true}

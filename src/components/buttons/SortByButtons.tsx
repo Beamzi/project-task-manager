@@ -11,12 +11,19 @@ import {
 } from "@heroicons/react/24/outline";
 import { BarsArrowDownIcon } from "@heroicons/react/24/solid";
 
+import { LuClockAlert } from "react-icons/lu";
+import { LuCalendar1 } from "react-icons/lu";
+import { LuArrowDownNarrowWide } from "react-icons/lu";
+import { LuBookOpenText } from "react-icons/lu";
+import { LuClipboardPen } from "react-icons/lu";
+import { LuBookmarkCheck } from "react-icons/lu";
+
 const operations = [
-  { type: "date", icon: <ClockIcon className="w-7" /> },
-  { type: "createdAt", icon: <CalendarIcon className="w-7" /> },
-  { type: "title", icon: <BarsArrowDownIcon className="w-7" /> },
-  { type: "content", icon: <DocumentTextIcon className="w-7" /> },
-  { type: "priority", icon: <FlagIcon className="w-7" /> },
+  { type: "date", icon: <LuClockAlert className="w-6 h-6" /> },
+  { type: "createdAt", icon: <LuCalendar1 className="w-6 h-6" /> },
+  { type: "title", icon: <LuArrowDownNarrowWide className="w-6 h-6" /> },
+  { type: "content", icon: <LuClipboardPen className="w-6 h-6" /> },
+  { type: "priority", icon: <LuBookmarkCheck className="w-6 h-6" /> },
 ];
 
 export default function SortByButtons({
@@ -32,7 +39,7 @@ export default function SortByButtons({
   const [toolTipIndex, setToolTipIndex] = useState(0);
 
   return (
-    <div className="w-full">
+    <div className="w-full px-1">
       <ul className="flex flex-col py-6 justify-center items-center content-center  w-full">
         {operations.map((item, index) => (
           <SortButton

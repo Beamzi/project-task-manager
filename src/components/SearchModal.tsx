@@ -9,6 +9,7 @@ import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
 import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
+import { LuSearch } from "react-icons/lu";
 
 export default function SearchModal() {
   const tasks = useContext(TaskContext);
@@ -24,7 +25,7 @@ export default function SearchModal() {
   return (
     <>
       <button onClick={() => setShowSearch(showSearch ? false : true)}>
-        <MagnifyingGlassIcon />
+        <LuSearch className="w-5 h-5" />
         Search
       </button>
       {showSearch &&
