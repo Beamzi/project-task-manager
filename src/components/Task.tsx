@@ -16,14 +16,13 @@ import PriorityBtn from "./buttons/PriorityBtn";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import MinimiseTaskBtn from "./buttons/MinimiseTaskBtn";
 import { motion } from "motion/react";
-import { DashBoardContext } from "@/context/DashBoardContext";
 import { format } from "date-fns";
 import TimeOptions from "./TimeOptions";
 import SaveOnchange from "./SaveOnchange";
 import { createPortal } from "react-dom";
 import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
-import { LuCircleUserRound, LuBox } from "react-icons/lu";
+import { LuCircleUserRound } from "react-icons/lu";
 
 interface Props {
   author?: string | null | undefined;

@@ -19,6 +19,8 @@ export function DashBoardProvider({
     string[]
   >([]);
 
+  const [globalIdScroll, setGlobalIdScroll] = useState(false);
+
   interface CommentData {
     content: string;
     createdAt: Date;
@@ -40,6 +42,8 @@ export function DashBoardProvider({
         setRemoveProjectFromDashboard,
         localComment,
         setLocalComment,
+        globalIdScroll,
+        setGlobalIdScroll,
       }}
     >
       {children}

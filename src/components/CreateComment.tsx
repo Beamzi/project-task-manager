@@ -11,8 +11,8 @@ import { SessionContext } from "@/context/SessionContext";
 
 interface Props {
   isNote?: boolean;
-  projectId: string | undefined | null;
-  profileImg: string | undefined | null;
+  projectId?: string | undefined | null;
+  profileImg?: string | undefined | null;
   setCommentsClient: Dispatch<SetStateAction<GetAllCommentsTypeof[]>>;
 }
 

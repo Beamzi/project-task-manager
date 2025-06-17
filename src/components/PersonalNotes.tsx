@@ -9,12 +9,7 @@ import { LuNotebook } from "react-icons/lu";
 import { LuChevronFirst } from "react-icons/lu";
 import { LuChevronLeft } from "react-icons/lu";
 
-interface Props {
-  profileImg: string | undefined | null;
-  name: string | undefined | null;
-}
-
-export default function PersonalNotes({ profileImg, name }: Props) {
+export default function PersonalNotes() {
   const allCommentsContext = useContext(AllCommentsContext);
   if (!allCommentsContext) throw new Error("comments not loaded");
 
@@ -138,12 +133,7 @@ export default function PersonalNotes({ profileImg, name }: Props) {
       )}
 
       <div>
-        <CreateComment
-          isNote={true}
-          projectId={null}
-          profileImg={profileImg}
-          setCommentsClient={setAllCommentsClient}
-        />
+        <CreateComment isNote={true} setCommentsClient={setAllCommentsClient} />
       </div>
     </div>
   );

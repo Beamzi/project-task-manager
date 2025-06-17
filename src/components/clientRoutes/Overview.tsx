@@ -4,21 +4,14 @@ import React from "react";
 import ListOfReminderTasks from "@/components/Lists/ListOfReminderTasks";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
-import SingleContainer from "@/components/Skeleton/SingleContainer";
 import { useContext, useState } from "react";
 import { TaskContext } from "@/context/TaskContext";
 import { SessionContext } from "@/context/SessionContext";
-import OverviewThreeSection from "@/components/OverviewThreeSection";
-import ThreeSection from "../Skeleton/ThreeSection";
-import { GiDuration, GiStack } from "react-icons/gi";
 import { createPortal } from "react-dom";
 import Analytics from "../Analytics";
 import PersonalNotes from "../PersonalNotes";
-import { GiPencil } from "react-icons/gi";
-import { LuPencilLine } from "react-icons/lu";
-import { LuTimerReset } from "react-icons/lu";
+import { LuPencilLine, LuTimerReset, LuPackageCheck } from "react-icons/lu";
 import Inventory from "../Inventory";
-import { LuPackageCheck } from "react-icons/lu";
 import TopBarContainer from "../Skeleton/TopBarContainer";
 
 export default function Overview() {
@@ -104,10 +97,10 @@ export default function Overview() {
                 <>
                   <div
                     onClick={() => setShowInventory(false)}
-                    className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                    className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-100 left-[50%] w-full h-full translate-[-50%]`}
                   ></div>
-                  <div className="bg-black border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
-                    <Inventory />
+                  <div className=" z-1000  rounded-xl fixed top-[50%] left-[50%] translate-[-50%]">
+                    <Inventory setShowInventory={setShowInventory} />
                   </div>
                 </>,
                 document.body
@@ -124,13 +117,8 @@ export default function Overview() {
           ></ListOfTasks>
         }
         rightData={<ListOfReminderTasks />}
-        // leftTitle="Recently Created"
-        // rightTitle="Reminders"
-        //height={`h-[50dvh] custom-height-media`}
         height={`h-full`}
       ></FirstRowContainers>
-
-      {/* <OverviewThreeSection /> */}
     </>
   );
 }

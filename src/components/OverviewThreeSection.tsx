@@ -65,7 +65,7 @@ export default function OverviewThreeSection() {
                       <>
                         <div
                           onClick={() => setShowNotes(false)}
-                          className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                          className={`text-center backdrop-blur-xs bg-neutral-950/50   fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
                         ></div>
                         <div className=" gradient-for-inner-containers border-1 z-1000 h-[80vh] rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
                           <PersonalNotes />
@@ -96,9 +96,9 @@ export default function OverviewThreeSection() {
                       <>
                         <div
                           onClick={() => setShowInventory(false)}
-                          className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                          className={`text-center backdrop-blur-xs  bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
                         ></div>
-                        <div className="bg-black border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
+                        <div className="  rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
                           <Inventory />
                         </div>
                       </>,
