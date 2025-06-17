@@ -20,6 +20,7 @@ export interface Props {
   taskDates: string[];
   dateIndex: number;
   isReminderView?: boolean;
+  isScheduleView?: boolean;
 }
 
 export default function ScheduleTask({
@@ -32,10 +33,10 @@ export default function ScheduleTask({
   dateIndex,
   taskDates,
   isReminderView,
+  isScheduleView,
 }: Props) {
   const [showForm, setShowForm] = useState(false);
   const [fixedDate, setFixedDate] = useState<Date>();
-  const [hoverBtns, setHoverBtns] = useState(false);
   const [showTask, setShowTask] = useState(false);
 
   const dueDate = format(new Date(date), "yyyy-MM-dd");
@@ -57,15 +58,18 @@ export default function ScheduleTask({
   };
 
   return (
-    <div className="overflow-hidden w-full border-b-1 border-dotted  ">
+    <div className="overflow-hidden w-full border-b-1 border-dotted ">
       {!overDue ? (
         <>
           {taskDates[dateIndex] !== taskDates[dateIndex - 1] && (
             <h3
               id={dateId}
               className={`font-bold  ${
+                isScheduleView &&
+                "gradient-for-thin-containers border-b-1 border-dotted border-neutral-500/80"
+              }  ${
                 isReminderView && "bg-neutral-900/70"
-              }  py-1 px-5 border-b-1 border-dotted rounded-md`}
+              } py-1 px-5 border-b-1 border-dotted rounded-md`}
             >
               {getDate()}
             </h3>
@@ -73,8 +77,15 @@ export default function ScheduleTask({
         </>
       ) : (
         <>
-          {taskDates[dateIndex] !== taskDates[dateIndex - 1] && (
-            <h3 className=" py-1 px-5 border-b-1 border-dotted bg-neutral-900">
+          {dateIndex === 0 && (
+            <h3
+              className={` ${
+                isScheduleView &&
+                "repeating-gradient border-b-1 border-neutral-600 "
+              } ${
+                isReminderView && "bg-neutral-900"
+              } py-1 px-5 border-b-1 border-dotted `}
+            >
               Overdue
             </h3>
           )}
@@ -82,9 +93,7 @@ export default function ScheduleTask({
       )}
 
       <div
-        onMouseEnter={() => setHoverBtns(true)}
-        onMouseLeave={() => setHoverBtns(false)}
-        className={`flex  hover:bg-neutral-900/20 relative align-center h-full w-full`}
+        className={`group flex  hover:bg-neutral-900/20 relative align-center h-full w-full`}
       >
         <div className="pt-3 px-3 h-full w-full wrap-normal text-neutral-500">
           <div className="[&>*]:mr-2 flex relative">
@@ -97,14 +106,12 @@ export default function ScheduleTask({
           </div>
 
           <div className="absolute right-0 top-0 flex mx-2 pt-2 ">
-            {hoverBtns && (
-              <div
-                onClick={() => setShowTask(true)}
-                className="ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600 "
-              >
-                <PencilIcon className="min-w-5" />
-              </div>
-            )}
+            <div
+              className="opacity-0 group-hover:opacity-100 transition-opacity ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex justify-center z-2 duration-100 hover:[&>*]:fill-rose-600"
+              onClick={() => setShowTask(true)}
+            >
+              <PencilIcon className="min-w-5" />
+            </div>
 
             <RemoveTaskBtn
               id={id}

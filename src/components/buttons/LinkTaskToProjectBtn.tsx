@@ -28,6 +28,11 @@ export default function LinkTaskToProjectBtn({
 
   async function linkTask() {
     // const { list, setList } = listState;
+    setAllTasksClient((prev) =>
+      prev.map((item) =>
+        item.id === taskId ? { ...item, projectId: projectId } : item
+      )
+    );
     try {
       const response = await fetch("/api/assign-task", {
         method: "POST",
@@ -38,12 +43,6 @@ export default function LinkTaskToProjectBtn({
       });
 
       const data = await response.json();
-
-      setAllTasksClient((prev) =>
-        prev.map((item) =>
-          item.id === taskId ? { ...item, projectId: projectId } : item
-        )
-      );
 
       // router.refresh();
     } catch (e) {

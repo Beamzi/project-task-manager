@@ -36,7 +36,11 @@ export default function ScheduleMenu({
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
 
   const activeDates = () => {
-    const extract = allTasksClientCopy?.map(
+    const allTasksClientCopySorted = [
+      ...allTasksClientCopy.sort((a, b) => a.date.getTime() - b.date.getTime()),
+    ];
+
+    const extract = allTasksClientCopySorted?.map(
       (task) => `${format(new Date(task.date), "yyyy-MM-dd")}`
     );
     const result = extract?.filter(

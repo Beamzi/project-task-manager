@@ -40,15 +40,18 @@ h3 {
   font-weight: 600
 }
 
- /* body > * {
+
+
+
+  .repeating-gradient {
   background: repeating-linear-gradient(
     45deg,
-    rgb(34, 34, 34) 0px,   
-    rgb(34, 34, 34) 1px,   
-    #000000 1px,           
-    #000000 10px           
+    rgb(31, 31, 31) 0px,   
+    rgb(59, 59, 59) 1px,   
+    #1a1a1a 1px,           
+    #1a1a1a 15px           
   );
-} */
+} 
 
 .inner-background {
   background: repeating-linear-gradient(

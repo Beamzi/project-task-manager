@@ -12,6 +12,7 @@ import { AllProjectsContext } from "@/context/AllProjectsContext";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { GiFriedFish } from "react-icons/gi";
 import NewProjectBtn from "./NewProjectBtn";
+import { LuBox } from "react-icons/lu";
 
 const overflowEllipsis =
   "overflow-hidden whitespace-nowrap text-ellipsis w-18 lg:w-18 xl:w-22 md:w-18";
@@ -43,43 +44,51 @@ export default function ProjectAssignBtn({
 
   return (
     <div
-      className={`  ${
-        minimise &&
-        parentHover &&
-        "bg-linear-to-r/srgb from-neutral-900 to-neutral-800"
+      className={` max-w-17 ${
+        minimise && parentHover && " from-neutral-900 to-neutral-800"
       } flex flex-col w-full py-1 px-2 ${list && ""} `}
     >
       <button
-        className={`hover:text-rose-600 text-md font-light text-start flex transition-all duration-300 hover:[&>*]: ${
+        className={`hover:text-rose-600 text-md font-light text-start flex transition-all text-neutral-400 duration-300 hover:[&>*]: ${
           list && "text-rose-600"
         }`}
         onClick={() => (list ? setList(false) : setList(true))}
       >
-        <ChevronDown isRendered={list} />
-        {allProjectsClient.length === 0 && !assignCheck && "Projects"}
-        {allProjectsClient.length !== 0 &&
-          !projectIdOfTask &&
+        <div className="min-w-17 min-h-5 flex">
+          <ChevronDown isRendered={list} />
+          <LuBox className="w-5 h-5" />
+        </div>
+
+        {(!minimise &&
+          allProjectsClient.length === 0 &&
           !assignCheck &&
-          "Projects"}
-        {assignCheck ? (
+          "Projects") ||
+          (!minimise &&
+            allProjectsClient.length !== 0 &&
+            !projectIdOfTask &&
+            !assignCheck &&
+            "Projects")}
+
+        {!minimise && assignCheck ? (
           <>
             <motion.p
               key={titleCheck}
               initial={{ opacity: 0.5, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className={`${overflowEllipsis}`}
+              className={`${overflowEllipsis} min-w-20`}
             >{`${titleCheck}`}</motion.p>
           </>
         ) : (
-          projects?.map((item) => (
-            <div className="" key={item.id}>
-              {item.id === projectIdOfTask ? (
-                <div className={`flex `}>
-                  <p className={`${overflowEllipsis}`}>{`${item.title}`}</p>
-                </div>
-              ) : null}
-            </div>
-          ))
+          !minimise &&
+          projects?.map(
+            (item) =>
+              item.id === projectIdOfTask && (
+                <p
+                  key={item.id}
+                  className={` min-w-20 ${overflowEllipsis}`}
+                >{`${item.title}`}</p>
+              )
+          )
         )}
       </button>
 

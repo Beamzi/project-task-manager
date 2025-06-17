@@ -26,7 +26,6 @@ export default function Schedule() {
           setAllTasksClient={setAllTasksClient}
         />
       </div>
-
       <div className="flex-1 flex-col rounded-b-2xl scrolling-container gradient-for-inner-containers  overflow-y-scroll h-full min-h-0 ">
         {/* <div className="h-800"></div> */}
         <ListOfScheduleTasks

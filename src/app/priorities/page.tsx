@@ -36,6 +36,7 @@ export default function Priorities() {
           </button>
         }
       />
+
       <FirstRowContainers
         rightId={true}
         leftData={
@@ -45,6 +46,7 @@ export default function Priorities() {
             setAllTasksClient={setAllTasksClient}
           ></ListOfTasks>
         }
+        rightScrollYDisable={true}
         rightData={
           <PersonalNotes
             // comments={comments}

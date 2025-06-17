@@ -4,6 +4,10 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import CreateComment from "./CreateComment";
 import { AllCommentsContext } from "@/context/AllCommentsContext";
 import { format } from "date-fns";
+import { LuTrash2 } from "react-icons/lu";
+import { LuNotebook } from "react-icons/lu";
+import { LuChevronFirst } from "react-icons/lu";
+import { LuChevronLeft } from "react-icons/lu";
 
 interface Props {
   profileImg: string | undefined | null;
@@ -58,22 +62,53 @@ export default function PersonalNotes({ profileImg, name }: Props) {
 
       const updateTimer = setTimeout(() => {
         updateNote();
-      }, 200);
-
+      }, 500);
       return () => clearTimeout(updateTimer);
     }
   }, [newContent, setAllCommentsClient]);
 
+  async function removeNote() {
+    setAllCommentsClient((prev) => prev.filter((item) => item.id !== openNote));
+
+    try {
+      await fetch("/api/delete-comment", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: openNote }),
+      });
+      // console.log()
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   return (
-    <div className=" flex flex-col w-full h-full  items-center  ml-0.5 p-2">
-      <p className="w-full text-end pb-2 px-2 rounded-t-xl">{createdAt}</p>
+    <div className="flex  flex-col w-full h-full p-4 items-center  ">
+      <div className="flex justify-between pb-1 w-full  mb-2 bg-neutral-900 rounded-lg pt-1 px-1 align-middle items-center  content-center ">
+        <div className=" flex items-center px-2 py-2">
+          <LuNotebook className="h-4 w-4 " />
+          <LuChevronLeft className="h-4 w-4 " />
+          <p className=" text-end px-1">{createdAt}</p>
+
+          {/* Notes */}
+        </div>
+        <button className=" flex px-2  rounded-lg ml-1" onClick={removeNote}>
+          <LuTrash2 className="w-4 h-4 " />
+        </button>
+      </div>
+
       {personalNotes && (
-        <div className="flex w-full h-full pb-20">
-          <div className="flex flex-col items-start w-1/4 pr-2 ">
+        <div className="flex rounded-xl  w-full h-full bg-neutral-900">
+          <div
+            className="flex flex-col px-2  border-r-1 border-dotted border-neutral-700/70 
+           items-start bg-transparent w-1/4 my-2 "
+          >
             {personalNotes.map((item) => (
               <button
-                className={`w-full text-start overflow-hidden whitespace-nowrap text-ellipsis p-1 px-1 rounded-lg  ${
-                  item.id === openNote && "bg-neutral-600 text-rose-600"
+                className={`max-w-20 w-full text-start overflow-hidden whitespace-nowrap text-ellipsis p-1 rounded-lg  ${
+                  item.id === openNote && "bg-neutral-800 text-rose-600"
                 }`}
                 onClick={() => {
                   setOpenNote(item.id);
@@ -86,13 +121,13 @@ export default function PersonalNotes({ profileImg, name }: Props) {
               </button>
             ))}
           </div>
-          <div className="w-full rounded-2xl">
+          <div className="w-full rounded-2xl bg-neutral-900">
             {personalNotes
               .filter((item) => item.id === openNote)
               .map((item) => (
-                <div key={item.id} className="w-full h-full  ">
+                <div key={item.id} className="w-full  h-full  overflow-hidden">
                   <textarea
-                    className="w-full h-full rounded-xl p-4"
+                    className="w-full rounded-xl py-2.5 focus:bg-transparent break-all break-words focus:outline-transparent h-full  "
                     value={newContent}
                     onChange={(e) => setNewContent(e.target.value)}
                   ></textarea>

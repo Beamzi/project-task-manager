@@ -144,8 +144,9 @@ export default function FirstRowContainers({
               } ${
                 !noExpand &&
                 !expand &&
+                !rightScrollYDisable &&
                 "!overflow-y-hidden md:!overflow-y-scroll"
-              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
+              } first-row-containers rounded-2xl border-1 outline-5 p-2  -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
                 height ? height : localHeight
               } w-full`}
             >

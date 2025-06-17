@@ -50,21 +50,21 @@ export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
     <>
       <div ref={scrollDivRef} className="overflow-hidden ">
         <div>
-          {allTasksClientCopy?.map(
-            (item, index) =>
-              item.date < endOfToday && (
-                <ScheduleTask
-                  overDue={overDue}
-                  key={item.id}
-                  id={item.id}
-                  title={item.title}
-                  date={item.date}
-                  content={item.content}
-                  taskDates={taskDates}
-                  dateIndex={index}
-                ></ScheduleTask>
-              )
-          )}
+          {allTasksClientCopy
+            ?.filter((item) => item.date < endOfToday)
+            .map((item, index) => (
+              <ScheduleTask
+                overDue={overDue}
+                key={item.id}
+                id={item.id}
+                title={item.title}
+                date={item.date}
+                content={item.content}
+                taskDates={taskDates}
+                dateIndex={index}
+                isScheduleView={true}
+              ></ScheduleTask>
+            ))}
         </div>
         {formattedDates.map((date) =>
           taskDates?.includes(date) ? (
@@ -80,6 +80,7 @@ export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
                     content={item.content}
                     taskDates={taskDates}
                     dateIndex={index}
+                    isScheduleView={true}
                   />
                 ) : null
               )}
@@ -110,6 +111,7 @@ export default function ListOfScheduleTasks({ allTasksClientCopy }: Props) {
           )
         )}
       </div>
+      <div className="pb-130"></div>
 
       {showForm && (
         <NewTask setShowForm={setShowForm} fixedDate={clickedDate} />

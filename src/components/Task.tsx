@@ -23,6 +23,7 @@ import SaveOnchange from "./SaveOnchange";
 import { createPortal } from "react-dom";
 import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
+import { LuCircleUserRound, LuBox } from "react-icons/lu";
 
 interface Props {
   author?: string | null | undefined;
@@ -77,9 +78,7 @@ export default function Task({
   const [select, setSelect] = useState(false);
   const [minimise, setMinimise] = useState(initMaximise ? false : true);
   const [status, setStatus] = useState("initial");
-  const [onHover, setOnHover] = useState(
-    minimise && `opacity-0 hover:opacity-100`
-  );
+
   const [parentHover, setParentHover] = useState(false);
   const [showTimeOptions, setShowTimeOptions] = useState(false);
   const [localPriorityState, setLocalPriorityState] = useState(
@@ -167,40 +166,26 @@ export default function Task({
       {/* ${hideInClient && "hidden"} */}
       <div className={` ${hideInClient && "hidden"} relative`}>
         <motion.div
-          onHoverStart={() => {
-            setOnHover("");
-            setParentHover(true);
-          }}
-          onHoverEnd={() => {
-            setOnHover("opacity-0 hover:opacity-100");
-            setParentHover(false);
-          }}
           id={id}
           initial={!minimise && { height: 500 }}
           transition={{ duration: 0.3 }}
-          animate={minimise ? { height: 90 } : { height: 280 }}
+          animate={minimise ? { height: 40 } : { height: 280 }}
           //please just be aware of this p offset if layout problems
-          className={`origin-top  all-tasks tasks-custom-breakpoint    pt-1 ${
+          className={`origin-top ${
+            minimise && "hover:bg-neutral-700/50"
+          } rounded-lg  all-tasks tasks-custom-breakpoint ${
             minimise
               ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
               : "md:pl-4"
           } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-neutral-700/50 border-dotted md:px-3 flex flex-col`}
         >
-          <div className="flex py-1">
-            <ProjectAssignBtn
-              taskId={id}
-              projectIdOfTask={projectId}
-              minimise={minimise}
-              parentHover={parentHover}
-            ></ProjectAssignBtn>
-
+          <div className="flex border-b-1 border-dotted border-neutral-700/50 ">
             <div
               className={`
-            absolute top-1 py-1  right-0 z-10 flex justify-end pl-1  ${
-              minimise && onHover
-            }`}
+            absolute top-1 py-1 right-0 z-10 flex justify-end pl-1  
+            `}
             >
-              {!initMaximise && (
+              {!initMaximise && !minimise && (
                 <MinimiseTaskBtn
                   id={id}
                   setMinimise={setMinimise}
@@ -210,54 +195,74 @@ export default function Task({
                 ></MinimiseTaskBtn>
               )}
 
-              <RemoveTaskBtn
-                id={id}
-                setHideInClient={setHideInClient}
-                setAllTasksClient={setAllTasksClient}
-              ></RemoveTaskBtn>
+              {!minimise && (
+                <RemoveTaskBtn
+                  id={id}
+                  setHideInClient={setHideInClient}
+                  setAllTasksClient={setAllTasksClient}
+                ></RemoveTaskBtn>
+              )}
             </div>
           </div>
-          {minimise ? (
-            <button
-              onClick={() => {
-                setMinimise(false);
-                setSelect(true);
-              }}
-              className={`py-1 md:w-full text-start text-sm px-2 text-scaley-base font-medium overflow-hidden whitespace-nowrap text-ellipsis   ${
-                minimise && "-mt-2 bg-transparent text-neutral-400"
-              }`}
-            >
-              {state.newTitle}
-            </button>
-          ) : (
-            <motion.input
-              maxLength={25}
-              transition={{ duration: 0.3 }}
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              value={select ? state.newTitle : title}
-              onChange={(e) => {
-                dispatch({ type: "change-values", propTitle: e.target.value });
-              }}
-              onClick={() => setSelect(true)}
-              type="text"
-              className={`rounded-t-lg w-full  text-scaley-base text-neutral-400 ${
-                !editing ? "" : `inset-shadow-sm inset-shadow-rose-600`
-              } py-1 px-2 text-scaley-base font-medium origin-top ${
-                minimise ? "-mt-2 bg-transparent text-neutral-400" : "mt-1"
-              }`}
-            ></motion.input>
-          )}
-          {minimise && (
-            <button
-              onClick={() => setMinimise(false)}
-              className=" text-start text-sm px-2 text-scaley-sm text-rose-300"
-            >
-              {minimise && format(new Date(quickDate), "EEE MMM d")}
-            </button>
-          )}
+
+          <div className="flex py-1  justify-between items-center">
+            <div className="flex  w-full  justify-start  align-middle content-start">
+              <ProjectAssignBtn
+                taskId={id}
+                projectIdOfTask={projectId}
+                minimise={minimise}
+                parentHover={parentHover}
+              ></ProjectAssignBtn>
+              {minimise && (
+                <button
+                  onClick={() => {
+                    setMinimise(false);
+                    setSelect(true);
+                  }}
+                  className={` w-[80%]  text-start text-sm px-2 font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
+                    minimise && " bg-transparent text-neutral-300"
+                  }`}
+                >
+                  {state.newTitle}
+                </button>
+              )}
+            </div>
+
+            {minimise && (
+              <div className="flex">
+                <button
+                  onClick={() => setMinimise(false)}
+                  className=" min-w-17  text-end text-sm px-2 text-scaley-sm  text-rose-300"
+                >
+                  {minimise && format(new Date(quickDate), "MMM d")}
+                </button>
+                <LuCircleUserRound className="w-5 h-5 stroke-neutral-600" />
+              </div>
+            )}
+          </div>
           {!minimise && (
             <>
+              <motion.input
+                maxLength={25}
+                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, scaleY: 0 }}
+                animate={{ opacity: 1, scaleY: 1 }}
+                value={select ? state.newTitle : title}
+                onChange={(e) => {
+                  dispatch({
+                    type: "change-values",
+                    propTitle: e.target.value,
+                  });
+                }}
+                onClick={() => setSelect(true)}
+                type="text"
+                className={`rounded-t-lg  w-full  text-scaley-base text-neutral-400 ${
+                  !editing ? "" : `inset-shadow-sm inset-shadow-rose-600`
+                } py-1 px-2 text-scaley-base font-medium origin-top ${
+                  minimise ? "-mt-2 bg-transparent text-neutral-400" : "mt-1"
+                }`}
+              ></motion.input>
+
               <motion.textarea
                 maxLength={500}
                 // {...motionProps}
@@ -268,7 +273,7 @@ export default function Task({
                   editing && select
                     ? `inset-shadow-sm inset-shadow-rose-600`
                     : ""
-                } text-scaley-sm  font-light origin-top px-2  py-1 h-[clamp(2rem,13vh,10rem)]`}
+                } text-scaley-sm font-light origin-top px-2 py-1 h-[clamp(2rem,13vh,10rem)]`}
                 value={(select ? state.newContent : content) ?? ""}
                 onChange={(e) =>
                   dispatch({
@@ -282,7 +287,7 @@ export default function Task({
                 transition={{ duration: 0.3, delay: 0.4 }}
                 initial={{ opacity: 0, scaleY: 0 }}
                 animate={{ opacity: 1, scaleY: 1 }}
-                className="relative flex border-1 w-full text-left p-1 mt-2   hover:text-rose-600 "
+                className="relative flex border-1 w-full text-left p-1 mt-2 hover:text-rose-600 "
                 onClick={() =>
                   setShowTimeOptions(showTimeOptions ? false : true)
                 }
