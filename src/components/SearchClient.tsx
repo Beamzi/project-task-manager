@@ -13,6 +13,8 @@ interface Props {
   xlWidth?: string;
   inputWidth?: string;
   autoFocus: boolean;
+  isDashboard?: boolean;
+  title?: string;
 }
 
 export default function SearchClient({
@@ -21,6 +23,8 @@ export default function SearchClient({
   xlWidth,
   inputWidth,
   autoFocus,
+  isDashboard,
+  title,
 }: Props) {
   const searchRef = useRef<HTMLInputElement>(null);
   const [searchClick, setSearchClick] = useState(false);
@@ -28,7 +32,8 @@ export default function SearchClient({
   return (
     <>
       <TopBarContainer
-        title={"Inbox"}
+        isDashboard={isDashboard}
+        title={title}
         data={
           <>
             <motion.input
@@ -40,7 +45,9 @@ export default function SearchClient({
               value={searching}
               onChange={(e) => setSearching(e.target.value)}
               type="search"
-              className={`border-1 w-[30dvw] h-8 max-w-110 py-4 px-3 ${
+              className={`border-1 ${
+                isDashboard ? "!w-full " : "w-[30dvw] "
+              } h-8 py-4 px-3 ${
                 inputWidth ? inputWidth : "w-1/2"
               } text-neutral-300 rounded-lg`}
             ></motion.input>

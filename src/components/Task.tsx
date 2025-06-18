@@ -174,9 +174,9 @@ export default function Task({
             minimise && "hover:bg-neutral-700/50"
           } rounded-lg  all-tasks tasks-custom-breakpoint ${
             minimise
-              ? "origin-top hello lg:hover:ml-5 md:hover:ml-3 hover:ml-2 transition-all duration-300"
-              : "md:pl-4"
-          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-neutral-700/50 border-dotted md:px-3 flex flex-col`}
+              ? "origin-top hello lg:hover:ml-2 md:hover:ml-2 hover:ml-2 transition-all duration-300"
+              : "md:pl-3"
+          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-neutral-700/50 border-dotted md:px-2 flex flex-col`}
         >
           <div className="flex border-b-1 border-dotted border-neutral-700/50 ">
             <div
@@ -205,7 +205,7 @@ export default function Task({
           </div>
 
           <div className="flex py-1  justify-between items-center">
-            <div className="flex  w-full  justify-start  align-middle content-start">
+            <div className="flex  w-full justify-start  align-middle content-start">
               <ProjectAssignBtn
                 taskId={id}
                 projectIdOfTask={projectId}
@@ -218,7 +218,7 @@ export default function Task({
                     setMinimise(false);
                     setSelect(true);
                   }}
-                  className={` w-[80%]  text-start text-sm px-2 font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
+                  className={` w-[80%] max-[388px]:w-19 max-[353px]:w-15 max-[320px]:w-11 max-[300px]:w-7  text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
                     minimise && " bg-transparent text-neutral-300"
                   }`}
                 >
@@ -231,7 +231,7 @@ export default function Task({
               <div className="flex">
                 <button
                   onClick={() => setMinimise(false)}
-                  className=" min-w-17  text-end text-sm px-2 text-scaley-sm  text-rose-300"
+                  className=" min-w-17  text-end text-sm px-2 text-scaley-sm   text-rose-300"
                 >
                   {minimise && format(new Date(quickDate), "MMM d")}
                 </button>

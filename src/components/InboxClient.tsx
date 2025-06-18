@@ -71,6 +71,7 @@ export default function InboxClient({ tasks }: Props) {
         searching={searching}
         setSearching={setSearching}
         autoFocus={false}
+        title="Inbox"
       />
       <FirstRowContainers
         leftData={

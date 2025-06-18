@@ -59,15 +59,23 @@ export default function ProjectAssignBtn({
           <LuBox className="w-5 h-5" />
         </div>
 
-        {(!minimise &&
-          allProjectsClient.length === 0 &&
-          !assignCheck &&
-          "Projects") ||
+        {(!minimise && allProjectsClient.length === 0 && !assignCheck && (
+          <span
+            className={`block min-w-20 -ml-2 max-[346px]:min-w-12 max-[310px]:min-w-10 overflow-hidden whitespace-nowrap text-ellipsis max-[295px]:invisible  `}
+          >
+            Projects
+          </span>
+        )) ||
           (!minimise &&
             allProjectsClient.length !== 0 &&
             !projectIdOfTask &&
-            !assignCheck &&
-            "Projects")}
+            !assignCheck && (
+              <span
+                className={`block min-w-20 -ml-2 max-[346px]:min-w-12 max-[310px]:min-w-10 max-[295px]:invisible overflow-hidden whitespace-nowrap text-ellipsis  `}
+              >
+                Projects
+              </span>
+            ))}
 
         {!minimise && assignCheck ? (
           <>
@@ -75,7 +83,7 @@ export default function ProjectAssignBtn({
               key={titleCheck}
               initial={{ opacity: 0.5, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className={`${overflowEllipsis} min-w-20`}
+              className={`${overflowEllipsis} min-w-20 max-[346px]:min-w-12 max-[310px]:min-w-10  -ml-2`}
             >{`${titleCheck}`}</motion.p>
           </>
         ) : (
@@ -85,7 +93,7 @@ export default function ProjectAssignBtn({
               item.id === projectIdOfTask && (
                 <p
                   key={item.id}
-                  className={` min-w-20 ${overflowEllipsis}`}
+                  className={` min-w-20 -ml-2 max-[346px]:min-w-12 max-[310px]:min-w-10 ${overflowEllipsis}`}
                 >{`${item.title}`}</p>
               )
           )

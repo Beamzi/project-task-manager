@@ -12,9 +12,9 @@ interface Props {
 export default function SaveOnchange({ editing }: Props) {
   return (
     <div className="w-2/4">
-      <div className="flex py-1 px-2  w-22 h-8 justify-center align-middle items-center">
+      <div className="flex py-1 pl-1  h-8 justify-start align-middle items-center">
         {editing ? (
-          <div className="flex w-20  ">
+          <div className="flex  ">
             <div className="w-10 origin-left ">
               <motion.div
                 transition={{ duration: 0.9 }}

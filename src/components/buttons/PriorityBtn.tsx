@@ -92,7 +92,7 @@ export default function PriorityBtn({
                 scale: 0.8,
               }
         }
-        className={`w-20 flex justify-center ml-2 border-1  ${
+        className={`w-20 max-[300px]:w-10 flex justify-center ml-2 border-1  ${
           (localPriorityState && "asd") ||
           "hover:[&>*]:fill-rose-600 hover:[&>*]:stroke-rose-600 transition-all duration-100 hover:border-x-5 hover:[&>*]:scale-120"
         }`}

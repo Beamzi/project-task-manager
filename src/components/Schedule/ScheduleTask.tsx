@@ -96,10 +96,10 @@ export default function ScheduleTask({
         className={`group flex  hover:bg-neutral-900/20 relative align-center h-full w-full`}
       >
         <div className="pt-3 px-3 h-full w-full wrap-normal text-neutral-500">
-          <div className="[&>*]:mr-2 flex relative">
+          <div className="[&>*]:mr-2 flex relative  ">
             <CheckCircleIcon className={`stroke-neutral-300 min-w-5`} />
             <span
-              className={`block text-neutral-400 [&>*]:mr-2 overflow-hidden whitespace-nowrap text-ellipsis xl:max-w-70 lg:max-w-60 md:max-w-25`}
+              className={`block text-neutral-400 [&>*]:mr-2  xl:max-w-70 lg:max-w-60 md:max-w-25w-[80%] max-[388px]:w-40 max-[353px]:w-33 max-[320px]:w-25 max-[300px]:w-20  text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis `}
             >
               {title}
             </span>
@@ -120,7 +120,7 @@ export default function ScheduleTask({
             ></RemoveTaskBtn>
           </div>
           <p
-            className={`block pl-7 pb-2 text-neutral-400  xl:max-w-85 lg:max-w-80 md:max-w-40  overflow-hidden whitespace-nowrap text-ellipsis`}
+            className={`block pl-7 pb-2 text-neutral-400  xl:max-w-85 lg:max-w-80 md:max-w-40 w-[80%] max-[388px]:w-40 max-[353px]:w-33 max-[320px]:w-28 max-[300px]:w-25 text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis`}
           >
             {content}
           </p>

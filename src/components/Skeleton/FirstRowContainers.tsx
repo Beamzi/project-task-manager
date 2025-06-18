@@ -40,29 +40,8 @@ export default function FirstRowContainers({
 
   return (
     <>
-      <div className="invisible absolute md:visible md:relative flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
-        {leftTitle && (
-          <p className="px-2 w-full text-start text-base pb-2 -mt-1 border-dotted">
-            {leftTitle}
-          </p>
-        )}
-        {rightTitle && (
-          <p className="ml-[clamp(16px,2vw,24px)] text-base pb-2 -mt-1 bg-transparent w-full border-dotted px-2">
-            {rightTitle}
-          </p>
-        )}
-      </div>
-
-      <div className=" md:hidden flex w-full px-[clamp(16px,2vw,24px)] 2xl:w-[70%]  xl:w-[80%]">
-        {leftTitle && (
-          <p className="px-2 w-full  text-start pb-2 -mt-1 text-base  border-dotted">
-            {!noExpand && !expand ? `${leftTitle}` : `${rightTitle}`}
-          </p>
-        )}
-      </div>
-
       <div
-        className={`flex px-[clamp(16px,2vw,24px)]  min-h-0 w-full ${
+        className={`flex px-[clamp(16px,2vw,24px)] max-[330px]:px-3  min-h-0 w-full ${
           ifBottomRow && "h-full "
         } 2xl:w-[70%] xl:w-[80%] bg-transparent justify-center ${
           !leftTitle && "pt-[clamp(16px,2vw,24px)]"
@@ -101,7 +80,7 @@ export default function FirstRowContainers({
                     !noExpand && !expand && "hidden"
                   } md:hidden flex items-center pb-4 justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
                 >
-                  <ChevronDoubleRightIcon className="w-8" />
+                  <ChevronDoubleRightIcon className="w-7" />
                 </div>
               )}
 
@@ -128,10 +107,10 @@ export default function FirstRowContainers({
               : `min-h-0 md:w-1/2 w-1/8 ${
                   !noExpand && expand && "w-full md:1/2 "
                 }`
-          } flex flex-col ml-[clamp(16px,2vw,24px)]`}
+          } flex flex-col ml-[clamp(16px,2vw,24px)] max-[330px]:ml-3 `}
         >
           <div
-            className={`rounded-2xl flex-1 relative  flex-col h-full min-h-0 ${
+            className={`rounded-2xl flex-1 relative flex-col h-full min-h-0 ${
               rightScrollYDisable ? "" : "overflow-hidden"
             }`}
           >
@@ -146,7 +125,7 @@ export default function FirstRowContainers({
                 !expand &&
                 !rightScrollYDisable &&
                 "!overflow-y-hidden md:!overflow-y-scroll"
-              } first-row-containers rounded-2xl border-1 outline-5 p-2  -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
+              } first-row-containers rounded-2xl border-1 outline-5 p-2   -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
                 height ? height : localHeight
               } w-full`}
             >
@@ -156,7 +135,7 @@ export default function FirstRowContainers({
                     !noExpand && expand && "hidden"
                   } md:hidden flex pb-4 items-center justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
                 >
-                  <ChevronDoubleLeftIcon className="w-8" />
+                  <ChevronDoubleLeftIcon className="w-7 " />
                 </div>
               )}
               <div
