@@ -23,7 +23,6 @@ import { NextResponse } from "next/server";
 
         if (description !== undefined && !description?.trim()) return NextResponse.json({error: 'Description Required'}, {status: 400})
         if (description && description.length > 500) return NextResponse.json({error: 'Description Too Long'}, {status: 400})
-
         return null
     }
     

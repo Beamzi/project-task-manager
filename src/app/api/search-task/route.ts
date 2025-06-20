@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server'
 import { auth } from "../../../../auth"
 
 
-
+//endpoint not in use, see searchClient instead
 export async function POST(request: Request) {
     const session = await auth()
     const res = await request.json()

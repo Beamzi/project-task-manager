@@ -12,7 +12,7 @@ export async function authCheck() {
     }
     catch(e) {
         console.error(e)
-        return NextResponse.json({error: 'Server Not Responding'}, {status: 500})
+        return NextResponse.json({error: 'Authentication unavailable'}, {status: 500})
     }
 
 }
