@@ -8,8 +8,6 @@ import { AllCommentsContext } from "@/context/AllCommentsContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import { GetAllCommentsTypeof } from "@/lib/queries/getAllComments";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
-import { DashBoardContext } from "@/context/DashBoardContext";
-
 const ellipsis = "overflow-hidden whitespace-nowrap text-ellipsis w-40";
 
 export default function Inventory({
@@ -20,20 +18,12 @@ export default function Inventory({
   const projectsContext = useContext(AllProjectsContext);
   const tasksContext = useContext(TaskContext);
   const commentsContext = useContext(AllCommentsContext);
-  const dashboardContext = useContext(DashBoardContext);
-  if (
-    !projectsContext ||
-    !tasksContext ||
-    !commentsContext ||
-    !dashboardContext
-  ) {
+  if (!projectsContext || !tasksContext || !commentsContext) {
     throw new Error("context not loaded");
   }
   const { allTasksClient } = tasksContext;
   const { allProjectsClient } = projectsContext;
   const { allCommentsClient } = commentsContext;
-
-  const { globalIdScroll, setGlobalIdScroll } = dashboardContext;
 
   const priorities = [
     ...allTasksClient.filter((item) => item.priority === true),

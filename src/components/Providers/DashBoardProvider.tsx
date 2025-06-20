@@ -2,15 +2,8 @@
 
 import { DashBoardContext } from "@/context/DashBoardContext";
 import React, { useState, useRef } from "react";
-import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
-export function DashBoardProvider({
-  children,
-  allTasks,
-}: {
-  children: React.ReactNode;
-  allTasks: getAllTasksTypeOf[];
-}) {
+export function DashBoardProvider({ children }: { children: React.ReactNode }) {
   const [modal, setModal] = useState(false);
   const [sideMenu, setSideMenu] = useState(false);
   const scrollDivRef = useRef<HTMLDivElement | null>(null);
@@ -18,8 +11,6 @@ export function DashBoardProvider({
   const [removeProjectFromDashboard, setRemoveProjectFromDashboard] = useState<
     string[]
   >([]);
-
-  const [globalIdScroll, setGlobalIdScroll] = useState(false);
 
   interface CommentData {
     content: string;
@@ -42,8 +33,6 @@ export function DashBoardProvider({
         setRemoveProjectFromDashboard,
         localComment,
         setLocalComment,
-        globalIdScroll,
-        setGlobalIdScroll,
       }}
     >
       {children}

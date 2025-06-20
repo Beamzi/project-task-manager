@@ -4,10 +4,7 @@ import { format } from "date-fns";
 import { FormEvent } from "react";
 import { useContext, useState } from "react";
 import TimeOptions from "./TimeOptions";
-import { projectContext } from "@/context/ProjectContext";
 import { PlusIcon, StarIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
-import { motion } from "motion/react";
 import {
   CheckCircleIcon,
   XCircleIcon,
@@ -16,6 +13,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
+import { AllProjectsContext } from "@/context/AllProjectsContext";
 interface Props {
   isPriority?: boolean;
   isAssigned?: boolean;
@@ -51,12 +49,16 @@ export default function NewTask({
   const [projectTitle, setProjectTitle] = useState(
     isAssigned ? currentProjectTitle : ""
   );
-  const projects = useContext(projectContext);
-  if (!projects) throw new Error("projects not loaded");
+  const projectsContext = useContext(AllProjectsContext);
+  if (!projectsContext) throw new Error("projects not loaded");
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) {
     throw new Error("hello");
   }
+
+  const { setAllProjectsClient, allProjectsClient } = projectsContext;
+  const projects = [...allProjectsClient];
+
   const { setAllTasksClient, allTasksClient } = tasksContext;
 
   async function createTask(event: FormEvent<HTMLFormElement>, tempId: string) {

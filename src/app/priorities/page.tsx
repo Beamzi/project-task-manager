@@ -4,7 +4,6 @@ import React, { useContext, useState } from "react";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
 import PersonalNotes from "@/components/PersonalNotes";
-import { CommentsNonProjectContext } from "@/context/CommentsNonProjectsContext";
 import { SessionContext } from "@/context/SessionContext";
 import { TaskContext } from "@/context/TaskContext";
 import { LuTimerReset } from "react-icons/lu";
@@ -14,11 +13,10 @@ import { createPortal } from "react-dom";
 
 export default function Priorities() {
   const tasksContext = useContext(TaskContext);
-  const comments = useContext(CommentsNonProjectContext);
   const session = useContext(SessionContext);
 
-  if (!tasksContext || !comments || !session) {
-    throw new Error("context not loaded - priorities ");
+  if (!tasksContext || !session) {
+    throw new Error("context not loaded - priorities");
   }
 
   const [showAnalytics, setShowAnalytics] = useState(false);

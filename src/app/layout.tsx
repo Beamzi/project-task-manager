@@ -2,15 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import DashBoard from "@/components/DashBoard/DashBoard";
-import ClientWrapper from "@/components/Providers/tasksProviders/TasksProvider";
 import { auth } from "../../auth";
-import SignInPrompt from "@/components/Landing";
-
 import { Inter } from "next/font/google";
 import Landing from "@/components/Landing";
-import Test from "@/components/test";
 
-// If loading a variable font, you don't need to specify the font weight
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

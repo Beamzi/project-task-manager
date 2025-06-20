@@ -1,7 +1,7 @@
 "use client";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { Bars3Icon } from "@heroicons/react/16/solid";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Image from "next/image";
 
 import { motion } from "motion/react";

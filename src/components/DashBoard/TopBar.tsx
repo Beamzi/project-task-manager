@@ -1,8 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import { auth } from "../../../auth";
-import ProfileTopBar from "../ProfileTopBar";
-import { ShareIcon } from "@heroicons/react/24/outline";
 
 import { LuGithub } from "react-icons/lu";
 import { LuMailCheck } from "react-icons/lu";

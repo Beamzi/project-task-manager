@@ -9,7 +9,7 @@ interface Props {
   allTasks: getAllTasksTypeOf[];
 }
 
-export default function TasksProvider({ children, allTasks }: Props) {
+export default function AllTasksProvider({ children, allTasks }: Props) {
   const [allTasksClient, setAllTasksClient] =
     useState<getAllTasksTypeOf[]>(allTasks);
 

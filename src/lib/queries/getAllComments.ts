@@ -10,11 +10,6 @@ const getAllCommentsQuery = {
         author: {
             select: { name: true }
         },
-        // project: {
-        //     select: {
-        //         title: true
-        //     }
-        // }
     },
 } as const
 

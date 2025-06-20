@@ -15,9 +15,6 @@ interface Props {
 export default function AllProjectsProvider({ allProjects, children }: Props) {
   const [allProjectsClient, setAllProjectsClient] =
     useState<GetAllProjecttypeOf[]>(allProjects);
-  // const memoizedValue = useMemo(() => value, [JSON.stringify(value)]);
-
-  // const memoizedValue = useMemo(() => value, [value]);
 
   return (
     <AllProjectsContext.Provider

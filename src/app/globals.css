@@ -191,8 +191,6 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
     @apply origin-top h-full hover:bg-neutral-800 hover:py-1   px-1 hover:border-transparent  outline-neutral-400 transition-all duration-100 hover:[&>*]:hover:text-rose-600 hover:[&>*]:hover:bg-neutral-800 hover:[&>*]:hover:border-r-5
   }
 
-
-
   button, ul, li, div {
     @apply select-none 
   }
@@ -208,7 +206,6 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
       @apply rounded-sm 
     }
   }
-
 
   .sidebar, .new-task-local-scope, .new-project-local-scope {
     button:hover, a:hover {
@@ -226,11 +223,9 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
   }
 }
 
-
   .date-options:hover {
     @apply dark:bg-neutral-400 text-rose-600
   }
-
 
   body > * {
     @apply dark:bg-black 
@@ -248,8 +243,6 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
   svg {
     @apply bg-transparent w-5
   }
-
-
 
 
   h2 {
