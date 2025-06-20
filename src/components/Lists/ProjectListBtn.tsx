@@ -22,13 +22,11 @@ export default function ProjectListBtn({
   variantItems,
   variantLines,
 }: Props) {
-  // const context = useContext(DashBoardContext);
-  // if (!context) {
-  //   throw new Error("dashboard props not loaded");
-  // }
-
-  // const { removeProjectFromDashboard } = context;
-  // const index = removeProjectFromDashboard.indexOf(id);
+  const dashBoardProps = useContext(DashBoardContext);
+  if (!dashBoardProps) {
+    throw new Error("context not provided");
+  }
+  const { sideMenu, setSideMenu } = dashBoardProps;
 
   return (
     <div className="flex w-full">
@@ -46,6 +44,7 @@ export default function ProjectListBtn({
           )} text-start py-1 text-sm  text-neutral-400
         }`}
           href={`/projects/${id}`}
+          onClick={() => setSideMenu(false)}
         >
           {title}
         </Link>

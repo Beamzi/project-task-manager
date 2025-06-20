@@ -32,7 +32,7 @@ export default function ScheduleMenu({
     throw new Error("scrollDivRef not loaded");
   }
   //const { scrollDivRef } = context;
-  const getDateRange = dateRange({ allTasksClientCopy });
+  const getDateRange = dateRange(allTasksClientCopy);
   const formattedDates = getDateRange.map((date) => format(date, "yyyy-MM-dd"));
 
   const activeDates = () => {
@@ -104,8 +104,8 @@ export default function ScheduleMenu({
 
   const validParse = () =>
     inViewParse >= new Date()
-      ? format(new Date(inViewParse), "eee d yyyy")
-      : format(new Date(), "eee d yyyy");
+      ? format(new Date(inViewParse), "eee d")
+      : format(new Date(), "eee d");
 
   return (
     <div className="flex flex-col w-full  relative">
@@ -124,7 +124,7 @@ export default function ScheduleMenu({
         </button>
         <h2>Schedule</h2>
 
-        <div className="px-2 w-30  flex justify-end ">
+        <div className=" w-30  flex justify-end ">
           <button
             onClick={() => {
               const currentIndex = formattedDates.indexOf(inView);
@@ -181,7 +181,7 @@ export default function ScheduleMenu({
           if (i >= windowStart && i < windowEnd)
             return (
               <button
-                className={`scale-90 px-4 lg:min-w-20  hover:text-rose-600 flex align-middle text-center justify-center content-center ${
+                className={`scale-90 px-4 lg:min-w-20 max-[400px]:w-10 max-[305px]:w-7 hover:text-rose-600 flex align-middle text-center justify-center content-center ${
                   inView === date &&
                   "text-rose-600 scale-120 transition-all duration-50 "
                 }`}

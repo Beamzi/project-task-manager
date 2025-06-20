@@ -80,7 +80,7 @@ export default function PersonalNotes() {
   }
 
   return (
-    <div className="flex  flex-col w-full h-full p-4 items-center  ">
+    <div className="flex flex-col w-full h-full p-4 items-center ">
       <div className="flex justify-between pb-1 w-full  mb-2 bg-neutral-900 rounded-lg pt-1 px-1 align-middle items-center  content-center ">
         <div className=" flex items-center px-2 py-2">
           <LuNotebook className="h-4 w-4 " />
@@ -89,7 +89,10 @@ export default function PersonalNotes() {
 
           {/* Notes */}
         </div>
-        <button className=" flex px-2  rounded-lg ml-1" onClick={removeNote}>
+        <button
+          className=" flex px-2 hover:text-rose-600 rounded-lg ml-1"
+          onClick={removeNote}
+        >
           <LuTrash2 className="w-4 h-4 " />
         </button>
       </div>
@@ -97,7 +100,7 @@ export default function PersonalNotes() {
       {personalNotes && (
         <div className="flex rounded-xl  w-full h-full bg-neutral-900">
           <div
-            className="flex flex-col px-2  border-r-1 border-dotted border-neutral-700/70 
+            className="flex flex-col px-2 border-r-1 border-dotted border-neutral-700/70 
            items-start bg-transparent w-1/4 my-2 "
           >
             {personalNotes.map((item) => (

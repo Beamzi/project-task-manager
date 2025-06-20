@@ -7,15 +7,22 @@ import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { SetStateAction, Dispatch } from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
+import { LuCircleAlert } from "react-icons/lu";
+
 interface Props {
   id?: string;
   setHideInClient: (value: boolean) => void;
   setAllTasksClient: React.Dispatch<React.SetStateAction<getAllTasksTypeOf[]>>;
+  isReminder?: boolean;
 }
 
-function RemoveTaskBtn({ id, setHideInClient, setAllTasksClient }: Props) {
+function RemoveTaskBtn({
+  id,
+  setHideInClient,
+  setAllTasksClient,
+  isReminder,
+}: Props) {
   const [showDelete, setShowDelete] = useState(false);
-
   async function deleteTask() {
     setAllTasksClient((prev) => prev.filter((item) => item.id !== id));
     try {
@@ -37,9 +44,11 @@ function RemoveTaskBtn({ id, setHideInClient, setAllTasksClient }: Props) {
         onClick={() => {
           setShowDelete(showDelete ? false : true);
         }}
-        className="ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600"
+        className={`ml-1 py-1 min-w-10 items-center content-center border-1 ${
+          isReminder && ""
+        } rounded-md relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600`}
       >
-        <DocumentCheckIcon className="min-w-5 " />
+        <LuCircleAlert className="min-w-5 h-5 " />
         {/* <XMarkIcon className="absolute  -mt-[1px] transition-all duration-100" /> */}
       </button>
       {showDelete && (

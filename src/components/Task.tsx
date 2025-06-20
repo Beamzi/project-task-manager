@@ -170,7 +170,7 @@ export default function Task({
           transition={{ duration: 0.3 }}
           animate={minimise ? { height: 40 } : { height: 280 }}
           //please just be aware of this p offset if layout problems
-          className={`origin-top ${
+          className={`origin-top  ${
             minimise && "hover:bg-neutral-700/50"
           } rounded-lg  all-tasks tasks-custom-breakpoint ${
             minimise
@@ -178,10 +178,10 @@ export default function Task({
               : "md:pl-3"
           } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-neutral-700/50 border-dotted md:px-2 flex flex-col`}
         >
-          <div className="flex border-b-1 border-dotted border-neutral-700/50 ">
+          <div className="flex">
             <div
               className={`
-            absolute top-1 py-1 right-0 z-10 flex justify-end pl-1  
+            absolute top-0.5 py-1 right-0 z-10 flex justify-end pl-1  
             `}
             >
               {!initMaximise && !minimise && (
@@ -204,7 +204,7 @@ export default function Task({
             </div>
           </div>
 
-          <div className="flex py-1  justify-between items-center">
+          <div className="flex py-1 justify-between items-center">
             <div className="flex  w-full justify-start  align-middle content-start">
               <ProjectAssignBtn
                 taskId={id}
@@ -218,7 +218,7 @@ export default function Task({
                     setMinimise(false);
                     setSelect(true);
                   }}
-                  className={` w-[80%] max-[388px]:w-19 max-[353px]:w-15 max-[320px]:w-11 max-[300px]:w-7  text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
+                  className={` w-[80%] max-[388px]:w-19 max-[353px]:w-15 max-[320px]:w-11 max-[300px]:w-7 text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
                     minimise && " bg-transparent text-neutral-300"
                   }`}
                 >
@@ -255,7 +255,7 @@ export default function Task({
                 }}
                 onClick={() => setSelect(true)}
                 type="text"
-                className={`rounded-t-lg  w-full  text-scaley-base text-neutral-400 ${
+                className={`rounded-t-lg w-full  text-scaley-base text-neutral-400 ${
                   !editing ? "" : `inset-shadow-sm inset-shadow-rose-600`
                 } py-1 px-2 text-scaley-base font-medium origin-top ${
                   minimise ? "-mt-2 bg-transparent text-neutral-400" : "mt-1"

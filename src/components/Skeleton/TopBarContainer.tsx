@@ -8,7 +8,7 @@ interface Props {
 
 export default function TopBarContainer({ data, title, isDashboard }: Props) {
   return (
-    <section className="project-page-view w-full pt-[clamp(8px,4vh,50px)] px-[clamp(16px,2vw,24px)] max-[330px]:px-3 2xl:w-[70%] xl:w-[80%]">
+    <section className="topbar-icons w-full pt-[clamp(8px,4vh,50px)] px-[clamp(16px,2vw,24px)] max-[330px]:px-3 2xl:w-[70%] xl:w-[80%]">
       <div
         className={`gradient-for-thin-containers border-1 ${
           !isDashboard && " flex justify-between"

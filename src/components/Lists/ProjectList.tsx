@@ -64,12 +64,8 @@ const lineMotion = {
 
 export default function ProjectList({
   active,
-  projectListClient,
-  projectListIds,
 }: {
   active: (value: string) => void;
-  projectListClient: string[];
-  projectListIds: string[];
 }) {
   const [hasAnimated, setHasAnimated] = useState(false);
 

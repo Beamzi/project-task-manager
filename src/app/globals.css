@@ -159,12 +159,11 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 }
 
 @layer components {
-  .project-page-view {
+  .topbar-icons {
     button:hover > svg {
-      @apply stroke-rose-600 scale-110 transition-all duration-200
+      @apply stroke-rose-600 scale-110 transition-all duration-200 z-100
     }
   }
-
   .nested-buttons {
     @apply hover:bg-white  hover:text-rose-600 transition-all duration-100
   }
@@ -216,7 +215,6 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
       @apply shadow-neutral-950 text-rose-600 transition-all duration-200 bg-neutral-200 
     }
 
-    /* QUESTIONABLE  */
     button:hover > svg, a:hover > svg {
       @apply scale-120 stroke-black transition-all duration-200
   }
@@ -227,8 +225,6 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
       @apply p-2 rounded-sm bg-transparent flex text-center items-center text-neutral-100 
   }
 }
-
-
 
 
   .date-options:hover {
@@ -256,7 +252,6 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 
 
 
-/* questionable */
   h2 {
     @apply dark:!text-neutral-300
   }

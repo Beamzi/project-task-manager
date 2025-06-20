@@ -2,21 +2,7 @@ import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import { eachDayOfInterval, format, parseISO } from "date-fns";
 
 
-// export interface ScheduleTasks {
-//     scheduleTasks:
-//       | {
-//           title: string;
-//           date: Date;
-//           content: string | null;
-//           id: string;
-//           published: boolean;
-//           authorId: string | null;
-//           projectId: string | null;
-//           priority: boolean;
-//           createdAt: Date;
-//         }[]
-//       | undefined;
-//   }
+
 
   export function dateRange (scheduleTasks: getAllTasksTypeOf[]) {
     const getLatestTask = () => {

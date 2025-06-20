@@ -6,6 +6,7 @@ import { MinusIcon } from "@heroicons/react/24/solid";
 import { PencilSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
+import { LuMinus } from "react-icons/lu";
 
 interface Props {
   id?: string;
@@ -40,10 +41,11 @@ export default function MinimiseTaskBtn({
       } hover:[&>*]:fill-rose-600`}
     >
       {!minimise ? (
-        <MinusIcon className=" transition-all duration-100"></MinusIcon>
+        <LuMinus className="transition-all duration-100 w-5 h-5"></LuMinus>
       ) : (
         <PencilSquareIcon className="absolute top transition-all duration-100" />
       )}
     </button>
   );
+  1;
 }

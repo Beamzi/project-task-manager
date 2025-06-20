@@ -9,6 +9,7 @@ import { TaskContext } from "@/context/TaskContext";
 import RemoveTaskBtn from "../buttons/RemoveTaskBtn";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import Task from "../Task";
+import { LuCircleAlert, LuPenLine } from "react-icons/lu";
 
 export interface Props {
   dateId?: string;
@@ -65,8 +66,7 @@ export default function ScheduleTask({
             <h3
               id={dateId}
               className={`font-bold  ${
-                isScheduleView &&
-                "gradient-for-thin-containers border-b-1 border-dotted border-neutral-500/80"
+                isScheduleView && "bg-neutral-900/50"
               }  ${
                 isReminderView && "bg-neutral-900/70"
               } py-1 px-5 border-b-1 border-dotted rounded-md`}
@@ -96,7 +96,7 @@ export default function ScheduleTask({
         className={`group flex  hover:bg-neutral-900/20 relative align-center h-full w-full`}
       >
         <div className="pt-3 px-3 h-full w-full wrap-normal text-neutral-500">
-          <div className="[&>*]:mr-2 flex relative  ">
+          <div className="[&>*]:mr-2 flex relative ">
             <CheckCircleIcon className={`stroke-neutral-300 min-w-5`} />
             <span
               className={`block text-neutral-400 [&>*]:mr-2  xl:max-w-70 lg:max-w-60 md:max-w-25w-[80%] max-[388px]:w-40 max-[353px]:w-33 max-[320px]:w-25 max-[300px]:w-20  text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis `}
@@ -110,7 +110,7 @@ export default function ScheduleTask({
               className="opacity-0 group-hover:opacity-100 transition-opacity ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex justify-center z-2 duration-100 hover:[&>*]:fill-rose-600"
               onClick={() => setShowTask(true)}
             >
-              <PencilIcon className="min-w-5" />
+              <LuPenLine className="min-w-5 h-5" />
             </div>
 
             <RemoveTaskBtn
@@ -131,14 +131,14 @@ export default function ScheduleTask({
                   setFixedDate(date);
                   setShowForm(true);
                 }}
-                className="flex [&>*]:mr-2 hover:text-rose-600 transition-all duration-200 hover:[&>*]:stroke-white "
+                className="flex hover:text-rose-600 transition-all duration-200 group "
               >
-                <PlusIcon className="fill-neutral-100 w-5 pb-3 transition-all duration-200 " />
+                <PlusIcon className="fill-neutral-100 w-5 pb-3 transition-all duration-200 mr-2 group-hover:stroke-white " />
                 new task
               </button>
             </>
           ) : (
-            <span className="block will-change-auto text-red-700 pb-3">
+            <span className="block topbar-icons !text-red-700 !hover:text-red-700 hover:scale-100 !scale-100 pb-3">
               {getDate()}
             </span>
           )}

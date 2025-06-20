@@ -18,6 +18,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import { PrioritiesContext } from "@/context/PrioritiesContext";
+import { LuStar } from "react-icons/lu";
 
 export default function PriorityBtn({
   id,
@@ -92,7 +93,7 @@ export default function PriorityBtn({
                 scale: 0.8,
               }
         }
-        className={`w-20 max-[300px]:w-10 flex justify-center ml-2 border-1  ${
+        className={`w-20 max-[300px]:w-10 flex justify-center ml-2 border-1 items-center ${
           (localPriorityState && "asd") ||
           "hover:[&>*]:fill-rose-600 hover:[&>*]:stroke-rose-600 transition-all duration-100 hover:border-x-5 hover:[&>*]:scale-120"
         }`}
@@ -107,13 +108,13 @@ export default function PriorityBtn({
       >
         {localPriorityState ? (
           <>
-            <StarIconSolid
-              className={`fill-rose-600 transition-all duration-300
+            <LuStar
+              className={`fill-rose-600 stroke-rose-600 transition-all duration-300 w-5 h-5 
               `}
             />
           </>
         ) : (
-          <StarIconOutline className="transition-all duration-300" />
+          <LuStar className="transition-all duration-300 w-5 h-5" />
         )}
         {/* {localPriorityState ? "prioritised"  : "priority"} */}
       </motion.button>

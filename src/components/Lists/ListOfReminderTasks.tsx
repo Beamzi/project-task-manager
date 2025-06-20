@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { useContext, useState } from "react";
 import { TaskDueDateContext } from "@/context/TaskDueDateContext";
 import ScheduleTask from "../Schedule/ScheduleTask";
@@ -23,9 +23,11 @@ export default function ListOfReminderTasks() {
   if (!tasksContext) throw new Error("tasks not loaded");
   const { setAllTasksClient, allTasksClient } = tasksContext;
 
-  const tasksByDueDate = [
-    ...allTasksClient.sort((a, b) => a.date.getTime() - b.date.getTime()),
-  ];
+  const tasksByDueDate = useMemo(() => {
+    return [
+      ...allTasksClient.sort((a, b) => a.date.getTime() - b.date.getTime()),
+    ];
+  }, [allTasksClient]);
 
   const taskDates = tasksByDueDate?.map((item) =>
     format(new Date(item.date), "yyyy-MM-dd")
@@ -47,21 +49,7 @@ export default function ListOfReminderTasks() {
         </div>
       )}
 
-      <div className="flex flex-wrap justify-center items-center content-center">
-        {/* <div className="border-1 rounded-xl">
-          <DatePicker
-            // selected={isNewTask ? quickDate : trueDate}
-            // onChange={handleDateChange}
-            inline
-            minDate={new Date()}
-            // maxDate={lastDayOfYear}
-            calendarClassName="custom-time-wrapper"
-          />
-        </div> */}
-        {/* 
-        {tasksByDueDate?.map((item) => (
-          <div key={item.id} className="w-10 h-5 mx-1 border-1"></div>
-        ))} */}
+      <div className="w-full">
         {tasksByDueDate?.map(
           (item, index) =>
             item.date < endOfToday && (

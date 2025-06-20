@@ -85,8 +85,8 @@ export default function SortButton({
             whileTap={{ scale: 0.8 }}
             onMouseEnter={() => setShowToolTip(true)}
             onMouseLeave={() => setShowToolTip(false)}
-            className={`border-1 my-1 md:mr-1 rounded-xl p-1   transition-colors  hover:text-rose-600 ${
-              iconReset === btnIndex && "text-rose-600 "
+            className={`border-1 w-8 h-8 max-[440px]:border-0 max-[400px]:scale-80 max-[315px]:scale-70 my-1 md:mr-1 rounded-xl p-1  transition-colors [&>*] hover:text-rose-600 ${
+              iconReset === btnIndex ? "text-rose-600" : "text-neutral-400"
             }`}
           >
             {icon}
@@ -94,7 +94,7 @@ export default function SortButton({
           <motion.div
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
-            className={`transition-colors  invisible md:visible md:relative absolute  hover:text-rose-600 border-1 my-1 p-1 ml-1 rounded-xl  ${
+            className={`transition-colors   invisible md:visible md:relative absolute  hover:text-rose-600 border-1 my-1 p-1 ml-1 rounded-xl  ${
               iconReset === btnIndex && ""
             }`}
           >

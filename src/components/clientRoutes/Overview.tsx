@@ -48,9 +48,9 @@ export default function Overview() {
           <>
             <button
               onClick={() => setShowAnalytics(true)}
-              className=" flex flex-col justify-center items-center h-full border-1 p-1 rounded-md ml-1"
+              className=" flex flex-col justify-center items-center  anim h-full border-1 p-1 rounded-md ml-1"
             >
-              <LuTimerReset className="w-full h-6" />
+              <LuTimerReset className="w-full h-6 " />
             </button>
             {showAnalytics &&
               createPortal(
@@ -59,7 +59,7 @@ export default function Overview() {
                     onClick={() => setShowAnalytics(false)}
                     className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%]  left-[50%] z-999 w-full h-full translate-[-50%]`}
                   ></div>
-                  <div className="gradient-for-inner-containers scale-65 md:scale-90 border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%] ">
+                  <div className="gradient-for-inner-containers md:w-1/2 w-[calc(100dvw-20px)] md:max-w-150 border-1 z-1000 rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%] ">
                     <Analytics />
                   </div>
                 </>,
@@ -77,15 +77,14 @@ export default function Overview() {
                 <>
                   <div
                     onClick={() => setShowNotes(false)}
-                    className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-50 left-[50%] w-full h-full translate-[-50%]`}
+                    className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-100 left-[50%] w-full h-full translate-[-50%]`}
                   ></div>
-                  <div className=" gradient-for-inner-containers border-1 z-1000 h-[80vh] rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
+                  <div className=" w-[calc(100dvw-20px)] sm:w-100 lg:w-180 gradient-for-inner-containers border-1 z-1000 h-[80vh] rounded-xl p-5 fixed top-[50%] left-[50%] translate-[-50%]">
                     <PersonalNotes />
                   </div>
                 </>,
                 document.body
               )}
-
             <button
               onClick={() => setShowInventory(showInventory ? false : true)}
               className="flex flex-col justify-center items-center h-full border-1 p-1 rounded-md ml-1"
@@ -99,7 +98,7 @@ export default function Overview() {
                     onClick={() => setShowInventory(false)}
                     className={`text-center backdrop-blur-xs bg-neutral-950/50 fixed top-[50%] z-100 left-[50%] w-full h-full translate-[-50%]`}
                   ></div>
-                  <div className=" z-1000  rounded-xl fixed top-[50%] left-[50%] translate-[-50%]">
+                  <div className=" z-1000 rounded-xl fixed top-[50%] left-[50%] translate-[-50%]">
                     <Inventory setShowInventory={setShowInventory} />
                   </div>
                 </>,

@@ -38,9 +38,7 @@ import { LuDiamondPlus } from "react-icons/lu";
 export default function SideBar({ className }: { className: string }) {
   const pathName = usePathname();
   const [isRendered, setIsRendered] = useState(true);
-  const [init, setInit] = useState(true);
-  const [projectListClient, setProjectListClient] = useState<string[]>([]);
-  const [projectListIds, setProjectListIds] = useState<string[]>([]);
+  const [showSidebar, setShowSidebar] = useState(false);
 
   const [showProjectForm, setShowProjectForm] = useState(false);
   const session = useContext(SessionContext);
@@ -48,7 +46,7 @@ export default function SideBar({ className }: { className: string }) {
   if (!dashBoardProps || !session) {
     throw new Error("context not provided");
   }
-  const { sideMenu } = dashBoardProps;
+  const { sideMenu, setSideMenu } = dashBoardProps;
 
   const active = (path: string) =>
     `${
@@ -69,19 +67,36 @@ export default function SideBar({ className }: { className: string }) {
 
         <SearchModal />
         <NewTaskBtn />
-        <Link className={` flex ${active("/")}`} href={"/"}>
+
+        <Link
+          className={` flex ${active("/")}`}
+          href={"/"}
+          onClick={() => setSideMenu(false)}
+        >
           <LuHouse className="w-5 h-5" />
           Overview
         </Link>
-        <Link className={` flex ${active("/inbox")}`} href={"/inbox"}>
+        <Link
+          className={` flex ${active("/inbox")}`}
+          href={"/inbox"}
+          onClick={() => setSideMenu(false)}
+        >
           <LuInbox className="w-5 h-5" />
           Inbox
         </Link>
-        <Link className={` flex ${active("/schedule")}`} href={"/schedule"}>
+        <Link
+          className={` flex ${active("/schedule")}`}
+          href={"/schedule"}
+          onClick={() => setSideMenu(false)}
+        >
           <LuCalendarCheck className="w-5 h-5" />
           Schedule
         </Link>
-        <Link className={` flex ${active("/priorities")}`} href={"/priorities"}>
+        <Link
+          className={` flex ${active("/priorities")}`}
+          href={"/priorities"}
+          onClick={() => setSideMenu(false)}
+        >
           <LuStar className="w-5 h-5" />
           Priorities
         </Link>
@@ -89,7 +104,9 @@ export default function SideBar({ className }: { className: string }) {
         <button
           className="flex"
           type="button"
-          onClick={() => setShowProjectForm(true)}
+          onClick={() => {
+            setShowProjectForm(true);
+          }}
         >
           <LuDiamondPlus className="w-5 h-5" />
           New Project
@@ -114,13 +131,8 @@ export default function SideBar({ className }: { className: string }) {
             </div>
           </button>
         </div>
-        {isRendered && (
-          <ProjectList
-            projectListClient={projectListClient}
-            active={active}
-            projectListIds={projectListIds}
-          />
-        )}
+
+        {isRendered && <ProjectList active={active} />}
 
         <div></div>
       </motion.aside>

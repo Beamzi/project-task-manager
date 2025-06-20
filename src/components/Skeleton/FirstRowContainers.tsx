@@ -93,8 +93,6 @@ export default function FirstRowContainers({
               >
                 {leftData}
               </div>
-              {/* {leftData} */}
-              {/* <div className="w-full">{leftData}</div> */}
             </div>
           </div>
         </div>
@@ -105,9 +103,9 @@ export default function FirstRowContainers({
             rightWidth
               ? rightWidth
               : `min-h-0 md:w-1/2 w-1/8 ${
-                  !noExpand && expand && "w-full md:1/2 "
+                  !noExpand && expand && "w-full md:1/2"
                 }`
-          } flex flex-col ml-[clamp(16px,2vw,24px)] max-[330px]:ml-3 `}
+          } flex flex-col  ml-[clamp(16px,2vw,24px)] max-[330px]:ml-3 `}
         >
           <div
             className={`rounded-2xl flex-1 relative flex-col h-full min-h-0 ${
@@ -125,7 +123,7 @@ export default function FirstRowContainers({
                 !expand &&
                 !rightScrollYDisable &&
                 "!overflow-y-hidden md:!overflow-y-scroll"
-              } first-row-containers rounded-2xl border-1 outline-5 p-2   -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
+              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
                 height ? height : localHeight
               } w-full`}
             >

@@ -19,11 +19,11 @@ import { LuClipboardPen } from "react-icons/lu";
 import { LuBookmarkCheck } from "react-icons/lu";
 
 const operations = [
-  { type: "date", icon: <LuClockAlert className="w-6 h-6" /> },
-  { type: "createdAt", icon: <LuCalendar1 className="w-6 h-6" /> },
-  { type: "title", icon: <LuArrowDownNarrowWide className="w-6 h-6" /> },
-  { type: "content", icon: <LuClipboardPen className="w-6 h-6" /> },
-  { type: "priority", icon: <LuBookmarkCheck className="w-6 h-6" /> },
+  { type: "date", icon: <LuClockAlert className="w-full h-full " /> },
+  { type: "createdAt", icon: <LuCalendar1 className="w-full h-full" /> },
+  { type: "title", icon: <LuArrowDownNarrowWide className="w-full h-full" /> },
+  { type: "content", icon: <LuClipboardPen className="w-full h-full" /> },
+  { type: "priority", icon: <LuBookmarkCheck className="w-full h-full" /> },
 ];
 
 export default function SortByButtons({
@@ -39,7 +39,7 @@ export default function SortByButtons({
   const [toolTipIndex, setToolTipIndex] = useState(0);
 
   return (
-    <div className="w-full px-1">
+    <div className="w-full px-1 pr-2">
       <ul className="flex flex-col py-6 justify-center items-center content-center  w-full">
         {operations.map((item, index) => (
           <SortButton

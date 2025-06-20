@@ -34,8 +34,8 @@ export default function Analytics() {
   }));
 
   const renderLineChart = (
-    <div className="">
-      <ResponsiveContainer width={500} height={250}>
+    <div className="w-full">
+      <ResponsiveContainer height={200}>
         <LineChart
           className=""
           data={tasksParse}
@@ -59,7 +59,7 @@ export default function Analytics() {
               style: { textAnchor: "middle" }, // Centers the text better
             }}
           />
-          <CartesianGrid stroke="#eee" strokeDasharray="1 1" />
+          <CartesianGrid stroke="#a3a3a3" strokeDasharray="1 1" />
           <Tooltip
             contentStyle={{
               color: "black",

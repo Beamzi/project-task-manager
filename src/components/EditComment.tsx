@@ -78,7 +78,7 @@ export default function EditComment({
   return (
     <>
       <div
-        className={`flex pt-3   ${isDeleted && "hidden"}
+        className={`flex pt-3 ${isDeleted && "hidden"}
 `}
       >
         {/* // TOPBAR BELOW */}
@@ -92,18 +92,23 @@ export default function EditComment({
           loading="lazy"
         ></Image>
         {/* {`${localComment}`} */}
-        <div key={id} className="w-full">
+        <div key={id} className="w-full ">
           <div className="flex w-full h-7  ">
             <div className="w-full flex align-middle content-center items-center">
               <span className="block overflow-hidden whitespace-nowrap text-ellipsis font-bold">{`${firstLastName?.[0]} ${lastInitial}`}</span>
-              <span className="block text-xs text-neutral-400 md:pl-2 pl-2 overflow-hidden whitespace-nowrap text-ellipsis min-[900px]:w-16 lg:w-30 sm:w-25.5">
-                {format(new Date(createdAt), "MMM d h:mm a")}
+              <span className="block text-neutral-400 md:pl-2 pl-2 overflow-hidden whitespace-nowrap text-ellipsis min-[900px]:w-16 lg:w-30 sm:w-25.5">
+                <span className="block text-xs visible max-[385px]:invisible max-[385px]:absolute">
+                  {format(new Date(createdAt), "MMM d h:mm a")}
+                </span>
+                <span className="block text-xs invisible max-[385px]:visible min-[385px]:absolute ">
+                  {format(new Date(createdAt), "MMM d")}
+                </span>
               </span>
             </div>
             {!edit && (
               <div className="flex align-middle h-full content-center items-center">
                 <button
-                  className=" "
+                  className=""
                   onClick={() => {
                     setEdit(edit ? false : true);
                   }}
