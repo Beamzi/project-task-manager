@@ -15,6 +15,13 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #1f1f1f;
+    --foreground: #dfdfdf;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #1f1f1f;
@@ -224,18 +231,18 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 }
 
   .date-options:hover {
-    @apply dark:bg-neutral-400 text-rose-600
+    @apply bg-neutral-400 text-rose-600
   }
 
   body > * {
-    @apply dark:bg-black 
+    @apply bg-black 
   }
   textarea, input {
-    @apply px-2 py-1 dark:bg-neutral-900
+    @apply px-2 py-1 bg-neutral-900
   }
 
   * {
-    @apply  dark:border-neutral-700 ; 
+    @apply  border-neutral-700 ; 
   }
   input, textarea {
     @apply text-neutral-500
@@ -246,25 +253,25 @@ background: radial-gradient(circle,rgb(22, 22, 22) 30%, rgba(0, 0, 0, 1) 100%);
 
 
   h2 {
-    @apply dark:!text-neutral-300
+    @apply !text-neutral-300
   }
   .custom-time-wrapper {
-    @apply dark:!bg-transparent !rounded-xl !overflow-hidden !border-none
+    @apply !bg-transparent !rounded-xl !overflow-hidden !border-none
     }
   .react-datepicker__header {
     @apply !bg-transparent
   }
   .react-datepicker__day {
-    @apply dark:!text-neutral-400 dark:hover:!text-neutral-900
+    @apply !text-neutral-400 hover:!text-neutral-900
   }
   .react-datepicker__day--disabled {
-  @apply dark:!text-neutral-700
+  @apply !text-neutral-700
   }
   .react-datepicker__day--selected {
     @apply !bg-rose-600 !text-white
   }
   .react-datepicker__day-name {
-    @apply dark:!text-white
+    @apply !text-white
   }
 }
 

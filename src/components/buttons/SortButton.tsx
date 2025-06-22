@@ -78,7 +78,7 @@ export default function SortButton({
           onClick={() => {
             handleInversion(`${operation}`);
           }}
-          className="flex justify-center items-center h-full  p-1 rounded-md ml-1"
+          className="flex justify-center items-center h-full p-1 rounded-md ml-1"
         >
           <motion.div
             whileHover={{ scale: 1.2 }}
@@ -94,7 +94,7 @@ export default function SortButton({
           <motion.div
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.8 }}
-            className={`transition-colors   invisible md:visible md:relative absolute  hover:text-rose-600 border-1 my-1 p-1 ml-1 rounded-xl  ${
+            className={`transition-colors  invisible lg:visible lg:relative absolute  hover:text-rose-600 border-1 my-1 p-1 ml-1 rounded-xl  ${
               iconReset === btnIndex && ""
             }`}
           >

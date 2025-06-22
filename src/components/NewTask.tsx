@@ -124,7 +124,7 @@ export default function NewTask({
           value={title}
           required
           minLength={1}
-          maxLength={25}
+          maxLength={35}
           placeholder="Title"
           onChange={(event) => setTitle(event.target.value)}
           className=" w-full text-lg rounded-t-lg"

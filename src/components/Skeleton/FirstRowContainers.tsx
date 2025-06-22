@@ -52,9 +52,9 @@ export default function FirstRowContainers({
           className={
             leftWidth
               ? leftWidth
-              : `min-h-0 md:w-1/2 w-1/8 ${
-                  !noExpand && !expand && "w-full md:1/2 "
-                }`
+              : `min-h-0 lg:w-1/2 w-1/8  group max-[1023px]:group  ${
+                  !noExpand && !expand && "w-full lg:1/2 "
+                } ${expand && !noExpand && ""}`
           }
         >
           <div
@@ -64,10 +64,10 @@ export default function FirstRowContainers({
           >
             <div
               id={`${leftId && "task-scroll-container"}`}
-              className={` rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 z-10  pb-31 flex w-full flex-wrap  ${
+              className={` rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900  p-2 z-10  pb-31 flex w-full flex-wrap ${
                 !noExpand &&
                 expand &&
-                "!overflow-y-hidden md:!overflow-y-scroll"
+                "!overflow-y-hidden lg:!overflow-y-scroll cursor-pointer max-[1020px]:group-hover:-outline-offset-0 "
               }  ${
                 leftScrollYDisable
                   ? ""
@@ -78,17 +78,16 @@ export default function FirstRowContainers({
                 <div
                   className={`${
                     !noExpand && !expand && "hidden"
-                  } md:hidden flex items-center pb-4 justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
+                  } lg:hidden flex items-center pb-4 justify-center group-hover:bg-neutral-600/20  align-middle content-center w-full h-full absolute top-0 left-0 transition-colors duration-200`}
                 >
-                  <ChevronDoubleRightIcon className="w-7" />
+                  <ChevronDoubleRightIcon className="w-7 text-neutral-300 group-hover:text-rose-600 group-hover:scale-115 transition-all duration-200" />
                 </div>
               )}
-
               <div
                 className={`${
                   !noExpand &&
                   expand &&
-                  "invisible md:visible  opacity-0 md:opacity-100"
+                  "invisible lg:visible opacity-0 lg:opacity-100"
                 } w-full h-full`}
               >
                 {leftData}
@@ -102,8 +101,8 @@ export default function FirstRowContainers({
           className={`${
             rightWidth
               ? rightWidth
-              : `min-h-0 md:w-1/2 w-1/8 ${
-                  !noExpand && expand && "w-full md:1/2"
+              : `min-h-0 lg:w-1/2 w-1/8 group max-[1023px]:group ${
+                  !noExpand && expand && "w-full lg:1/2"
                 }`
           } flex flex-col  ml-[clamp(16px,2vw,24px)] max-[330px]:ml-3 `}
         >
@@ -115,15 +114,19 @@ export default function FirstRowContainers({
             <div
               id={`${rightId && "task-scroll-container"}`}
               className={`${
+                !noExpand &&
+                !expand &&
+                "max-[1020px]:group-hover:-outline-offset-0"
+              } ${
                 rightScrollYDisable
                   ? ""
-                  : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden"
+                  : "min-h-0 overflow-y-scroll z-10 overflow-x-hidden "
               } ${
                 !noExpand &&
                 !expand &&
                 !rightScrollYDisable &&
-                "!overflow-y-hidden md:!overflow-y-scroll"
-              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900 flex w-full pb-31 content-start flex-wrap ${
+                "!overflow-y-hidden lg:!overflow-y-scroll cursor-pointer"
+              } first-row-containers rounded-2xl border-1 outline-5 p-2 -outline-offset-6 outline-neutral-900   flex w-full pb-31 content-start flex-wrap  ${
                 height ? height : localHeight
               } w-full`}
             >
@@ -131,16 +134,16 @@ export default function FirstRowContainers({
                 <div
                   className={`${
                     !noExpand && expand && "hidden"
-                  } md:hidden flex pb-4 items-center justify-center align-middle content-center w-full h-full absolute top-0 left-0`}
+                  } lg:hidden flex pb-4 items-center justify-center align-middle content-center w-full h-full absolute top-0 left-0 group-hover:bg-neutral-600/20 transition-colors duration-200  `}
                 >
-                  <ChevronDoubleLeftIcon className="w-7 " />
+                  <ChevronDoubleLeftIcon className="w-7 group-hover:text-rose-600 group-hover:scale-115 transition-all duration-200 " />
                 </div>
               )}
               <div
                 className={`${
                   !noExpand &&
                   !expand &&
-                  "invisible md:visible opacity-0 md:opacity-100"
+                  "invisible lg:visible opacity-0 lg:opacity-100"
                 } w-full h-full`}
               >
                 {rightData}

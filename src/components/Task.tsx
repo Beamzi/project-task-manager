@@ -163,7 +163,7 @@ export default function Task({
   return (
     <>
       {/* ${hideInClient && "hidden"} */}
-      <div className={` ${hideInClient && "hidden"} relative`}>
+      <div className={` ${hideInClient && "hidden"} relative w-full`}>
         <motion.div
           id={id}
           initial={!minimise && { height: 500 }}
@@ -176,7 +176,7 @@ export default function Task({
             minimise
               ? "origin-top hello lg:hover:ml-2 md:hover:ml-2 hover:ml-2 transition-all duration-300"
               : "md:pl-3"
-          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1 border-neutral-700/50 border-dotted md:px-2 flex flex-col`}
+          } hover:ml-0 transition-all duration-200 task-selector task-shadows xl:w-[100%] lg:w-[100%] w-full border-b-1  border-neutral-700/50 border-dotted md:px-2 flex flex-col`}
         >
           <div className="flex">
             <div
@@ -218,7 +218,7 @@ export default function Task({
                     setMinimise(false);
                     setSelect(true);
                   }}
-                  className={` w-[80%] max-[388px]:w-19 max-[353px]:w-15 max-[320px]:w-11 max-[300px]:w-7 text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
+                  className={`w-[80%]  max-[450px]:w-27  max-[388px]:w-19 max-[353px]:w-15 max-[320px]:w-11 max-[300px]:w-7  text-start text-sm font-medium overflow-hidden whitespace-nowrap text-ellipsis ${
                     minimise && " bg-transparent text-neutral-300"
                   }`}
                 >
@@ -239,10 +239,11 @@ export default function Task({
               </div>
             )}
           </div>
+
           {!minimise && (
             <>
               <motion.input
-                maxLength={25}
+                maxLength={35}
                 transition={{ duration: 0.3 }}
                 initial={{ opacity: 0, scaleY: 0 }}
                 animate={{ opacity: 1, scaleY: 1 }}

@@ -7,7 +7,7 @@ import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { SetStateAction, Dispatch } from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
-import { LuCircleAlert } from "react-icons/lu";
+import { LuCircle, LuCircleAlert, LuFileCheck } from "react-icons/lu";
 
 interface Props {
   id?: string;
@@ -48,16 +48,19 @@ function RemoveTaskBtn({
           isReminder && ""
         } rounded-md relative px-2 flex  justify-center z-2 traition-all duration-100 hover:[&>*]:fill-rose-600`}
       >
-        <LuCircleAlert className="min-w-5 h-5 " />
-        {/* <XMarkIcon className="absolute  -mt-[1px] transition-all duration-100" /> */}
+        {isReminder ? (
+          <LuCircle className="min-w-4 h-4 " />
+        ) : (
+          <LuFileCheck className="min-w-5 h-5" />
+        )}
       </button>
       {showDelete && (
-        <div className="break-words absolute top-11 py-3  -right-0 border-1 bg-black rounded-xl p-2 w-70">
-          <div className="flex px-1 justify-between  items-center  content-center w-full align-middle">
+        <div className="break-words absolute z-50 top-10 py-1  -right-0 border-1 bg-black border-neutral-700 text-neutral-300 rounded-xl p-1 w-70">
+          <div className="flex px-1 justify-between items-center  content-center w-full align-middle">
             <p className=" text-center">Mark task as complete?</p>
             <div className="flex">
               <button
-                className="nested-buttons mr-1 border-1 p-1 px-2 w-full"
+                className="nested-buttons rounded-lg mr-1 border-1 p-1 px-2 w-full"
                 onClick={() => {
                   deleteTask();
                   setHideInClient(true);
@@ -66,7 +69,7 @@ function RemoveTaskBtn({
                 Yes
               </button>
               <button
-                className="nested-buttons border-1 px-2 p-1 w-full"
+                className="nested-buttons rounded-lg  border-1 px-2  w-full"
                 onClick={() => {
                   setShowDelete(false);
                 }}

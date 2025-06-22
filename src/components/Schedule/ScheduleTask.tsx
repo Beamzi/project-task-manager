@@ -93,7 +93,7 @@ export default function ScheduleTask({
       )}
 
       <div
-        className={`group flex  hover:bg-neutral-900/20 relative align-center h-full w-full`}
+        className={`group/second flex  hover:bg-neutral-900/20 relative align-center h-full w-full`}
       >
         <div className="pt-3 px-3 h-full w-full wrap-normal text-neutral-500">
           <div className="[&>*]:mr-2 flex relative ">
@@ -106,17 +106,18 @@ export default function ScheduleTask({
           </div>
 
           <div className="absolute right-0 top-0 flex mx-2 pt-2 ">
-            <div
-              className="opacity-0 group-hover:opacity-100 transition-opacity ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex justify-center z-2 duration-100 hover:[&>*]:fill-rose-600"
+            <button
+              className="opacity-0 group-hover/second:opacity-100 transition-opacity ml-1 py-1 min-w-10 items-center content-center border-1 rounded-md relative px-2 flex justify-center z-2 duration-100 hover:[&>*]:fill-rose-600"
               onClick={() => setShowTask(true)}
             >
               <LuPenLine className="min-w-5 h-5" />
-            </div>
+            </button>
 
             <RemoveTaskBtn
               id={id}
               setHideInClient={setHideInClient}
               setAllTasksClient={setAllTasksClient}
+              isReminder={true}
             ></RemoveTaskBtn>
           </div>
           <p
@@ -131,9 +132,9 @@ export default function ScheduleTask({
                   setFixedDate(date);
                   setShowForm(true);
                 }}
-                className="flex hover:text-rose-600 transition-all duration-200 group "
+                className="flex hover:text-rose-600 transition-all duration-200 group/second "
               >
-                <PlusIcon className="fill-neutral-100 w-5 pb-3 transition-all duration-200 mr-2 group-hover:stroke-white " />
+                <PlusIcon className="fill-neutral-100 w-5 pb-3 transition-all duration-200 mr-2 group-hover/second:stroke-white " />
                 new task
               </button>
             </>

@@ -50,7 +50,7 @@ export default function SingleContainer({
               id="task-scroll-container"
               className={`relative z-10 rounded-2xl border-1 first-row-containers outline-5 -outline-offset-6 outline-neutral-900 p-2 flex w-full flex-wrap   ${
                 scrollYDisable ? "" : "overflow-y-auto "
-              } content-start  ${height ? height : localHeight}`}
+              } content-start   ${height ? height : localHeight}`}
             >
               {data}
             </div>

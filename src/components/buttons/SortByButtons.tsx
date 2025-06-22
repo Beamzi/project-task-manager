@@ -39,7 +39,7 @@ export default function SortByButtons({
   const [toolTipIndex, setToolTipIndex] = useState(0);
 
   return (
-    <div className="w-full px-1 pr-2">
+    <div className="w-full px-1 pr-2 ">
       <ul className="flex flex-col py-6 justify-center items-center content-center  w-full">
         {operations.map((item, index) => (
           <SortButton
