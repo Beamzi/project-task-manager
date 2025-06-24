@@ -2,7 +2,7 @@
 import { TaskContext } from "@/context/TaskContext";
 import React from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   children: React.ReactNode;

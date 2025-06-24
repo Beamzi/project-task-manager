@@ -1,8 +1,6 @@
-// "use client";
 import React from "react";
 import SignInBtn from "./buttons/SignInBtn";
 import Image from "next/image";
-// import { signIn } from "../../auth"
 import { signIn } from "next-auth/react"; // for client-side
 
 export default function Landing() {
@@ -17,9 +15,6 @@ export default function Landing() {
         }}
         className="fixed top-0 left-0 noise-overlay h-[calc(100vh-40px)] ml-5 mt-5 w-[calc(100vw-40px)]"
       ></div>
-
-      {/* <div className=" fixed top-0 left-0 landing-background h-screen w-screen"></div> */}
-
       <div className="flex flex-col border-1 h-full">
         <header className="min-h-0 z-2 border-b-1 invisible relative md:h-12 h-0  w-full md:visible">
           <div

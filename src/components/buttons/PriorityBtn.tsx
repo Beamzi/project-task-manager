@@ -1,10 +1,6 @@
 "use client";
 
-import { StarIcon as StarIconSolid } from "@heroicons/react/24/solid";
-import {
-  QuestionMarkCircleIcon,
-  StarIcon as StarIconOutline,
-} from "@heroicons/react/24/outline";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import {
   useContext,
@@ -17,12 +13,10 @@ import Tooltip from "../Tooltip";
 import { motion, AnimatePresence } from "motion/react";
 import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
-import { PrioritiesContext } from "@/context/PrioritiesContext";
 import { LuStar } from "react-icons/lu";
 
 export default function PriorityBtn({
   id,
-  priorityState,
   localPriorityState,
   setLocalPriorityState,
   setAllTasksClient,
@@ -38,10 +32,6 @@ export default function PriorityBtn({
     throw new Error("hello");
   }
   const { allTasksClient } = tasksContext;
-
-  // const priorityTasksContext = useContext(PrioritiesContext);
-  // if (!priorityTasksContext) throw new Error("priority tasks not laoded");
-  // const { setPriorityTasksClient, priorityTasksClient } = priorityTasksContext;
 
   const [toggleItem, setToggleItem] = useState("");
   const [unpriority, setUnpriority] = useState(false);
@@ -71,9 +61,6 @@ export default function PriorityBtn({
           item.id === id ? { ...item, priority: value } : item
         )
       );
-
-      // const priority = allTasksClient.find((f) => f.id === id);
-      // setPriorityTasksClient((prev) => (priority ? [...prev, priority] : prev));
     } catch (e) {
       console.error(e);
     }
@@ -82,7 +69,6 @@ export default function PriorityBtn({
   return (
     <div className="z-5 py-0.5 flex w-2/4 justify-end relative ">
       <motion.button
-        //keep an eye on this
         key={restart ? "restart" : "normal"}
         initial={restart && { opacity: 0.5, scaleX: 0 }}
         animate={{ opacity: 1, scaleX: 1, transition: { duration: 0.2 } }}
@@ -116,7 +102,6 @@ export default function PriorityBtn({
         ) : (
           <LuStar className="transition-all duration-300 w-5 h-5" />
         )}
-        {/* {localPriorityState ? "prioritised"  : "priority"} */}
       </motion.button>
       <div
         onMouseEnter={() => setTipReveal(true)}

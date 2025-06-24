@@ -6,7 +6,6 @@ import { AllCommentsContext } from "@/context/AllCommentsContext";
 import { format } from "date-fns";
 import { LuTrash2 } from "react-icons/lu";
 import { LuNotebook } from "react-icons/lu";
-import { LuChevronFirst } from "react-icons/lu";
 import { LuChevronLeft } from "react-icons/lu";
 
 export default function PersonalNotes() {
@@ -73,7 +72,6 @@ export default function PersonalNotes() {
         },
         body: JSON.stringify({ id: openNote }),
       });
-      // console.log()
     } catch (e) {
       console.error(e);
     }
@@ -86,8 +84,6 @@ export default function PersonalNotes() {
           <LuNotebook className="h-4 w-4 " />
           <LuChevronLeft className="h-4 w-4 " />
           <p className=" text-end px-1">{createdAt}</p>
-
-          {/* Notes */}
         </div>
         <button
           className=" flex px-2 hover:text-rose-600 duration-200 transition-all rounded-lg ml-1"

@@ -4,12 +4,9 @@ import React from "react";
 import ListOfScheduleTasks from "@/components/Schedule/ListOfScheduleTasks";
 import ScheduleMenu from "@/components/Schedule/ScheduleMenu";
 import { useContext } from "react";
-import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
 import { TaskContext } from "@/context/TaskContext";
 
 export default function Schedule() {
-  //   const allTasksByDueDate = useContext(AllTasksDueDateContext);
-
   const allTasksContext = useContext(TaskContext);
   if (!allTasksContext) throw new Error("tasks not laoded ");
   const { setAllTasksClient, allTasksClient } = allTasksContext;
@@ -27,11 +24,7 @@ export default function Schedule() {
         />
       </div>
       <div className="flex-1 flex-col rounded-b-2xl scrolling-container gradient-for-inner-containers  overflow-y-scroll h-full min-h-0 ">
-        {/* <div className="h-800"></div> */}
-        <ListOfScheduleTasks
-          allTasksClientCopy={allTasksClientCopy}
-          //   setAllTasksClient={setAllTasksClient}
-        />
+        <ListOfScheduleTasks allTasksClientCopy={allTasksClientCopy} />
       </div>
     </div>
   );

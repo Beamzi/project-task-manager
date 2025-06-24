@@ -3,9 +3,6 @@ import Image from "next/image";
 
 import { LuGithub } from "react-icons/lu";
 import { LuMailCheck } from "react-icons/lu";
-import { LuShare2 } from "react-icons/lu";
-import Link from "next/link";
-
 export default async function TopBar({ className }: { className: string }) {
   return (
     <div
@@ -27,10 +24,6 @@ export default async function TopBar({ className }: { className: string }) {
       </div>
       <div className="flex items-center pr-4">
         <div className="flex h-full align-middle justify-center items-center content-center my-1 text-sm">
-          {/* Share
-          <a target="_blank" href={"https://github.com/Beamzi"}>
-            <LuShare2 className="w-5 h-5 ml-1 " />
-          </a> */}
           <a
             target="_blank"
             href={"https://github.com/Beamzi"}

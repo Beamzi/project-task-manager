@@ -1,25 +1,16 @@
 "use client";
 
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { DashBoardContext } from "@/context/DashBoardContext";
+import React, { useEffect, useState } from "react";
 import { ChevronDoubleRightIcon } from "@heroicons/react/24/solid";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 
 import { project } from "@/context/ProjectContext";
-// import type { TaskType } from "@/context/TaskContext";
 interface NewProps {
   modelList: getAllTasksTypeOf[] | undefined | project[];
 }
 
 export default function EasySelect({ modelList }: NewProps) {
-  const context = useContext(DashBoardContext);
-  if (!context) {
-    throw new Error("Dashboard state not loaded");
-  }
-
-  const { globalMinimised } = context;
   const [selected, setSelected] = useState("");
-  //const { taskRef } = context
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -30,7 +21,7 @@ export default function EasySelect({ modelList }: NewProps) {
         });
       },
       {
-        threshold: 0.5, // adjust if needed
+        threshold: 0.5,
       }
     );
 

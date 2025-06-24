@@ -1,13 +1,8 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import ProjectListBtn from "./ProjectListBtn";
-import { projectContext } from "@/context/ProjectContext";
-import { DashBoardContext } from "@/context/DashBoardContext";
-import Link from "next/link";
 import { motion } from "motion/react";
-import { generateKey } from "crypto";
-import { withRouter } from "next/router";
 import { AllProjectsContext } from "@/context/AllProjectsContext";
 
 const container = {
@@ -67,11 +62,9 @@ export default function ProjectList({
 }: {
   active: (value: string) => void;
 }) {
-  const [hasAnimated, setHasAnimated] = useState(false);
-
   const allProjectsContext = useContext(AllProjectsContext);
   if (!allProjectsContext) throw new Error("projects not loaded");
-  const { setAllProjectsClient, allProjectsClient } = allProjectsContext;
+  const { allProjectsClient } = allProjectsContext;
 
   return (
     <>
@@ -80,7 +73,6 @@ export default function ProjectList({
         variants={container}
         initial="hidden"
         animate="show"
-        // onAnimationComplete={() => setHasAnimated(true)}
       >
         {allProjectsClient.map((item) => (
           <ProjectListBtn

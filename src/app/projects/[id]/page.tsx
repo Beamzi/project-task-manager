@@ -6,14 +6,10 @@ import { useContext } from "react";
 import ListOfTasks from "@/components/Lists/ListOfTasks";
 import ProjectView from "@/components/ProjectView";
 import FirstRowContainers from "@/components/Skeleton/FirstRowContainers";
-
 import RemoveProject from "@/components/buttons/RemoveProject";
-import { UserPlusIcon } from "@heroicons/react/24/outline";
 import { SessionContext } from "@/context/SessionContext";
 import { useParams } from "next/navigation";
 import { TaskContext } from "@/context/TaskContext";
-import { LuTimerReset } from "react-icons/lu";
-import { LuBookCheck } from "react-icons/lu";
 import { LuUserPlus } from "react-icons/lu";
 import TopBarContainer from "@/components/Skeleton/TopBarContainer";
 

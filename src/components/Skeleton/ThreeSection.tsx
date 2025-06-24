@@ -1,10 +1,4 @@
 import React from "react";
-import { GiNotebook } from "react-icons/gi";
-import { GiBurningEmbers } from "react-icons/gi";
-import Timer from "../Timer";
-import Inventory from "../Inventory";
-import SingleContainer from "./SingleContainer";
-import CardContainer from "./CardContainer";
 
 interface Props {
   data: React.ReactElement;
@@ -14,7 +8,6 @@ interface Props {
   scrollYDisable?: boolean;
   xlWidth?: string;
 }
-const localHeight = "h-[40dvh]";
 
 export default function ThreeSection({
   data,

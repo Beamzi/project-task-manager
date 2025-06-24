@@ -21,9 +21,9 @@ import { SessionContext } from "@/context/SessionContext";
 interface ProjectViewProps {
   project: GetAllProjecttypeOf | null;
   projectId?: ParamValue;
-  comments: GetAllProjecttypeOf["comments"] | undefined;
+  comments?: GetAllProjecttypeOf["comments"] | undefined;
   profileImg: string | null | undefined;
-  allProjectsClient: GetAllProjecttypeOf[];
+  allProjectsClient?: GetAllProjecttypeOf[];
   setAllProjectsClient: Dispatch<SetStateAction<GetAllProjecttypeOf[]>>;
 }
 
@@ -127,7 +127,6 @@ export default function ProjectView({
         onChange={(e) => setDescription(e.target.value)}
         value={description}
         className="break-all rounded-lg h-45 my-2"
-        //defaultValue={project?.description ?? ""}
       ></textarea>
 
       {init ? (

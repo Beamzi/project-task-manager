@@ -1,7 +1,6 @@
 "use client";
 
 import React, { Dispatch, SetStateAction, useContext, useState } from "react";
-import { MinusCircleIcon } from "@heroicons/react/24/outline";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { redirect } from "next/navigation";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
@@ -9,7 +8,6 @@ import { LuBookCheck } from "react-icons/lu";
 
 export default function RemoveProject({
   project,
-  allProjectsClient,
   setAllProjectsClient,
 }: {
   project: GetAllProjecttypeOf;

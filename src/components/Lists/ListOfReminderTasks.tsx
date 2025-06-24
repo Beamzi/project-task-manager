@@ -2,26 +2,22 @@
 
 import React, { useMemo } from "react";
 import { useContext, useState } from "react";
-import { TaskDueDateContext } from "@/context/TaskDueDateContext";
 import ScheduleTask from "../Schedule/ScheduleTask";
 import { GiFlyingTrout } from "react-icons/gi";
-import { CalendarIcon, EyeIcon } from "@heroicons/react/24/outline";
+import { CalendarIcon } from "@heroicons/react/24/outline";
 import { TaskContext } from "@/context/TaskContext";
 import Link from "next/link";
 import { format } from "date-fns";
-import DatePicker from "react-datepicker";
 
 export default function ListOfReminderTasks() {
-  // const tasksByDueDate = useContext(TaskDueDateContext);
   const [overDue] = useState(true);
-  const [showForm, setShowForm] = useState(false);
 
   const endOfToday = new Date();
   endOfToday.setHours(0, 0, 0, 0);
 
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) throw new Error("tasks not loaded");
-  const { setAllTasksClient, allTasksClient } = tasksContext;
+  const { allTasksClient } = tasksContext;
 
   const tasksByDueDate = useMemo(() => {
     return [

@@ -3,11 +3,7 @@
 import React, { Dispatch, SetStateAction, useContext } from "react";
 import { useState } from "react";
 import Image from "next/image";
-import { GetNonProjectCommentsTypeOf } from "@/lib/queries/getNonProjectComments";
 import { GetAllCommentsTypeof } from "@/lib/queries/getAllComments";
-import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
-import { Jersey_10_Charted } from "next/font/google";
-import { SessionContext } from "@/context/SessionContext";
 
 interface Props {
   isNote?: boolean;

@@ -1,12 +1,7 @@
 "use client";
 
 import React, { useContext, useState } from "react";
-import {
-  PlusIcon,
-  XCircleIcon,
-  CheckCircleIcon,
-} from "@heroicons/react/24/outline";
-import { request } from "http";
+import { XCircleIcon, CheckCircleIcon } from "@heroicons/react/24/outline";
 import { AllProjectsContext } from "@/context/AllProjectsContext";
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
@@ -42,8 +37,6 @@ export default function NewProjectBtn({
         body: JSON.stringify({ title: projectTitle, description: description }),
       });
       const response = await request.json();
-      //   setProjectListIds([...projectListIds, response.result.id]);
-
       setAllProjectsClient((prev) =>
         prev.map((item) =>
           item.id === tempId ? { ...item, id: response.result.id } : item
@@ -67,7 +60,6 @@ export default function NewProjectBtn({
           onSubmit={(event) => {
             const tempId = crypto.randomUUID();
 
-            //   setProjectListClient([...projectListClient, projectTitle]);
             setAllProjectsClient((prev) => [
               ...prev,
               {

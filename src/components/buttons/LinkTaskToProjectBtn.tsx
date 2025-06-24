@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { TaskContext } from "@/context/TaskContext";
 interface Props {
   title: string;
@@ -18,23 +18,21 @@ export default function LinkTaskToProjectBtn({
   setList,
   setTitleCheck,
   setAssignCheck,
-  isFirstProject,
 }: Props) {
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) {
     throw new Error("hello");
   }
-  const { setAllTasksClient, allTasksClient } = tasksContext;
+  const { setAllTasksClient } = tasksContext;
 
   async function linkTask() {
-    // const { list, setList } = listState;
     setAllTasksClient((prev) =>
       prev.map((item) =>
         item.id === taskId ? { ...item, projectId: projectId } : item
       )
     );
     try {
-      const response = await fetch("/api/assign-task", {
+      const request = await fetch("/api/assign-task", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,9 +40,7 @@ export default function LinkTaskToProjectBtn({
         body: JSON.stringify({ taskId: taskId, projectId: projectId }),
       });
 
-      const data = await response.json();
-
-      // router.refresh();
+      const response = await request.json();
     } catch (e) {
       console.error(e);
     }
@@ -56,7 +52,6 @@ export default function LinkTaskToProjectBtn({
       onClick={() => {
         linkTask();
         setList(false);
-        // router.refresh();
         setTitleCheck(title);
         setAssignCheck(true);
       }}

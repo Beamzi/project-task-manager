@@ -3,18 +3,9 @@
 import React from "react";
 import { useState } from "react";
 import SortButton from "./SortButton";
-import {
-  CalendarIcon,
-  ClockIcon,
-  DocumentTextIcon,
-  FlagIcon,
-} from "@heroicons/react/24/outline";
-import { BarsArrowDownIcon } from "@heroicons/react/24/solid";
-
 import { LuClockAlert } from "react-icons/lu";
 import { LuCalendar1 } from "react-icons/lu";
 import { LuArrowDownNarrowWide } from "react-icons/lu";
-import { LuBookOpenText } from "react-icons/lu";
 import { LuClipboardPen } from "react-icons/lu";
 import { LuBookmarkCheck } from "react-icons/lu";
 

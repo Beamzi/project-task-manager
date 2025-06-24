@@ -1,8 +1,7 @@
 "use client";
 
-import { redirect } from "next/navigation";
 import Link from "next/link";
-import { useState, useContext, useRef } from "react";
+import { useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { motion } from "motion/react";
 interface Props {
@@ -26,7 +25,7 @@ export default function ProjectListBtn({
   if (!dashBoardProps) {
     throw new Error("context not provided");
   }
-  const { sideMenu, setSideMenu } = dashBoardProps;
+  const { setSideMenu } = dashBoardProps;
 
   return (
     <div className="flex w-full">

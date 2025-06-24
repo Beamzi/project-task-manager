@@ -1,8 +1,5 @@
 "use client";
-import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
 import { TaskContext } from "@/context/TaskContext";
-import { TaskDueDateContext } from "@/context/TaskDueDateContext";
-import { eachDayOfInterval } from "date-fns";
 import React, { useContext } from "react";
 import {
   LineChart,

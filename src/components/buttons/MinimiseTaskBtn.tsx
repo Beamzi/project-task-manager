@@ -2,8 +2,7 @@
 
 import React from "react";
 
-import { MinusIcon } from "@heroicons/react/24/solid";
-import { PencilSquareIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import { LuMinus } from "react-icons/lu";

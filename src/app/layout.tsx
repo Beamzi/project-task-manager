@@ -38,8 +38,6 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} antialiased`}
       >
-        {/* <Landing></Landing> */}
-        {/* <Test /> */}
         {session ? <DashBoard>{children}</DashBoard> : <Landing></Landing>}
       </body>
     </html>

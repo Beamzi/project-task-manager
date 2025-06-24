@@ -1,7 +1,6 @@
 "use client";
 
-import { projectContext } from "@/context/ProjectContext";
-import { useContext, useRef, useEffect } from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import React from "react";
 import LinkTaskToProjectBtn from "./LinkTaskToProjectBtn";

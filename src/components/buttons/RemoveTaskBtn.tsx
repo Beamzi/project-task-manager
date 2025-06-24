@@ -1,13 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { XMarkIcon } from "@heroicons/react/24/solid";
-import { useContext, useState } from "react";
-import { CheckBadgeIcon, DocumentCheckIcon } from "@heroicons/react/24/outline";
-import { DashBoardContext } from "@/context/DashBoardContext";
-import { SetStateAction, Dispatch } from "react";
+import { useState } from "react";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
-import { LuCircle, LuCircleAlert, LuFileCheck } from "react-icons/lu";
+import { LuCircle, LuFileCheck } from "react-icons/lu";
 
 interface Props {
   id?: string;

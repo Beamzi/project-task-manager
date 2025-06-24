@@ -16,10 +16,7 @@ interface Props {
   setAllTasksClient?: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
 }
 
-export default function ScheduleMenu({
-  allTasksClientCopy,
-  setAllTasksClient,
-}: Props) {
+export default function ScheduleMenu({ allTasksClientCopy }: Props) {
   const [inView, setInView] = useState("");
   const [sequence, setSequence] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);

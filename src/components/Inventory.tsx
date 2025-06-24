@@ -49,7 +49,6 @@ export default function Inventory({
                 setTimeout(() => {
                   id?.scrollIntoView({});
                 });
-                // setGlobalIdScroll(item.id);
               }}
               key={item.id}
               className="flex text-neutral-400 ml-1 items-center border-b-1 border-neutral-700/50 py-1"

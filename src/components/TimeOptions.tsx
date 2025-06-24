@@ -1,13 +1,8 @@
 "use client";
 
 import React from "react";
-import {
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  format,
-  parseISO,
-} from "date-fns";
-import { useState, useContext } from "react";
+import { eachWeekOfInterval, format, parseISO } from "date-fns";
+import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -149,7 +144,6 @@ export default function TimeOptions({
           </button>
         </li>
       </ul>
-      
 
       <div className="calendar-and-buttons">
         {showCalendar && (

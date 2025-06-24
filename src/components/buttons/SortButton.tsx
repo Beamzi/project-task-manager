@@ -47,8 +47,6 @@ export default function SortButton({
   setIconReset,
   iconReset,
   btnIndex,
-  toolTipIndex,
-  setToolTipIndex,
 }: Props) {
   const [init, setInit] = useState(true);
   const [invertSort, setInvertSort] = useState(init);

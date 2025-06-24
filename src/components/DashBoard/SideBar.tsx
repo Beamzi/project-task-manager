@@ -6,22 +6,8 @@ import NewProjectBtn from "../buttons/NewProjectBtn";
 import ProjectList from "../Lists/ProjectList";
 import { DashBoardContext } from "@/context/DashBoardContext";
 import Link from "next/link";
-import {
-  StarIcon,
-  CheckCircleIcon,
-  ListBulletIcon,
-  InboxIcon,
-  HomeIcon,
-  CalendarDaysIcon,
-  ChevronDownIcon,
-  ChevronUpIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
-
-import { TaskDueDateContext } from "@/context/TaskDueDateContext";
 import SearchModal from "../SearchModal";
 import { usePathname } from "next/navigation";
-import ChevronDown from "../icons/ChevronDown";
 import ChevronUp from "../icons/ChevronUp";
 import { motion } from "motion/react";
 import { SessionContext } from "@/context/SessionContext";
@@ -30,15 +16,12 @@ import { LuHouse } from "react-icons/lu";
 import { LuInbox } from "react-icons/lu";
 import { LuCalendarCheck } from "react-icons/lu";
 import { LuStar } from "react-icons/lu";
-import { LuPlus } from "react-icons/lu";
 import { LuBox } from "react-icons/lu";
-import { LuGrid2X2Plus } from "react-icons/lu";
 import { LuDiamondPlus } from "react-icons/lu";
 
 export default function SideBar({ className }: { className: string }) {
   const pathName = usePathname();
   const [isRendered, setIsRendered] = useState(true);
-  const [showSidebar, setShowSidebar] = useState(false);
 
   const [showProjectForm, setShowProjectForm] = useState(false);
   const session = useContext(SessionContext);
@@ -64,10 +47,8 @@ export default function SideBar({ className }: { className: string }) {
         } `}
       >
         <ProfileTopBar session={session}></ProfileTopBar>
-
         <SearchModal />
         <NewTaskBtn />
-
         <Link
           className={` flex ${active("/")}`}
           href={"/"}
@@ -139,5 +120,3 @@ export default function SideBar({ className }: { className: string }) {
     </>
   );
 }
-
-// w-100 h-100 mx-auto border-1 absolute left-0 right-0 fixed inset-0 z-100

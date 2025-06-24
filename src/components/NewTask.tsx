@@ -85,8 +85,6 @@ export default function NewTask({
           item.id === tempId ? { ...item, id: response.result.id } : item
         )
       );
-
-      // setNewTaskResponse((prev) => [...prev, response.result]);
     } catch (e) {
       console.error(e);
     }

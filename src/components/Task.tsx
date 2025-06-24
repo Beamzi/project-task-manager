@@ -3,7 +3,6 @@
 import ProjectAssignBtn from "./buttons/ProjectAssignBtn";
 import RemoveTaskBtn from "./buttons/RemoveTaskBtn";
 import {
-  useContext,
   useEffect,
   useReducer,
   useState,
@@ -11,7 +10,6 @@ import {
   Dispatch,
   SetStateAction,
 } from "react";
-import { useRouter } from "next/navigation";
 import PriorityBtn from "./buttons/PriorityBtn";
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import MinimiseTaskBtn from "./buttons/MinimiseTaskBtn";
@@ -20,7 +18,6 @@ import { format } from "date-fns";
 import TimeOptions from "./TimeOptions";
 import SaveOnchange from "./SaveOnchange";
 import { createPortal } from "react-dom";
-import { TaskContext } from "@/context/TaskContext";
 import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import { LuCircleUserRound } from "react-icons/lu";
 
@@ -73,34 +70,24 @@ export default function Task({
   initMaximise,
   setAllTasksClient,
 }: Props) {
-  const router = useRouter();
   const [select, setSelect] = useState(false);
   const [minimise, setMinimise] = useState(initMaximise ? false : true);
   const [status, setStatus] = useState("initial");
-
-  const [parentHover, setParentHover] = useState(false);
+  const [hideInClient, setHideInClient] = useState(false);
+  const [parentHover] = useState(false);
   const [showTimeOptions, setShowTimeOptions] = useState(false);
+  const [quickDate, setQuickDate] = useState<Date>(date);
+  const [editing, setEditing] = useState(false);
   const [localPriorityState, setLocalPriorityState] = useState(
     priority ?? false
   );
 
   const formattedTrueDate = format(new Date(date), "yyyy-MM-dd'T'HH:mm");
-  const [hideInClient, setHideInClient] = useState(false);
-
   const [state, dispatch] = useReducer(reducer, {
     newTitle: `${title}`,
     newContent: `${content}`,
     newDate: `${formattedTrueDate}`,
   });
-
-  const [quickDate, setQuickDate] = useState<Date>(date);
-  const [editing, setEditing] = useState(false);
-
-  const tasksContext = useContext(TaskContext);
-  if (!tasksContext) {
-    throw new Error("hello");
-  }
-  // const { setAllTasksClient, allTasksClient } = tasksContext;
 
   const prevState = useRef(state);
 
@@ -162,7 +149,6 @@ export default function Task({
 
   return (
     <>
-      {/* ${hideInClient && "hidden"} */}
       <div className={` ${hideInClient && "hidden"} relative w-full`}>
         <motion.div
           id={id}

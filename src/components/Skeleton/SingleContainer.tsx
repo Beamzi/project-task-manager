@@ -1,9 +1,3 @@
-import React from "react";
-import { GiNotebook } from "react-icons/gi";
-import { GiBurningEmbers } from "react-icons/gi";
-import Timer from "../Timer";
-import Inventory from "../Inventory";
-
 interface Props {
   data: React.ReactElement;
   title?: string;
@@ -22,11 +16,7 @@ export default function SingleContainer({
   scrollYDisable,
   xlWidth,
 }: Props) {
-  const now = new Date();
-
-  console.log(now.getTime());
   return (
-    //pb-[clamp(16px,2vw,24px)]
     <>
       <div
         className={`px-[clamp(16px,2vw,24px)] w-full  flex flex-1 flex-col h-full min-h-0 ${
@@ -34,8 +24,6 @@ export default function SingleContainer({
         } bg-transparent justify-center ${
           !title && "pt-[clamp(16px,2vw,24px)]"
         }`}
-
-        // mb-[clamp(16px,2vw,24px)]
       >
         <div className={width ? width : `h-full w-2/2`}>
           {title && (

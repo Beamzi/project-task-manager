@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import ListOfTasks from "./Lists/ListOfTasks";
 import { useEffect } from "react";
 
 export default function SearchTasks() {
@@ -46,7 +45,7 @@ export default function SearchTasks() {
 
       {show && selected && search.length > 0 && (
         <div className="bg-black absolute top-10 left-0 z-100">
-          <ListOfTasks currentTasks={result} />
+          {/* <ListOfTasks currentTasks={result} /> */}
         </div>
       )}
     </div>

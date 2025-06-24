@@ -1,13 +1,10 @@
 "use client";
 import React from "react";
 import { useState, useContext } from "react";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { createPortal } from "react-dom";
 import SearchClient from "./SearchClient";
 import SingleContainer from "./Skeleton/SingleContainer";
 import ListOfSearchTasks from "./Lists/ListOfSearchTasks";
-import { AllTasksDueDateContext } from "@/context/AllTasksDueDateContext";
-import { DashBoardContext } from "@/context/DashBoardContext";
 import { TaskContext } from "@/context/TaskContext";
 import { LuSearch } from "react-icons/lu";
 
@@ -18,7 +15,6 @@ export default function SearchModal() {
   }
 
   const { setAllTasksClient, allTasksClient } = tasks;
-
   const [showSearch, setShowSearch] = useState(false);
   const [searching, setSearching] = useState("");
 

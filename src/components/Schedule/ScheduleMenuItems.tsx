@@ -11,12 +11,7 @@ export interface Props {
   setAllTasksClient: Dispatch<SetStateAction<getAllTasksTypeOf[]>>;
 }
 
-export default function ScheduleMenuItems({
-  taskId,
-  title,
-  date,
-  content,
-}: Props) {
+export default function ScheduleMenuItems({ date }: Props) {
   const day = date.toString().slice(0, 3);
   const dayNum = date.toString().slice(7, 10);
 

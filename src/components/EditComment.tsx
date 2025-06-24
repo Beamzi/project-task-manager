@@ -26,9 +26,6 @@ export default function EditComment({
   setCommentsClient,
 }: Props) {
   const [edit, setEdit] = useState(false);
-
-  // const localIndex = commentsClient.findIndex((p) => p.id === id);
-
   const [newContent, setNewContent] = useState(content);
   const [initOptions, setInitOptions] = useState(false);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -74,14 +71,12 @@ export default function EditComment({
   const firstLastName = name?.split(" ");
 
   const lastInitial = firstLastName?.[1]?.slice(0, 1);
-  // ${isDeleted && "hidden"}
   return (
     <>
       <div
         className={`flex pt-3 ${isDeleted && "hidden"}
 `}
       >
-        {/* // TOPBAR BELOW */}
         <Image
           className="rounded-full mr-3 relative top-1 h-full"
           src={profileImg ?? ""}
@@ -91,7 +86,6 @@ export default function EditComment({
           alt="user profile picture"
           loading="lazy"
         ></Image>
-        {/* {`${localComment}`} */}
         <div key={id} className="w-full ">
           <div className="flex w-full h-7  ">
             <div className="w-full flex align-middle content-center items-center">
@@ -139,7 +133,6 @@ export default function EditComment({
               </div>
             )}
           </div>
-          {/* TOPBAR ABOVE */}
           <div className="flex">
             <div className="flex w-full ">
               {!edit ? (

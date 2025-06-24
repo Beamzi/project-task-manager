@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useMemo } from "react";
-
 import { AllProjectsContext } from "@/context/AllProjectsContext";
-
 import { GetAllProjecttypeOf } from "@/lib/queries/getAllProjects";
 
 interface Props {
