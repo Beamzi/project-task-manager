@@ -31,7 +31,7 @@ export default function EasySelect({ modelList }: NewProps) {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [modelList]);
 
   return (
     <div className="py-2  px-5 h-[100%] bg-neutral-900  ">

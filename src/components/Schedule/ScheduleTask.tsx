@@ -1,15 +1,14 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { format } from "date-fns";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
-import { CheckCircleIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import NewTask from "../NewTask";
 import { TaskContext } from "@/context/TaskContext";
 import RemoveTaskBtn from "../buttons/RemoveTaskBtn";
-import { getAllTasksTypeOf } from "@/lib/queries/getAllTasks";
 import Task from "../Task";
-import { LuCircleAlert, LuPenLine } from "react-icons/lu";
+import { LuPenLine } from "react-icons/lu";
 
 export interface Props {
   dateId?: string;
@@ -49,8 +48,6 @@ export default function ScheduleTask({
 
   const [hideInClient, setHideInClient] = useState(false);
   const { setAllTasksClient, allTasksClient } = tasksContext;
-
-  // const setAllTasksClientCopy = [...allTasksClient];
 
   const getDate = () => {
     const date =

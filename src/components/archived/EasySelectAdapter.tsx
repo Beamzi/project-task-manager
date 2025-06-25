@@ -3,7 +3,7 @@
 import { projectContext } from "@/context/ProjectContext";
 import React from "react";
 import { useContext } from "react";
-import EasySelect from "./Lists/EasySelect";
+import EasySelect from "./EasySelect";
 
 export default function EasySelectAdapter() {
   const projects = useContext(projectContext);
