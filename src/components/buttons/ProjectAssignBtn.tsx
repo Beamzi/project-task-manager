@@ -13,8 +13,7 @@ import { GiFriedFish } from "react-icons/gi";
 import NewProjectBtn from "./NewProjectBtn";
 import { LuBox } from "react-icons/lu";
 
-const overflowEllipsis =
-  "overflow-hidden whitespace-nowrap text-ellipsis w-18 lg:w-18 xl:w-22 md:w-18";
+const overflowEllipsis = "overflow-hidden whitespace-nowrap text-ellipsis ";
 
 export default function ProjectAssignBtn({
   taskId,
@@ -82,7 +81,7 @@ export default function ProjectAssignBtn({
               key={titleCheck}
               initial={{ opacity: 0.5, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className={`${overflowEllipsis} min-w-20 max-[346px]:min-w-12 max-[310px]:min-w-10  -ml-2`}
+              className={`${overflowEllipsis} min-w-20 xl:min-w-30 lg:min-w-25 max-[346px]:min-w-12 max-[310px]:min-w-10  -ml-2`}
             >{`${titleCheck}`}</motion.p>
           </>
         ) : (
@@ -92,7 +91,7 @@ export default function ProjectAssignBtn({
               item.id === projectIdOfTask && (
                 <p
                   key={item.id}
-                  className={` min-w-20 -ml-2 max-[346px]:min-w-12 max-[310px]:min-w-10 ${overflowEllipsis}`}
+                  className={` min-w-20 xl:min-w-30 lg:min-w-25 -ml-2 max-[346px]:min-w-12 max-[310px]:min-w-10 ${overflowEllipsis}`}
                 >{`${item.title}`}</p>
               )
           )

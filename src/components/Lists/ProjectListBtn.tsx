@@ -12,7 +12,7 @@ interface Props {
   variantLines: any;
 }
 const overflowEllipsis =
-  "block overflow-hidden whitespace-nowrap text-ellipsis w-30";
+  "block overflow-hidden whitespace-nowrap text-ellipsis w-40";
 
 export default function ProjectListBtn({
   id,
