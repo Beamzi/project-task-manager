@@ -1,5 +1,5 @@
 "use client";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { format } from "date-fns";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
@@ -38,21 +38,32 @@ export default function ScheduleTask({
   const [showForm, setShowForm] = useState(false);
   const [fixedDate, setFixedDate] = useState<Date>();
   const [showTask, setShowTask] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   const dueDate = format(new Date(date), "yyyy-MM-dd");
-  const currentDate = format(new Date(), "yyyy-MM-dd");
   const dateForDisplay = date.toString().slice(0, 10);
 
   const tasksContext = useContext(TaskContext);
   if (!tasksContext) throw new Error("tasks not loaded");
 
   const [hideInClient, setHideInClient] = useState(false);
+
   const { setAllTasksClient, allTasksClient } = tasksContext;
 
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const getDate = () => {
-    const date =
-      dueDate === currentDate ? `Today ${dateForDisplay}` : `${dateForDisplay}`;
-    return date;
+    if (isMounted) {
+      const currentDate = format(new Date(), "yyyy-MM-dd");
+
+      const date =
+        dueDate === currentDate
+          ? `Today ${dateForDisplay}`
+          : `${dateForDisplay}`;
+      return date;
+    } else return dateForDisplay;
   };
 
   return (

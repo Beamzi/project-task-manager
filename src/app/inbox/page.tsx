@@ -16,7 +16,6 @@ export default function InboxClient() {
     throw new Error("task context not loaded");
   }
 
-
   const { allTasksClient, setAllTasksClient } = tasksContext;
 
   const [action, setAction] = useState("");
