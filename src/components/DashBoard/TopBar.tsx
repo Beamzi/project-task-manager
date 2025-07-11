@@ -6,18 +6,20 @@ import { LuMailCheck } from "react-icons/lu";
 export default async function TopBar({ className }: { className: string }) {
   return (
     <div
-      className={`h-full flex justify-between text-neutral-200 ${className} `}
+      className={`h-full  min-h-[40px] flex justify-between text-neutral-200 ${className} `}
     >
       <div className="flex">
-        <Image
-          className="h-full w-full pl-5 pr-3 py-3 "
-          src="/logo/2.svg"
-          style={{ objectFit: "contain" }}
-          alt="logo"
-          width={60}
-          height={60}
-          priority
-        />
+        <div className="w-[60px] h-full flex items-center justify-center pl-5 pr-3 py-3">
+          <Image
+            className="object-contain"
+            src="/logo/2.svg"
+            // style={{ objectFit: "contain" }}
+            alt="logo"
+            width={60}
+            height={60}
+            priority
+          />
+        </div>
         <div className="h-full flex align-middle flex-col justify-center">
           <h3 className="min-w-50">Welcome to Manaboard!</h3>
         </div>
