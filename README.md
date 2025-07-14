@@ -1,74 +1,45 @@
-# Project Manager
+# Manaboard - Project Management Platform
 
 [View Live Application](https://project-task-manager-nine.vercel.app/)
 
-A high-performance project management platform with 50ms route changes and zero-latency interactions. All operations feel instant through custom state management and optimistic UI updates.
-
-## Screenshots
+A high-performance full stack project management platform with near-instant route changes and zero-latency interactions. All operations feel instant through custom state management and optimistic UI updates.
 
 ![Dashboard Overview](./demos/screenshots/recents-and-reminders.png)
-_Main overview showing recent tasks, active dates, and analytics and more_
-
-![Project View](./demos/screenshots/project-view.png)
-_A hub view for grouping tasks with shared context, and adding comments_
-
-![Inbox View](./demos/screenshots/inbox-view.png)
-_a view to search and sort tasks by query properties_
-
-![Schedule Timeline](./demos/screenshots/schedule.png)
-_Interactive X/Y scrollable timeline automatically scoped to user's date range_
-
-![Mobile Responsive](./demos/screenshots/mobile-first-ux-2.png)(./demos/screenshots/mobile-first-ux-1.png)
-_Fully responsive design maintains functionality across all devices_
+_Main dashboard overview showing recent tasks, active dates, analytics and more_
 
 # Feature Demos
 
 Watch key features in action (hosted .mov files):
 
-- [Task to Project Demo](./demos/task-to-project-complete.mov) Watch tasks being seamlessly assigned to projects with instant UI updates and relational data management
+- [Task to Project Demo](./demos/task-to-project-complete.mov) Seamlessly assign tasks to projects, leave comments and modify projects with instant UI updates and consistent relational data.
 
-- [Search & Sort Demo](./demos/search-sort-complete.mov) See fuzzy search with typo tolerance and multi-property sorting across all tasks in real-time
+- [Search & Sort Demo](./demos/search-sort-complete.mov) Fuzzy search with typo tolerance and multi-property real-time sorting.
 
-- [Schedule Scroller Demo](./demos/schedule-scroller-complete.mov) Experience the interactive X/Y scrollable timeline that automatically scopes to your personal date rang
-- [Responsive UX Demo](./demos/responsive-ux-complete.mov) Discover how the interface adapts fluidly across devices while maintaining 50ms route changes and zero-latency interactions
+- [Schedule Scroller Demo](./demos/schedule-scroller-complete.mov) Interactive scrollable timeline scoped to user’s personal date range.
+- [Responsive UX Demo](./demos/responsive-ux-complete.mov) See how the app adapts fluidly across devices while maintaining instant feedback.
 
-## Key Technical Achievements
+## Technical Highlights
 
-### Performance Engineering
+While project management apps are common, this platform focuses on developing high performance, detailed & engaging UX and robust architecture leveraging SSR preloading with seamless client-state hydration. It achieves ~50ms client-side route transitions without loading states, using custom in-memory state management and optimistic UI updates. A hybrid SSR/CSR setup ensures fast initial loads and snappy interactivity.
 
-- 50ms client-side route changes with zero loading states
-- Instant CRUD operations through in-memory state management
-- Zero-latency UI updates with optimistic rendering
-- Strategic SSR/CSR hybrid for optimal initial load and interaction speed
+State is handled through a custom model-driven system built with React Context API and TypeScript, with a server-to-client bridge to eliminate hydration mismatches. Changes are held in memory for instant responsiveness and synced to the backend in the background. State flows cleanly and instantly across views, keeping everything in sync.
 
-### Custom State Management Architecture
-
-- Model-based React Context providers with TypeScript integration
-- SSR-to-client state bridge eliminating hydration mismatches
-- Memory-based operations with background API synchronization
-- Reactive state propagation across multiple views and components
-
-### Advanced Full-Stack Integration
-
-- End-to-end type safety with Prisma-generated TypeScript types
-- Session-scoped data loading with automatic user isolation
-- Real-time collaborative features with instant UI synchronization
-- Production-ready authentication with Google OAuth
+The full-stack layer includes end-to-end type safety using Prisma, scoped data loading per session, and a foundation for future team workflows building on the current real-time project comment system. Authentication is handled through Google OAuth, using a production-ready setup.
 
 ## Features
 
 ### Core Task Management
 
 - **Dynamic Task Creation** - Create and modify tasks with real-time validation and instant updates
-- **Project Organization** - Hierarchical project structure with task assignment capabilities
-- **Due Date Management** - Set and track task deadlines with automated scheduling
+- **Project Organization** - Hierarchical project structure with task assignment and comment / discussion capabilities
+- **Due Date Management** - Set and track task deadlines with automated scheduling and dynamic navigation
 - **Task Assignment** - Assign tasks to specific projects with relational data management
 
 ### Views & Navigation
 
 - **Interactive Schedule View** - X/Y scrollable timeline automatically scoped to user's date range (current date to furthest due date)
-- **Smart Inbox** - Centralized task management with multi-property sorting (createdAt, dueDate, priority)
-- **Priority View** - Filtered dashboard displaying high-priority tasks
+- **Smart Inbox** - Centralized task management with multi-property sorting (createdAt, dueDate, priority) and dynamic search
+- **Priority View** - Filtered dashboard displaying priority tasks, this is also where the user can view and modify their personal notes.
 - **Inventory Overview** - Comprehensive listing of all user-created items across all views (tasks, projects, notes, etc.)
 
 ### Search & Filtering
@@ -87,12 +58,11 @@ Watch key features in action (hosted .mov files):
 ### Analytics & Tracking
 
 - **Time Chart** - Visual analytics showing task distribution by days remaining until due date
-- **Progress Tracking** - Monitor task completion rates and overdue items
-- **Data Visualization** - Interactive charts and graphs for project insights
+- **Data Visualization** - Interactive chart for project insights
 
 ### Personal Productivity
 
-- **Personal Notes** - Standalone note-taking system independent of task management
+- **Personal Notes** - Standalone note-taking system independent of task management (without the pressure of due dates and assignments)
 - **Cross-Feature Integration** - Notes system leverages existing comment infrastructure
 - **Deadline Tracking** - Automated monitoring of approaching and overdue tasks
 - **Workload Distribution** - Visual representation of task allocation over time
@@ -118,7 +88,7 @@ The application provides REST-like endpoints for:
 - **Authentication:** Google OAuth via NextAuth.js
 - **Comments/Notes:** Project comments and personal notes (unified endpoint with projectId filtering)
 
-## Technical Architecture
+## Architecture
 
 ### Frontend
 
