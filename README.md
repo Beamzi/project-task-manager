@@ -11,12 +11,12 @@ _Main dashboard overview showing recent tasks, active dates, analytics and more_
 
 Watch key features in action (hosted .mov files):
 
-- [Task to Project Demo](./demos/task-to-project-complete.mov) Seamlessly assign tasks to projects, leave comments and modify projects with instant UI updates and consistent relational data.
+- [Task to Project Demo](./demos/Task%20To%20Project%20Complete.mp4) Seamlessly assign tasks to projects, leave comments and modify projects with instant UI updates and consistent relational data.
 
-- [Search & Sort Demo](./demos/search-sort-complete.mov) Fuzzy search with typo tolerance and multi-property real-time sorting.
+- [Search & Sort Demo](./demos/Search%20&%20Sort%20Complete.mp4) Fuzzy search with typo tolerance and multi-property real-time sorting.
 
-- [Schedule Scroller Demo](./demos/schedule-scroller-complete.mov) Interactive scrollable timeline scoped to user’s personal date range.
-- [Responsive UX Demo](./demos/responsive-ux-complete.mov) See how the app adapts fluidly across devices while maintaining instant feedback.
+- [Schedule Scroller Demo](./demos/Schedule%20Scroller%20Complete.mp4) Interactive scrollable timeline scoped to user’s personal date range.
+- [Responsive UX Demo](./demos/Responsive%20Ux%20Complete.mp4) See how the app adapts fluidly across devices while maintaining instant feedback.
 
 ## Technical Highlights
 
