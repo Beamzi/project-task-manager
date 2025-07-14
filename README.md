@@ -1,10 +1,36 @@
 # Project Manager
 
-## Live Demo 🔗
-
 [View Live Application](https://project-task-manager-nine.vercel.app/)
 
 A high-performance project management platform with 50ms route changes and zero-latency interactions. All operations feel instant through custom state management and optimistic UI updates.
+
+## Screenshots
+
+![Dashboard Overview](./demos/screenshots/recents-and-reminders.png)
+_Main overview showing recent tasks, active dates, and analytics and more_
+
+![Project View](./demos/screenshots/project-view.png)
+_A hub view for grouping tasks with shared context, and adding comments_
+
+![Inbox View](./demos/screenshots/inbox-view.png)
+_a view to search and sort tasks by query properties_
+
+![Schedule Timeline](./demos/screenshots/schedule.png)
+_Interactive X/Y scrollable timeline automatically scoped to user's date range_
+
+![Mobile Responsive](./demos/screenshots/mobile-first-ux-2.png)(./demos/screenshots/mobile-first-ux-1.png)
+_Fully responsive design maintains functionality across all devices_
+
+# Feature Demos
+
+Watch key features in action (hosted .mov files):
+
+- [Task to Project Demo](./demos/task-to-project-complete.mov) Watch tasks being seamlessly assigned to projects with instant UI updates and relational data management
+
+- [Search & Sort Demo](./demos/search-sort-complete.mov) See fuzzy search with typo tolerance and multi-property sorting across all tasks in real-time
+
+- [Schedule Scroller Demo](./demos/schedule-scroller-complete.mov) Experience the interactive X/Y scrollable timeline that automatically scopes to your personal date rang
+- [Responsive UX Demo](./demos/responsive-ux-complete.mov) Discover how the interface adapts fluidly across devices while maintaining 50ms route changes and zero-latency interactions
 
 ## Key Technical Achievements
 
