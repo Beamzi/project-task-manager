@@ -56,7 +56,7 @@ export default function ScheduleTask({
 
   const getDate = () => {
     if (isMounted) {
-      const currentDate = format(new Date(), "yyyy-MM-dd");
+      const currentDate = format(new Date(), "yyyy-MM-dd", {});
 
       const date =
         dueDate === currentDate
