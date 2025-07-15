@@ -11,7 +11,7 @@ _Main dashboard overview showing recent tasks, active dates, analytics and more_
 
 Watch key features in action (hosted .mov files):
 
-- [Task to Project Demo](./demos/Task%20To%20Project%20Complete.mp4) Seamlessly assign tasks to projects, leave comments and modify projects with instant UI updates and consistent relational data.
+- [Task to Project Demo](https://github.com/user-attachments/assets/fcf3b59a-70a6-4c9c-b3dc-33690b0bf278) Seamlessly assign tasks to projects, leave comments and modify projects with instant UI updates and consistent relational data.
 
 - [Search & Sort Demo](./demos/Search%20&%20Sort%20Complete.mp4) Fuzzy search with typo tolerance and multi-property real-time sorting.
 
