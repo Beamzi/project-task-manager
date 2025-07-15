@@ -51,22 +51,24 @@ export default function Landing() {
             <div className="flex h-full w-full justify-center align-middle items-center content-center px-20">
               <div className="w-1/2 h-50 pr-20">
                 <div className="pb-2 flex flex-col items-left ">
-                  <h1 className="text-xl ">Into Flow With Manaboard</h1>
-                  <p>
+                  <h1 className="text-xl gradual-load-static-1">
+                    Into Flow With Manaboard
+                  </h1>
+                  <p className="gradual-load-static-2">
                     Stay on top of every project, task, and deadline — an all in
                     one smart, real-time workspace
                   </p>
                 </div>
-                <p className="pt-2 border-t-1 ">
+                <p className="pt-2 border-t-1 gradual-load-static-3 ">
                   No setup requried, just sign in and start organizing
                 </p>
-                <div className=" items-left !z-1000 py-2">
+                <div className=" items-left !z-1000 py-2 gradual-load-static-5">
                   <SignInBtn></SignInBtn>
                 </div>
               </div>
               <div className="w-1/2 h-50 min-h-[300px]">
                 <div
-                  className="w-full h-full flex relative"
+                  className="w-full h-full flex relative gradual-load-static-4"
                   style={{ aspectRatio: "16/9" }}
                 >
                   <Image
