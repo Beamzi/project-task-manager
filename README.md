@@ -13,10 +13,10 @@ Watch key features in action (hosted .mov files):
 
 - [Task to Project Demo](https://github.com/user-attachments/assets/fcf3b59a-70a6-4c9c-b3dc-33690b0bf278) Seamlessly assign tasks to projects, leave comments and modify projects with instant UI updates and consistent relational data.
 
-- [Search & Sort Demo](./demos/Search%20&%20Sort%20Complete.mp4) Fuzzy search with typo tolerance and multi-property real-time sorting.
+- [Search & Sort Demo](https://github.com/user-attachments/assets/b5c0163d-dea6-4ea5-9d39-9c6a441ee658) Fuzzy search with typo tolerance and multi-property real-time sorting.
 
-- [Schedule Scroller Demo](./demos/Schedule%20Scroller%20Complete.mp4) Interactive scrollable timeline scoped to user’s personal date range.
-- [Responsive UX Demo](./demos/Responsive%20Ux%20Complete.mp4) See how the app adapts fluidly across devices while maintaining instant feedback.
+- [Schedule Scroller Demo](https://github.com/user-attachments/assets/fa36f2c7-7484-4c34-a2ab-fc24b68e73c5) Interactive scrollable timeline scoped to user’s personal date range.
+- [Responsive UX Demo](https://github.com/user-attachments/assets/5e0868ab-45fe-4923-9b73-b0cf52b6fef9) See how the app adapts fluidly across devices while maintaining instant feedback.
 
 ## Technical Highlights
 
