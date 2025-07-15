@@ -65,16 +65,16 @@ export default function Landing() {
                 </div>
               </div>
               <div className="w-1/2 h-50 min-h-[300px]">
-                <div className="w-full h-full flex relative">
+                <div
+                  className="w-full h-full flex relative"
+                  style={{ aspectRatio: "16/9" }}
+                >
                   <img
                     src="/screens/landing-figma-edit.png"
                     style={{
                       objectFit: "contain",
                       width: "100%",
                       height: "100%",
-                      display: "block",
-                      maxWidth: "100%",
-                      maxHeight: "100%",
                     }}
                     alt="logo"
                     loading="eager"
